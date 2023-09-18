@@ -16,10 +16,4 @@ public class mainController {
 	public String home() {
 		return "home";
 	}
-	@GetMapping("/test")
-	public String test(Model model) {
-		ArrayList<travel_attDTO> getlist  = tdao.getlist();
-		model.addAttribute("list", getlist);
-		return "home";
-	}
 }
