@@ -128,7 +128,7 @@
             <li><a href="#" class="menu">여행지</a>
                 <ul class="sub-menu">
                     <li><a href="/travel_list">관광지</a></li>
-                    <li><a href="#">축제/행사</a></li>
+                    <li><a href="#">축제/행사</a></li> 
                 </ul>
             </li>
             <li><a href="#" class="menu">메뉴2</a>

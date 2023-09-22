@@ -16,5 +16,5 @@ public interface travel_attDAO {
 	void deletelist(String ta_name);
 	travel_attDTO getdetailimg(String ta_name);
 	void deletedetail(String ta_name);
-
+	ArrayList<travel_attDTO> locationName();
 }

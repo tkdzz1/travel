@@ -858,8 +858,8 @@
 		<div class="board">
 			&nbsp;&nbsp;<strong><a class="newq">New Question</a></strong> <br>
 			<div class="fornewq2">
-				<a href="#" class="newq1">Ask Question</a>&nbsp;&nbsp;&nbsp;&nbsp;<a
-					href="#" class="newq2">Show All Question</a>
+				<a href="#" class="newq1">Ask Question</a>&nbsp;&nbsp;&nbsp;&nbsp;
+				<a href="/q&a" class="newq2">Show All Question</a>
 			</div>
 			<br>
 			<br>
@@ -948,14 +948,15 @@
 						class="carda"> ${restaurant[0].fs_name} </a>
 				</div>
 
+
 				<div class="dttcard2">
 					<a href="#"><img src="img/${restaurant[1].fs_img}"
 						class="testimg1"></a> <a style="text-decoration: none;" href="#"
 						class="carda"> ${restaurant[1].fs_name} </a>
 				</div>
 
-			</dt>
 
+			</dt>
 			<dd>
 				<img src="https://www.visitjeju.net/image/main/icon_emer.png"
 					class=dtimg2>
