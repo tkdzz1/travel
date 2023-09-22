@@ -1,0 +1,16 @@
+@charset "UTF-8";
+
+.container {
+  display: grid;
+  place-items: center; /* 가로와 세로 중앙 정렬 */
+  margin-top: 20%;
+}
+
+.social-login {
+	width:30%; 
+	text-align:center;
+}
+
+.social-login > img {
+	cursor:pointer;
+}
