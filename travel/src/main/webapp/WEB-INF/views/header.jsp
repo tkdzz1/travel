@@ -160,7 +160,7 @@
                 
                 
             </li>
-            <li><a href="#" class="linkoflog">로그인</a></li>
+            <li><a href="/login" class="linkoflog">로그인</a></li>
         </ul>
         
     </header>
