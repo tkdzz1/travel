@@ -1,0 +1,2 @@
+mainimage.directory=C:/Users/1234/git/travel/travel/src/main/resources/static/img/t_img
+detailimage.directory=C:/Users/1234/git/travel/travel/src/main/resources/static/img/t_sub_img
