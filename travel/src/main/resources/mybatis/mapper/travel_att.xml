@@ -30,6 +30,12 @@
 <delete id="deletedetail">
 	delete from detail_imginfo where ta_name=#{param1}
 </delete>
+
+<!-- 테스트 -->
+<select id="locationName" resultType="com.himedia.springboot.travel_attDTO">
+   select ta_name,ta_img from travel_attraction order by ta_num asc limit 3;
+</select>
+
 <update id="updateTravelAttraction">
     update detail_imginfo set ta_name=#{param1}, ta_imginfo=#{param2}, ta_content=#{param3} where ta_name=#{param1}
 </update>
