@@ -12,10 +12,10 @@
 	<div id=loginDIV>
 		<h1>이메일 로그인</h1>
 		<input type=text name=email> <input type=button value="확인" id="emailCheck">
-		<div class="social-login" style="display:none;">
-			<hr>SNS 로그인<br><br>
-			<img src="img/kakaologin.png">
-		</div>
+	</div>
+	<div class="social-login">
+		<hr><h1>SNS 로그인</h1>
+		<img src="img/kakaologin.png" id="kakaoLogin">
 	</div>
 	<div id="emailCode" style="display:none;">
 		<h1>인증번호 입력</h1>
@@ -38,5 +38,6 @@
 
 </body>
 <script src="https://code.jquery.com/jquery-latest.js"></script>
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script src="js/login.js"></script>
 </html>

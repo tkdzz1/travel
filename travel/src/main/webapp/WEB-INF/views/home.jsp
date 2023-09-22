@@ -749,7 +749,7 @@
 
 </style>
 <body>
-	<%@include file="header.jsp"%>
+<%-- 	<%@include file="header.jsp"%> --%>
 
 	<div style="overflow: hidden">
 		<div class="slide-container">
@@ -1121,7 +1121,7 @@
 			</div>
 			<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
-			<%@include file="footer.jsp"%>
+<%-- 			<%@include file="footer.jsp"%> --%>
 </body>
 <script src="https://code.jquery.com/jquery-latest.js"></script>
 <script>
