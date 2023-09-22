@@ -2,5 +2,32 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				 "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.himedia.springboot.travel_attDAO">
-
+<select id="getList" resultType="com.himedia.springboot.travel_attDTO">
+	select ta_num,ta_name,ta_local,ta_img,ta_address,ta_category, ta_latitude, ta_longitude from travel_attraction limit #{param1}, #{param2}
+</select>
+<select id="getmaker" resultType="com.himedia.springboot.travel_attDTO">
+	select ta_num,ta_name,ta_local,ta_img,ta_address,ta_category, ta_latitude, ta_longitude from travel_attraction
+</select>
+<insert id="addlist">
+	INSERT INTO travel_attraction SET ta_name = #{param1}, ta_local = #{param2}, ta_img = #{param3}, ta_address = #{param4}, ta_category = #{param5}, ta_latitude=#{param6}, ta_longitude=#{param7} 
+</insert>
+<select id="cntlist" resultType="int">
+	select count(*) from travel_attraction;
+</select>
+<select id="getdetail" resultType="com.himedia.springboot.travel_attDTO">
+	select a.ta_num,a.ta_name,a.ta_local,a.ta_img,a.ta_address,a.ta_category, a.ta_latitude,a.ta_longitude,b.ta_imginfo,b.ta_content
+    from travel_attraction a inner join detail_imginfo b on a.ta_name=b.ta_name where b.ta_name=#{param1}
+</select>
+<insert id="addimginfo">
+	insert into detail_imginfo set ta_name=#{param1}, ta_imginfo=#{param2}, ta_content=#{param3}
+</insert>
+<delete id="deletelist">
+	delete from travel_attraction where ta_name=#{param1}
+</delete>
+<select id="getdetailimg">
+	select ta_imginfo from detail_imginfo where ta_name=#{param1};
+</select>
+<delete id="deletedetail">
+	delete from detail_imginfo where ta_name=#{param1}
+</delete>
 </mapper>

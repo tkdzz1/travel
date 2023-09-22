@@ -1,0 +1,48 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    color: #fff; /* 텍스트 색상 설정 */
+}
+
+.travel-info {
+    background-color: rgba(0, 0, 0, 0.25); /* 배경 색상 및 투명도 설정 */
+    padding: 20px; /* 내용과의 여백 설정 */
+    height:500px;
+}
+
+h1, h2, p {
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    font-size: 24px;
+}
+
+h2 {
+    font-size: 18px;
+    margin-top: 10px; /* 제목과 내용 사이 여백 설정 */
+}
+
+p {
+    font-size: 16px;
+    margin-top: 5px; /* 내용과 내용 사이 여백 설정 */
+}
+.background-img {
+    background-image: url('https://api.cdn.visitjeju.net/photomng/imgpath/201810/17/41209f96-3700-4de3-8545-347a602229e2.jpg');
+    background-size: 100% 550px; /* 가로는 100%, 세로는 600%로 설정 */
+    background-position: top center; /* 이미지를 상단 중앙에 정렬 */
+    background-repeat: no-repeat; /* 이미지 반복 없음 */
+}
+.detail-info {
+	margin-left: auto;
+	margin-right: auto;
+	background-color: ghostwhite;
+	width: 900px;
+	padding: 10px;
+	white-space: pre;
+	color: black;
+	text-align: center; /* 가로 가운데 정렬 */
+	
+}
