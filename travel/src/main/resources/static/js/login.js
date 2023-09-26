@@ -67,5 +67,5 @@ $(document)
 	})
 })
 .on('click','#kakaoLogin',function(){
- 	window.location.href = 'http://kauth.kakao.com/oauth/authorize?client_id=7fb612febcabd2e33c624c45cf59cfd5&redirect_uri=http://localhost:8080/oauth/kakao&response_type=code';
+ 	window.location.href = 'https://kauth.kakao.com/oauth/authorize?client_id=7fb612febcabd2e33c624c45cf59cfd5&redirect_uri=http://localhost:8080/oauth/kakao&response_type=code';
 })
