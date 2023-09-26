@@ -7,4 +7,5 @@ public interface memberDAO {
 	int memberCheck(String email);
 	void signup(String email, String password);
 	int login(String email, String password);
+	String socialCheck(String email);
 }
