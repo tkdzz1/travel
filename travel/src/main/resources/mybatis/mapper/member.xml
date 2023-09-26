@@ -15,4 +15,8 @@ insert into member set member_id = #{param1}, password = #{param2}, created = no
 select count(*) from member where member_id = #{param1} and password = #{param2}
 </select>
 
+<select id="socialCheck" resultType="String">
+select password from member where member_id = #{param1}
+</select>
+
 </mapper>

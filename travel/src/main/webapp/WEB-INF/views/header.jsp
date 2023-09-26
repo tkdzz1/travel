@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -53,7 +54,7 @@
 .linkoflog {
     position: relative;
     left: 600%;
-    font-size: 12px;
+    font-size: 15px;
     margin-top: 15%;
 }
 
@@ -123,12 +124,13 @@
 </style>
 <body>
 <div class="header">
+<a href="/"><img src="/img/logo/TravelJEJU.png" style="width:150px; margin-left:0;"></a>
     <header>
         <ul>
             <li><a href="#" class="menu">여행지</a>
                 <ul class="sub-menu">
                     <li><a href="/travel_list">관광지</a></li>
-                    <li><a href="#">축제/행사</a></li> 
+                    <li><a href="#">음식</a></li>
                 </ul>
             </li>
             <li><a href="#" class="menu">메뉴2</a>
@@ -143,7 +145,14 @@
                     <li><a href="#">서브6</a></li>
                 </ul>
             </li>
-            <li><a href="#" style="font-size: 25px;">메뉴4</a></li>
+            <li><a href="#" class="menu">My Page</a>
+            	<ul class="sub-menu">
+            		<li><a href="#">찜한 여행지</a></li>
+            		<li><a href="#">나의 질문</a></li>
+            		<li><a href="#">나의 리뷰</a></li>
+            		<li><a href="#">정보 수정</a></li>
+            	</ul>
+            </li>
             <li>
                 <a href="#">
                     <img src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png"
@@ -157,18 +166,18 @@
    				 <button id="search-close-button">닫기</button>
 				</div>
                 
-                
-                
             </li>
+            <c:if test="${id == null}">
             <li><a href="/login" class="linkoflog">로그인</a></li>
+            </c:if>
+            <c:if test="${id != null}">
+            <li><a href="/logout" class="linkoflog">로그아웃</a><li>
+            </c:if>
         </ul>
         
     </header>
     
 </div>
-
-
-
 
 </body>
 

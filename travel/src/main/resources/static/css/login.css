@@ -3,7 +3,7 @@
 .container {
   display: grid;
   place-items: center; /* 가로와 세로 중앙 정렬 */
-  margin-top: 20%;
+  margin-top: 10%;
 }
 
 .social-login {
@@ -13,4 +13,31 @@
 
 .social-login > img {
 	cursor:pointer;
+}
+
+button {
+    margin: 20px;
+}
+
+h1 {
+	text-align: center;
+}
+
+.w-btn {
+	cursor: pointer;
+    position: relative;
+    border: none;
+    display: inline-block;
+    padding: 15px 30px;
+    border-radius: 15px;
+    font-family: "paybooc-Light", sans-serif;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.25s;
+}
+
+.w-btn-red {
+    background-color: #ff5f2e;
+    color: #e1eef6;
 }

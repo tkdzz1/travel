@@ -22,7 +22,7 @@
 <div class="vis-weather">
 <!-- <i class="wi wi-day-sunny"></i> -->
     <!-- <img src="weather-icon.png" alt="Weather Icon" class="weather-icon"> -->
- 		<h1>서귀포 날씨</h1>
+ 		<h1>서귀포시 날씨</h1>
         
 		<ul class="list-group list-group-flush weather" style="font-weight: 600;"></ul>
 </div>       

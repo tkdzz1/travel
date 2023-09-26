@@ -22,12 +22,16 @@ public class mainController {
 	
 	
 	@GetMapping("/")
-	public String home(Model model) {
+	public String home(HttpServletRequest req, Model model) {
+		HttpSession s = req.getSession();
+		String email = (String) s.getAttribute("id");
+		
 		ArrayList<travel_attDTO> alemp = tdao.locationName();
 		ArrayList<foodstoreDTO> alemp2 = fdao.fsTest();
 		
 		model.addAttribute("location",alemp);
 		model.addAttribute("restaurant",alemp2);
+		model.addAttribute("id",email);
 		
 		return "home";
 	}
@@ -35,7 +39,7 @@ public class mainController {
 	
 	
 	@GetMapping("/q&a")
-public String showqanda(HttpServletRequest req, Model model) {
+	public String showqanda(HttpServletRequest req, Model model) {
 		
 		
 		HttpSession session = req.getSession();
