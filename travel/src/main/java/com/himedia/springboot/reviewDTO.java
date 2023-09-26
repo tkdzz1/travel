@@ -1,9 +1,13 @@
 package com.himedia.springboot;
 
+import lombok.Data;
+
+@Data
 public class reviewDTO {
-	int review_num;
-	String review_id;
-	int review_rating;
-	String review_content;
-	String review_created;
+	private int review_num;
+	private String review_location;
+	private String review_id;
+	private int review_rating;
+	private String review_content;
+	private String review_created;
 }

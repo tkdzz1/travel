@@ -2,4 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				 "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.himedia.springboot.reviewDAO">
+<select id="getReviewList" resultType="com.himedia.springboot.reviewDTO">
+	select review_num, review_location, review_id, review_rating, review_content, review_created from review where review_location=#{param1} limit #{param2},#{param3}
+</select>
+<select id="getReview" resultType="com.himedia.springboot.reviewDTO">
+	select review_num, review_location, review_id, review_rating, review_content, review_created from review where review_location=#{param1}
+</select>
+<delete id="deleteReview">
+	delete from review where review_num=#{param1}
+</delete>
 </mapper>

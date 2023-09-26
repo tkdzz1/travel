@@ -64,7 +64,7 @@
 <section>
 <div class="review">
 	<h1 class="reviewh1">리뷰 작성</h1>
-	<fieldset>
+	<fieldset id="field">
 		<span class="text-bold">별점을 선택해주세요</span>
 		<input type="radio" name="reviewStar" class="radio" value="5" id="rate1"><label
 			for="rate1">★</label>
@@ -77,13 +77,21 @@
 		<input type="radio" name="reviewStar" class="radio" value="1" id="rate5"><label
 			for="rate5">★</label>
 	</fieldset>
-	<div>
+	<div id="insertReview" class="insertReview">
 		<input type="hidden" id="taname" value="${detail.ta_name}">
-		<textarea class="col-auto form-control" id="reviewContents"
-				  placeholder="좋은 리뷰를 남겨주세요!"></textarea>
-				  <input type="button" id=btnreview class="btnreview" value="작성완료">
+		<textarea class="col-auto form-control" id="reviewContents" placeholder="좋은 리뷰를 남겨주세요!"></textarea>
+	  <input type="button" id=btnreview class="btnreview" value="작성완료">
 	</div>
-	
+	<div>
+		<c:forEach items="${review}" var="alist">
+		    <p class="author">작성자: ${id} 작성일자: ${alist.review_created }</p>
+		    <div class="comment">
+		        <p class="content">${alist.review_content}</p>
+			<input type="button" data-review-num="${alist.review_num}" class="delete-button" value="삭제">
+		    </div>
+		</c:forEach>
+
+	</div>
 </div>
 </section>
 </body>
@@ -128,24 +136,55 @@ $(document)
     }
     likeButton.toggleClass("clicked");
 })
-.on("click",".radio",function(){
-	console.log($(this).val());
-})
 .on("click","#btnreview", function(){
 	let rating = $("input[name='reviewStar']:checked").val();
 	let taname = $("#taname").val();
+	let content = $("#reviewContents").val();
 	let id= $(".id").text()
 	$.ajax({
 		url:"/review",
-		data:{rating:rating,ta_name:taname},
+		data:{rating:rating,ta_name:taname,content:content},
 		method:"post",
 		success:function(data){
 			console.log(data)
+			alert("리뷰 작성을 완료하였습니다.")
+			console.log("data")
+			 $("#reviewContents").val(""); // 리뷰 입력 창 초기화
+			
 		},
 		error: function(xhr, status, error) {
             console.error("리뷰 작성에 실패했습니다.");
         }
 	})
 })
+.on("click", ".delete-button", function () {
+    var reviewNum = $(this).data("review-num"); // 데이터 속성을 통해 리뷰 번호 가져오기
+    console.log("클릭한 삭제 버튼의 리뷰 번호: " + reviewNum);
+    
+    // Ajax 요청
+    $.ajax({
+        type: "POST", // 또는 다른 HTTP 메서드 (GET, DELETE 등)
+        url: "/deleteReview", // 서버에서 삭제 작업을 수행할 엔드포인트 URL
+        data: { reviewNum: reviewNum }, // 서버에 전달할 데이터 (리뷰 번호)
+        success: function (response) {
+            console.log("리뷰가 성공적으로 삭제되었습니다.");
+            // 삭제된 리뷰를 화면에서 제거
+            $(".review[data-review-num='" + reviewNum + "']").remove();
+            
+            // 여기에서 필요한 업데이트 작업을 수행할 수 있습니다.
+        },
+        error: function (error) {
+            // 삭제 중에 오류가 발생하면 이 부분이 실행됩니다.
+            console.error("리뷰 삭제 중 오류 발생: " + error);
+            // 오류 처리를 위한 코드를 추가할 수 있습니다.
+        }
+    });
+});
+
+
+
+	
+
+
 </script>
 </html>

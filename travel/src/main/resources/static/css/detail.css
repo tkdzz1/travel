@@ -165,3 +165,43 @@ table {
 .reviewh1 {
 	text-align: center;
 }
+.read{
+	height: 200px;
+	margin-top: 15px;
+	border: 1px solid black;
+	width: 500px;
+	margin-left: auto;
+	margin-right: auto;
+	width: 100%;
+}
+/* 댓글 스타일링 */
+.comment {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin: 10px 0;
+  background-color: #f9f9f9;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100px;
+}
+
+.author {
+  font-weight: bold;
+}
+
+.delete-button {
+  background-color: #f44336;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  padding: 5px 10px;
+  font-size: 16px;
+}
+
+/* 댓글 스타일에 hover 효과 추가 */
+.delete-button:hover {
+  background-color: #d32f2f;
+}

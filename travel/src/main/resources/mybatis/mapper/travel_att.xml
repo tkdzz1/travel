@@ -52,7 +52,7 @@
 <update id="hitup">
 	update travel_attraction set ta_hit=ta_hit+1 where ta_name=#{param1}
 </update>
-<insert id="insertReivew">
-	insert into review set review_location=${param1}, reveiw_id=#{param2}, review_rating=#{param3}, review_content=#{param4}, review_created=now()
+<insert id="insertReview">
+	insert into review set review_location=#{param1}, review_id=#{param2}, review_rating=#{param3}, review_content=#{param4}, review_created=now()
 </insert>
 </mapper>

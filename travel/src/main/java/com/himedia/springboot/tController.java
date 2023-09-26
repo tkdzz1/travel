@@ -22,6 +22,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
@@ -29,7 +31,9 @@ import jakarta.servlet.http.HttpSession;
 public class tController {
 	@Autowired
 	private travel_attDAO tdao;
-		
+	@Autowired
+	private reviewDAO rdao;
+	
 	@GetMapping("/travel_list")
 	public String tlist(HttpServletRequest req,Model model) {
 		int start, psize;
@@ -188,8 +192,30 @@ public class tController {
     	String[] ta_contentParts = ta_content.split("/");
     	String[] ta_imginfoParts = ta_imginfo.split("/");
     	
+    	int start, psize;
+		String page = req.getParameter("pageno");
+		if(page==null || page.equals("")) {
+			page="1";	
+		} 
+		int pno = Integer.parseInt(page);
+		start = (pno-1)*5;
+		psize=5;		
+		int cnt=tdao.cntTravelList();
+		int pagecount = (int)Math.ceil(cnt/5.0);
+		String pagestr="";
+		for(int i=1; i<=pagecount; i++) {
+			if(pno==i) {
+				pagestr+=i+"&nbsp;";
+			} else {
+			pagestr+="<a href='/travel_list?pageno="+i+"'>"+i+"</a>&nbsp;";
+			}
+		}
+		
+		model.addAttribute("pagestr",pagestr);
+    	List<reviewDTO> review =  rdao.getReviewList(ta_name, start, psize);
     	tdao.hitup(ta_name);
-        model.addAttribute("detail", detail);
+        model.addAttribute("review",review);
+    	model.addAttribute("detail", detail);
         model.addAttribute("ta_imginfoParts", ta_imginfoParts);
         model.addAttribute("ta_contentParts", ta_contentParts);
 
@@ -480,17 +506,26 @@ public class tController {
             return "컨텐츠 삭제 실패: " + e.getMessage();
         }
     }
-    @PostMapping("review")
+    @PostMapping("/review")
     @ResponseBody
-    public String review(HttpServletRequest req, Model model) {
-    	HttpSession s = req.getSession();
-    	String id= (String)s.getAttribute("id");
-    	String reviewContents = req.getParameter("reviewContents");
-    	int rating = Integer.parseInt(req.getParameter("rating"));
-    	String ta_name = req.getParameter("ta_name");
-    	tdao.insertReview(ta_name,id,rating,reviewContents);
-    	System.out.println(s);
-    	return "";
+    public String review(HttpServletRequest req) throws JsonProcessingException {
+        HttpSession session = req.getSession();
+        String id = (String) session.getAttribute("id");
+        System.out.println(id);
+        String reviewContents = req.getParameter("content");
+        int rating = Integer.parseInt(req.getParameter("rating"));
+        String ta_name = req.getParameter("ta_name");
+        tdao.insertReview(ta_name, id, rating, reviewContents);
+
+        return "리뷰 등록이 성공하였습니다.";
+    }
+    @PostMapping("/deleteReview")
+    @ResponseBody
+    public String deleteReview(HttpServletRequest req) {
+    	int reviewNum=Integer.parseInt(req.getParameter("reviewNum"));
+    	System.out.println(reviewNum);
+    	rdao.deleteReview(reviewNum);
+    	return "성공";
     }
 
     
