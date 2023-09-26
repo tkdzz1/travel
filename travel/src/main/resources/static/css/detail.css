@@ -2,15 +2,32 @@ body {
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
-    color: #fff; /* 텍스트 색상 설정 */
 }
-
+.heart {
+    border: none;
+    background: none;
+    padding: 0;
+    cursor: pointer;
+	width: 50px;
+	height: 50px;
+}
+.like {
+    border: none;
+    background: none;
+    padding: 0;
+    cursor: pointer;
+	width: 50px;
+	height: 50px;
+}
 .travel-info {
-    background-color: rgba(0, 0, 0, 0.25); /* 배경 색상 및 투명도 설정 */
+	color: white;
+	margin-left: 500px;
+	width: 700px;
+    background-color: rgba(0, 0, 0, 0.6); /* 배경 색상 및 투명도 설정 */
     padding: 20px; /* 내용과의 여백 설정 */
     height:500px;
 }
-
+	
 h1, h2, p {
     margin: 0;
     padding: 0;
@@ -30,7 +47,6 @@ p {
     margin-top: 5px; /* 내용과 내용 사이 여백 설정 */
 }
 .background-img {
-    background-image: url('https://api.cdn.visitjeju.net/photomng/imgpath/201810/17/41209f96-3700-4de3-8545-347a602229e2.jpg');
     background-size: 100% 550px; /* 가로는 100%, 세로는 600%로 설정 */
     background-position: top center; /* 이미지를 상단 중앙에 정렬 */
     background-repeat: no-repeat; /* 이미지 반복 없음 */
@@ -38,11 +54,114 @@ p {
 .detail-info {
 	margin-left: auto;
 	margin-right: auto;
-	background-color: ghostwhite;
 	width: 900px;
 	padding: 10px;
 	white-space: pre;
 	color: black;
 	text-align: center; /* 가로 가운데 정렬 */
 	
+}
+.detail-info {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.info {
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 5px;
+}
+
+/* 이미지 스타일 */
+.img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+/* 입력 필드 스타일 */
+input[type="text"] {
+    width: 500px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px; /* 원하는 폰트 크기로 조정하세요 */
+}
+
+/* 버튼 스타일 */
+input[type="button"] {
+    background-color: lightgreen;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+input[type="button"]:hover {
+    background-color: green;
+}
+
+/* 이미지 삭제 버튼 스타일 */
+.deleteImage {
+    background-color: #f00;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    margin-top: 10px;
+    border-radius: 5px;
+}
+
+.deleteImage:hover {
+    background-color: #c00;
+}
+
+/* 컨텐츠 삭제 버튼 스타일 */
+.deleteContent {
+    background-color: #f00;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    margin-top: 10px;
+    border-radius: 5px;
+}
+
+.deleteContent:hover {
+    background-color: #c00;
+}
+
+/* 새 컨텐츠 추가 버튼 스타일 */
+#addDetail {
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+table {
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+}
+.review {
+	margin-top: 20px;
+	margin-left: auto;
+	margin-right: auto;
+	width: 850px;
+	height: 600px;
+	border: 1px solid #ddd;
+	
+	
+}
+.reviewh1 {
+	text-align: center;
 }

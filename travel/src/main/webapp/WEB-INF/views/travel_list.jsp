@@ -12,7 +12,7 @@
 <body>
 <div class="container">
     <div class="left-panel">
-        <h1>여행지 정보</h1> <a href="/add_list">추가</a> 
+        <h1>여행지 정보</h1> <button id="addtravellist">관광지 추가</button>
         <c:forEach items="${list}" var="alist">
         <div class="travel-card">
             <div class="image-and-text">
@@ -20,8 +20,8 @@
 			    <div class="text">
 			        <h2>${alist.ta_name}</h2>
 			        <p><strong>주소:</strong> ${alist.ta_address}</p>
-<!-- 			        <p><strong>좋아요:</strong> 120</p>
-			        <p><strong>싫어요:</strong> 10</p> -->
+		       		<p><strong>조회수:</strong>${alist.ta_hit}</p>
+			        <p><strong>싫어요:</strong> 10</p>
 			        <p><strong>분류:</strong>${alist.ta_category}</p>
 			        <button class="btndelete" data-name="${alist.ta_name}">삭제</button> <!-- 수정된 버튼 -->
 			        <input type="hidden" id="h_name" name="h_name" value="${alist.ta_name}" class="h_name">
@@ -118,7 +118,7 @@ $(document).ready(function() {
             title: ta_name
         });
 		
-        let infoWindowContent = '<div class="detail" style="padding:10px;"><a href="/travel_detail?ta_name=' + ta_name + '">' + ta_name + '</a></div>';
+        let infoWindowContent = '<div class="detail" style="padding:10px;"><a href="/travel_Detail?ta_name=' + ta_name + '">' + ta_name + '</a></div>';
         let infoWindow = new naver.maps.InfoWindow({
             content: infoWindowContent
         });
@@ -169,6 +169,12 @@ $(document).ready(function() {
             }
         });
     });
+ 	$("#addtravellist").on("click",function(){
+ 		document.location="/add_TravelList"
+ 	})
+ 	$("#addfoodlist").on("click",function(){
+ 		document.location="/add_FoodList"
+ 	})
 });
 </script>
 </html>

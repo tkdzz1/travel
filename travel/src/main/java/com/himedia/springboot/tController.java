@@ -23,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class tController {
@@ -39,7 +40,7 @@ public class tController {
 		int pno = Integer.parseInt(page);
 		start = (pno-1)*5;
 		psize=5;		
-		int cnt=tdao.cntlist();
+		int cnt=tdao.cntTravelList();
 		int pagecount = (int)Math.ceil(cnt/5.0);
 		String pagestr="";
 		for(int i=1; i<=pagecount; i++) {
@@ -52,10 +53,10 @@ public class tController {
 		model.addAttribute("pagestr",pagestr);
 		ArrayList<travel_attDTO> getlist = tdao.getList(start,psize);
 		model.addAttribute("list", getlist);	
-		return "travel_attraction/travel_list";
+		return "travel_list";
 	}
 	
-	@GetMapping("/add_list")
+	@GetMapping("/add_TravelList")
 	public String addlist() {
 		return "travel_attraction/add_list";
 	}
@@ -125,8 +126,8 @@ public class tController {
                 
                 String taContent = taContentBuilder.toString();
                 // 여행지 정보를 데이터베이스에 저장
-                tdao.addlist(name, local, savedMainName, address, category, latitude, longitude);
-                tdao.addimginfo(name,detailImagePaths.toString(),taContent);
+                tdao.addTravelList(name, local, savedMainName, address, category, latitude, longitude);
+                tdao.addImgInfo(name,detailImagePaths.toString(),taContent);
                 model.addAttribute("fileName", mainFile);
                 return "redirect:/travel_list";
             } catch (IOException e) {
@@ -151,7 +152,7 @@ public class tController {
 		int pno = Integer.parseInt(page);
 		start = (pno-1)*5;
 		psize=5;		
-		int cnt=tdao.cntlist();
+		int cnt=tdao.cntTravelList();
 		int pagecount = (int)Math.ceil(cnt/5.0);
 		String pagestr="";
 		for(int i=1; i<=pagecount; i++) {
@@ -177,23 +178,21 @@ public class tController {
         }
         return ja.toJSONString();
     }
-    @GetMapping("/travel_detail")
+    @GetMapping("/travel_Detail")
     public String detail(HttpServletRequest req,Model model) {
     	String ta_name=req.getParameter("ta_name");
-    	travel_attDTO detail = tdao.getdetail(ta_name);
+    	travel_attDTO detail = tdao.getDetail(ta_name);
     	 
     	String ta_imginfo = detail.getTa_imginfo();
     	String ta_content = detail.getTa_content();
     	String[] ta_contentParts = ta_content.split("/");
     	String[] ta_imginfoParts = ta_imginfo.split("/");
     	
+    	tdao.hitup(ta_name);
         model.addAttribute("detail", detail);
         model.addAttribute("ta_imginfoParts", ta_imginfoParts);
         model.addAttribute("ta_contentParts", ta_contentParts);
-        System.out.println("ta_imginfoParts 배열 내용:");
-        for (String item : ta_imginfoParts) {
-            System.out.println(item);
-        }
+
     	    
     	return "/travel_attraction/travel_detail";
     }
@@ -201,7 +200,7 @@ public class tController {
     @ResponseBody
     public String delete(HttpServletRequest req) {
         String ta_name = req.getParameter("ta_name");
-        tdao.deletelist(ta_name);
+        tdao.deleteList(ta_name);
         String imageDirectory = mainuploadDirectory;
         String  mainImageFileName = req.getParameter("ta_img");
         // 이미지 파일 삭제 메서드 호출
@@ -218,7 +217,7 @@ public class tController {
     @ResponseBody
     public String delete_img(HttpServletRequest req) {
         String ta_name = req.getParameter("ta_name");
-        travel_attDTO detail_img = tdao.getdetailimg(ta_name);
+        travel_attDTO detail_img = tdao.getDetailImg(ta_name);
         String ta_imginfo = detail_img.getTa_imginfo();
         String[] ta_imginfoParts = ta_imginfo.split("/");
 
@@ -232,14 +231,14 @@ public class tController {
                 mainImageFile.delete(); // 파일을 삭제합니다.
             }
         }
-        tdao.deletedetail(ta_name);
+        tdao.deleteTravel_attraction(ta_name);
         
         return "삭제되었습니다.";
     }
     @GetMapping("/update")
     public String update(HttpServletRequest req,Model model) {
     	String ta_name = req.getParameter("ta_name");
-    	travel_attDTO detail = tdao.getdetail(ta_name);
+    	travel_attDTO detail = tdao.getDetail(ta_name);
 	 
     	String ta_imginfo = detail.getTa_imginfo();
     	String ta_content = detail.getTa_content();
@@ -252,20 +251,28 @@ public class tController {
         return "travel_attraction/update";
     }
     @PostMapping("/doupdate")
-    public String updateTravelAttraction(@RequestParam("newdetailimg") MultipartFile[] newdetailImages,
-							    		 @RequestParam("newlistimg") MultipartFile newListImage,
-							    		 @RequestParam("content") String[] contents,
+    public String updateTravelAttraction(@RequestParam(value = "newdetailimg", required = false) MultipartFile[] newdetailImages,
+                                         @RequestParam(value = "newlistimg", required = false) MultipartFile newListImage,
+                                         @RequestParam(value = "content", required = false) String[] contents,
                                          @RequestParam("name") String name,
                                          HttpServletRequest req,
                                          Model model) {
         try { 	
+        	System.out.println(newdetailImages);
+        	System.out.println(contents);
+            if (newdetailImages == null && contents ==null) {
+            	String newdetailImage="";
+            	String contetn="";
+            	tdao.updateTravelAttraction(name, newdetailImage, contetn);
+            	return "redirect:/travel_Detail?ta_name=" + name;
+            }
+
         	String ta_name = req.getParameter("ta_name");
             String local = req.getParameter("local");
             String address = req.getParameter("address");
             String category = req.getParameter("category");
             
-        	travel_attDTO detail = tdao.getdetail(ta_name);
-        	
+        	travel_attDTO detail = tdao.getDetail(ta_name);
         	String ta_imginfo = detail.getTa_imginfo();
         	String[] ta_imginfoParts = ta_imginfo.split("/");
             if (!newListImage.isEmpty()) {
@@ -277,11 +284,11 @@ public class tController {
                 String savedListImageName = listImageId.toString() + formattedListDate + "." + StringUtils.getFilenameExtension(listImageName);
                 File listImageFile = new File(mainuploadDirectory + File.separator + savedListImageName);
                 newListImage.transferTo(listImageFile);
-                tdao.updatelist1(name,local,savedListImageName,address,category,ta_name);
+                tdao.updateList1(name,local,savedListImageName,address,category,ta_name);
             } else {
-            	tdao.updatelist2(name,local,address,category,ta_name);
+            	tdao.updateList2(name,local,address,category,ta_name);
             }
-            tdao.updatedetailinfo(name,ta_name);
+            tdao.updateDetailInfo(name,ta_name);
             // 이미지 수정을 위한 인덱스
             int imageIndex = 0;
             StringBuilder detailImagePaths = new StringBuilder();
@@ -312,7 +319,6 @@ public class tController {
                         detailImagePaths.append(ta_imginfoParts[imageIndex]);
                     }
                 }
-
                 // 이미지 수정을 위한 인덱스 증가
                 imageIndex++;
             }
@@ -335,13 +341,13 @@ public class tController {
             // 여행지 정보 및 이미지 업데이트
             tdao.updateTravelAttraction(name, detailImagePaths.toString(), taContent);
 
-            return "redirect:/travel_detail?ta_name=" + name;
+            return "redirect:/travel_Detail?ta_name=" + name;
         } catch (IOException e) {
             e.printStackTrace();
             model.addAttribute("errorMessage", "파일 업로드 실패");
         }
 
-        return "redirect:/travel_detail?ta_name=" + name;
+        return "redirect:/travel_Detail?ta_name=" + name;
     }
     @PostMapping("/deleteImage")
     @ResponseBody
@@ -350,18 +356,21 @@ public class tController {
                               RedirectAttributes redirectAttributes) {
         try {
             // 1. DB에서 해당 레코드를 가져옵니다.
-            travel_attDTO detail = tdao.getdetail(taName);
+            travel_attDTO detail = tdao.getDetail(taName);
 
             // 2. 가져온 문자열을 '/'로 분할하여 배열로 변환합니다.
             String ta_imginfo = detail.getTa_imginfo();
             String[] ta_imginfoParts = ta_imginfo.split("/");
 
-            // 3. 삭제하려는 이미지를 배열에서 제거합니다.
+            // 3. 삭제하려는 이미지를 배열에서 제거하고 빈 문자열을 추가합니다.
             List<String> updatedImageList = new ArrayList<>(Arrays.asList(ta_imginfoParts));
             updatedImageList.remove(imageToDelete);
+            updatedImageList.add("");
 
-            // 4. 업데이트된 문자열을 DB에 다시 저장합니다.
+            // 4. 업데이트된 문자열을 '/'로 합쳐서 문자열로 변환합니다.
             String updatedTaImgInfo = String.join("/", updatedImageList);
+
+            // 5. DB에 다시 저장합니다.
             tdao.updateTravelAttraction(taName, updatedTaImgInfo, detail.getTa_content());
 
             return "success"; // 이미지 삭제 성공 메시지를 리턴
@@ -371,41 +380,121 @@ public class tController {
         }
     }
 
-    @PostMapping("/addImage")
+    @PostMapping("/updatedetail")
     @ResponseBody
-    public String addImage(@RequestParam("ta_name") String taName,
-                           @RequestParam("newdetailimg") MultipartFile newDetailImage,
-                           RedirectAttributes redirectAttributes) {
+    public String updateDetail(@RequestParam("ta_name") String taName,
+                               @RequestParam("content") String content,
+                               @RequestParam(value = "newdetailimg", required = false) MultipartFile newDetailImage,
+                               RedirectAttributes redirectAttributes) {
         try {
-            if (!newDetailImage.isEmpty()) {
-                // 파일 업로드 로직
-            	String detailImageName = newDetailImage.getOriginalFilename();
-            	UUID detailImageId = UUID.randomUUID();
-            	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddkkmmss");
-            	Date date = new Date();
-            	String formattedDate = sdf.format(date);
-            	String savedDetailImageName = detailImageId.toString() + formattedDate + "." + StringUtils.getFilenameExtension(detailImageName);
-            	File detailImageFile = new File(detailuploadDirectory + File.separator + savedDetailImageName); // detailuploadDirectory 변수 사용
-            	newDetailImage.transferTo(detailImageFile);
+            // 기존 텍스트 컨텐츠를 가져오기 (여기에서는 어떻게 가져올지에 대한 로직을 추가해야 합니다)
+            travel_attDTO detail = tdao.getDetail(taName);
+            String ta_content = detail.getTa_content();
+            String[] ta_contentParts = ta_content.split("/");
+
+            // content가 비어 있거나 null일 경우 빈 문자열("")로 초기화
+            if (content == null || content.isEmpty()) {
+                content = "";
+            }
+
+            // 기존 컨텐츠와 새로운 컨텐츠를 합쳐서 업데이트
+            StringBuilder updatedContentBuilder = new StringBuilder();
+            for (String part : ta_contentParts) {
+                if (!part.isEmpty()) {
+                    updatedContentBuilder.append(part).append("/");
+                }
+            }
+            // content가 비어있는 경우 뒤의 "/"가 추가되지 않도록 조건을 추가합니다.
+            if (!content.isEmpty()) {
+                updatedContentBuilder.append(content);
+            }
+            String updatedContent = updatedContentBuilder.toString();
+
+            // 이미지 추가 로직
+            if (newDetailImage != null && !newDetailImage.isEmpty()) {
+                String detailImageName = newDetailImage.getOriginalFilename();
+                UUID detailImageId = UUID.randomUUID();
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddkkmmss");
+                Date date = new Date();
+                String formattedDate = sdf.format(date);
+                String savedDetailImageName = detailImageId.toString() + formattedDate + "." + StringUtils.getFilenameExtension(detailImageName);
+                File detailImageFile = new File(detailuploadDirectory + File.separator + savedDetailImageName);
+                newDetailImage.transferTo(detailImageFile);
 
                 // DB에 새 이미지 경로 추가
-                travel_attDTO detail = tdao.getdetail(taName);
                 String ta_imginfo = detail.getTa_imginfo();
                 if (ta_imginfo == null || ta_imginfo.isEmpty()) {
                     ta_imginfo = savedDetailImageName;
                 } else {
                     ta_imginfo += "/" + savedDetailImageName;
                 }
-                tdao.updateTravelAttraction(taName, ta_imginfo, detail.getTa_content());
-
-                return "success"; // 이미지 추가 성공 메시지를 리턴
+                tdao.updateTravelAttraction(taName, ta_imginfo, updatedContent);
             } else {
-                return "error"; // 이미지가 비어 있을 경우 에러 메시지를 리턴
+                // 이미지가 없을 경우 컨텐츠만 업데이트
+                tdao.updateContent(taName, updatedContent);
             }
+
+            return "업데이트 및 이미지 추가 성공: " + content;
         } catch (Exception e) {
             e.printStackTrace();
-            return "error"; // 이미지 추가 중 오류가 발생했을 경우 에러 메시지를 리턴
+            return "업데이트 및 이미지 추가 실패: " + e.getMessage();
         }
     }
+    @PostMapping("/deleteContent")
+    @ResponseBody
+    public String deleteContent(@RequestParam("ta_name") String taName,
+                                @RequestParam("contentToDelete") String contentToDelete) {
+        try {
+            travel_attDTO detail = tdao.getDetail(taName);
+            
+            String ta_content = detail.getTa_content();
+            String[] ta_contentParts = ta_content.split("/");
+            
+            List<String> deleteContent = new ArrayList<>(Arrays.asList(ta_contentParts));
+            System.out.println("deleteContent:" + deleteContent);
+            
+            // contentToDelete를 ArrayList에서 정확하게 찾아내고 그 위치를 contentToDeleteIndex에 저장
+            int contentToDeleteIndex = deleteContent.indexOf(contentToDelete);
+            
+            if (contentToDeleteIndex >= 0) {
+                // contentToDelete를 찾은 경우에만 삭제와 추가를 수행
+                deleteContent.remove(contentToDeleteIndex);
+                // 삭제된 컨텐츠의 위치에 빈 문자열을 추가
+                deleteContent.add(contentToDeleteIndex, "");
+            } else {
+                // contentToDelete를 찾지 못한 경우에 대한 예외 처리
+                return "컨텐츠 삭제 실패: 해당 컨텐츠를 찾을 수 없습니다.";
+            }
+            
+            // 삭제된 컨텐츠를 "/"로 합쳐서 업데이트
+            String updatedTaContent = String.join("/", deleteContent);
+            System.out.println("updatedTaContent:" + updatedTaContent);
+            
+            // DB 업데이트 시 ta_imginfo는 그대로 사용
+            tdao.updateTravelAttraction(taName, detail.getTa_imginfo(), updatedTaContent);
+
+            // 삭제 작업이 성공하면 메시지를 반환합니다.
+            return "컨텐츠 삭제 성공: " + contentToDelete;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "컨텐츠 삭제 실패: " + e.getMessage();
+        }
+    }
+    @PostMapping("review")
+    @ResponseBody
+    public String review(HttpServletRequest req, Model model) {
+    	HttpSession s = req.getSession();
+    	String id= (String)s.getAttribute("id");
+    	String reviewContents = req.getParameter("reviewContents");
+    	int rating = Integer.parseInt(req.getParameter("rating"));
+    	String ta_name = req.getParameter("ta_name");
+    	tdao.insertReview(ta_name,id,rating,reviewContents);
+    	System.out.println(s);
+    	return "";
+    }
+
+    
+
 
 }
+

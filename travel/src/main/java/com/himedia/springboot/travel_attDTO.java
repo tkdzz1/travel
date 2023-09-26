@@ -11,8 +11,13 @@ public class travel_attDTO {
 	private	double ta_latitude;
 	private double ta_longitude;
 	private String ta_imginfo;
-	
-	
+	private int ta_hit;
+	public int getTa_hit() {
+		return ta_hit;
+	}
+	public void setTa_hit(int ta_hit) {
+		this.ta_hit = ta_hit;
+	}
 	public String getTa_imginfo() {
 		return ta_imginfo;
 	}
