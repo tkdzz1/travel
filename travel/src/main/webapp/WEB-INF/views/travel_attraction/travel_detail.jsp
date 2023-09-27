@@ -11,6 +11,7 @@
 
 <title>Insert title here</title>
 </head>
+<%@ include file="../header.jsp" %>
 <body>
 <section>
 <div class="background-img" style="background-image: url('img/t_img/${detail.ta_img}');">
@@ -94,6 +95,7 @@
 	</div>
 </div>
 </section>
+<%@ include file="../footer.jsp" %>
 </body>
 <script src="https://code.jquery.com/jquery-latest.js"></script>
 <script>

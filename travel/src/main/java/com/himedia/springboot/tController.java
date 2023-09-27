@@ -57,7 +57,7 @@ public class tController {
 		model.addAttribute("pagestr",pagestr);
 		ArrayList<travel_attDTO> getlist = tdao.getList(start,psize);
 		model.addAttribute("list", getlist);	
-		return "travel_list";
+		return "travel_attraction/travel_list";
 	}
 	
 	@GetMapping("/add_TravelList")

@@ -36,7 +36,7 @@
 		<img src="img/kakaologin.png" id="kakaoLogin">
 	</div>
 </div>
-
+<%@include file="footer.jsp"%>
 </body>
 <script src="https://code.jquery.com/jquery-latest.js"></script>
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>

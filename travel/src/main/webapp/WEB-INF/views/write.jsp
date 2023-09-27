@@ -79,6 +79,7 @@
 
 </head>
 <body>
+<%@include file="header.jsp"%>
   <h1>게시물 작성</h1>
   <form method="post" action="/insert" id="frmInsert" name="frmInsert">
     <table>
@@ -108,7 +109,8 @@
       </tr>
     </table>
   </form>
-
+	  <%@include file="footer.jsp"%>
+</body>
   <script src="https://code.jquery.com/jquery-latest.js"></script>
   <script>
     $(document).on('submit', '#frmInsert', function () {
@@ -131,5 +133,4 @@
       return true;
     });
   </script>
-</body>
 </html>

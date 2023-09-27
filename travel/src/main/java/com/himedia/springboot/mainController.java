@@ -158,20 +158,10 @@ public class mainController {
     }
 	
 	
-	
-	
 
-	
-	
-	
-	
-	
 	@GetMapping("/write")
-	public String write(HttpServletRequest req, Model model) {
-		HttpSession session = req.getSession();
-		req.getParameter("id");
-		return "/write";
-		
+	public String write() {
+		return "write";
 	}
 	
 	

@@ -12,7 +12,7 @@
 <style>
 </style>
 <body>
-
+<%@ include file="../header.jsp" %>
 <form action="doupdate" id="frmupdate" method="post" enctype="multipart/form-data">
 	<div class="background-img" style="background-image: url('img/t_img/${detail.ta_img}');">
         <div class="travel-info">
@@ -74,6 +74,7 @@
         </table>
     </div>
 </form>
+<%@ include file="../footer.jsp" %>
 </body>
 <script src="https://code.jquery.com/jquery-latest.js"></script>
 <script>

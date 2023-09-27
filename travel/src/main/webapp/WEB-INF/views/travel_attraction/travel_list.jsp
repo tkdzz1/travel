@@ -5,11 +5,12 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>네이버 지도 이동 예제</title>
+    <title>TRAVEL JEJU - 관광지</title>
     <link rel="stylesheet" type="text/css" href="css/map.css">
     <script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=81hlrkxaq1"></script>
 </head>
 <body>
+<%@ include file="../header.jsp" %>
 <div class="container">
     <div class="left-panel">
         <h1>여행지 정보</h1> <button id="addtravellist">관광지 추가</button>
@@ -39,7 +40,7 @@
         </div>
     </div>
 </div>
-
+<%@ include file="../footer.jsp" %>
 </body>
 <!-- <script src="js/map.js"></script> -->
 <script src="https://code.jquery.com/jquery-latest.js"></script>

@@ -5,8 +5,8 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="css/add_list.css">
-
 </head>
+<%@ include file="../header.jsp" %>
 <body>
     <h1>여행지 추가</h1>
     <form action="/upload" method="post" enctype="multipart/form-data">
@@ -17,7 +17,7 @@
         
         <label for="region">지역명:</label>
         <input type="text" id="local" name="local" required><br>
-
+        
         <!-- 디테일 이미지 및 컨텐츠 내용 -->
         <div id="detailFields">
             <!-- 초기에는 한 쌍의 입력 필드만 표시 -->
@@ -52,6 +52,7 @@
         <input type="button" id="previewImage" value="이미지 미리보기">
     </form>
 </body>
+   <%@ include file="../footer.jsp" %>
 <script src="https://code.jquery.com/jquery-latest.js"></script>.
 <script>
 $(document).ready(function() {

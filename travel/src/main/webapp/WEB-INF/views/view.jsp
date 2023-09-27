@@ -131,7 +131,7 @@
     </style>
 </head>
 <body>
-
+<%@include file="header.jsp"%>
 <h1 class="h1title">질문 상세보기</h1>
 <hr class="hr1"/>
 
@@ -622,5 +622,6 @@
     	
     });
 </script>
+<%@include file="footer.jsp"%>
 </body>
 </html>

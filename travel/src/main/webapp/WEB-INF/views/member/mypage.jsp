@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <link rel="stylesheet" href="/resources/css/home.css" />
@@ -24,14 +25,22 @@
 									<div class="myp-inner">
 										<div class="myp-profile">
 											<p class="profile-img">
-												<img
+												<c:if test="${empty profile}">
+													<img
 													src="https://media.bunjang.co.kr/product/177600551_1_1643548856_w320.jpg">
+												</c:if>
+												<c:if test="${!empty profile}">
+													<img
+													src="${profile}">
+												</c:if>
 											</p>
 										</div>
 										<div class="myp-info">
 											<div class="myTop">
 												<div class="infoLV">
-													<span class="myN">이름</span>&nbsp;님의 제주여행
+													<span class="myN"><c:if test="${empty nickname}">${id}</c:if>
+																				  <c:if test="${!empty nickname}">${nickname}</c:if>
+													</span>&nbsp;님의 제주여행
 												</div>
 											</div>
 											<div class="myBtm">
@@ -70,6 +79,7 @@
 			</div>
 		</div>
 	</div>
+<%@ include file="../footer.jsp" %>
 <script src="https://code.jquery.com/jquery-latest.js"></script>
 </body>
 </html>

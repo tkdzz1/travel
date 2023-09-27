@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,23 +32,16 @@
         <nav id="lnbNav" class="lnb_nav_wrap">
             <h2 class="blind">주메뉴</h2>
             <ul class="lnb_nav">
-                <li class="lnb_nav_item n1">  <!-- 메뉴 순서 추가 n1m, n2, ..... -->
-                    <a href="#" class="lnb_nav_link"><span>테마여행</span></a>
+                <li class="lnb_nav_item n1">
+                    <a href="#" class="lnb_nav_link"><span>여행지</span></a>
                     <ul class="depth2">
-                        <li><a href="#"><span>추천여행 30선</span></a></li>
-                        <li><a href="#"><span>테마별 여행</span></a></li>
+                        <li><a href="/travel_list"><span>관광지</span></a></li>
+                        <li><a href="/food_store"><span>음식</span></a></li>
+                        <li><a href="/stay"><span>숙박</span></a></li>
+                        <li><a href="/festival"><span>축제</span></a></li>
                     </ul>
                 </li>
                 <li class="lnb_nav_item n2">
-                    <a href="#" class="lnb_nav_link"><span>여행지</span></a>
-                    <ul class="depth2">
-                        <li><a href="#"><span>관광지</span></a></li>
-                        <li><a href="#"><span>음식</span></a></li>
-                        <li><a href="#"><span>숙박</span></a></li>
-                        <li><a href="#"><span>축제</span></a></li>
-                    </ul>
-                </li>
-                <li class="lnb_nav_item n3">
                     <a href="#" class="lnb_nav_link"><span>지역별여행</span></a>
                     <ul class="depth2">
                         <li><a href="#"><span>곶자왈</span></a></li>
@@ -58,7 +52,7 @@
                         <li><a href="#"><span>우도</span></a></li>
                     </ul>
                 </li>
-                <li class="lnb_nav_item n4">
+                <li class="lnb_nav_item n3">
                     <a href="#" class="lnb_nav_link"><span>여행준비</span></a>
                     <ul class="depth2">
                         <li><a href="#"><span>나만의 제주 여행</span></a></li>
@@ -68,14 +62,14 @@
   
                     </ul>
                 </li>
-                <li class="lnb_nav_item n5">
+                <li class="lnb_nav_item n4">
                     <a href="/mypage" class="lnb_nav_link"><span>나의여행</span></a>
                     <ul class="depth2">
-                        <li><a href="/mybbs"><span>나의게시글</span></a></li>
-                        <li><a href="/myreview"><span>나의리뷰</span></a></li>
-                        <li><a href="/mylike"><span>찜한여행지</span></a></li>
-                        <li><a href="#"><span>제주방문지</span></a></li>
-                        <li><a href="#"><span>정보수정</span></a></li>
+                        <li><a href="/mybbs"><span>나의 게시글</span></a></li>
+                        <li><a href="/myreview"><span>나의 리뷰</span></a></li>
+                        <li><a href="/mylike"><span>찜한 여행지</span></a></li>
+                        <li><a href="#"><span>제주 방문지</span></a></li>
+                        <li><a href="#"><span>정보 수정</span></a></li>
                     </ul>
                 </li>
             </ul>
@@ -84,8 +78,12 @@
 	        <div class="gnb_site">
 	            <button type="button" class="btn">여행자</button>
 	            <ul class="list">
-	            	<li><a href="/login"><span>로그인</span></a>
-	            	<li><a href="/logout"><span>로그아웃</span></a>
+	            	<c:if test="${empty id}">
+	            		<li><a href="/login"><span>로그인</span></a></li>
+	            	</c:if>
+	            	<c:if test="${!empty id}">
+	            		<li><a href="/logout"><span>로그아웃</span></a></li>
+	            	</c:if>
 	            </ul>
 	        </div>
 	    </div>

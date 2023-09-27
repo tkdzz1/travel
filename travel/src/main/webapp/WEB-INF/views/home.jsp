@@ -89,8 +89,8 @@ var tagListJson = ["제주투어"," 제주힐링여행"," 가을여행"," 사진
 		<div class="board">
 			&nbsp;&nbsp;<strong><a class="newq">New Question</a></strong> <br>
 			<div class="fornewq2">
-				<a href="#" class="newq1">Ask Question</a>&nbsp;&nbsp;&nbsp;&nbsp; <a
-					href="/q&a" class="newq2">Show All Question</a>
+				<a href="/write" class="newq1">Ask Question</a>&nbsp;&nbsp;&nbsp;&nbsp; 
+				<a href="/q&a" class="newq2">Show All Question</a>
 			</div>
 			<br> <br>
 			<ul style="display: flex;">

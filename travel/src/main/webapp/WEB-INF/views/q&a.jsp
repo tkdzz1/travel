@@ -399,6 +399,7 @@ font-family: 'Happiness-Sans-Title';
     </td>
 </tr>
 </table>
+<%@include file="footer.jsp"%>
 </body>
 <script src="https://code.jquery.com/jquery-latest.js"></script>
 <script>
