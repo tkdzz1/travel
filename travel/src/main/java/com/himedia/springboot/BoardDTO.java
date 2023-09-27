@@ -8,6 +8,7 @@ public class BoardDTO {
 	String content;
 	int hit;
 	String created;
+	String updated;
 	String category;
 	int answer_count;
 	
@@ -66,7 +67,7 @@ public class BoardDTO {
 	public void setUpdated(String updated) {
 		this.updated = updated;
 	}
-	String updated;
+	
 	
 	
 	

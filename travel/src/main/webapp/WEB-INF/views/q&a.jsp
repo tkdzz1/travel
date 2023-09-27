@@ -13,11 +13,12 @@
     background-color: white;
     margin: 0;
     padding: 0;
+   
   }
 
   h1 {
     text-align: center;
-    background-color: #333;
+    background-color: #CED8F6;
     color: #fff;
     padding: 20px 0;
     margin: 0;
@@ -93,6 +94,16 @@ font-family: 'TheJamsil5Bold';
     font-family: 'Verdana', sans-serif;
     
   }
+  
+  
+  button#btnlogin {
+  	background-color: #D8D8D8;
+    color: black;
+    border: none;
+    padding: 12px 20px;
+    cursor: pointer;
+    font-family: 'Verdana', sans-serif;
+  }
 
   button#btnWrite:hover {
     background-color: #A4A4A4;
@@ -104,7 +115,7 @@ font-family: 'TheJamsil5Bold';
   }
 
   .wDiv {
-    text-align: right;
+    text-align: center;
     margin-top: 10px;
   }
 
@@ -154,7 +165,7 @@ font-family: 'TheJamsil5Bold';
   }
   
   #tblBoard {
-  	margin-top:20%;
+  	margin-top:8%;
   }
   
 
@@ -196,11 +207,65 @@ font-family: 'TheJamsil5Bold';
         
         .popular {
         	text-align:center;
+        	width:75%;
+        	margin-left: 10%;
         }
+        
+        .popular tbody > tr:hover {
+        	background-color:#ccc;
+        }
+        
+        @font-face {
+    font-family: 'GangwonState';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-2@1.0/GangwonState.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.poph3 {
+	font-family: 'GangwonState';
+	font-weight:bold;
+	font-size: 25px;
+}
+        
+        @font-face {
+    font-family: 'Happiness-Sans-Title';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2205@1.0/Happiness-Sans-Title.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+        
+        
+        
+.mid {
+	text-align:center;	
+}   
+
+.mid p, .mid h1 {
+font-family: 'Happiness-Sans-Title';
+}
+
+.mid p {
+	font-size:20px;
+}
+
+@font-face {
+    font-family: 'LINESeedKR-Bd';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Bd.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+
+.tbfirst{
+	font-family: 'LINESeedKR-Bd';
+}     
+        
         
         
 </style>
 </head>
+
+<%@include file="header.jsp"%>
 <body>
 
 
@@ -222,20 +287,66 @@ font-family: 'TheJamsil5Bold';
 <br><br><br><br><br><br>
 
 
-<!-- 추가로 만들 예정 
-<div class="popular">
-	<h3>인기 Q&A</h3>
-	
-	<div class="popularContent">
 
-	
-	
-	</div>
-	
-	
+
+<!-- 조회수 높은 두가지 출력 -->
+<div class="popular">
+    <h3 class=poph3>많이 본 Q&A</h3>
+    <div class="popularContent">
+        <table class="tbfirst">
+            <thead>
+                <tr>
+                    <th>제목</th>
+                    <th>답변수</th>
+                    <th>조회수</th>
+                    <th>작성일</th>
+                </tr>
+            </thead>
+            <tbody>
+                <c:forEach items="${popularPosts}" var="popularPost">
+                    <tr>
+                        <td>
+                            <a href="/view?seqno=${popularPost.seqno}">
+                                <c:out value="${popularPost.title}" />
+                            </a>
+                        </td>
+                        <td>
+                            <c:out value="${popularPost.answer_count}" />
+                        </td>
+                        <td>
+                        	<c:out value="${popularPost.hit}" />
+                        </td>
+                        <td>
+                            <c:out value="${popularPost.created}" />
+                        </td>
+                    </tr>
+                </c:forEach>
+            </tbody>
+        </table>
+    </div>
 </div>
 
--->
+<br><br><br>
+
+
+
+<div class="mid">
+    <h1>여행 팁</h1>
+    <br><br>
+    <p>제주도 여행 팁을 알려드립니다. 어디서 먹고, 무엇을 봐야 하는지 알아보세요.</p>
+    <br>
+   
+    <img src="https://www.visitjeju.net/image/knowledge/banner.png" alt="여행 팁 이미지" style="max-width: 100%;">
+	<br><br>
+   
+    <p>
+        제주도를 여행하실 때, 꼭 가봐야 할 명소와 맛집을 소개합니다. 
+        제주의 아름다운 자연 풍경을 즐기고 현지 음식을 맛보세요!
+    </p>
+	<br>
+    		<!--  음식링크  -->
+    <button id="btnTravelTips" class="btnTravelTips">더 알아보기</button>
+</div>
 
 
 
@@ -257,6 +368,8 @@ font-family: 'TheJamsil5Bold';
             <td>${bpost.category}</td>
             <td>${bpost.answer_count}</td>
             <td>${bpost.created}</td>
+            <!-- 조회수ㅡ -->
+            <td style="display:none;">${bpost.hit}</td>
         </tr>
     </c:forEach>
     </tbody>
@@ -269,16 +382,17 @@ font-family: 'TheJamsil5Bold';
         <div id="pagestr-container" align="center">${pagestr}</div>
         <br><br>
         
-        <!-- 로그인 되어있을때, userid는 임시로 넣었습니다.  -->
-        <c:if test="${not empty sessionScope.userid}">
+        
+        <c:if test="${not empty sessionScope.id}">
             <div class="wDiv">
                 <button id="btnWrite" class="btnWrite">글쓰기</button>
             </div>    
         </c:if>
-        <button id="btnWrite" class="btnWrite">글쓰기</button>
         
-        <!-- 로그인 되어있지 않을때. userid는 임시로 넣었습니다. -->
-        <c:if test="${empty sessionScope.userid}"> 
+        
+      
+        <c:if test="${empty sessionScope.id}">
+        <button id="btnlogin" class="btnlogin">로그인</button> 
             <p>로그인하세요</p>
         </c:if>
         
@@ -300,7 +414,13 @@ font-family: 'TheJamsil5Bold';
 
     .on('click','#btnPrev',function(){
         document.location='/manager';
-    });
+    })
+    
+    $('#btnlogin').click(function(){
+    	window.location.href="/login";
+    })
+    
+    ;
     
 </script>
 </html>

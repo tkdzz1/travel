@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+				 "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.himedia.springboot.ReplyDAO">
+
+<insert id="addReply" >
+
+insert into reply set commenter=#{param1}, reply_content=#{param2}, parent_comment_id=#{param3}, reply_created=now();
+</insert>
+
+<delete id="delete" >
+
+delete from reply where parent_comment_id = #{param1}
+
+</delete>
+
+<select id = "showreply">
+	
+	select * from reply where parent_comment_id = #{param1}
+
+</select>
+    
+
+</mapper>

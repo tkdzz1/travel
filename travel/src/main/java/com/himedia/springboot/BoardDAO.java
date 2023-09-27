@@ -10,8 +10,18 @@ public interface BoardDAO {
 	ArrayList<BoardDTO> getList(int start, int psize);
 	int getTotal();
 	
+	void insert(String p1, String p2, String p3, String p4);
 	
 	BoardDTO view(int seqno);
 	void hitup(int seqno);
+	
+	void deletePost(int seqno);
+	
+	
+	void editPost(int seqno, String title, String content, String Category);
+	
+	ArrayList<BoardDTO> popular();
+	
+	void answerCount(int seqno,int s);
 	
 }

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+				 "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.himedia.springboot.CommentDAO">
+
+<insert id="addComment" >
+
+insert into comment set commenter=#{param1}, comment_content=#{param2}, board_seqno=#{param3}, comment_created=now();
+</insert>
+
+<select id ="showComment">
+select * from comment where board_seqno=#{param1}
+</select>
+
+<delete id="deleteComment">
+    DELETE FROM comment WHERE board_seqno = #{param1} AND comment_id = #{param2}
+
+</delete>
+
+<update id="editComment">
+        UPDATE comment
+        SET comment_content = #{param2}
+        WHERE board_seqno = #{param1} and comment_id = #{param3}
+    </update>
+    
+    <update id="answerCount">
+	update board set answer_count =#{param1} where seqno=#{param2}
+</update>
+    
+
+</mapper>

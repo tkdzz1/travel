@@ -14,12 +14,39 @@
 </select>
 
 <select id="view" resultType="com.himedia.springboot.BoardDTO">
-	select seqno,title,content,writer,hit,created,updated,category from board
+	select seqno,title,content,writer,hit,created,updated,category,answer_count from board
 	where seqno=#{param1}
 </select>
 
 <update id="hitup">
 	update board set hit=hit+1 where seqno=#{param1}
+</update>
+
+<insert id="insert">
+	insert into board set title=#{param1}, content=#{param2}, writer=#{param3}, category=#{param4}, created=now(),updated=now()
+</insert>
+
+<delete id="deletePost">
+    delete from board where seqno=#{param1}
+</delete>
+
+<update id="editPost">
+    UPDATE board
+    SET title = #{param2}, content = #{param3}, category = #{param4}, updated = NOW()
+    WHERE seqno = #{param1}
+</update>
+
+
+<select id="popular" resultType="com.himedia.springboot.BoardDTO">
+    select seqno, title, content, writer, hit, created, updated, category, answer_count
+    from board
+    order by hit desc
+    limit 2
+</select>
+
+<update id ="answerCount">
+	update board set answer_count =#{param2} where seqno =#{param1}
+	
 </update>
 
 
