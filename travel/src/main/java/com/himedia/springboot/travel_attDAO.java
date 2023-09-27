@@ -4,8 +4,6 @@ import java.util.ArrayList;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import jakarta.servlet.http.HttpSession;
-
 @Mapper
 public interface travel_attDAO {
 

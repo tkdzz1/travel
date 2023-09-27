@@ -79,12 +79,14 @@ public class OAuthController {
 		
 		String nickname = kakaoProfile.getProperties().getNickname();
 		String email = kakaoProfile.getKakao_account().getEmail();
-
+		String profile = kakaoProfile.getProperties().getThumbnail_image();
+		
 		if ( mDao.memberCheck(email) == 0 ) {
 			mDao.signup(email, cosKey);
 		}
-		
+
 		HttpSession s = req.getSession();
+		s.setAttribute("profile", profile);
 		s.setAttribute("nickname", nickname);
 		s.setAttribute("id", email);
 		

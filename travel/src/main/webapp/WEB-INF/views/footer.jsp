@@ -163,13 +163,13 @@ footer .logo {
    
     <div class="info">
       <span>사업자등록번호 213-23-12512</span>
-      <span>(주)share place 대표이사 ㄱㄱㄱ</span>
+      <span>TRAVEL JEJU</span>
       <span>TEL : 02) 2222-2222 / FAX : 02) 4242-2424</span>
-      <span>개인정보 책임자 : 홍길동</span>
+      <span>개인정보 책임자 : TRAVEL JEJU</span>
     </div>
 
     <p class="copyright">
-      &copy; <span class="this-year"></span> Share place Company. All Rights Reseved.
+      &copy; <span class="this-year"></span> TRAVEL JEJU Company. All Rights Reseved.
     </p>
   
 
