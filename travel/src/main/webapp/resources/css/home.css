@@ -1,0 +1,737 @@
+@charset "UTF-8";
+/* 슬라이드 관련 스타일 유지 */
+.slide-container {
+	position: relative;
+	display: flex;
+	width: 300vw;
+	transition: all 1s;
+	transform: translateX(0);
+}
+
+.slide-box {
+	width: 100vw;
+	float: left;
+}
+
+.slide-box img {
+	width: 100%;
+}
+
+.slide-button {
+	position: absolute;
+/*	top: 30%;*/
+	transform: translateY(-20%);
+	background: rgba(0, 0, 0, 0.5); /* 배경색 추가 */
+	border: 1px solid #fff; /* 테두리 스타일 및 색상 설정 */
+	font-size: 40px;
+	cursor: pointer;
+	color: black;
+	height: 30px;
+	cursor: pointer;
+	color: white;
+	height: 40px; /* 높이 조정 */
+	width: 40px; /* 너비 조정 */
+	text-align: center; /* 텍스트 가운데 정렬 */
+	line-height: 40px; /* 텍스트 수직 가운데 정렬 */
+	border-radius: 10%; /* 원 모양의 모서리로 변경 */
+}
+
+.slide2-button {
+	position: absolute;
+	transform: translateY(100%);
+	background: none;
+	border: none;
+	font-size: 70px;
+	cursor: pointer;
+	color: black;
+}
+
+.slide-button.left {
+	left: 10%;
+}
+
+.slide-button.right {
+	right: 10%;
+}
+
+.tex {
+	display: flex;
+	justify-content: center;
+}
+
+.img1text {
+	display: flex;
+	justify-content: center;
+	font-weight: bold;
+	font-size: 20px;
+}
+
+.img1 {
+	width: 825px;
+	height: 420px;
+	margin-right: 50px;
+	border-radius: 10px;
+}
+
+.img2 {
+	width: 420px;
+	height: 420px;
+	border-radius: 10px;
+}
+
+.img21 {
+	width: 420px;
+	height: 420px;
+	display: none;
+}
+
+.img31 {
+	width: 420px;
+	height: 420px;
+	display: none;
+}
+
+.img21.active {
+	display: block;
+}
+
+.img31.active {
+	display: block;
+}
+
+.img3 {
+	width: 260px;
+	height: 140px;
+	position: relative;
+	top: 0;
+	border-radius: 10px;
+}
+
+.test {
+	display: flex;
+	margin-left: 15.7%;
+}
+
+.img4 {
+	width: 260px;
+	height: 140px;
+	position: relative;
+	border-radius: 10px;
+}
+
+.img5 {
+	width: 260px;
+	height: 140px;
+	position: relative;
+	border-radius: 10px;
+}
+
+.card {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-right: 1.02%;
+	border: 1px solid black;
+	border-radius: 10px;
+	width: 267px;
+	height: 270px;
+}
+
+@font-face {
+	font-family: 'GongGothicMedium';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicMedium.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+.card-text {
+	/*
+	card의 사진 아래의 text
+	*/
+	font-family: 'GongGothicMedium';
+	text-align: center;
+	flex-grow: 1; /* 내용에 따라 높이가 자동으로 조절 */
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-top: 10px;
+	padding: 3px;
+}
+
+.undermini {
+	margin-left: 65%;
+}
+
+@font-face {
+	font-family: 'HakgyoansimWoojuR';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-2@1.0/HakgyoansimWoojuR.woff2')
+		format('woff2');
+	font-weight: normal;
+	font-style: normal;
+}
+
+.undermini a {
+	font-family: 'HakgyoansimWoojuR';
+}
+
+.minibox {
+	/*
+	버튼 클릭시 넘어가는 사진 아래에 있는 문구
+	*/
+	border: 1px solid black;
+	border-radius: 10px;
+	display: inline-block;
+	position: relative;
+	bottom: 250px;
+}
+
+.minibox3 {
+	border: 1px solid black;
+	border-radius: 10px;
+	display: inline-block;
+	position: relative;
+	bottom: 220px;
+	margin-right: 30px;
+}
+
+.bigboard {
+	width: 1290px;
+	height: 400px;
+	margin: 0 auto;
+	padding: 40px 0;
+	border: 1px solid black;
+	border-radius: 10px;
+	background-color: #E0F2F7;
+}
+
+.dtimg {
+	/*
+	첫번째,세번째 dt 말풍선 모양 이미지 ( 작은 삼각형)
+	*/
+	position: relative;
+	left: 625px;
+	bottom: 170px;
+}
+
+.dtimg2 {
+	/*
+	두번째,네번째 dt 말풍선 모양 이미지 ( 작은 삼각형)
+	*/
+	position: relative;
+	bottom: 160px;
+	left: 1153px;
+}
+
+.firstdt {
+	/*
+	첫번째 dt 
+	*/
+	background: #385693;
+	width: 300px;
+	height: 300px;
+	border-radius: 30px;
+	margin-left: 365px;
+}
+
+/*
+	세번째 dt 
+	*/
+.second-instance {
+	background-color: #8b9c1c;
+}
+
+.seconddt {
+	/*
+	두번째 dt 
+	*/
+	background: #59a193;
+	width: 300px;
+	height: 300px;
+	border-radius: 30px;
+	margin-left: auto; /* 화면 오른쪽에 배치 */
+	margin-right: 380px;
+}
+
+.fourth-instance {
+	background-color: #ef6d00;
+}
+
+.board {
+	margin-left: 50px;
+	margin-right: 10px;
+	margin-top: 50px;
+	margin-bottom: 80px;
+	background-color: white;
+	border-radius: 20px;
+	height: 300px;
+	width: 1200px;
+	text-align: center;
+}
+
+.board li {
+	margin-left: 5%;
+	list-style: circle;
+	margin-bottom: 5%;
+}
+
+@font-face {
+	font-family: 'S-CoreDream-3Light';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+.board a {
+	color: black;
+	text-decoration: none;
+	font-family: 'S-CoreDream-3Light';
+	font-weight: 300;
+}
+
+.board a:hover {
+	text-decoration: underline;
+}
+
+@font-face {
+	font-family: 'GmarketSansMedium';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+.newq {
+	/*
+	new question 
+	*/
+	font-size: 25px;
+	text-decoration: none !important;
+	font-weight: bold !important;
+	font-family: 'GmarketSansMedium' !important;
+}
+
+.newq2 {
+	/*
+	show all question 
+	*/
+	font-weight: bold !important;
+	font-family: 'GmarketSansMedium' !important;
+	font-size: 15px;
+	text-align: right;
+	cursor: pointer;
+	border: 1px solid black;
+	background-color: white;
+}
+
+.newq1 {
+	font-weight: bold !important;
+	font-family: 'GmarketSansMedium' !important;
+	font-size: 15px;
+	text-align: left;
+	cursor: pointer;
+	border: 1px solid black;
+	background-color: white;
+}
+
+.newq2:hover {
+	background-color: #D8D8D8;
+}
+
+.newq1:hover {
+	background-color: #D8D8D8;
+}
+
+.fornewq2 {
+	text-align: right;
+	margin-right: 10%;
+}
+
+.dtTitle {
+	font-size: 26px;
+	line-height: 28px;
+	margin: 5px 0 30px;
+}
+
+.dtKeyword {
+	font-weight: 700;
+	font-size: 42px;
+	line-height: 46px;
+	margin: 10px 0 0;
+}
+
+.dth2 {
+	font-size: 14px;
+	line-height: 50px;
+	margin: 30px 0 5px;
+}
+
+.dta {
+	display: block;
+	position: absolute;
+	top: 0;
+	left: 50%;
+	width: 25px;
+	height: 25px;
+	background: url(https://www.visitjeju.net/image/main/btn_plus.png)
+		no-repeat;
+	margin-left: -12px;
+	text-indent: -9999px;
+}
+
+.plus-button {
+	display: inline-block;
+	width: 40px;
+	height: 40px;
+	text-align: center;
+	line-height: 35px;
+	border: 2px solid grey; /* 테두리 스타일 및 색상 설정 */
+	text-decoration: none; /* 밑줄 제거 */
+	color: #000; /* 플러스 모양 색상 설정 */
+	font-size: 50px; /* 플러스 모양의 글꼴 크기 설정 */
+	margin-top: 50px;
+}
+
+.plus-button:hover {
+	background-color: #000; /* 마우스 호버 시 배경색 변경 */
+	color: #fff; /* 플러스 모양 색상 변경 */
+}
+
+@font-face {
+	font-family: 'SUITE-Regular';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Regular.woff2')
+		format('woff2');
+	font-weight: 400;
+	font-style: normal;
+}
+
+.beforedt {
+	font-family: 'SUITE-Regular';
+	font-size: 20px;
+}
+
+.mainh2 {
+	font-family: 'SUITE-Regular';
+	font-size: 40px;
+}
+
+.dtCard {
+	position: relative;
+	width: 300px;
+	height: 300px;
+	border: 1px solid grey;
+	border-radius: 20px;
+	left: 140%;
+	bottom: 282px;
+	text-align: center
+}
+
+.dttcard {
+	position: relative;
+	width: 300px;
+	height: 300px;
+	border: 1px solid grey;
+	border-radius: 20px;
+	left: 280%;
+	bottom: 584px;
+	text-align: center
+}
+
+.dttcard3 {
+	position: relative;
+	width: 300px;
+	height: 300px;
+	border: 1px solid grey;
+	border-radius: 20px;
+	left: 280%;
+	bottom: 489px;
+	text-align: center;
+	color: black;
+	font-family: 'LINESeedKR-Bd';
+}
+
+.dttcard3 a {
+	color: black;
+}
+
+.dttcard2 {
+	position: relative;
+	width: 300px;
+	height: 300px;
+	border: 1px solid grey;
+	border-radius: 20px;
+	text-align: center;
+	bottom: 486px;
+	right: 280.5%;
+	color: black;
+	font-family: 'LINESeedKR-Bd';
+}
+
+.dttcard2 a {
+	color: black;
+}
+
+.dttcard4 {
+	position: relative;
+	width: 300px;
+	height: 300px;
+	border: 1px solid grey;
+	border-radius: 20px;
+	text-align: center;
+	bottom: 489px;
+	right: 280.5%;
+	color: black;
+	font-family: 'LINESeedKR-Bd';
+}
+
+.dtCard2 {
+	position: relative;
+	width: 300px;
+	height: 300px;
+	border: 1px solid grey;
+	border-radius: 20px;
+	right: 139.5%;
+	bottom: 184px;
+	text-align: center
+}
+
+.dtCard3 {
+	position: relative;
+	width: 300px;
+	height: 300px;
+	border: 1px solid grey;
+	border-radius: 20px;
+	left: 140%;
+	bottom: 187px;
+	text-align: center
+}
+
+.dtCard4 {
+	position: relative;
+	width: 300px;
+	height: 300px;
+	border: 1px solid grey;
+	border-radius: 20px;
+	right: 140%;
+	bottom: 187px;
+	text-align: center
+}
+
+.dtCard4 a {
+	color: black;
+	margin-top: 20px;
+}
+
+.dttcard4 a {
+	color: black;
+}
+
+@font-face {
+	font-family: 'LINESeedKR-Bd';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Bd.woff2')
+		format('woff2');
+	font-weight: 700;
+	font-style: normal;
+}
+
+.dtCard a {
+	font-family: 'LINESeedKR-Bd';
+	color: black;
+}
+
+.dttcard a {
+	font-family: 'LINESeedKR-Bd';
+	color: black;
+}
+
+.dtCard2 a {
+	font-family: 'LINESeedKR-Bd';
+	color: black;
+}
+
+.dtCard3 a {
+	font-family: 'LINESeedKR-Bd';
+	color: black;
+}
+
+.dtCard4 a {
+	font-family: 'LINESeedKR-Bd';
+	color: black;
+}
+
+.testimg1 {
+	width: 298px;
+	height: 190px;
+	border-radius: 20px;
+}
+
+.texbtn {
+	text-align: right;
+	margin-right: 26%;
+}
+
+#showprev {
+	position: absolute;
+	right: 35%; /* 조절 가능한 왼쪽 위치 조정 */
+	transform: translateY(-600%);
+	background: rgba(0, 0, 0, 0.5); /* 배경색 추가 */
+	border: 2px solid #fff; /* 테두리 스타일 및 색상 설정 */
+	font-size: 40px;
+	cursor: pointer;
+	color: white;
+	height: 40px; /* 높이 조정 */
+	width: 40px; /* 너비 조정 */
+	text-align: center; /* 텍스트 가운데 정렬 */
+	line-height: 40px; /* 텍스트 수직 가운데 정렬 */
+	border-radius: 50%; /* 원 모양의 모서리로 변경 */
+	z-index: 2;
+}
+
+#shownext {
+	position: absolute;
+	right: 16.7%; /* 조절 가능한 왼쪽 위치 조정 */
+	transform: translateY(-600%);
+	background: rgba(0, 0, 0, 0.5); /* 배경색 추가 */
+	border: 2px solid #fff; /* 테두리 스타일 및 색상 설정 */
+	font-size: 44px;
+	cursor: pointer;
+	color: white;
+	height: 40px; /* 높이 조정 */
+	width: 40px; /* 너비 조정 */
+	text-align: center; /* 텍스트 가운데 정렬 */
+	line-height: 40px; /* 텍스트 수직 가운데 정렬 */
+	border-radius: 50%; /* 원 모양의 모서리로 변경 */
+	z-index: 2;
+}
+
+.carda {
+	font-size: 20px;
+	position:relative;
+	top:10%;
+}
+
+.carda:hover {
+	color: #F7BE81;
+}
+
+.testimg1:hover .carda {
+	color: #F5D0A9;
+}
+
+.reviewContents {
+	background-color: #282828;
+	border: 1px solid black;
+	padding: 50px 0 70px;
+	text-align: center;
+	overflow: hidden;
+}
+
+.mainContents {
+	width: 1290px;
+	margin: 0 auto;
+	min-height: 100px;
+}
+
+.rvh2 {
+	color: white;
+	font-size: 35px;
+}
+
+.rvh3 {
+	margin-top: 20px;
+	font-size: 20px;
+	color: #8a8b8b;
+	line-height: 1;
+}
+
+.reviewimg {
+	height: 161px;
+	width: 161px;
+	border: 2px solid transparent; /* 기본적으로 투명 테두리 설정 */
+}
+
+.reviewimg:hover {
+	border: 2px solid #5858FA; /* 원하는 테두리 스타일 및 두께 설정 */
+}
+
+.imgsdiv {
+	height: 497px;
+	width: 322px;
+	background-color: #3c3c3c;
+	float: left;
+	margin-left: 3px;
+	cursor: pointer;
+	border: 2px solid transparent;
+}
+
+.imgsdiv2 {
+	float: left;
+	margin-left: 3px;
+}
+
+.reviewimg2 {
+	height: 332px;
+	width: 322px;
+	border: 2px solid transparent;
+}
+
+.reviewimg2:hover {
+	border: 2px solid #5858FA;
+}
+
+@font-face {
+	font-family: 'S-CoreDream-3Light';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+.imgsdiv a {
+	position: absolute;
+	left: 35%;
+	margin-top: 2%;
+	color: white;
+	font-family: 'S-CoreDream-3Light';
+}
+
+.rvimg {
+	float: left;
+	margin: 0;
+	padding: 0;
+}
+
+.imgsdiv:hover {
+	border: 2px solid #5858FA;
+}
+
+.lastimg {
+	margin-right: 8%;
+}
+
+.lastcomment {
+	display: inline-block;
+	border: 1px solid grey;
+	margin-top:5%;
+}
+
+.lastcomment:hover {
+	background-color: #A4A4A4;
+	cursor:pointer;
+}
+
+.card:hover {
+	border:1px solid green;
+}
+
+
+
+/* header.jsp */
