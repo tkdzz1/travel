@@ -2,6 +2,8 @@ package com.himedia.springboot;
 
 import lombok.Data;
 
+//KAKAO PROFILE
+
 @Data
 public class KakaoProfile {
 	public Long id;
