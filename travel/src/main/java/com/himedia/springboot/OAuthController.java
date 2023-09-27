@@ -27,7 +27,7 @@ public class OAuthController {
 	
 	@Autowired
 	memberDAO mDao;
-	
+	//KAKAO LOGIN
 	@GetMapping("/oauth/kakao")
 	public String kakaoLogin(HttpServletRequest req, String code) {
 		
