@@ -6,7 +6,7 @@
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="css/add_list.css">
 </head>
-<%@ include file="../header.jsp" %>
+
 <body>
     <h1>여행지 추가</h1>
     <form action="/upload" method="post" enctype="multipart/form-data">
@@ -52,7 +52,6 @@
         <input type="button" id="previewImage" value="이미지 미리보기">
     </form>
 </body>
-   <%@ include file="../footer.jsp" %>
 <script src="https://code.jquery.com/jquery-latest.js"></script>.
 <script>
 $(document).ready(function() {

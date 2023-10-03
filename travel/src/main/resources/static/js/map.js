@@ -64,3 +64,4 @@ var mapOptions = {
         // 페이지 로드 시 여행지 데이터를 불러옴
         loadTravelData();
     });
+ })

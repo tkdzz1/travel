@@ -91,6 +91,8 @@ footer .btn-group .btn:last-child {
 footer .info {
   margin-top: 30px;
   text-align: center;
+  background-color: #3c3c3c;
+  border: 1px solid #3c3c3c;
 }
 
 

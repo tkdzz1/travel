@@ -53,6 +53,7 @@ textarea {
     border-radius: 5px;
     cursor: pointer;
 }
+
 /* 팝업 창 스타일 */
 #imagePreviewPopup {
     display: none;

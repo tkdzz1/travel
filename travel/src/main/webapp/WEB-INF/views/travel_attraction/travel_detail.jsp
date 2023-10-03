@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" type="text/css" href="css/detail.css"> <!-- CSS 파일 연결 -->
+<link rel="stylesheet" type="text/css" href="/css/detail.css"> <!-- CSS 파일 연결 -->
 <link rel="stylesheet" type="text/css" href="/css/star.css">
 
 <title>Insert title here</title>
@@ -81,7 +81,7 @@
 	<div id="insertReview" class="insertReview">
 		<input type="hidden" id="taname" value="${detail.ta_name}">
 		<textarea class="col-auto form-control" id="reviewContents" placeholder="좋은 리뷰를 남겨주세요!"></textarea>
-	  <input type="button" id=btnreview class="btnreview" value="작성완료">
+	  <input type="button" id=btnreview class="btnreview" style="height:50px;" value="작성완료">
 	</div>
 	<div>
 		<c:forEach items="${review}" var="alist">
@@ -94,8 +94,8 @@
 
 	</div>
 </div>
-</section>
 <%@ include file="../footer.jsp" %>
+</section>
 </body>
 <script src="https://code.jquery.com/jquery-latest.js"></script>
 <script>
