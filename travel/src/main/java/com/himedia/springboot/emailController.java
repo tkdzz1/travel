@@ -1,8 +1,11 @@
 package com.himedia.springboot;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,6 +21,9 @@ public class emailController {
     
     @Autowired
     private memberDAO mDao;
+    
+	@Autowired
+	private foodstoreDAO fDao;
     
 	@Value("${cos.key}")
 	private String cosKey;
@@ -76,5 +82,36 @@ public class emailController {
 		}
 		
 		return String.valueOf(check);
+	}
+	
+	@GetMapping("/my_jeju_travel")
+	public String myJejuTravel() {
+		return "my_jeju_travel/my_jeju_travel";
+	}
+	
+	@GetMapping("/food_store")
+	public String tlist(HttpServletRequest req,Model model) {
+		int start, psize;
+		String page = req.getParameter("pageno");
+		if(page==null || page.equals("")) {
+			page="1";	
+		} 
+		int pno = Integer.parseInt(page);
+		start = (pno-1)*5;
+		psize=5;		
+		int cnt=fDao.cntFoodList();
+		int pagecount = (int)Math.ceil(cnt/5.0);
+		String pagestr="";
+		for(int i=1; i<=pagecount; i++) {
+			if(pno==i) {
+				pagestr+=i+"&nbsp;";
+			} else {
+			pagestr+="<a href='/travel_list?pageno="+i+"'>"+i+"</a>&nbsp;";
+			}
+		}
+		model.addAttribute("pagestr",pagestr);
+		ArrayList<foodstoreDTO> getlist = fDao.getList(start,psize);
+		model.addAttribute("list", getlist);	
+		return "food_store/food_list";
 	}
 }

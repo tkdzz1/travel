@@ -41,3 +41,8 @@ h1 {
     background-color: #ff5f2e;
     color: #e1eef6;
 }
+
+.w-btn-black {
+    background-color: silver;
+    color: black;
+}

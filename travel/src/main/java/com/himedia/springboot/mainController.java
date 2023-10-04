@@ -35,7 +35,7 @@ public class mainController {
 		String email = (String) s.getAttribute("id");
 		
 		ArrayList<travel_attDTO> alemp = tdao.locationName();
-		ArrayList<foodstoreDTO> alemp2 = fdao.fsTest();
+		ArrayList<foodstoreDTO> alemp2 = fdao.get_fs();
 		
 		model.addAttribute("location",alemp);
 		model.addAttribute("restaurant",alemp2);

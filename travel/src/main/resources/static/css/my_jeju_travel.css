@@ -1,0 +1,51 @@
+@charset "UTF-8";
+#wrapper {
+	height: 1000px;
+	margin-top: 3%;
+	margin-left: 6%;
+}
+
+#wrapper > h1 {
+	font-size: 30px;
+}
+
+table {
+	border: 3px solid #ffa458;
+}
+
+input[type='date']::before {
+  content: attr(data-placeholder);
+  width: 100%;
+}
+
+input[type='date']:focus::before,
+input[type='date']:valid::before {
+  display: none;
+}
+
+.travel_list thead {
+	cursor: pointer;
+}
+
+td {
+	text-align: center;
+}
+
+div {
+	padding : 10px;
+}
+
+.travel_list {
+	width:380px;
+	height: 500px;
+}
+
+.timeTable tr {
+	height: 50px;
+	border-bottom: 1px solid black;
+}
+
+.timeTable td {
+	border-bottom: 1px solid silver;
+	border-right: 1px solid silver;
+}
