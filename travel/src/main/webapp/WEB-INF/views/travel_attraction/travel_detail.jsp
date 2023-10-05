@@ -89,7 +89,7 @@
 	</div>
 	
 </div>
-<%-- <%@ include file="../footer.jsp" %> --%>
+<%@ include file="../footer.jsp" %>
 </section>
 </body>
 <script src="https://code.jquery.com/jquery-latest.js"></script>
