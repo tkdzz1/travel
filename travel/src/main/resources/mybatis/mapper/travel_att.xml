@@ -3,7 +3,7 @@
 				 "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.himedia.springboot.travel_attDAO">
 <select id="getList" resultType="com.himedia.springboot.travel_attDTO">
-	select ta_num,ta_name,ta_local,ta_img,ta_address,ta_category, ta_latitude, ta_longitude, ta_hit from travel_attraction limit #{param1}, #{param2}
+	select ta_num,ta_name,ta_local,ta_img,ta_address,ta_category, ta_latitude, ta_longitude, ta_hit from travel_attraction where ta_category=#{param3} limit #{param1}, #{param2}
 </select>
 <select id="getmaker" resultType="com.himedia.springboot.travel_attDTO">
 	select ta_num,ta_name,ta_local,ta_img,ta_address,ta_category, ta_latitude, ta_longitude, ta_hit from travel_attraction
@@ -12,7 +12,7 @@
 	INSERT INTO travel_attraction SET ta_name = #{param1}, ta_local = #{param2}, ta_img = #{param3}, ta_address = #{param4}, ta_category = #{param5}, ta_latitude=#{param6}, ta_longitude=#{param7} 
 </insert>
 <select id="cntTravelList" resultType="int">
-	select count(*) from travel_attraction;
+	select count(*) from travel_attraction where ta_category = #{param1};
 </select>
 <select id="getDetail" resultType="com.himedia.springboot.travel_attDTO">
 	select a.ta_num,a.ta_name,a.ta_local,a.ta_img,a.ta_address,a.ta_category, a.ta_latitude,a.ta_longitude,a.ta_hit,b.ta_imginfo,b.ta_content

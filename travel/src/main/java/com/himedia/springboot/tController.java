@@ -48,7 +48,7 @@ public class tController {
 		int pno = Integer.parseInt(page);
 		start = (pno-1)*5;
 		psize=5;		
-		int cnt=tdao.cntTravelList();
+		int cnt=tdao.cntTravelList("관광지");
 		int pagecount = (int)Math.ceil(cnt/5.0);
 		String pagestr="";
 		for(int i=1; i<=pagecount; i++) {
@@ -59,7 +59,7 @@ public class tController {
 			}
 		}
 		model.addAttribute("pagestr",pagestr);
-		ArrayList<travel_attDTO> getlist = tdao.getList(start,psize);
+		ArrayList<travel_attDTO> getlist = tdao.getList(start,psize,"관광지");
 		model.addAttribute("list", getlist);	
 		return "travel_attraction/travel_list";
 	}
@@ -87,6 +87,16 @@ public class tController {
                 String image = main.getOriginalFilename();
                 String address = req.getParameter("address");
                 String category = req.getParameter("category");
+                
+                String[] cList = {"관광지", "travel_list", "음식", "food_store", "숙박", "stay", "쇼핑", "shopping"};
+                String redirect = "";
+                
+                for (int i=0; i<cList.length; i+=2) {
+                	if (category.equals(cList[i])) {
+                		redirect = cList[i+1];
+                	}
+                }
+                
                 double latitude = Double.parseDouble(req.getParameter("latitude"));
                 double longitude = Double.parseDouble(req.getParameter("longitude"));
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddkkmmss");
@@ -137,7 +147,7 @@ public class tController {
                 tdao.addTravelList(name, local, savedMainName, address, category, latitude, longitude);
                 tdao.addImgInfo(name,detailImagePaths.toString(),taContent);
                 model.addAttribute("fileName", mainFile);
-                return "redirect:/travel_list";
+                return "redirect:/" + redirect;
             } catch (IOException e) {
                 e.printStackTrace();
                 model.addAttribute("errorMessage", "파일 업로드 실패");
@@ -154,13 +164,14 @@ public class tController {
     public String getdata(HttpServletRequest req, Model model) {
     	int start, psize;
 		String page = req.getParameter("pageno");
+		String category = req.getParameter("category");
 		if(page==null || page.equals("")) {
 			page="1";	
 		} 
 		int pno = Integer.parseInt(page);
 		start = (pno-1)*5;
 		psize=5;		
-		int cnt=tdao.cntTravelList();
+		int cnt=tdao.cntTravelList(category);
 		int pagecount = (int)Math.ceil(cnt/5.0);
 		String pagestr="";
 		for(int i=1; i<=pagecount; i++) {
@@ -171,7 +182,7 @@ public class tController {
 			}
 		}
 		model.addAttribute("pagestr",pagestr);
-    	ArrayList<travel_attDTO> getlist = tdao.getList(start, psize);
+    	ArrayList<travel_attDTO> getlist = tdao.getList(start, psize, category);
         JSONArray ja = new JSONArray();
         
         for (int i = 0; i < getlist.size(); i++) {
@@ -195,7 +206,25 @@ public class tController {
     	String ta_content = detail.getTa_content();
     	String[] ta_contentParts = ta_content.split("/");
     	String[] ta_imginfoParts = ta_imginfo.split("/");
-
+    	
+    	int start, psize;
+		String page = req.getParameter("pageno");
+		if(page==null || page.equals("")) {
+			page="1";	
+		} 
+		int pno = Integer.parseInt(page);
+		start = (pno-1)*5;
+		psize=5;		
+		int cnt=tdao.cntTravelList("관광지");
+		int pagecount = (int)Math.ceil(cnt/5.0);
+		String pagestr="";
+		for(int i=1; i<=pagecount; i++) {
+			if(pno==i) {
+				pagestr+=i+"&nbsp;";
+			} else {
+			pagestr+="<a href='/travel_list?pageno="+i+"'>"+i+"</a>&nbsp;";
+			}
+		}
     	tdao.hitup(ta_name);
     	model.addAttribute("detail", detail);
         model.addAttribute("ta_imginfoParts", ta_imginfoParts);

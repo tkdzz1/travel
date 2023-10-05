@@ -19,8 +19,6 @@ public class mainController {
 	@Autowired
 	private travel_attDAO tdao;
 	@Autowired
-	private foodstoreDAO fdao;
-	@Autowired
 	private BoardDAO bdao;
 	@Autowired
 	private CommentDAO cdao;
@@ -35,10 +33,8 @@ public class mainController {
 		String email = (String) s.getAttribute("id");
 		
 		ArrayList<travel_attDTO> alemp = tdao.locationName();
-		ArrayList<foodstoreDTO> alemp2 = fdao.get_fs();
 		
 		model.addAttribute("location",alemp);
-		model.addAttribute("restaurant",alemp2);
 		model.addAttribute("id",email);
 		
 		return "home";
