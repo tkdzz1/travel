@@ -207,30 +207,10 @@ public class tController {
     	String[] ta_contentParts = ta_content.split("/");
     	String[] ta_imginfoParts = ta_imginfo.split("/");
     	
-    	int start, psize;
-		String page = req.getParameter("pageno");
-		if(page==null || page.equals("")) {
-			page="1";	
-		} 
-		int pno = Integer.parseInt(page);
-		start = (pno-1)*5;
-		psize=5;		
-		int cnt=tdao.cntTravelList("관광지");
-		int pagecount = (int)Math.ceil(cnt/5.0);
-		String pagestr="";
-		for(int i=1; i<=pagecount; i++) {
-			if(pno==i) {
-				pagestr+=i+"&nbsp;";
-			} else {
-			pagestr+="<a href='/travel_list?pageno="+i+"'>"+i+"</a>&nbsp;";
-			}
-		}
     	tdao.hitup(ta_name);
     	model.addAttribute("detail", detail);
         model.addAttribute("ta_imginfoParts", ta_imginfoParts);
         model.addAttribute("ta_contentParts", ta_contentParts);
-        
-
     	    
     	return "/travel_attraction/travel_detail";
     }
