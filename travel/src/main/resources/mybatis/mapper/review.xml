@@ -11,4 +11,13 @@
 <delete id="deleteReview">
 	delete from review where review_num=#{param1}
 </delete>
+<delete id="deletelist">
+	delete from review where review_location=#{param1}
+</delete>
+<select id="cntReviewList" resultType="int">
+	select count(*) from review where review_location=#{param1}
+</select>
+<update id="updateContent">
+	update review set review_content=#{param2}, review_rating=#{param3} where review_num=#{param1}
+</update>
 </mapper>

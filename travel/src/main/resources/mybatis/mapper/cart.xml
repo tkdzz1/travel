@@ -2,4 +2,16 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				 "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.himedia.springboot.cartDAO">
+<insert id="addCart">
+	insert into cart set cart_category=#{param2}, cart_local=#{param1}, cart_id=#{param4}, cart_num=#{param3}
+</insert>
+<select id="cntCart" resultType="int">
+	select count(*) from cart where cart_local=#{param1} and cart_id=#{param2} 
+</select>
+<delete id="removeCart">
+	delete from cart where cart_id=#{param2} and cart_local=#{param1}
+</delete>
+<select id="totalCart">
+	select count(*) from cart where cart_local=#{param1}
+</select>
 </mapper>

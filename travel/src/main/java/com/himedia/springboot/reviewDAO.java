@@ -9,4 +9,7 @@ public interface reviewDAO {
 	ArrayList<reviewDTO> getReviewList(String ta_name, int start, int psize);
 	reviewDTO getReview(String ta_name);
 	void deleteReview(int reviewNum);
+	void deletelist(String ta_name);
+	int cntReviewList(String ta_name);
+	void updateContent(int reviewNum, String updateContent, int rating);
 }
