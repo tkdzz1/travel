@@ -33,12 +33,12 @@
             <h2 class="blind">주메뉴</h2>
             <ul class="lnb_nav">
                 <li class="lnb_nav_item n1">
-                    <a href="#" class="lnb_nav_link"><span>여행지</span></a>
+                    <a href="/travel_list" class="lnb_nav_link"><span>여행지</span></a>
                     <ul class="depth2">
                         <li><a href="/travel_list"><span>관광지</span></a></li>
                         <li><a href="/food_store"><span>음식</span></a></li>
                         <li><a href="/stay"><span>숙박</span></a></li>
-                        <li><a href="/festival"><span>축제</span></a></li>
+                        <li><a href="/shopping"><span>쇼핑</span></a></li>
                     </ul>
                 </li>
                 <li class="lnb_nav_item n2">
@@ -55,11 +55,9 @@
                 <li class="lnb_nav_item n3">
                     <a href="#" class="lnb_nav_link"><span>여행준비</span></a>
                     <ul class="depth2">
-                        <li><a href="#"><span>나만의 제주 여행</span></a></li>
-                        <li><a href="#"><span>가이드북&amp;지도</span></a></li>
-                        <li><a href="#" target="_blank"><span>문화관광해설사</span></a></li>
-                        <li><a href="#"  target="_blank"><span>제주투어</span></a></li>
-  
+                        <li><a href="/my_jeju_travel"><span>나만의 제주 여행</span></a></li>
+                        <li><a href="https://www.kctg.or.kr/tour/touristSiteList.do" target="_blank"><span>문화관광해설사</span></a></li>
+                        <li><a href="https://jejutour.or.kr/"  target="_blank"><span>제주투어</span></a></li>
                     </ul>
                 </li>
                 <li class="lnb_nav_item n4">

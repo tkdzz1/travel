@@ -45,6 +45,8 @@
         <select id="category" name="category" required>
             <option value="관광지">관광지</option>
             <option value="음식">음식</option>
+            <option value="숙박">숙박</option>
+            <option value="쇼핑">쇼핑</option>
         </select><br>
 
         <input type="submit" value="추가">
