@@ -4,7 +4,9 @@
 <mapper namespace="com.himedia.springboot.homeDAO">
 
 <select id="getLikeList" resultType="com.himedia.springboot.travel_attDTO">
-
+SELECT a.ta_num, a.ta_name, a.ta_local, a.ta_img, a.ta_address, a.ta_category, a.ta_latitude, a.ta_longitude
+FROM travel_attraction a JOIN cart b ON a.ta_num = b.cart_num
+WHERE b.cart_id = #{param1};
 </select>
 
 </mapper>
