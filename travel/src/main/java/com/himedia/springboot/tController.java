@@ -211,7 +211,7 @@ public class tController {
     	model.addAttribute("detail", detail);
         model.addAttribute("ta_imginfoParts", ta_imginfoParts);
         model.addAttribute("ta_contentParts", ta_contentParts);
-    	    
+        
     	return "/travel_attraction/travel_detail";
     }
     @PostMapping("/delete_list")
