@@ -20,4 +20,5 @@
 <update id="updateContent">
 	update review set review_content=#{param2}, review_rating=#{param3} where review_num=#{param1}
 </update>
+
 </mapper>

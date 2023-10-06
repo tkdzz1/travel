@@ -16,5 +16,6 @@ public class travel_attDTO {
 	private double ta_longitude;
 	private String ta_imginfo;
 	private int ta_hit;
+	private int like_count;
 
 }

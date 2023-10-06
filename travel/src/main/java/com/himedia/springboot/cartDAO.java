@@ -9,5 +9,6 @@ public interface cartDAO {
 	int cntCart(String ta_name, String id);
 	void removeCart(String ta_name, String id);
 	int totalCart(String ta_name);
+	void delete(int ta_num, String id);
 
 }

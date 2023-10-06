@@ -3,8 +3,13 @@
 				 "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.himedia.springboot.travel_attDAO">
 <select id="getList" resultType="com.himedia.springboot.travel_attDTO">
-	select ta_num,ta_name,ta_local,ta_img,ta_address,ta_category, ta_latitude, ta_longitude, ta_hit from travel_attraction where ta_category=#{param3} limit #{param1}, #{param2}
-</select>
+	SELECT a.ta_num, a.ta_name, a.ta_local, a.ta_img, a.ta_address, a.ta_category, a.ta_latitude, a.ta_longitude, a.ta_hit, COUNT(b.like_num) as like_count
+	FROM travel_attraction a
+	LEFT JOIN likes b ON a.ta_num = b.like_num 
+	WHERE ta_category = #{param3}
+	GROUP BY a.ta_num, a.ta_name, a.ta_local, a.ta_img, a.ta_address, a.ta_category, a.ta_latitude, a.ta_longitude, a.ta_hit
+	LIMIT #{param1}, #{param2}
+ </select>
 <select id="getmaker" resultType="com.himedia.springboot.travel_attDTO">
 	select ta_num,ta_name,ta_local,ta_img,ta_address,ta_category, ta_latitude, ta_longitude, ta_hit from travel_attraction
 </select>
