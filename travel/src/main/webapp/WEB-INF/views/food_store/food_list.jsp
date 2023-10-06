@@ -5,7 +5,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>TRAVEL JEJU - 관광지</title>
+    <title>TRAVEL JEJU - 식당</title>
     <link rel="stylesheet" type="text/css" href="css/map.css">
     <script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=81hlrkxaq1"></script>
 </head>
@@ -13,7 +13,7 @@
 <%@ include file="../header.jsp" %>
 <div class="container">
     <div class="left-panel">
-        <h1>여행지 정보</h1> <button id="addtravellist">관광지 추가</button>
+        <h1>여행지 정보</h1> <button id="addtravellist">식당 추가</button>
         <c:forEach items="${list}" var="alist">
         <div class="travel-card">
             <div class="image-and-text">
@@ -24,7 +24,6 @@
 		       		<p><strong>조회수:</strong>${alist.ta_hit}</p>
 			        <p><strong>싫어요:</strong> 10</p>
 			        <p><strong>분류:</strong>${alist.ta_category}</p>
-			        <input type=hidden id=category value="${alist.ta_category}">
 			        <button class="btndelete" data-name="${alist.ta_name}">삭제</button> <!-- 수정된 버튼 -->
 			        <input type="hidden" id="h_name" name="h_name" value="${alist.ta_name}" class="h_name">
 			        <input type="hidden" id="h_name" name="h_latitude" value="${alist.ta_latitude}" class="h_latitude">
@@ -46,7 +45,6 @@
 <!-- <script src="js/map.js"></script> -->
 <script src="https://code.jquery.com/jquery-latest.js"></script>
 <script>
-var category = $('#category').val();
 $(document).ready(function() {
     let infoWindow = new naver.maps.InfoWindow();
     let isInfoWindowOpen = false;
@@ -68,7 +66,7 @@ $(document).ready(function() {
         $.ajax({
             url: "/getTravelData",
             method: "post",
-            data: { pageno: page, category: category },
+            data: { pageno: page },
             dataType: "json",
             success: function(data) {
                 // 여행지 정보를 순회하면서 마커를 생성하고 이름 설정
