@@ -23,7 +23,7 @@
 </update>
 
 <insert id="insert">
-	insert into board set title=#{param1}, content=#{param2}, writer=#{param3}, category=#{param4}, created=now(),updated=now()
+	insert into board set title=#{param1}, content=#{param2}, writer=#{param3}, category=#{param4}, created=CURDATE(),updated=CURDATE()
 </insert>
 
 <delete id="deletePost">
@@ -32,7 +32,7 @@
 
 <update id="editPost">
     UPDATE board
-    SET title = #{param2}, content = #{param3}, category = #{param4}, updated = NOW()
+    SET title = #{param2}, content = #{param3}, category = #{param4}, updated = CURDATE()
     WHERE seqno = #{param1}
 </update>
 

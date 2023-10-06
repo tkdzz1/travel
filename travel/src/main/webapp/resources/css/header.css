@@ -128,14 +128,7 @@ fieldset {
     min-width: 0
 }
 
-hr {
-    visibility: hidden;
-    overflow: hidden;
-    position: absolute;
-    height: 0;
-    width: 0;
-    font-size: 0
-}
+
 
 template {
     display: none

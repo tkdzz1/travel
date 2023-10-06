@@ -18,8 +18,7 @@
 
   h1 {
     text-align: center;
-    background-color: #CED8F6;
-    color: #fff;
+    color: #ccc;
     padding: 20px 0;
     margin: 0;
     font-family: 'Verdana', sans-serif;
@@ -32,6 +31,7 @@
     background-color: #fff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     font-family: 'Arial', sans-serif;
+
   }
 
 @font-face {
@@ -47,25 +47,18 @@ font-family: 'TheJamsil5Bold';
 
 
   th, td {
-   
     padding: 12px;
     text-align: center;
     
- 
-    border: none; /* 세로 줄 없애기 */
-    border-bottom: 1px solid #ddd; /* 가로 줄만 남기기 */
- 
-
-    
-    
-    
+    border: none !important; /* 세로 줄 없애기 */
+    border-bottom: 1px solid #ddd !important; /* 가로 줄만 남기기 */
   }
 
   th {
-    background-color: transparent;
-    border-bottom: 1px solid grey;
-    border-top:2px solid black;
-    color: black;
+    background-color: transparent !important;
+    border-bottom: 1px solid grey !important;
+    border-top:2px solid black !important;
+    color: black !important;
   }
 
 
@@ -188,7 +181,7 @@ font-family: 'TheJamsil5Bold';
 
         .imga {
             position: absolute; /* 포지션을 설정하여 이미지 위에 위치시킴 */
-            top: 50%; /* 상단 여백을 50%로 설정하여 세로 중앙 정렬 */
+            top: 23%; /* 상단 여백을 50%로 설정하여 세로 중앙 정렬 */
             left: 50%; /* 왼쪽 여백을 50%로 설정하여 가로 중앙 정렬 */
             transform: translate(-50%, -400%); /* 50% 만큼 이동하여 가운데 정렬 */
         
@@ -202,13 +195,15 @@ font-family: 'TheJamsil5Bold';
             line-height: 32px;
             color: white;
             text-decoration: none;
+            
+            
            
         }
         
         .popular {
         	text-align:center;
         	width:75%;
-        	margin-left: 10%;
+        	margin-left: 12%;
         }
         
         .popular tbody > tr:hover {
@@ -245,6 +240,10 @@ font-family: 'TheJamsil5Bold';
 font-family: 'Happiness-Sans-Title';
 }
 
+.mid h1 {
+	color:darkgrey;
+}
+
 .mid p {
 	font-size:20px;
 }
@@ -259,15 +258,32 @@ font-family: 'Happiness-Sans-Title';
 .tbfirst{
 	font-family: 'LINESeedKR-Bd';
 }     
-        
-        
+
+#btnTravelTips,#btnWrite,#btnlogin {
+    border: 1px solid black !important;
+    background-color: #D8D8D8 !important;
+    color: black !important;
+    padding: 12px 20px !important;
+    cursor: pointer !important;
+    font-family: 'Verdana', sans-serif !important;
+    border-radius: 5px !important;
+    transition: background-color 0.3s ease, color 0.3s ease !important;
+}
+
+/* 버튼에 호버 스타일 추가 */
+button:hover {
+    background-color: #A4A4A4 !important;
+    color: white !important;
+}    
+
+
         
 </style>
 </head>
 
 <%@include file="header.jsp"%>
 <body>
-
+<br><br>
 
 <div class="q&a-container">
 
@@ -292,6 +308,7 @@ font-family: 'Happiness-Sans-Title';
 <!-- 조회수 높은 두가지 출력 -->
 <div class="popular">
     <h3 class=poph3>많이 본 Q&A</h3>
+    <br><br>
     <div class="popularContent">
         <table class="tbfirst">
             <thead>
@@ -382,6 +399,13 @@ font-family: 'Happiness-Sans-Title';
         <div id="pagestr-container" align="center">${pagestr}</div>
         <br><br>
         
+            </td>
+</tr>
+</table>
+
+<br><br>
+        
+        
         
         <c:if test="${not empty sessionScope.id}">
             <div class="wDiv">
@@ -396,9 +420,8 @@ font-family: 'Happiness-Sans-Title';
             <p>로그인하세요</p>
         </c:if>
         
-    </td>
-</tr>
-</table>
+
+<br><br><br>
 <%@include file="footer.jsp"%>
 </body>
 <script src="https://code.jquery.com/jquery-latest.js"></script>
@@ -413,10 +436,6 @@ font-family: 'Happiness-Sans-Title';
         window.location.href = "/write";
     })
 
-    .on('click','#btnPrev',function(){
-        document.location='/manager';
-    })
-    
     $('#btnlogin').click(function(){
     	window.location.href="/login";
     })

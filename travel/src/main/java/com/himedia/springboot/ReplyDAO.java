@@ -12,5 +12,7 @@ public interface ReplyDAO {
 	
 	int addReply(String s1, String s2, int s3);
 		
-	void delete(int parentid);
+	int delete(int reply_id);
+	
+	int edtreply(int reply_id, String reply_content);
 }

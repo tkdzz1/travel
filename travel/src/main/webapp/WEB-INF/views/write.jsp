@@ -8,78 +8,79 @@
 
 <style>
   body {
-    font-family: Arial, sans-serif;
-    background-color: #f2f2f2;
-    margin: 0;
-    padding: 0;
+    font-family: Arial, sans-serif !important;
+    margin: 0 !important;
+    padding: 0 !important;
   }
 
   h1 {
-    text-align: center;
-    color: #333;
+    text-align: center !important;
+    color: #333 !important;
   }
 
   table {
-    border-collapse: collapse;
-    width: 75%;
-    margin: 0 auto;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-collapse: collapse !important;
+    width: 80% !important;
+    margin: 0 auto !important;
+    background-color: #fff !important;
+    border: 1px solid #ddd !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+    padding: 20px !important;
   }
 
   th {
-    background-color: #333;
-    color: #fff;
-    text-align: left;
-    padding: 10px;
-    border: 1px solid #ddd;
+    background-color: #333 !important;
+    color: #fff !important;
+    text-align: left !important;
+    padding: 10px !important;
+    border: 1px solid #ddd !important;
   }
 
   td {
-    padding: 10px;
-    border: 1px solid #ddd;
+    padding: 10px !important;
+    border: 1px solid #ddd !important;
   }
 
   input[type="text"],
-  textarea {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
+  textarea,
+  select {
+    width: 100% !important;
+    padding: 10px !important;
+    border: 1px solid #ddd !important;
+    border-radius: 5px !important;
+    margin-bottom: 10px !important;
   }
 
-  input[type="submit"] {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-  }
 
   a {
-    text-decoration: none;
-    color: #007bff;
+    text-decoration: none !important;
+    color: #007bff !important;
   }
 
   a:hover {
-    text-decoration: underline;
+    text-decoration: underline !important;
   }
-  
-   select {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
+
+ 
+
+  /* 추가한 부분: 버튼 스타일 */
+  #btnSubmit, #btnPrev {
+    background-color: #007bff !important;
+    color: #fff !important;
+    border: none !important;
+    border-radius: 5px !important;
+    cursor: pointer !important;
   }
-  
-  
+
+  #btnSubmit:hover, #btnPrev:hover {
+    background-color: #0056b3 !important;
+  }
 </style>
 
 </head>
 <body>
 <%@include file="header.jsp"%>
+<br><br><br>
   <h1>게시물 작성</h1>
   <form method="post" action="/insert" id="frmInsert" name="frmInsert">
     <table>
@@ -101,18 +102,30 @@
         <td>내용</td>
         <td><textarea rows="10" cols="64" name="content" id="content"></textarea></td>
       </tr>
-      <tr>
-        <td><a href="/q&a">목록으로</a></td>
+      <tr><td></td>
         <td style="text-align:right;">
           <input type="submit" id="btnSubmit" name="btnSubmit" value="작성완료">&nbsp;&nbsp;
+          <input type="button" id="btnPrev" value="이전으로">
         </td>
       </tr>
     </table>
   </form>
+  <br><br><br><br>
 	  <%@include file="footer.jsp"%>
 </body>
   <script src="https://code.jquery.com/jquery-latest.js"></script>
   <script>
+  $(document)
+  .ready(function(){
+	  $('#btnPrev').click(function(){
+		  window.location.href="/q&a";
+	  })
+  })
+  
+  
+  
+  
+  
     $(document).on('submit', '#frmInsert', function () {
       if ($('#title').val() === '') {
         alert('제목을 입력하세요.');
