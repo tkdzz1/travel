@@ -25,6 +25,9 @@ public class emailController {
 	@Autowired
 	private travel_attDAO tDao;
     
+	@Autowired
+	private homeDAO hDao;
+	
 	@Value("${cos.key}")
 	private String cosKey;
 	
@@ -86,6 +89,17 @@ public class emailController {
 	
 	@GetMapping("/my_jeju_travel")
 	public String myJejuTravel(HttpServletRequest req, Model model) {
+		HttpSession s = req.getSession();
+		String id = (String) s.getAttribute("id");
+		
+		ArrayList<travel_attDTO> tList = hDao.getLikeList(id);
+		
+		if ( tList.size() == 0 ) {
+			model.addAttribute("tList", "empty");
+			return "my_jeju_travel/my_jeju_travel";
+		}
+		
+		model.addAttribute("tList", tList);
 		
 		return "my_jeju_travel/my_jeju_travel";
 	}

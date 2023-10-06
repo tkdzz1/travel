@@ -5,7 +5,7 @@
 
 <insert id="addComment" >
 
-insert into comment set commenter=#{param1}, comment_content=#{param2}, board_seqno=#{param3}, comment_created=now();
+insert into comment set commenter=#{param1}, comment_content=#{param2}, board_seqno=#{param3}, comment_created=CURDATE();
 </insert>
 
 <select id ="showComment">

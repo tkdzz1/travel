@@ -56,19 +56,25 @@
 					<li>쇼핑<hr></li>
 				</ul>
 			</div>
-<!-- 			<div class=listContent> -->
-<!-- 				<img src="/img/t_img/${tList.ta_img}"> -->
-<!-- 				<div class=text> -->
-<!-- 					<h3>이름</h3> -->
-<!-- 					<p>주소</p> -->
-<!-- 					<button class="w-btn w-btn-red">일정에 추가</button> -->
-<!-- 				</div> -->
-<!-- 			</div> -->
-<!-- 			<hr> -->
+			<c:if test="${tList != 'empty' }">
+				<c:forEach items="${tList}" var="tList">
+					<div class=listContent>
+						<img src="/img/t_img/${tList.ta_img}">
+						<div class=text>
+							<h4>${tList.ta_name}</h4>
+							<p>${tList.ta_local}</p>
+							<button class="w-btn w-btn-red">일정에 추가</button>
+						</div>
+					</div>
+					<hr>
+				</c:forEach>
+			</c:if>
+			<c:if test="${tList == 'empty' }">
 			<div style="text-align:center; margin-top: 50%;">
 				<img src="img/heart.png" style="width:100px;">
 				<h3>찜한 여행지가 없습니다.</h3>
 			</div>
+			</c:if>
 	  </div>
   
   <div>

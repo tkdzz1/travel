@@ -2,8 +2,10 @@ package com.himedia.springboot;
 
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -122,6 +124,11 @@ public class mainController {
 	
 	    model.addAttribute("commenter", session.getAttribute("id"));
 	    model.addAttribute("comment_content", "");
+	    
+	    // 답글
+	    
+	   
+	    
 
 	    return "view"; 
 	}
@@ -246,6 +253,37 @@ public class mainController {
 	
 	
 	
+	@PostMapping("/edtrply")
+	public ResponseEntity<String> editreplies(@RequestParam("reply_id") int replyId,
+	                                          @RequestParam("reply_content") String reply_content,
+	                                          Model model) {
+	    rdao.edtreply(replyId, reply_content); 
+
+	    System.out.println(reply_content);
+	    System.out.println(replyId);
+	    
+	    
+	    // return 1이 나올거라고 예상ㅇ ??
+	    return ResponseEntity.ok("1");
+	}
+
+	@PostMapping("/delrply")
+	public ResponseEntity<String> editreplies(@RequestParam("reply_id") int replyId,
+												Model model) {
+		rdao.delete(replyId);
+		
+		System.out.println(replyId);
+		
+		 return ResponseEntity.ok("1");
+	}
+	
+	
+	
+	
+
+	
+	
+	
 	@PostMapping("/deleteComment")
 	public String deleteComments(HttpServletRequest req) {
 		 HttpSession session = req.getSession();
@@ -278,6 +316,22 @@ public class mainController {
 		 return "";
 	}
 
+	
+	
+	@PostMapping("/getReplies")
+	@ResponseBody
+	public List<ReplyDTO> getReplies(HttpServletRequest req,Model model) {
+	    HttpSession session = req.getSession();
+
+	    int parent_comment_id = Integer.parseInt(req.getParameter("commentId"));
+	    
+	    List<ReplyDTO> replies = rdao.showreply(parent_comment_id);
+	    
+	    model.addAttribute("replies",replies);
+
+	    return replies;
+	}
+
 
 	
 	
@@ -302,9 +356,7 @@ public class mainController {
 	}
 
 	
-	
 
-	
 	
 	
 	
