@@ -9,9 +9,9 @@
 <link
 	href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css"
 	rel="stylesheet">
-<title>Insert title here</title>
+<title>TRAVEL JEJU</title>
 </head>
-<%@ include file="/WEB-INF/views/header.jsp"%>
+<%@ include file="header.jsp"%>
 
 <body class="main">
 <script type="text/javascript">

@@ -7,10 +7,10 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface travel_attDAO {
 
-	ArrayList<travel_attDTO> getList(int start, int psize);
+	ArrayList<travel_attDTO> getList(int start, int psize, String category);
 	ArrayList<travel_attDTO> getmaker();
 	void addTravelList(String name, String local, String savedMainName, String address, String category, double latitude, double longitude);
-	int cntTravelList();
+	int cntTravelList(String category);
 	travel_attDTO getDetail(String ta_name);
 	void addImgInfo(String name, String savedImageName, String taContent);
 	void deleteList(String ta_name);

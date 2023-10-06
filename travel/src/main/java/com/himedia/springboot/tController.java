@@ -33,6 +33,10 @@ public class tController {
 	private travel_attDAO tdao;
 	@Autowired
 	private reviewDAO rdao;
+	@Autowired
+	private cartDAO cdao;
+	@Autowired
+	private likeDAO ldao;
 	
 	@GetMapping("/travel_list")
 	public String tlist(HttpServletRequest req,Model model) {
@@ -44,7 +48,7 @@ public class tController {
 		int pno = Integer.parseInt(page);
 		start = (pno-1)*5;
 		psize=5;		
-		int cnt=tdao.cntTravelList();
+		int cnt=tdao.cntTravelList("관광지");
 		int pagecount = (int)Math.ceil(cnt/5.0);
 		String pagestr="";
 		for(int i=1; i<=pagecount; i++) {
@@ -55,7 +59,7 @@ public class tController {
 			}
 		}
 		model.addAttribute("pagestr",pagestr);
-		ArrayList<travel_attDTO> getlist = tdao.getList(start,psize);
+		ArrayList<travel_attDTO> getlist = tdao.getList(start,psize,"관광지");
 		model.addAttribute("list", getlist);	
 		return "travel_attraction/travel_list";
 	}
@@ -83,6 +87,16 @@ public class tController {
                 String image = main.getOriginalFilename();
                 String address = req.getParameter("address");
                 String category = req.getParameter("category");
+                
+                String[] cList = {"관광지", "travel_list", "음식", "food_store", "숙박", "stay", "쇼핑", "shopping"};
+                String redirect = "";
+                
+                for (int i=0; i<cList.length; i+=2) {
+                	if (category.equals(cList[i])) {
+                		redirect = cList[i+1];
+                	}
+                }
+                
                 double latitude = Double.parseDouble(req.getParameter("latitude"));
                 double longitude = Double.parseDouble(req.getParameter("longitude"));
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddkkmmss");
@@ -116,7 +130,7 @@ public class tController {
                 for (String detailInfo : detailInfos) {
 	                    if (detailInfo == null || detailInfo.isEmpty()) {
 	                        // 콘텐츠가 비어있는 경우 더미 데이터를 추가합니다
-	                    	System.out.println("공백");
+	                    	
 	                        taContentBuilder.append("/");
 	                    } else {
 	                        if (taContentBuilder.length() > 0) {
@@ -133,7 +147,7 @@ public class tController {
                 tdao.addTravelList(name, local, savedMainName, address, category, latitude, longitude);
                 tdao.addImgInfo(name,detailImagePaths.toString(),taContent);
                 model.addAttribute("fileName", mainFile);
-                return "redirect:/travel_list";
+                return "redirect:/" + redirect;
             } catch (IOException e) {
                 e.printStackTrace();
                 model.addAttribute("errorMessage", "파일 업로드 실패");
@@ -150,13 +164,14 @@ public class tController {
     public String getdata(HttpServletRequest req, Model model) {
     	int start, psize;
 		String page = req.getParameter("pageno");
+		String category = req.getParameter("category");
 		if(page==null || page.equals("")) {
 			page="1";	
 		} 
 		int pno = Integer.parseInt(page);
 		start = (pno-1)*5;
 		psize=5;		
-		int cnt=tdao.cntTravelList();
+		int cnt=tdao.cntTravelList(category);
 		int pagecount = (int)Math.ceil(cnt/5.0);
 		String pagestr="";
 		for(int i=1; i<=pagecount; i++) {
@@ -167,7 +182,7 @@ public class tController {
 			}
 		}
 		model.addAttribute("pagestr",pagestr);
-    	ArrayList<travel_attDTO> getlist = tdao.getList(start, psize);
+    	ArrayList<travel_attDTO> getlist = tdao.getList(start, psize, category);
         JSONArray ja = new JSONArray();
         
         for (int i = 0; i < getlist.size(); i++) {
@@ -192,34 +207,11 @@ public class tController {
     	String[] ta_contentParts = ta_content.split("/");
     	String[] ta_imginfoParts = ta_imginfo.split("/");
     	
-    	int start, psize;
-		String page = req.getParameter("pageno");
-		if(page==null || page.equals("")) {
-			page="1";	
-		} 
-		int pno = Integer.parseInt(page);
-		start = (pno-1)*5;
-		psize=5;		
-		int cnt=tdao.cntTravelList();
-		int pagecount = (int)Math.ceil(cnt/5.0);
-		String pagestr="";
-		for(int i=1; i<=pagecount; i++) {
-			if(pno==i) {
-				pagestr+=i+"&nbsp;";
-			} else {
-			pagestr+="<a href='/travel_list?pageno="+i+"'>"+i+"</a>&nbsp;";
-			}
-		}
-		
-		model.addAttribute("pagestr",pagestr);
-    	List<reviewDTO> review =  rdao.getReviewList(ta_name, start, psize);
     	tdao.hitup(ta_name);
-        model.addAttribute("review",review);
     	model.addAttribute("detail", detail);
         model.addAttribute("ta_imginfoParts", ta_imginfoParts);
         model.addAttribute("ta_contentParts", ta_contentParts);
-
-    	    
+        
     	return "/travel_attraction/travel_detail";
     }
     @PostMapping("/delete_list")
@@ -234,7 +226,7 @@ public class tController {
         if (mainImageFile.exists()) {
             mainImageFile.delete(); // 파일을 삭제합니다.
         }
-        
+        rdao.deletelist(ta_name);
         return "삭제되었습니다.";
     }
 
@@ -284,8 +276,7 @@ public class tController {
                                          HttpServletRequest req,
                                          Model model) {
         try { 	
-        	System.out.println(newdetailImages);
-        	System.out.println(contents);
+        	
             if (newdetailImages == null && contents ==null) {
             	String newdetailImage="";
             	String contetn="";
@@ -477,8 +468,7 @@ public class tController {
             String[] ta_contentParts = ta_content.split("/");
             
             List<String> deleteContent = new ArrayList<>(Arrays.asList(ta_contentParts));
-            System.out.println("deleteContent:" + deleteContent);
-            
+          
             // contentToDelete를 ArrayList에서 정확하게 찾아내고 그 위치를 contentToDeleteIndex에 저장
             int contentToDeleteIndex = deleteContent.indexOf(contentToDelete);
             
@@ -494,7 +484,6 @@ public class tController {
             
             // 삭제된 컨텐츠를 "/"로 합쳐서 업데이트
             String updatedTaContent = String.join("/", deleteContent);
-            System.out.println("updatedTaContent:" + updatedTaContent);
             
             // DB 업데이트 시 ta_imginfo는 그대로 사용
             tdao.updateTravelAttraction(taName, detail.getTa_imginfo(), updatedTaContent);
@@ -506,12 +495,11 @@ public class tController {
             return "컨텐츠 삭제 실패: " + e.getMessage();
         }
     }
-    @PostMapping("/review")
+    @PostMapping("/insertReview")
     @ResponseBody
     public String review(HttpServletRequest req) throws JsonProcessingException {
         HttpSession session = req.getSession();
         String id = (String) session.getAttribute("id");
-        System.out.println(id);
         String reviewContents = req.getParameter("content");
         int rating = Integer.parseInt(req.getParameter("rating"));
         String ta_name = req.getParameter("ta_name");
@@ -523,13 +511,146 @@ public class tController {
     @ResponseBody
     public String deleteReview(HttpServletRequest req) {
     	int reviewNum=Integer.parseInt(req.getParameter("reviewNum"));
-    	System.out.println(reviewNum);
     	rdao.deleteReview(reviewNum);
     	return "성공";
     }
-
     
+    @PostMapping("/getReviewList")
+    @ResponseBody
+    public String getReviewList(HttpServletRequest req, Model model) {
+        String ta_name = req.getParameter("ta_name");
+        int start, psize;
+        String page = req.getParameter("pageno");
+        if (page == null || page.equals("")) {
+            page = "1";
+        }	
+        int pno = Integer.parseInt(page);
+        start = (pno - 1) * 5;
+        psize = 5;
+        int cnt = rdao.cntReviewList(ta_name);
+        int pagecount = (int)Math.ceil(cnt / 5.0);
+        String pagestr = "";
+        for (int i = 1; i <= pagecount; i++) {
+            if (pno == i) {
+                pagestr += i + "&nbsp;";
+            } else {
+                pagestr += "<a href='/travel_Detail?ta_name=test2&pageno=" + i + "'>" + i + "</a>&nbsp;";
+            }
+        }
+        model.addAttribute("pagestr", pagestr);
+        ArrayList<reviewDTO> review = rdao.getReviewList(ta_name, start, psize);
+        JSONArray ja = new JSONArray();
+        for (int i = 0; i < review.size(); i++) {
+            JSONObject jo = new JSONObject();
+            jo.put("review_num", review.get(i).getReview_num());
+            jo.put("review_location", review.get(i).getReview_location());
+            jo.put("review_id", review.get(i).getReview_id());
+            jo.put("review_rating", review.get(i).getReview_rating());
+            jo.put("review_content", review.get(i).getReview_content());
+            jo.put("review_created", review.get(i).getReview_created());
+            ja.add(jo);
+        }    
+        // JSON 응답 데이터 생성 (페이지 번호와 리뷰 데이터를 포함)
+        JSONObject response = new JSONObject();
+        response.put("pagestr", pagestr);
+        response.put("reviews", ja);
+        
+        return response.toJSONString();
+    }
 
-
+    @PostMapping("/addCart")
+    @ResponseBody
+    public String addcart(HttpServletRequest req) {
+    	HttpSession session = req.getSession();
+        String id = (String) session.getAttribute("id");
+    	String ta_name = req.getParameter("ta_name");
+    	String ta_category=req.getParameter("ta_category");
+    	int ta_num = Integer.parseInt(req.getParameter("ta_num"));
+    	System.out.println(ta_name);
+    	cdao.addCart(ta_name,ta_category,ta_num,id);
+    	
+    	int cnt = cdao.totalCart(ta_name);
+    	return cnt+"";
+    }
+    
+    @PostMapping("/cntCart")
+    @ResponseBody
+    public String cntcart(HttpServletRequest req) {
+    	HttpSession session = req.getSession();
+        String id = (String) session.getAttribute("id");
+        String ta_name = req.getParameter("ta_name");
+        System.out.println(id);
+        int cnt = cdao.cntCart(ta_name,id);
+        return cnt+"";
+    }
+    @PostMapping("/removeCart")
+    @ResponseBody
+    public String removeCart(HttpServletRequest req) {
+    	HttpSession session = req.getSession();
+        String id = (String) session.getAttribute("id");
+        String ta_name = req.getParameter("ta_name");
+        
+        cdao.removeCart(ta_name,id);
+        int cnt = cdao.totalCart(ta_name);
+    	return cnt+"";
+    }
+    @PostMapping("/addLike")
+    @ResponseBody
+    public String addlike(HttpServletRequest req) {
+    	HttpSession session = req.getSession();
+        String id = (String) session.getAttribute("id");
+    	String ta_name = req.getParameter("ta_name");
+    	String ta_category=req.getParameter("ta_category");
+    	int ta_num = Integer.parseInt(req.getParameter("ta_num"));
+    	
+    	ldao.addLike(ta_category,ta_name,id,ta_num);
+    	int cnt = ldao.totalLike(ta_name);
+    	return cnt+"";
+    }
+    @PostMapping("/removeLike")
+    @ResponseBody
+    public String removeLike(HttpServletRequest req) {
+    	HttpSession session = req.getSession();
+        String id = (String) session.getAttribute("id");
+        String ta_name = req.getParameter("ta_name");
+        
+        ldao.removeLike(ta_name,id);
+        int cnt = ldao.totalLike(ta_name);
+    	return cnt+"";
+    }
+    @PostMapping("/cntLike")
+    @ResponseBody
+    public String cntLike(HttpServletRequest req) {
+    	HttpSession session = req.getSession();
+        String id = (String) session.getAttribute("id");
+        String ta_name = req.getParameter("ta_name");
+        System.out.println(id);
+        int cnt = ldao.cntLike(ta_name,id);
+        return cnt+"";
+    }
+    @PostMapping("/totalCart")
+    @ResponseBody
+    public String totoalcart(HttpServletRequest req) {
+    	String ta_name = req.getParameter("ta_name");
+    	int cnt = cdao.totalCart(ta_name);
+    	return cnt+"";
+    }
+    @PostMapping("/totalLike")
+    @ResponseBody
+    public String totoalLike(HttpServletRequest req) {
+    	String ta_name = req.getParameter("ta_name");
+    	int cnt = ldao.totalLike(ta_name);
+    	return cnt+"";
+    }
+    @PostMapping("/update_content")
+    @ResponseBody
+    public String update_content(HttpServletRequest req) {
+    	int reviewNum = Integer.parseInt(req.getParameter("reviewNum"));
+    	String updatedText=req.getParameter("updatedText");
+    	int rating = Integer.parseInt(req.getParameter("rating"));
+    	System.out.println(updatedText);
+    	rdao.updateContent(reviewNum,updatedText,rating);
+    	return "성공";
+    }
 }
 

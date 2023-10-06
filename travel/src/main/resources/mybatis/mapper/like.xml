@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+				 "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.himedia.springboot.likeDAO">
+<insert id="addLike">
+	insert into likes set like_category=#{param1}, like_local=#{param2}, like_id=#{param3}, like_num=#{param4}
+</insert>
+<select id="cntLike" resultType="int">
+	select count(*) from likes where like_local=#{param1} and like_id=#{param2} 
+</select>
+<delete id="removeLike">
+	delete from likes where like_id=#{param2} and like_local=#{param1}
+</delete>
+<select id="totalLike">
+	select count(*) from likes where like_local=#{param1}
+</select>
+</mapper>
