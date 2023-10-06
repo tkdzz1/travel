@@ -2,6 +2,8 @@ package com.himedia.springboot;
 
 import java.util.ArrayList;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -87,12 +89,33 @@ public class emailController {
 		return String.valueOf(check);
 	}
 	
+	int st;
+	int ps = 5;
+	
 	@GetMapping("/my_jeju_travel")
 	public String myJejuTravel(HttpServletRequest req, Model model) {
 		HttpSession s = req.getSession();
 		String id = (String) s.getAttribute("id");
 		
-		ArrayList<travel_attDTO> tList = hDao.getLikeList(id);
+		String page = req.getParameter("pageno");
+		if(page == null || page.equals("")) {
+			page = "1";
+		}
+		int pageNo = Integer.parseInt(page);
+		st = (pageNo - 1) * ps;
+		int cnt = hDao.cntCartList(id);
+		int pageCount = (int)Math.ceil(cnt / 5.0);
+		page = "";
+		for(int i=1; i<=pageCount; i++) {
+			if(pageNo == i) {
+				page += "<a class=strong id=" + i  + ">" + i +"</a>&nbsp;";
+			} else {
+				page += "<a class=a id=" + i + ">" + i + "</a>&nbsp;";
+			}
+		}
+		model.addAttribute("page",page);
+		
+		ArrayList<travel_attDTO> tList = hDao.getCartList(st, ps, id);
 		
 		if ( tList.size() == 0 ) {
 			model.addAttribute("tList", "empty");
@@ -102,6 +125,35 @@ public class emailController {
 		model.addAttribute("tList", tList);
 		
 		return "my_jeju_travel/my_jeju_travel";
+	}
+	
+	@PostMapping("/pageMove")
+	@ResponseBody
+	public String pageMove(HttpServletRequest req) {
+		HttpSession s = req.getSession();
+		String id = (String) s.getAttribute("id");
+		
+		int pageNo = Integer.parseInt(req.getParameter("page"));
+		
+		st = ( pageNo - 1 ) * ps;
+		
+		ArrayList<travel_attDTO> tList = hDao.getCartList(st, ps, id);
+		
+		JSONArray ja = new JSONArray();
+		
+		for (int i = 0; i < tList.size(); i++) {
+			JSONObject jo = new JSONObject();
+			jo.put("ta_num", tList.get(i).getTa_num());
+			jo.put("ta_name", tList.get(i).getTa_name());
+			jo.put("ta_local", tList.get(i).getTa_local());
+			jo.put("ta_img", tList.get(i).getTa_img());
+			jo.put("ta_address", tList.get(i).getTa_address());
+			jo.put("ta_category", tList.get(i).getTa_category());
+			jo.put("ta_latitude", tList.get(i).getTa_latitude());
+			jo.put("ta_longitude", tList.get(i).getTa_longitude());
+			ja.add(jo);
+		}
+		return ja.toJSONString();
 	}
 	
 	@GetMapping("/food_store")

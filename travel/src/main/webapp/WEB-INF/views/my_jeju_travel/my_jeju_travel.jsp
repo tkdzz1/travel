@@ -21,18 +21,30 @@
 	    <table>
 	      <tr>
 	        <td>제목</td>
-	        <td><input type="text" placeholder="예시) 나의 3박4일 제주여행"></td>
+	        <td><input type="text" id=title placeholder="예시) 나의 3박4일 제주여행"></td>
 	      </tr>
 	      <tr>
 	        <td>기간</td>
-	        <td id="0bak0il"></td>
+	        <td id="days"></td>
 	      </tr>
 	      <tr>
-	        <td><input type="date" data-placeholder="시작 날짜" required aria-required="true" value={startDateValue} className={styles.selectDay} onChange={StartDateValueHandler}></td>
-	        <td><input type="date" data-placeholder="종료 날짜" required aria-required="true" value={startDateValue} className={styles.selectDay} onChange={StartDateValueHandler}></td>
+	        <td><input type="date" id=start data-placeholder="시작 날짜" required aria-required="true"></td>
+	        <td><input type="date" id=end data-placeholder="종료 날짜" required aria-required="true"></td>
 	      </tr>
 	      <tr>
-	        <td colspan="2"><button class="w-btn w-btn-red">일정 만들기</button></td>
+	      	<td>인원</td><td><input type=number value=1 style="width:30px;"></td>
+	      </tr>
+	      <tr>
+	      	<td>일행</td><td><select>
+	      									<option selected>선택</option>
+	      									<option>혼자</option>
+	      									<option>부모</option>
+	      									<option>아이</option>
+	      									<option>친구</option>
+	      								</select>
+	   	  </tr>
+	      <tr>
+	        <td colspan="2"><button id=plan class="w-btn w-btn-red">일정 만들기</button></td>
 	      </tr>
 	    </table>
 	</div>
@@ -54,20 +66,25 @@
 					<li>관광지<hr></li>
 					<li>음식<hr></li>
 					<li>쇼핑<hr></li>
+					<li>숙박<hr></li>
 				</ul>
 			</div>
 			<c:if test="${tList != 'empty' }">
 				<c:forEach items="${tList}" var="tList">
-					<div class=listContent>
+					<hr>
+					<div name=contentList class=listContent>
 						<img src="/img/t_img/${tList.ta_img}">
 						<div class=text>
-							<h4>${tList.ta_name}</h4>
-							<p>${tList.ta_local}</p>
-							<button class="w-btn w-btn-red">일정에 추가</button>
+							<h5 style="font-size:20px;">${tList.ta_name}</h5>
+							<p style="font-size:20px;">${tList.ta_local}</p>
+							<button class="w-btn w-btn-red" name=add>일정에 추가</button>
 						</div>
 					</div>
-					<hr>
 				</c:forEach>
+				<hr>
+				<div id=page>
+				 	${page}
+				</div>
 			</c:if>
 			<c:if test="${tList == 'empty' }">
 			<div style="text-align:center; margin-top: 50%;">
@@ -78,12 +95,12 @@
 	  </div>
   
   <div>
-  	<table class=timeTable>
+  	<table id=planTable class=timeTable>
   		<thead style="background-color:black;">
-  			<tr><td style="color:white; width:60px;">시간</td><td style="width:800px;"></td></tr>
+  			<tr><td style="width:60px;">시간</td><td id=dayCheck style="width:800px;"></td></tr>
   		</thead>
   		<tbody>
-  			<tr><td>05:00</td>  <td rowspan=19>일정을 추가해주세요.</td></tr>
+  			<tr><td>05:00</td><td rowspan=19>일정을 만들어주세요.</td></tr>
   			<tr><td>06:00</td></tr>
   			<tr><td>07:00</td></tr>
   			<tr><td>08:00</td></tr>

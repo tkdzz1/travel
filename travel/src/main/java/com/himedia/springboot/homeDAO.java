@@ -6,5 +6,8 @@ import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface homeDAO {
-	ArrayList<travel_attDTO> getLikeList(String id);
+	
+	ArrayList<travel_attDTO> getCartList(int st, int ps, String id);
+	int cntCartList(String id);
+	
 }

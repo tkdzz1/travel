@@ -25,6 +25,7 @@ input[type='date']:valid::before {
 
 .travel_list {
 	overflow-y: auto; /* 수평 스크롤을 생성하려면 "auto"로 설정 */
+	scroll-behavior: smooth;
 }
 
 .travel_list ul {
@@ -48,6 +49,19 @@ td {
 	text-align: center;
 }
 
+#page {
+	text-align: center;
+}
+
+.a {
+	cursor: pointer;
+}
+
+.strong {
+	color:#ff5f2e;
+	font-size:20px;
+}
+
 div {
 	padding : 10px;
 }
@@ -66,6 +80,11 @@ div {
 .timeTable td {
 	border-bottom: 1px solid silver;
 	border-right: 1px solid silver;
+	border: 1px solid gray;
+}
+
+.timeTable thead td {
+	color:white;
 }
 
 .select{
@@ -88,7 +107,7 @@ div {
 }
 .listContent .text {
   flex-grow: 1; /* 텍스트 영역이 남은 공간을 채우도록 설정 */
-  line-height: 0.5;
+  line-height: 1;
 }
 .listContent hr {
   height: 1px; /* 원하는 높이로 설정 */
