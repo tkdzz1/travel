@@ -73,6 +73,7 @@
 				<c:forEach items="${tList}" var="tList">
 					<hr>
 					<div name=contentList class=listContent>
+						<input type=hidden value="${tList.ta_num}" name=taNum>
 						<img src="/img/t_img/${tList.ta_img}">
 						<div class=text>
 							<h5 style="font-size:20px;">${tList.ta_name}</h5>
@@ -93,15 +94,14 @@
 			</div>
 			</c:if>
 	  </div>
-  
+
   <div>
   	<table id=planTable class=timeTable>
   		<thead style="background-color:black;">
-  			<tr><td style="width:60px;">시간</td><td id=dayCheck style="width:800px;"></td></tr>
+  			<tr><td style="width:60px;">시간</td><td style="width:800px;"></td></tr>
   		</thead>
   		<tbody>
-  			<tr><td>05:00</td><td rowspan=19>일정을 만들어주세요.</td></tr>
-  			<tr><td>06:00</td></tr>
+  			<tr><td>06:00</td><td rowspan=18>일정을 만들어주세요.</td></tr>
   			<tr><td>07:00</td></tr>
   			<tr><td>08:00</td></tr>
   			<tr><td>09:00</td></tr>
@@ -122,7 +122,7 @@
   		</tbody>
   	</table>
   </div>
-  
+
   <div style="text-align:center;">
   		<button class="w-btn w-btn-red">저장</button> <button class="w-btn w-btn-black">취소</button>
   </div>

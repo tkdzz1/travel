@@ -16,4 +16,12 @@ FROM cart
 WHERE cart_id = #{param1};
 </select>
 
+<select id="getChoice" resultType="com.himedia.springboot.travel_attDTO">
+select * from travel_attraction where ta_num = #{param1}
+</select>
+
+<select id="getMarker" resultType="com.himedia.springboot.travel_attDTO">
+select ta_name, ta_latitude, ta_longitude from travel_attraction where ta_num = #{param1}
+</select>
+
 </mapper>

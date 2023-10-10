@@ -1,18 +1,21 @@
+let choicePlan;
+let ta_num;
+let beforeValue;
+let infoWindow = new naver.maps.InfoWindow();
+let isInfoWindowOpen = false;
+let mapOptions = { 
+    center: new naver.maps.LatLng(33.3595704, 126.600000),
+    zoom: 10
+};	
+
+let map = new naver.maps.Map('map', mapOptions);
+    
 $(document)
 .ready(function(){
 	let today = getFormattedDate();
 	$('#start').attr('min', today);
 	$('#end').attr('min', today);
 	$('#start').attr('value', today);
-	
-	let infoWindow = new naver.maps.InfoWindow();
-    let isInfoWindowOpen = false;
-    let mapOptions = { 
-        center: new naver.maps.LatLng(33.3595704, 126.600000),
-        zoom: 10
-    };	
-
-    let map = new naver.maps.Map('map', mapOptions);
 })
 
 .on('change','#start',function(){
@@ -128,17 +131,135 @@ $(document)
 	
 	let div = $('#list');
 	div.scrollTop(0);
-	
 })
 
 .on('click','button[name=add]',function(){
-	if ( $('#dayCheck').text() == '' ) {
+	if ( $('#days').text() == '' ) {
+		alert("일정을 먼저 만들어주세요.");
 		return false;
 	}
 	
+	choicePlan = $(this).closest('.listContent').find('input[name=taNum]').val();
 	
+	$('#planTable tbody td:first-child').each(function() {
+	    var td = $(this);
+	    
+	    var button = $('<button>', {
+	        class: 'w-btn w-btn-red',
+	        name: 'selectTime'
+	    });
+	
+	    td.wrap(button);
+	});
+	return false;
 })
 
+.on('click','button[name=selectTime]',function(){
+	let addPlan = $(this).closest('tr').find('td:eq(1)');
+
+	$.ajax({ url:'/getChoice', data: {choice : choicePlan}, type:'post', dataType:'json',
+			success:function(data) {
+				let obj = data[0];
+				ta_num = obj['ta_num'];
+				addPlan.html('<h1><span name=num></span>' + obj['ta_name'] + '<span name=change> ➰ </span><span name=empty> ❌ </span></h1>');
+				changePlan();
+				loadTravelData();
+			}, error:function(){
+				console.log('error!');
+			}
+		
+	})
+	
+	$('#planTable tbody td:first-child').each(function() {
+		 var td = $(this);
+		 td.unwrap();
+	})
+	
+	return false;
+})
+
+.on('click','#planTable thead td span',function(){
+	var thead = $(this).closest('thead').attr("name");
+	var tbody = $(this).closest('thead').next().attr("name");
+	var dayCheck =  $(this).parent().text().split(" ")[2] + $(this).parent().text().split(" ")[3];
+	
+	if ( $(this).attr("name") == "before" ) {
+		if ( dayCheck == "DAY1" ) {
+			return false;
+		}
+		
+		$('thead[name=' + thead + ']').hide();
+		$('tbody[name=' + tbody + ']').hide();
+		var numberZone = thead.match(/\d+/);
+		
+		if ( numberZone ) {
+			var decrement = ( parseInt(numberZone[0], 10) - 1 ).toString();
+			var updateDay = thead.replace(/\d+/, decrement);
+		}
+		
+		$('thead[name=' + updateDay + ']').show();
+		$('tbody[name=' + updateDay + ']').show();
+	} else {
+		if ( dayCheck == "DAY" + $('#planTable tbody').length ) {
+			return false;
+		}
+		
+		$('thead[name=' + thead + ']').hide();
+		$('tbody[name=' + tbody + ']').hide();
+		
+		var numberZone = thead.match(/\d+/);
+		
+		if ( numberZone ) {
+			var increment = ( parseInt(numberZone[0], 10) + 1 ).toString();
+			var updateDay = thead.replace(/\d+/, increment);
+		}
+		
+		$('thead[name=' + updateDay + ']').show();
+		$('tbody[name=' + updateDay + ']').show();
+	}
+})
+
+.on('click','span[name=empty]',function(){
+	if( !confirm("일정에서 삭제 할까요?") ){
+		return false;
+	} else {
+		$(this).closest('td').html('');
+		changePlan();
+		return false;
+	}
+})
+
+.on('click','span[name=change]',function(){
+    alert("변경할 일정을 선택해주세요.");
+    var valueCheck = $(this).closest('tbody').find('tr');
+    beforeValue = valueCheck.find('td:eq(1)');
+    valueCheck.each(function() {
+        var td = $(this).find('td:eq(1)');
+        if (td.text().trim() !== '') {
+            var button = $('<button>', {
+                class: 'w-btn w-btn-red',
+                name: 'changePlan',
+                text: td.text().trim()
+            });
+            td.html(button);
+        }
+    });
+    return false;
+})
+
+.on('click','button[name=changePlan]',function(){
+	var nowValue = $(this).html();
+	$(this).closest('td').html(beforeValue);
+	beforeValue.html(nowValue);
+	
+	var valueCheck = $(this).closest('tbody').find('tr');
+	valueCheck.each(function() {
+        var td = $(this).find('td:eq(1)');
+        if (td.text().trim() !== '') {
+            td.unwrap();
+        }
+    });
+})
 ;
 
 function getFormattedDate() {
@@ -162,12 +283,11 @@ function ListShow(data, i){
 }
 
 function createTable(day) {
-	 let html ='<thead style="background-color:black;">'
+	 let html ='<thead style="background-color:black;" name=day' + day +'>'
   		+	'<tr><td style="color:white; width:60px;">시간</td>'
-  		+ '<td style="width:800px;">DAY ' + day + '</td></tr>'
+  		+ '<td style="width:800px;"><span name=before>◀ </span> DAY ' + day + ' <span name=after> ▶</span></td></tr>'
   		+ '</thead>'
-  		+ '<tbody>' 
-  		+	'<tr><td>05:00</td><td></td></tr>'
+  		+ '<tbody name=day' + day + '>' 
   		+	'<tr><td>06:00</td><td></td></tr>'
   		+	'<tr><td>07:00</td><td></td></tr>'
   		+	'<tr><td>08:00</td><td></td></tr>'
@@ -188,4 +308,55 @@ function createTable(day) {
   		+	'<tr><td>23:00</td><td></td></tr>'
   		+  '</tbody>'
   		return html;
+}
+
+function changePlan() {
+  var numList = ['1️⃣', '2️⃣', '3️⃣', '4️⃣', '5️⃣', '6️⃣', '7️⃣', '8️⃣', '9️⃣', '🔟'];
+  let ndx = 0;
+  $('#planTable tbody tr').each(function() {
+    var $this = $(this).find('td:eq(1)');
+    var text = $this.text().trim(); // 공백 제거
+    if (text !== '') {
+      $this.find('span[name=num]').text(numList[ndx]);
+      ndx++;
+    }
+  });
+}
+
+function loadTravelData() {
+    $.ajax({
+        url: "/getPlanData",
+        method: "post",
+        data: { ta_num : ta_num },
+        dataType: "json",
+        success: function(data) {
+            // 여행지 정보를 순회하면서 마커를 생성하고 이름 설정
+            data.forEach(function(travelInfo) {
+                let allPosition = new naver.maps.LatLng(travelInfo.ta_latitude, travelInfo.ta_longitude);
+                console.log(allPosition);
+                let marker = new naver.maps.Marker({
+                    position: allPosition,
+                    map: map,
+                    title: travelInfo.ta_name
+                });
+                
+                let infoWindow = new naver.maps.InfoWindow({
+                    content: travelInfo.ta_name
+                });
+                
+               naver.maps.Event.addListener(marker, 'click', function() {
+                    if (isInfoWindowOpen) {
+                        infoWindow.close();
+                        isInfoWindowOpen = false;
+                    } else {
+                        infoWindow.open(map, marker);
+                        isInfoWindowOpen = true;
+                    }
+                });
+            });
+        },
+        error: function(xhr, status, error) {
+            console.error("여행지 정보를 불러오는데 실패했습니다.");
+        }
+    });
 }

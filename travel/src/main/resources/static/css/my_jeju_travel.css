@@ -23,6 +23,11 @@ input[type='date']:valid::before {
   display: none;
 }
 
+.timeTable span[name=empty],
+.timeTable span[name=change] {
+	cursor: pointer;
+}
+
 .travel_list {
 	overflow-y: auto; /* 수평 스크롤을 생성하려면 "auto"로 설정 */
 	scroll-behavior: smooth;
@@ -87,6 +92,10 @@ div {
 	color:white;
 }
 
+.timeTable thead span {
+	cursor: pointer;
+}
+
 .select{
 	color:#ff5f2e;
 	font-weight:bold;
@@ -105,6 +114,7 @@ div {
   height: 100px;
   margin-right: 10px; /* 이미지 오른쪽 여백 추가 */
 }
+
 .listContent .text {
   flex-grow: 1; /* 텍스트 영역이 남은 공간을 채우도록 설정 */
   line-height: 1;
