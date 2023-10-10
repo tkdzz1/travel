@@ -233,4 +233,47 @@ public class emailController {
 		model.addAttribute("list", getlist);	
 		return "travel_attraction/travel_list";
 	}
+	
+	@PostMapping("/getChoice")
+	@ResponseBody
+	public String getChoice(HttpServletRequest req) {
+		int choiceNum = Integer.parseInt(req.getParameter("choice"));
+		
+		travel_attDTO choice = hDao.getChoice(choiceNum);
+		
+		JSONArray ja = new JSONArray();
+		
+		JSONObject jo = new JSONObject();
+		jo.put("ta_num", choice.getTa_num());
+		jo.put("ta_name", choice.getTa_name());
+		jo.put("ta_local", choice.getTa_local());
+		jo.put("ta_img", choice.getTa_img());
+		jo.put("ta_address", choice.getTa_address());
+		jo.put("ta_category", choice.getTa_category());
+		jo.put("ta_latitude", choice.getTa_latitude());
+		jo.put("ta_longitude", choice.getTa_longitude());
+		ja.add(jo);
+		
+		return ja.toJSONString();
+	}
+	
+	@PostMapping("/getPlanData")
+	@ResponseBody
+	public String getPlanData(HttpServletRequest req) {
+		int num = Integer.parseInt(req.getParameter("ta_num"));
+		
+		ArrayList<travel_attDTO> getMarker = hDao.getMarker(num);
+		
+		JSONArray ja = new JSONArray();
+		
+		for (int i = 0; i < getMarker.size(); i++) {
+			JSONObject jo = new JSONObject();
+			jo.put("ta_name", getMarker.get(i).getTa_name());
+			jo.put("ta_latitude", getMarker.get(i).getTa_latitude());
+			jo.put("ta_longitude", getMarker.get(i).getTa_longitude());
+			ja.add(jo);
+		}
+		return ja.toJSONString();
+	}
+	
 }
