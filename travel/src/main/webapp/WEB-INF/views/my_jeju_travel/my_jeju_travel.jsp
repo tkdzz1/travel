@@ -128,7 +128,7 @@
   </div>
   
 </div>
-<%-- <%@ include file = "../footer.jsp" %> --%>
+<%@ include file = "../footer.jsp" %>
 </body>
 <script src="https://code.jquery.com/jquery-latest.js"></script>
 <script src="js/my_jeju_travel.js"></script>

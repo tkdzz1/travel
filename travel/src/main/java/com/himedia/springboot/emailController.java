@@ -262,17 +262,44 @@ public class emailController {
 	public String getPlanData(HttpServletRequest req) {
 		int num = Integer.parseInt(req.getParameter("ta_num"));
 		
-		ArrayList<travel_attDTO> getMarker = hDao.getMarker(num);
+		travel_attDTO getMarker = hDao.getMarker(num);
 		
 		JSONArray ja = new JSONArray();
 		
-		for (int i = 0; i < getMarker.size(); i++) {
+		JSONObject jo = new JSONObject();
+		jo.put("ta_name", getMarker.getTa_name());
+		jo.put("ta_latitude", getMarker.getTa_latitude());
+		jo.put("ta_longitude", getMarker.getTa_longitude());
+		ja.add(jo);
+			
+		return ja.toJSONString();
+	}
+	
+	@PostMapping("/likeFilter")
+	@ResponseBody
+	public String likeFilter(HttpServletRequest req) {
+		HttpSession s = req.getSession();
+		
+		String id = (String) s.getAttribute("id");
+		String filter = req.getParameter("filter");
+		
+		ArrayList<travel_attDTO> filterList = hDao.getFilterList(id, filter);
+		
+		JSONArray ja = new JSONArray();
+		
+		for(int i=0; i<filterList.size(); i++) {
 			JSONObject jo = new JSONObject();
-			jo.put("ta_name", getMarker.get(i).getTa_name());
-			jo.put("ta_latitude", getMarker.get(i).getTa_latitude());
-			jo.put("ta_longitude", getMarker.get(i).getTa_longitude());
+			jo.put("ta_num", filterList.get(i).getTa_num());
+			jo.put("ta_name", filterList.get(i).getTa_name());
+			jo.put("ta_local", filterList.get(i).getTa_local());
+			jo.put("ta_img", filterList.get(i).getTa_img());
+			jo.put("ta_address", filterList.get(i).getTa_address());
+			jo.put("ta_category", filterList.get(i).getTa_category());
+			jo.put("ta_latitude", filterList.get(i).getTa_latitude());
+			jo.put("ta_longitude", filterList.get(i).getTa_longitude());
 			ja.add(jo);
 		}
+		
 		return ja.toJSONString();
 	}
 	
