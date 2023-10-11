@@ -14,11 +14,12 @@
 <body>
 <%-- <%@ include file = "../header.jsp" %> --%>
 <div id=wrapper>
-	<div style="float:left;">
+
+	<div style="float:left; margin-left:10%;">
 	    <h1>여행 준비</h1>
 	    <hr>
 	    <h5>작성자 : ${id}</h5>
-	    <table>
+	    <table style="width:400px;">
 	      <tr>
 	        <td>제목</td>
 	        <td><input type="text" id=title placeholder="예시) 나의 3박4일 제주여행"></td>
@@ -51,11 +52,11 @@
 
 	  <div class="right-panel">
 	    <div id="map-container"> 
-	      <div id="map" style="width: 860px; height: 400px;"></div> 
+	      <div id="map" style="width: 850px; height: 400px;"></div> 
 	    </div>
 	  </div>
 	  
-	  <div style="float:left;" class=travel_list id=list>
+	  <div style="float:left; margin-left:10%;" class=travel_list id=list>
 			<ul>
 				<li class=select>찜한 여행지<hr></li>
 				<li>검색<hr></li>
