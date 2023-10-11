@@ -24,4 +24,10 @@ select * from travel_attraction where ta_num = #{param1}
 select ta_name, ta_latitude, ta_longitude from travel_attraction where ta_num = #{param1}
 </select>
 
+<select id="getFilterList" resultType="com.himedia.springboot.travel_attDTO">
+SELECT *
+FROM cart a JOIN travel_attraction b ON a.cart_num = b.ta_num
+WHERE cart_id = #{param1} AND cart_category= #{param2};
+</select>
+
 </mapper>
