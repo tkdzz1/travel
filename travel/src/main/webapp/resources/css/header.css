@@ -11,8 +11,25 @@
 body,
 html {
 	text-rendering: optimizeLegibility
+
+}
+a,audio,canvas,label,progress,span,video {
+    display: inline-block
 }
 
+article,aside,audio,blockquote,body,button,canvas,caption,dd,details,div,dl,dt,embed,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,html,iframe,legend,li,menu,nav,ol,p,pre,section,summary,table,tbody,td,template,tfoot,th,thead,tr,ul,video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-family: inherit; 
+    vertical-align: baseline;
+    box-sizing: border-box;
+    word-break: break-all
+}
+
+body,html {
+    text-rendering: optimizeLegibility
+}
 img {
 	border: none
 }
@@ -621,6 +638,7 @@ html.hidden body {
 
 
 input {
+
 	font-size: inherit;
 	font-family: inherit;
 	vertical-align: middle;
@@ -632,6 +650,9 @@ input {
 	padding: 1px 6px;
 	border: solid 1px #858585;
 	line-height: 28px
+
+
+
 }
 
 input[type=search],

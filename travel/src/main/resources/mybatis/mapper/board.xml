@@ -14,7 +14,7 @@
 </select>
 
 <select id="view" resultType="com.himedia.springboot.BoardDTO">
-	select seqno,title,content,writer,hit,created,updated,category,answer_count from board
+	select seqno,title,content,writer,hit,created,updated,category,answer_count,isprivate from board
 	where seqno=#{param1}
 </select>
 
@@ -23,7 +23,7 @@
 </update>
 
 <insert id="insert">
-	insert into board set title=#{param1}, content=#{param2}, writer=#{param3}, category=#{param4}, created=now(),updated=now()
+	insert into board set title=#{param1}, content=#{param2}, writer=#{param3}, category=#{param4}, isprivate=#{param5}, created=CURDATE(),updated=CURDATE()
 </insert>
 
 <delete id="deletePost">
@@ -32,7 +32,7 @@
 
 <update id="editPost">
     UPDATE board
-    SET title = #{param2}, content = #{param3}, category = #{param4}, updated = NOW()
+    SET title = #{param2}, content = #{param3}, category = #{param4}, updated = CURDATE()
     WHERE seqno = #{param1}
 </update>
 
@@ -46,13 +46,16 @@
 
 <update id ="answerCount">
 	update board set answer_count =#{param2} where seqno =#{param1}
-	
 </update>
 
 <select id="getprof" resultType="com.himedia.springboot.BoardDTO">
 SELECT a.seqno, a.title, a.category, a.answer_count, a.created FROM board a
 LEFT OUTER JOIN MEMBER b ON a.writer=b.member_id
 where b.member_id=#{param1}
+</select>
+
+<select id = "getboardlist">
+	select * from board order by seqno desc limit 7
 </select>
 
 </mapper>

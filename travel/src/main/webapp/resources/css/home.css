@@ -204,12 +204,17 @@
 	margin-right: 30px;
 }
 
+.break-word {
+        word-wrap: break-word; /* 긴 단어를 줄 바꿈하여 표시 */
+}
+
+
+
 .bigboard {
 	width: 1290px;
 	height: 400px;
 	margin: 0 auto;
-	padding: 40px 0;
-	border: 1px solid black;
+	border: 1px solid #ccc;
 	border-radius: 10px;
 	background-color: #E0F2F7;
 }
@@ -219,7 +224,7 @@
 	첫번째,세번째 dt 말풍선 모양 이미지 ( 작은 삼각형)
 	*/
 	position: relative;
-	left: 625px;
+	left: 665px;
 	bottom: 170px;
 }
 
@@ -229,7 +234,7 @@
 	*/
 	position: relative;
 	bottom: 160px;
-	left: 1153px;
+	left: 1035px;
 }
 
 .firstdt {
@@ -271,7 +276,7 @@
 	margin-left: 50px;
 	margin-right: 10px;
 	margin-top: 50px;
-	margin-bottom: 80px;
+	margin-bottom: 50px;
 	background-color: white;
 	border-radius: 20px;
 	height: 300px;
@@ -280,9 +285,8 @@
 }
 
 .board li {
-	margin-left: 5%;
+	
 	list-style: circle;
-	margin-bottom: 5%;
 }
 
 @font-face {
@@ -407,10 +411,16 @@
 }
 
 .plus-button:hover {
+
 	background-color: #000;
 	/* 마우스 호버 시 배경색 변경 */
 	color: #fff;
 	/* 플러스 모양 색상 변경 */
+
+	background-color: #000; /* 마우스 호버 시 배경색 변경 */
+	color: #fff; /* 플러스 모양 색상 변경 */
+	text-decoration:none;
+
 }
 
 @font-face {
