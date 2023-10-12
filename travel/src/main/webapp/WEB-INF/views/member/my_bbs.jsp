@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -41,13 +41,14 @@
 												<div class="infoLV">
 													<span class="myN"><c:if test="${empty nickname}">${id}</c:if>
 														<c:if test="${!empty nickname}">${nickname}</c:if> </span>&nbsp;님의
-													제주여행
+													제주여행 <input type="text" value="${id }" id=userid readonly class="mybut">
 												</div>
+												
 											</div>
 											<div class="myBtm">
 												<ul>
 													<li><p>나의여행일정</p> <em>0</em></li>
-													<li><p>나의게시글</p> <em>0</em></li>
+													<li><p>나의질문</p> <em>0</em></li>
 													<li><p>나의리뷰</p> <em>0</em></li>
 													<li><p>찜한여행지</p> <em>0</em></li>
 													<li><p>제주방문지</p> <em>0</em></li>
@@ -60,7 +61,7 @@
 								<div class="tabmenu_wrap mt50">
 									<ul class="tabStyle wid5 innerwrap" id="tab">
 										<li><a href="/mypage">나의여행일정</a></li>
-										<li class="on"><a href="/mybbs">나의게시글</a></li>
+										<li class="on"><a href="/mybbs">나의질문</a></li>
 										<li><a href="/myreview">나의리뷰</a></li>
 										<li><a href="/mylike">찜한여행지</a></li>
 										<li><a href="#">제주방문지</a></li>
@@ -69,12 +70,12 @@
 
 								<div class="my_tour_wrap">
 									<div class="wrap_tit_zone">
-										<p class="wrap_tit">나의 게시글</p>
-										<p class="wrap_sub_tit">내가 작성한 게시글을 확인할 수 있습니다.</p>
+										<p class="wrap_tit">나의 질문</p>
+										<p class="wrap_sub_tit">내가 작성한 질문을 확인할 수 있습니다.</p>
 
 									</div>
 
-									<table class="bbs">
+									<table class="bbs" id="tblBoard">
 										<colgroup>
 											<col style="width: 100px;">
 											<col>
@@ -86,27 +87,22 @@
 											<tr>
 												<th scope="col">번호</th>
 												<th scope="col">제목</th>
-												<th scope="col">조회수</th>
-												<th scope="col">작성자</th>
+												<th scope="col">카테고리</th>
+												<th scope="col">답변수</th>
 												<th scope="col">작성일</th>
 											</tr>
 										</thead>
 										<tbody>
+										    <c:forEach items="${blist}" var="bpost">
 											<tr>
-												<td>1</td>
-												<td>제목이들어간느구조</td>
-												<td>짱</td>
-												<td>농담곰</td>
-												<td>2023-10-06</td>
-											</tr>
-											<tr>
-												<td>2</td>
-												<td>제목이들어간느구조</td>
-												<td>짱</td>
-												<td>농담곰</td>
-												<td>2023-10-06</td>
+												<td>${bpost.seqno}</td>
+												<td>${bpost.title}</td>
+												<td>${bpost.category}</td>
+												<td>${bpost.answer_count}</td>
+												<td>${bpost.created}</td>
 											</tr>
 										</tbody>
+										    </c:forEach>
 									</table>
 
 
@@ -130,5 +126,12 @@
 	</div>
 	<%@ include file="../footer.jsp"%>
 	<script src="https://code.jquery.com/jquery-latest.js"></script>
+	<script>
+    $(document)
+    .on('click','#tblBoard tbody tr',function(){
+        document.location='/view?seqno='+$(this).find('td:eq(0)').text();
+        return false;
+    })
+	</script>
 </body>
 </html>

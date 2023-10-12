@@ -19,7 +19,5 @@ select count(*) from member where member_id = #{param1} and password = #{param2}
 select password from member where member_id = #{param1}
 </select>
 
- <select id="getprof" resultType="com.himedia.springboot.memberDTO">
-select count(member_id) from member where member_id = #{param1} 
-</select>
+
 </mapper>

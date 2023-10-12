@@ -1,0 +1,656 @@
+@charset "UTF-8";
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+main,
+menu,
+nav,
+section,
+summary {
+	display: block
+}
+
+a,
+audio,
+canvas,
+label,
+progress,
+span,
+video {
+	display: inline-block
+}
+
+article,
+aside,
+audio,
+blockquote,
+body,
+button,
+canvas,
+caption,
+dd,
+details,
+div,
+dl,
+dt,
+embed,
+fieldset,
+figcaption,
+figure,
+footer,
+form,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+header,
+html,
+iframe,
+legend,
+li,
+menu,
+nav,
+ol,
+p,
+pre,
+section,
+summary,
+table,
+tbody,
+td,
+template,
+tfoot,
+th,
+thead,
+tr,
+ul,
+video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: inherit;
+	vertical-align: baseline;
+	box-sizing: border-box;
+	word-break: break-all
+}
+
+
+/* 사이드 */
+
+.main .side_banner {
+    position: fixed;
+    right: 5%;
+    bottom: 50px;
+    animation: chatBtn 2s infinite;
+    z-index: 4000
+}
+
+.main .side_banner .item {
+    width: 108px
+}
+
+.main .side_banner .btn_chat {
+    display: block;
+    font-size: 0;
+    line-height: 0
+}
+
+.main .side_banner .close {
+    position: absolute;
+    right: 0;
+    top: -6px;
+    background-image: url(https://itour.incheon.go.kr/images/main.png);
+    background-position: -293px -268px;
+    width: 16px;
+    height: 15px;
+    text-indent: -9999px
+}
+
+.main .chat {
+    position: fixed;
+    right: 5%;
+    bottom: -100%;
+    padding: 20px;
+    width: 300px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    background: #f5f5f5;
+    box-shadow: 0 0 10px rgba(0,0,0,.3);
+    transition: .5s;
+    z-index: 5000
+}
+
+.main .chat.active {
+    bottom: 50px
+}
+
+.main .chat .title {
+    font-size: 18px;
+    text-align: center;
+    color: #333;
+    font-weight: 500
+}
+
+.main .chat .text {
+    margin-top: 10px;
+    font-size: 12px;
+    line-height: 1.3
+}
+
+.main .chat .group {
+    width: 100%;
+    margin-top: 10px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    line-height: 1.2;
+    font-size: 15px
+}
+
+.main .chat .group .gray {
+    color: #888;
+    font-size: 13px
+}
+
+.main .chat .n1 .link {
+    display: block;
+    position: relative;
+    width: 100%;
+    padding: 20px 0 20px 100px;
+    font-weight: 500;
+    box-sizing: border-box
+}
+
+.main .chat .n1 .link:hover {
+    text-decoration: none
+}
+
+.main .chat .n1 .link:before {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 15px;
+    top: 6px;
+    background-image: url(https://itour.incheon.go.kr/images/main.png);
+    background-position: -163px -75px;
+    width: 65px;
+    height: 65px
+}
+.main .chat .n2 .link {
+    display: block;
+    position: relative;
+    width: 100%;
+    padding: 20px 0 20px 100px;
+    font-weight: 500;
+    box-sizing: border-box
+}
+
+.main .chat .n2 .link:hover {
+    text-decoration: none
+}
+
+.main .chat .n2 .link:before {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 15px;
+    top: 6px;
+    background-image: url(https://image.mediapen.com/news/202103/news_605667_1614652226_m.jpg);
+    background-size: cover;
+    width: 65px;
+    height: 65px
+}
+
+
+
+.main .chat .close {
+    position: absolute;
+    right: 13px;
+    top: 13px;
+    background-image: url(https://itour.incheon.go.kr/images/main.png);
+    background-position: -293px -268px;
+    width: 16px;
+    height: 15px;
+    text-indent: -9999px
+}
+
+@keyframes chatBtn {
+    0% {
+        transform: translateY(0)
+    }
+
+    50% {
+        transform: translateY(-10px)
+    }
+
+    0% {
+        transform: translateY(0)
+    }
+}
+
+/* side end */
+
+
+
+.gnb_popup {
+    position: relative;
+    overflow: hidden;
+    width: 100%
+}
+
+.gnb_popup .slick-list {
+    position: relative
+}
+
+.gnb_popup .item {
+    font-size: 0;
+    line-height: 0
+}
+
+.gnb_popup .item a {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%)
+}
+
+.gnb_popup .item a:focus {
+    outline: 2px solid rgb(255, 255, 255);
+    margin: 2px;
+}
+
+.gnb_popup .item img {
+    max-width: inherit;
+    max-height: inherit
+}
+
+.gnb_popup .slick-arrow {
+    position: absolute;
+    top: 22px;
+    z-index: 1001;
+    width: 35px;
+    height: 35px
+}
+
+.gnb_popup .slick-arrow:before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    width: 35px;
+    height: 35px
+}
+
+.gnb_popup .slick-arrow.slick-prev {
+    left: 50px
+}
+
+.gnb_popup .slick-arrow.slick-prev:before {
+    content: '';
+    background-image: url(https://itour.incheon.go.kr/images/main.png);
+    background-position: -280px -96px;
+    width: 37px;
+    height: 37px
+}
+
+.gnb_popup .slick-arrow.slick-next {
+    right: 50px
+}
+
+.gnb_popup .slick-arrow.slick-next:before {
+    content: '';
+    background-image: url(https://itour.incheon.go.kr/images/main.png);
+    background-position: -280px -143px;
+    width: 36px;
+    height: 36px
+}
+
+.gnb_popup.slideUp {
+    height: 0px;
+    overflow: hidden;
+}
+
+@media all and (max-width: 1200px) {
+    .gnb_popup .slick-arrow.slick-prev {
+        left:10px
+    }
+}
+
+.gnb_popup .close {
+    position: absolute;
+    top: 30px;
+    right: 10px;
+    z-index: 1001;
+    background-image: url(https://itour.incheon.go.kr/images/main.png);
+    background-position: -208px -268px;
+    width: 20px;
+    height: 20px
+}
+
+.main .main-container {
+    position: relative;
+
+}
+
+.main .header {
+    position: relative
+}
+
+.main .search_form {
+    margin-top: -65px;
+    padding-bottom: 37px
+}
+
+.main .section_title {
+    line-height: 1.2;
+    font-size: 40px;
+    color: #333;
+    font-weight: 500;
+    text-align: center
+}
+
+.main .section_title span {
+    font-weight: 300;
+    vertical-align: middle
+}
+
+.main .wrap .section_title strong {
+    display: inline-block;
+    font-weight: 800;
+    vertical-align: middle
+}
+
+.main .main_visual {
+    position: relative
+}
+
+.main .main_visual .item {
+    position: relative
+}
+
+.main .main_visual .item .link {
+    display: block;
+    width: 100%;
+    height: 730px;
+    text-align: center;
+    background-repeat: no-repeat;
+    background-position: center top;
+    background-size: cover
+}
+
+.main .main_visual .item .link:after {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 50%;
+    width: 100%;
+    background-image: linear-gradient(to bottom,transparent,rgba(0,0,0,.6))
+}
+
+.main .main_visual .item .link:focus {
+    position: relative;
+    outline: none;
+}
+
+.main .main_visual .item .link:focus::before {
+    content: '';
+    position: absolute;
+    z-index: 10;
+    display: block;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    box-sizing: border-box;
+
+}
+
+.main .main_visual .item .text {
+    position: absolute;
+    z-index: 10;
+    bottom: 190px;
+    width: 1200px;
+    margin: 0 auto;
+    left: calc(50vw - 600px);
+    color: #fff;
+    font-size: 45px;
+    letter-spacing: -2px;
+    text-align: center
+}
+
+@media all and (max-width: 1200px) {
+    .main .main_visual .item .text {
+        left:0
+    }
+}
+
+.main .main_visual .slick-arrow {
+    position: absolute;
+    top: 354px;
+    z-index: 6;
+    width: 35px;
+    height: 35px
+}
+
+.main .main_visual .slick-arrow:before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    width: 35px;
+    height: 35px
+}
+
+.main .main_visual .slick-arrow.slick-prev {
+    left: 50px
+}
+
+.main .main_visual .slick-arrow.slick-prev:before {
+    content: '';
+    background-image: url(https://itour.incheon.go.kr/images/main.png);
+    background-position: -238px -68px;
+    width: 30px;
+    height: 57px
+}
+
+.main .main_visual .slick-arrow.slick-next {
+    right: 50px
+}
+
+.main .main_visual .slick-arrow.slick-next:before {
+    content: '';
+    background-image: url(https://itour.incheon.go.kr/images/main.png);
+    background-position: -238px 0;
+    width: 32px;
+    height: 58px
+}
+
+@media all and (max-width: 1200px) {
+    .main .main_visual .slick-arrow.slick-prev {
+        left:10px
+    }
+
+    .main .main_visual .slick-arrow.slick-next {
+        right: 10px
+    }
+}
+
+.main .main_visual .slick-dots {
+    position: absolute;
+    left: 50%;
+    bottom: 117px;
+    transform: translateX(-50%)
+}
+
+.main .main_visual .slick-dots li {
+    display: inline-block;
+    margin: 0 4px
+}
+
+.main .main_visual .slick-dots .slick-active button {
+    background-image: url(https://itour.incheon.go.kr/images/main.png);
+    background-position: -114px -268px;
+    width: 22px;
+    height: 22px
+}
+
+.main .main_visual .slick-dots button {
+    width: 22px;
+    height: 22px;
+    background-image: url(https://itour.incheon.go.kr/images/main.png);
+    background-position: -82px -268px;
+    width: 22px;
+    height: 22px;
+    text-indent: -9999px
+}
+
+.main .main_visual .play_buttons {
+    position: absolute;
+    right: calc(50vw - 600px);
+    bottom: 113px
+}
+
+.main .main_visual .play_buttons .btn {
+    position: relative;
+    /*display:none*/
+    width: 0px;
+    height: 0px;
+}
+
+.main .main_visual .play_buttons .btn.active {
+    /*display:block*/
+    width: 31px !important;
+    height: 31px !important;
+}
+
+.main .main_visual .play_buttons .btn.play {
+    background-image: url(https://itour.incheon.go.kr/images/main.png);
+    background-position: -238px -176px;
+}
+
+.main .main_visual .play_buttons .btn.pause {
+    background-image: url(https://itour.incheon.go.kr/images/main.png);
+    background-position: -238px -135px;
+    width: 0px;
+    height: 0px
+}
+
+@media all and (max-width: 1330px) {
+    .main .main_visual .play_buttons {
+        right:65px
+    }
+}
+
+
+/* popular */
+
+.main .popular_tour {
+    margin-top: 55px;
+    margin-bottom: 53px;
+}
+
+.main .popular_tour .list {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 36px
+}
+
+.main .popular_tour .list .item {
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+    flex: 1 0 277px;
+    max-width: 277px;
+    margin-left: 30px;
+    padding-bottom: 20px;
+    border-radius: 20px;
+    background-color: #fff;
+    box-shadow: 8.192px 5.736px 32px 0 rgba(202,205,221,.61)
+}
+
+.main .popular_tour .list .item:first-child {
+    margin-left: 0
+}
+
+.main .popular_tour .list .photo {
+    font-size: 0;
+    line-height: 0
+}
+
+.main .popular_tour .list .photo img {
+    width: 277px;
+    height: 200px
+}
+
+
+.main .popular_tour .list .content .subject {
+    margin: 14px 20px
+}
+
+.main .popular_tour .list .content .subject .button {
+    display: block;
+    font-size: 20px;
+    width: 100%;
+    font-weight: 800;
+}
+
+.main .popular_tour .list .content .subject .button:before {
+    content: '';
+    display: block;
+    position: absolute;
+    z-index: 95;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%
+}
+
+.main .popular_tour .list .tag {
+    margin: 24px 20px;
+    font-size: 15px;
+    color: #787878
+}
+
+
+/* 검색 */
+
+.search_form {
+    position: relative;
+    padding: 18px 100px 50px;
+    background-color: #fff;
+    box-shadow: 0 0 43px 0 rgba(0,0,0,.13)
+}
+
+.search_form .text {
+    width: calc(100% - 55px);
+    height: 60px;
+    border: none;
+    font-size: 22px;
+    font-weight: 300;
+    vertical-align: middle
+}
+
+.search_form .search_submit {
+    margin-left: 10px;
+    font-size: 0;
+    line-height: 0;
+    border: none;
+    background-image: url(https://itour.incheon.go.kr/images/program.png);
+    background-position: -186px -288px;
+    width: 33px;
+    height: 33px;
+    vertical-align: middle
+}
+
+.search_form .search_wrap {
+    border-bottom: 2px solid #666
+}
+

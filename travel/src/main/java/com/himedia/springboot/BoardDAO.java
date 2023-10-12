@@ -23,5 +23,6 @@ public interface BoardDAO {
 	ArrayList<BoardDTO> popular();
 	
 	void answerCount(int seqno,int s);
-	
+	ArrayList<BoardDTO> getprof();
+
 }

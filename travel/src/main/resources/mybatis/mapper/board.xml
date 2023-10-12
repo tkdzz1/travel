@@ -49,5 +49,10 @@
 	
 </update>
 
+<select id="getprof" resultType="com.himedia.springboot.BoardDTO">
+SELECT a.seqno, a.title, a.category, a.answer_count, a.created FROM board a
+LEFT OUTER JOIN MEMBER b ON a.writer=b.member_id
+where b.member_id=#{param1}
+</select>
 
 </mapper>

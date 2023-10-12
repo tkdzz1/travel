@@ -46,7 +46,7 @@
 											<div class="myBtm">
 												<ul>
 													<li><p>나의여행일정</p> <em>0</em></li>
-													<li><p>나의게시글</p> <em>0</em></li>
+													<li><p>나의질문</p> <em>0</em></li>
 													<li><p>나의리뷰</p> <em>0</em></li>
 													<li><p>찜한여행지</p> <em>0</em></li>
 													<li><p>제주방문지</p> <em>0</em></li>
@@ -59,7 +59,7 @@
 								<div class="tabmenu_wrap mt50">
 									<ul class="tabStyle wid5 innerwrap" id="tab">
 										<li><a href="/mypage">나의여행일정</a></li>
-										<li><a href="/mybbs">나의게시글</a></li>
+										<li><a href="/mybbs">나의질문</a></li>
 										<li class="on"><a href="/myreview">나의리뷰</a></li>
 										<li><a href="/mylike">찜한여행지</a></li>
 										<li><a href="#">제주방문지</a></li>

@@ -63,7 +63,7 @@
                 <li class="lnb_nav_item n4">
                     <a href="/mypage" class="lnb_nav_link"><span>나의여행</span></a>
                     <ul class="depth2">
-                        <li><a href="/mybbs"><span>나의 게시글</span></a></li>
+                        <li><a href="/mybbs"><span>나의 질문</span></a></li>
                         <li><a href="/myreview"><span>나의 리뷰</span></a></li>
                         <li><a href="/mylike"><span>찜한 여행지</span></a></li>
                         <li><a href="#"><span>제주 방문지</span></a></li>

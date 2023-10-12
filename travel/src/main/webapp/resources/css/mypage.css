@@ -197,6 +197,14 @@
 .spr_com.page-first {
 	background-position: 0 -100px
 }
+
 .my_tour .my_tour_wrap .wrap_tit_zone .wrap_sub_tit {
-    padding-left: 15px;
+	padding-left: 15px;
 }
+
+/*
+.mybut {
+	display: none;
+}*/
+
+/* table */

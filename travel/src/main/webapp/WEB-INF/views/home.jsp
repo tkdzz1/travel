@@ -5,6 +5,7 @@
 <html>
 <head>
 <link rel="stylesheet" href="/resources/css/home.css" />
+<link rel="stylesheet" href="/resources/css/main.css" />
 <meta charset="UTF-8">
 <link
 	href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css"
@@ -119,7 +120,7 @@
 							<div class="modal-background">
 								<div class="modal">
 									<h2>당장 올레로 안 올레?</h2>
-									<img class="img-modal" src="/resources/img/1694999996855.png">
+									<img class="img-modal" src="https://img.hankyung.com/photo/202307/AKR20230724060800056_04_i_P4.jpg">
 								</div>
 							</div>
 						</div>
