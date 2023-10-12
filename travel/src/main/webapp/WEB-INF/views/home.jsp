@@ -377,13 +377,13 @@
 					class=dtimg2>
 			</dd>
 
-<<<<<<< HEAD
+
 		</dl>
 	</div>
 
-=======
+
 <br><br><br><br><br><br><br><br>
->>>>>>> refs/remotes/origin/master
+
 
 	<div class="side_banner">
 		<div class="item qna">
