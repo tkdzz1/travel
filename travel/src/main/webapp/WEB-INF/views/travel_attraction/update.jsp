@@ -55,14 +55,14 @@
 		            </c:otherwise>
 		        </c:choose>
 		        <div>
-					<p><textarea name="content" class="content" style="height:auto; width:100%;">${status.index < fn:length(ta_contentParts) ? ta_contentParts[status.index] : ''}</textarea></p>
+					<p><textarea name="content" class="content" style="height:auto; width:90%;">${status.index < fn:length(ta_contentParts) ? ta_contentParts[status.index] : ''}</textarea></p>
 		            <input type="button" class="deleteContent" value="컨텐츠 삭제">
 		        </div>
 		    </div>
 		</c:forEach>
 
 		<label>새 컨텐츠 추가</label><br>
-		<input type="text" id="addcontent"><br>
+		<textarea id="addcontent" style="width:90%;"></textarea><br>
 		<input type="file" id="addimagefile"><br>
 		<input type="button" id="updatedetail" value="내용 추가"><br>
 		<table>

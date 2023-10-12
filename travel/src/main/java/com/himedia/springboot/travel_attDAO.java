@@ -25,4 +25,5 @@ public interface travel_attDAO {
 	void hitup(String ta_name);
 	void insertReview(String ta_name, String id, int rating, String reviewContents);
 	void delete(String ta_name);
+	Integer avgStar(String ta_name);
 }

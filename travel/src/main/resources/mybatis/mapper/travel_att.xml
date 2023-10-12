@@ -3,10 +3,13 @@
 				 "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.himedia.springboot.travel_attDAO">
 <select id="getList" resultType="com.himedia.springboot.travel_attDTO">
-	SELECT a.ta_num, a.ta_name, a.ta_local, a.ta_img, a.ta_address, a.ta_category, a.ta_latitude, a.ta_longitude, a.ta_hit, COUNT(b.like_num) as like_count
+	SELECT a.ta_num, a.ta_name, a.ta_local, a.ta_img, a.ta_address, a.ta_category, a.ta_latitude, a.ta_longitude, a.ta_hit, 
+	       COUNT(DISTINCT l.like_id) AS like_count, COUNT(DISTINCT r.review_num) AS review_count, ROUND(AVG(review_rating), 2) AS avgStar, count(DISTINCT c.cart_num) as cart_count
 	FROM travel_attraction a
-	LEFT JOIN likes b ON a.ta_num = b.like_num 
-	WHERE ta_category = #{param3}
+	LEFT JOIN likes l ON a.ta_name = l.like_local AND l.like_category = #{param3}
+	LEFT JOIN review r ON a.ta_name = r.review_location
+	left join cart c on a.ta_num = c.cart_num
+	WHERE a.ta_category = #{param3}
 	GROUP BY a.ta_num, a.ta_name, a.ta_local, a.ta_img, a.ta_address, a.ta_category, a.ta_latitude, a.ta_longitude, a.ta_hit
 	LIMIT #{param1}, #{param2}
  </select>
@@ -60,4 +63,7 @@
 <insert id="insertReview">
 	insert into review set review_location=#{param1}, review_id=#{param2}, review_rating=#{param3}, review_content=#{param4}, review_created=now()
 </insert>
+<select id="avgStar" resultType="Integer">
+	    SELECT ROUND(AVG(review_rating)) AS avgStar FROM review where review_location=#{param1}
+</select>
 </mapper>
