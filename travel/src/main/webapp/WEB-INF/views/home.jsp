@@ -452,8 +452,7 @@
 	<%@include file="footer.jsp"%>
 </body>
 <script src="https://code.jquery.com/jquery-latest.js"></script>
-<<<<<<< HEAD
-=======
+
 <script>
 
 $(document).ready(function() {
@@ -472,7 +471,7 @@ $(document).ready(function() {
 
 
 </script>
->>>>>>> refs/remotes/origin/master
+
 <script src="/resources/js/home.js"></script>
 
 <!-- 
