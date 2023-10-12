@@ -32,7 +32,8 @@
 		<input type=password name=loginPassword><button id=login class="w-btn w-btn-red">로그인</button>
 	</div>
 	<div class="social-login">
-		<hr><h1>SNS 로그인</h1>
+		<br><br><hr><br><br>
+		<h1>SNS 로그인</h1>
 		<img src="img/kakaologin.png" id="kakaoLogin">
 	</div>
 </div>

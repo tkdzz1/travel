@@ -4,6 +4,7 @@
   display: grid;
   place-items: center; /* 가로와 세로 중앙 정렬 */
   margin-top: 10%;
+  margin-bottom: 10%;
 }
 
 .social-login {
