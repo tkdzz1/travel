@@ -10,6 +10,13 @@ WHERE b.cart_id = #{param3}
 limit #{param1}, #{param2};
 </select>
 
+<select id="getCartFilterList" resultType="com.himedia.springboot.travel_attDTO">
+SELECT a.ta_num, a.ta_name, a.ta_local, a.ta_img, a.ta_address, a.ta_category, a.ta_latitude, a.ta_longitude
+FROM travel_attraction a JOIN cart b ON a.ta_num = b.cart_num
+WHERE b.cart_id = #{param3} and b.cart_category = #{param4}
+limit #{param1}, #{param2};
+</select>
+
 <select id="cntCartList" resultType="int">
 SELECT COUNT(*)
 FROM cart

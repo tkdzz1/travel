@@ -1,6 +1,7 @@
 let choicePlan;
 let ta_num;
 let beforeValue;
+let filter;
 let markers = [];
 let infoWindow = new naver.maps.InfoWindow();
 let isInfoWindowOpen = false;
@@ -93,7 +94,8 @@ $(document)
 	if ( $(this).hasClass('select') ) {
 		return false;
 	} else {
-		let filter = $(this).text();
+		filter = $(this).text();
+		console.log(filter);
 		likeFilter(filter);
 		
 		$('#list ul:eq(1) li').removeClass('select');
@@ -106,11 +108,15 @@ $(document)
 .on('click','#page a',function(){
 	page = $(this).attr("id");
 	
+	if ( filter == undefined ) {
+		filter = "전체";
+	}
+	
 	if ( $(this).hasClass('strong') ){
 		return false;
 	}
 	
-	$.ajax({ url:'/pageMove', type:'post', data: {page : page}, dataType: 'json',
+	$.ajax({ url:'/pageMove', type:'post', data: {page : page, filter : filter}, dataType: 'json',
 		success: function(data) {
 			if (data.length == 5) {
 				for( let i=0; i<data.length; i++ ) {
@@ -127,7 +133,7 @@ $(document)
 				}
 			}
 		}, error: function() {
-			
+			alert("ERROR !");
 		}
 	})
 	
@@ -170,7 +176,7 @@ $(document)
 			success:function(data) {
 				let obj = data[0];
 				ta_num = obj['ta_num'];
-				addPlan.html('<h1 name='+ta_num+'><span name=num></span>' + obj['ta_name'] + '<span name=empty> ❌ </span></h1>');	
+				addPlan.html('<h1 name='+ta_num+'><span name=num></span>' + '<span name='+ta_num+'>' + obj['ta_name'] + '</span>' + '<span name=empty> ❌ </span></h1>');	
 				changePlan();
 				loadTravelData(ta_num);
 			}, error:function(){
@@ -241,6 +247,7 @@ $(document)
 	if( !confirm("일정에서 삭제 할까요?") ){
 		return false;
 	} else {
+		
 		for (let i = 0; i<markers.length; i++) {
 			if ( markers[i]['title'] == ta_num ) {
 				markers.splice(i, 1);
@@ -248,7 +255,7 @@ $(document)
 				break;
 			}
 		}
-		console.log(markers.length);
+		
 		$(this).closest('td').html('');
 		changePlan();
 		return false;
@@ -264,7 +271,6 @@ $(document)
     var numberZone = thead.match(/\d+/);
     tbodyIndex = parseInt(numberZone[0], 10) - 1;
     e.originalEvent.dataTransfer.setData('data', $(this).html());
-    console.log($(this).html());
     dragIndex = $(this).closest('tr').index();
     $(this).css('background-color', 'gray');
 })
@@ -302,6 +308,45 @@ $(document)
     
 })
 
+.on('click','#cancel',function(){
+	Swal.fire({
+	   title: '변경 사항은 저장되지 않습니다.',
+	   text: '플래너 생성을 중단하고 홈으로 돌아갈까요?',
+	   icon: 'warning',
+	   
+	   showCancelButton: true, // cancel버튼 보이기. 기본은 원래 없음
+	   confirmButtonColor: '#3085d6', // confrim 버튼 색깔 지정
+	   cancelButtonColor: '#d33', // cancel 버튼 색깔 지정
+	   confirmButtonText: '예', // confirm 버튼 텍스트 지정
+	   cancelButtonText: '아니오', // cancel 버튼 텍스트 지정
+	   
+	   reverseButtons: false, // 버튼 순서 거꾸로
+   
+	}).then(result => {
+	   // 만약 Promise리턴을 받으면,
+	   if (result.isConfirmed) { // 만약 모달창에서 confirm 버튼을 눌렀다면
+	   
+	      document.location ="/";
+	      
+	   }
+	});
+})
+
+.on('click','#save',function(){
+	console.log("작성자 : " + $('#writer').text());
+	console.log("제목 : " + $("#title").val());
+	console.log("기간 : " + $('#days').text())
+	console.log("시작 날짜 : " + $('#start').val());
+	console.log("종료 날짜 : " + $('#end').val());
+	console.log("인원 : " + $('#people').val());
+	console.log("일행 : " + $('#party').val());
+	
+	var plan = [];
+	
+	$('#planTable thead').each(function(){
+
+	})
+})
 ;
 
 function getFormattedDate() {
@@ -323,6 +368,7 @@ function ListShow(data, i){
 	set.find('img').attr("src", "/img/t_img/" + obj['ta_img']);
 	set.find('h5').text(obj['ta_name']);
 	set.find('p').text(obj['ta_local']);
+	console.log(set.parent().find('#page').html());
 }
 
 function createTable(day) {
@@ -331,24 +377,24 @@ function createTable(day) {
   		+ '<td style="width:800px;"><span name=before>◀ </span> DAY ' + day + ' <span name=after> ▶</span></td></tr>'
   		+ '</thead>'
   		+ '<tbody name=day' + day + '>' 
-  		+	'<tr><td>06:00</td><td draggable="true"></td></tr>'
-  		+	'<tr><td>07:00</td><td draggable="true"></td></tr>'
-  		+	'<tr><td>08:00</td><td draggable="true"></td></tr>'
-  		+	'<tr><td>09:00</td><td draggable="true"></td></tr>'
-  		+	'<tr><td>10:00</td><td draggable="true"></td></tr>'
-  		+	'<tr><td>11:00</td><td draggable="true"></td></tr>'
-  		+	'<tr><td>12:00</td><td draggable="true"></td></tr>'
-  		+	'<tr><td>13:00</td><td draggable="true"></td></tr>'
-  		+	'<tr><td>14:00</td><td draggable="true"></td></tr>'
-  		+	'<tr><td>15:00</td><td draggable="true"></td></tr>'
-  		+	'<tr><td>16:00</td><td draggable="true"></td></tr>'
-  		+	'<tr><td>17:00</td><td draggable="true"></td></tr>'
-  		+	'<tr><td>18:00</td><td draggable="true"></td></tr>'
-  		+	'<tr><td>19:00</td><td draggable="true"></td></tr>'
-  		+	'<tr><td>20:00</td><td draggable="true"></td></tr>'
-  		+	'<tr><td>21:00</td><td draggable="true"></td></tr>'
-  		+	'<tr><td>22:00</td><td draggable="true"></td></tr>'
-  		+	'<tr><td>23:00</td><td draggable="true"></td></tr>'
+  		+	'<tr><td name=6>06:00</td><td draggable="true"></td></tr>'
+  		+	'<tr><td name=7>07:00</td><td draggable="true"></td></tr>'
+  		+	'<tr><td name=8>08:00</td><td draggable="true"></td></tr>'
+  		+	'<tr><td name=9>09:00</td><td draggable="true"></td></tr>'
+  		+	'<tr><td name=10>10:00</td><td draggable="true"></td></tr>'
+  		+	'<tr><td name=11>11:00</td><td draggable="true"></td></tr>'
+  		+	'<tr><td name=12>12:00</td><td draggable="true"></td></tr>'
+  		+	'<tr><td name=13>13:00</td><td draggable="true"></td></tr>'
+  		+	'<tr><td name=14>14:00</td><td draggable="true"></td></tr>'
+  		+	'<tr><td name=15>15:00</td><td draggable="true"></td></tr>'
+  		+	'<tr><td name=16>16:00</td><td draggable="true"></td></tr>'
+  		+	'<tr><td name=17>17:00</td><td draggable="true"></td></tr>'
+  		+	'<tr><td name=18>18:00</td><td draggable="true"></td></tr>'
+  		+	'<tr><td name=19>19:00</td><td draggable="true"></td></tr>'
+  		+	'<tr><td name=20>20:00</td><td draggable="true"></td></tr>'
+  		+	'<tr><td name=21>21:00</td><td draggable="true"></td></tr>'
+  		+	'<tr><td name=22>22:00</td><td draggable="true"></td></tr>'
+  		+	'<tr><td name=23>23:00</td><td draggable="true"></td></tr>'
   		+  '</tbody>'
   		return html;
 }
@@ -430,24 +476,26 @@ function markerReload(){
 }
 
 function likeFilter(filter) {
-	$.ajax({ url:'/likeFilter', data: { filter : filter }, type: 'post', dataType: 'json',
+	page = "";
+	
+	$.ajax({ url:'/likeFilter', data: {page : page, filter : filter }, type: 'post', dataType: 'json',
 			success: function(data) {
-				for (let i = 0 ; i<data.length ; i++){
-					console.log("들어옴")
-					ListShow(data, i);
+				if (data.length == 5) {
+					for( let i=0; i<data.length; i++ ) {
+						ListShow(data, i);
+					}
+				} else {
+					for( let i=0; i<data.length; i++ ) {
+						ListShow(data, i);
+					}
+					for ( let i=data.length; i<=$('div[name=contentList]').length; i++){
+						let set = $('div[name=contentList]').eq(i);
+						set.prev('hr').hide();
+						set.hide();
+					}
 				}
 			}, error: function(){
-				
+				alert("error!!!");
 			}
 	})
 }
-
-//CREATE TABLE travel_planner (
-//planner_num int auto_increment primary key,
-//writer varchar(32) not null,
-//title varchar(32) not null,
-//days varchar(32) not null,
-//people int,
-//party varchar(16) not null,
-//plan text
-//);

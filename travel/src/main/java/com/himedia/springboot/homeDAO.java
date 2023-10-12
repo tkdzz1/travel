@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Mapper;
 public interface homeDAO {
 	
 	ArrayList<travel_attDTO> getCartList(int st, int ps, String id);
+	ArrayList<travel_attDTO> getCartFilterList(int st, int ps, String id, String filter);
 	int cntCartList(String id);
 	travel_attDTO getChoice(int ta_num);
 	travel_attDTO getMarker(int num);
