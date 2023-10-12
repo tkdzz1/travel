@@ -46,10 +46,10 @@ public class tController {
 			page="1";	
 		} 
 		int pno = Integer.parseInt(page);
-		start = (pno-1)*5;
-		psize=5;		
+		start = (pno-1)*10;
+		psize=10;		
 		int cnt=tdao.cntTravelList("관광지");
-		int pagecount = (int)Math.ceil(cnt/5.0);
+		int pagecount = (int)Math.ceil(cnt/10.0);
 		String pagestr="";
 		for(int i=1; i<=pagecount; i++) {
 			if(pno==i) {
@@ -168,10 +168,10 @@ public class tController {
 			page="1";	
 		} 
 		int pno = Integer.parseInt(page);
-		start = (pno-1)*5;
-		psize=5;		
+		start = (pno-1)*10;
+		psize=10;		
 		int cnt=tdao.cntTravelList(category);
-		int pagecount = (int)Math.ceil(cnt/5.0);
+		int pagecount = (int)Math.ceil(cnt/10.0);
 		String pagestr="";
 		for(int i=1; i<=pagecount; i++) {
 			if(pno==i) {
@@ -191,6 +191,7 @@ public class tController {
             jo.put("ta_img", getlist.get(i).getTa_img());
             jo.put("ta_local", getlist.get(i).getTa_local());
             jo.put("ta_address", getlist.get(i).getTa_address());
+            jo.put("ta_category", getlist.get(i).getTa_category());
             jo.put("ta_latitude", getlist.get(i).getTa_latitude());
             jo.put("ta_longitude", getlist.get(i).getTa_longitude());
             ja.add(jo);
@@ -206,12 +207,13 @@ public class tController {
     	String ta_content = detail.getTa_content();
     	String[] ta_contentParts = ta_content.split("/");
     	String[] ta_imginfoParts = ta_imginfo.split("/");
-    	
+    	Integer avgStar = tdao.avgStar(ta_name);
+    	System.out.println(avgStar);
     	tdao.hitup(ta_name);
     	model.addAttribute("detail", detail);
         model.addAttribute("ta_imginfoParts", ta_imginfoParts);
         model.addAttribute("ta_contentParts", ta_contentParts);
-        
+        model.addAttribute("avgStar", avgStar);
     	return "/travel_attraction/travel_detail";
     }
     @PostMapping("/delete_list")

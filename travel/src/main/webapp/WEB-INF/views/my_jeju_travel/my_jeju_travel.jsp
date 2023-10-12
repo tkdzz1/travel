@@ -10,15 +10,18 @@
 <link rel="stylesheet" href="css/login.css" />
     <link rel="stylesheet" type="text/css" href="css/map.css">
     <script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=81hlrkxaq1"></script>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
 </head>
 <body>
 <%-- <%@ include file = "../header.jsp" %> --%>
 <div id=wrapper>
-	<div style="float:left;">
+
+	<div style="float:left; margin-left:10%;">
 	    <h1>여행 준비</h1>
 	    <hr>
-	    <h5>작성자 : ${id}</h5>
-	    <table>
+	    <h5>작성자 : <span id=writer>${id}</span></h5>
+	    <table style="width:400px;">
 	      <tr>
 	        <td>제목</td>
 	        <td><input type="text" id=title placeholder="예시) 나의 3박4일 제주여행"></td>
@@ -32,10 +35,10 @@
 	        <td><input type="date" id=end data-placeholder="종료 날짜" required aria-required="true"></td>
 	      </tr>
 	      <tr>
-	      	<td>인원</td><td><input type=number value=1 style="width:30px;"></td>
+	      	<td>인원</td><td><input type=number id=people value=1 style="width:30px;"></td>
 	      </tr>
 	      <tr>
-	      	<td>일행</td><td><select>
+	      	<td>일행</td><td><select id=party>
 	      									<option selected>선택</option>
 	      									<option>혼자</option>
 	      									<option>부모</option>
@@ -51,11 +54,11 @@
 
 	  <div class="right-panel">
 	    <div id="map-container"> 
-	      <div id="map" style="width: 860px; height: 400px;"></div> 
+	      <div id="map" style="width: 850px; height: 400px;"></div> 
 	    </div>
 	  </div>
 	  
-	  <div style="float:left;" class=travel_list id=list>
+	  <div style="float:left; margin-left:10%;" class=travel_list id=list>
 			<ul>
 				<li class=select>찜한 여행지<hr></li>
 				<li>검색<hr></li>
@@ -124,11 +127,11 @@
   </div>
 
   <div style="text-align:center;">
-  		<button class="w-btn w-btn-red">저장</button> <button class="w-btn w-btn-black">취소</button>
+  		<button class="w-btn w-btn-red" id=save>저장</button> <button class="w-btn w-btn-black" id=cancel>취소</button>
   </div>
   
 </div>
-<%-- <%@ include file = "../footer.jsp" %> --%>
+<%@ include file = "../footer.jsp" %>
 </body>
 <script src="https://code.jquery.com/jquery-latest.js"></script>
 <script src="js/my_jeju_travel.js"></script>

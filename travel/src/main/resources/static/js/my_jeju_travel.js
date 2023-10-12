@@ -1,15 +1,19 @@
 let choicePlan;
 let ta_num;
 let beforeValue;
+let filter;
+let markers = [];
 let infoWindow = new naver.maps.InfoWindow();
 let isInfoWindowOpen = false;
+let dragIndex;
+let tbodyIndex;
 let mapOptions = { 
     center: new naver.maps.LatLng(33.3595704, 126.600000),
     zoom: 10
 };	
 
 let map = new naver.maps.Map('map', mapOptions);
-    
+
 $(document)
 .ready(function(){
 	let today = getFormattedDate();
@@ -90,8 +94,13 @@ $(document)
 	if ( $(this).hasClass('select') ) {
 		return false;
 	} else {
+		filter = $(this).text();
+		console.log(filter);
+		likeFilter(filter);
+		
 		$('#list ul:eq(1) li').removeClass('select');
 		$(this).addClass('select');
+
 		return false;
 	}
 })
@@ -99,11 +108,15 @@ $(document)
 .on('click','#page a',function(){
 	page = $(this).attr("id");
 	
+	if ( filter == undefined ) {
+		filter = "전체";
+	}
+	
 	if ( $(this).hasClass('strong') ){
 		return false;
 	}
 	
-	$.ajax({ url:'/pageMove', type:'post', data: {page : page}, dataType: 'json',
+	$.ajax({ url:'/pageMove', type:'post', data: {page : page, filter : filter}, dataType: 'json',
 		success: function(data) {
 			if (data.length == 5) {
 				for( let i=0; i<data.length; i++ ) {
@@ -120,7 +133,7 @@ $(document)
 				}
 			}
 		}, error: function() {
-			
+			alert("ERROR !");
 		}
 	})
 	
@@ -156,14 +169,16 @@ $(document)
 
 .on('click','button[name=selectTime]',function(){
 	let addPlan = $(this).closest('tr').find('td:eq(1)');
-
+	var thead = $(this).closest('tbody').prev().attr('name');
+    var numberZone = thead.match(/\d+/);
+    tbodyIndex = parseInt(numberZone[0], 10) - 1;
 	$.ajax({ url:'/getChoice', data: {choice : choicePlan}, type:'post', dataType:'json',
 			success:function(data) {
 				let obj = data[0];
 				ta_num = obj['ta_num'];
-				addPlan.html('<h1><span name=num></span>' + obj['ta_name'] + '<span name=change> ➰ </span><span name=empty> ❌ </span></h1>');
+				addPlan.html('<h1 name='+ta_num+'><span name=num></span>' + '<span name='+ta_num+'>' + obj['ta_name'] + '</span>' + '<span name=empty> ❌ </span></h1>');	
 				changePlan();
-				loadTravelData();
+				loadTravelData(ta_num);
 			}, error:function(){
 				console.log('error!');
 			}
@@ -182,7 +197,7 @@ $(document)
 	var thead = $(this).closest('thead').attr("name");
 	var tbody = $(this).closest('thead').next().attr("name");
 	var dayCheck =  $(this).parent().text().split(" ")[2] + $(this).parent().text().split(" ")[3];
-	
+
 	if ( $(this).attr("name") == "before" ) {
 		if ( dayCheck == "DAY1" ) {
 			return false;
@@ -190,15 +205,19 @@ $(document)
 		
 		$('thead[name=' + thead + ']').hide();
 		$('tbody[name=' + tbody + ']').hide();
+		
 		var numberZone = thead.match(/\d+/);
 		
 		if ( numberZone ) {
+			tbodyIndex = parseInt(numberZone[0], 10) - 2;
 			var decrement = ( parseInt(numberZone[0], 10) - 1 ).toString();
 			var updateDay = thead.replace(/\d+/, decrement);
 		}
 		
 		$('thead[name=' + updateDay + ']').show();
 		$('tbody[name=' + updateDay + ']').show();
+		
+		markerReload();
 	} else {
 		if ( dayCheck == "DAY" + $('#planTable tbody').length ) {
 			return false;
@@ -210,55 +229,123 @@ $(document)
 		var numberZone = thead.match(/\d+/);
 		
 		if ( numberZone ) {
+			tbodyIndex = parseInt(numberZone[0], 10);
 			var increment = ( parseInt(numberZone[0], 10) + 1 ).toString();
 			var updateDay = thead.replace(/\d+/, increment);
 		}
 		
 		$('thead[name=' + updateDay + ']').show();
 		$('tbody[name=' + updateDay + ']').show();
+		
+		markerReload();
 	}
 })
 
 .on('click','span[name=empty]',function(){
+	ta_num = parseInt( $(this).parent().attr("name") );
+	console.log('선택한 일정' + ta_num);
 	if( !confirm("일정에서 삭제 할까요?") ){
 		return false;
 	} else {
+		
+		for (let i = 0; i<markers.length; i++) {
+			if ( markers[i]['title'] == ta_num ) {
+				markers.splice(i, 1);
+				markers[i].setMap(null);
+				break;
+			}
+		}
+		
 		$(this).closest('td').html('');
 		changePlan();
 		return false;
 	}
 })
 
-.on('click','span[name=change]',function(){
-    alert("변경할 일정을 선택해주세요.");
-    var valueCheck = $(this).closest('tbody').find('tr');
-    beforeValue = valueCheck.find('td:eq(1)');
-    valueCheck.each(function() {
-        var td = $(this).find('td:eq(1)');
-        if (td.text().trim() !== '') {
-            var button = $('<button>', {
-                class: 'w-btn w-btn-red',
-                name: 'changePlan',
-                text: td.text().trim()
-            });
-            td.html(button);
-        }
-    });
-    return false;
+// drag & drop (일정 수정)
+.on('dragstart', "#planTable tbody tr td:odd", function(e) {
+    if ($(this).html() == '') {
+        return false;
+    }
+    var thead = $(this).closest('tbody').prev().attr('name');
+    var numberZone = thead.match(/\d+/);
+    tbodyIndex = parseInt(numberZone[0], 10) - 1;
+    e.originalEvent.dataTransfer.setData('data', $(this).html());
+    dragIndex = $(this).closest('tr').index();
+    $(this).css('background-color', 'gray');
 })
 
-.on('click','button[name=changePlan]',function(){
-	var nowValue = $(this).html();
-	$(this).closest('td').html(beforeValue);
-	beforeValue.html(nowValue);
+.on('dragover', "#planTable tbody tr td:odd", function(e) {
+    e.preventDefault();
+    $(this).css('background-color', 'gray');
+})
+
+.on('dragleave', "#planTable tbody tr td:odd", function(e) {
+    e.preventDefault();
+    $(this).css('background-color', 'white');
+})
+
+.on('dragend', "#planTable tbody tr td:odd", function(e) {
+    $('#planTable tbody tr td:odd').each(function() {
+        $(this).css('background-color', 'white');
+    })
+})
+
+.on('drop', "#planTable tbody tr td:odd", function(e) {
+    e.preventDefault();
+
+    var data = e.originalEvent.dataTransfer.getData('data');
+    var dropIndex = $(this).closest('tr').index();
+
+    if (dropIndex === dragIndex) {
+        return false;
+    } else {
+        var dragData = $(this).html();
+        $(this).html(data);
+        $('#planTable tbody:eq('+tbodyIndex+') tr:eq(' + dragIndex + ') td:odd').html(dragData);
+        changePlan();
+    }
+    
+})
+
+.on('click','#cancel',function(){
+	Swal.fire({
+	   title: '변경 사항은 저장되지 않습니다.',
+	   text: '플래너 생성을 중단하고 홈으로 돌아갈까요?',
+	   icon: 'warning',
+	   
+	   showCancelButton: true, // cancel버튼 보이기. 기본은 원래 없음
+	   confirmButtonColor: '#3085d6', // confrim 버튼 색깔 지정
+	   cancelButtonColor: '#d33', // cancel 버튼 색깔 지정
+	   confirmButtonText: '예', // confirm 버튼 텍스트 지정
+	   cancelButtonText: '아니오', // cancel 버튼 텍스트 지정
+	   
+	   reverseButtons: false, // 버튼 순서 거꾸로
+   
+	}).then(result => {
+	   // 만약 Promise리턴을 받으면,
+	   if (result.isConfirmed) { // 만약 모달창에서 confirm 버튼을 눌렀다면
+	   
+	      document.location ="/";
+	      
+	   }
+	});
+})
+
+.on('click','#save',function(){
+	console.log("작성자 : " + $('#writer').text());
+	console.log("제목 : " + $("#title").val());
+	console.log("기간 : " + $('#days').text())
+	console.log("시작 날짜 : " + $('#start').val());
+	console.log("종료 날짜 : " + $('#end').val());
+	console.log("인원 : " + $('#people').val());
+	console.log("일행 : " + $('#party').val());
 	
-	var valueCheck = $(this).closest('tbody').find('tr');
-	valueCheck.each(function() {
-        var td = $(this).find('td:eq(1)');
-        if (td.text().trim() !== '') {
-            td.unwrap();
-        }
-    });
+	var plan = [];
+	
+	$('#planTable thead').each(function(){
+
+	})
 })
 ;
 
@@ -277,9 +364,11 @@ function ListShow(data, i){
 	set.show();
 	set.prev('hr').show();
 	let obj = data[i];
+	set.find('input[type=hidden]').attr("value",obj['ta_num']);
 	set.find('img').attr("src", "/img/t_img/" + obj['ta_img']);
 	set.find('h5').text(obj['ta_name']);
 	set.find('p').text(obj['ta_local']);
+	console.log(set.parent().find('#page').html());
 }
 
 function createTable(day) {
@@ -288,24 +377,24 @@ function createTable(day) {
   		+ '<td style="width:800px;"><span name=before>◀ </span> DAY ' + day + ' <span name=after> ▶</span></td></tr>'
   		+ '</thead>'
   		+ '<tbody name=day' + day + '>' 
-  		+	'<tr><td>06:00</td><td></td></tr>'
-  		+	'<tr><td>07:00</td><td></td></tr>'
-  		+	'<tr><td>08:00</td><td></td></tr>'
-  		+	'<tr><td>09:00</td><td></td></tr>'
-  		+	'<tr><td>10:00</td><td></td></tr>'
-  		+	'<tr><td>11:00</td><td></td></tr>'
-  		+	'<tr><td>12:00</td><td></td></tr>'
-  		+	'<tr><td>13:00</td><td></td></tr>'
-  		+	'<tr><td>14:00</td><td></td></tr>'
-  		+	'<tr><td>15:00</td><td></td></tr>'
-  		+	'<tr><td>16:00</td><td></td></tr>'
-  		+	'<tr><td>17:00</td><td></td></tr>'
-  		+	'<tr><td>18:00</td><td></td></tr>'
-  		+	'<tr><td>19:00</td><td></td></tr>'
-  		+	'<tr><td>20:00</td><td></td></tr>'
-  		+	'<tr><td>21:00</td><td></td></tr>'
-  		+	'<tr><td>22:00</td><td></td></tr>'
-  		+	'<tr><td>23:00</td><td></td></tr>'
+  		+	'<tr><td name=6>06:00</td><td draggable="true"></td></tr>'
+  		+	'<tr><td name=7>07:00</td><td draggable="true"></td></tr>'
+  		+	'<tr><td name=8>08:00</td><td draggable="true"></td></tr>'
+  		+	'<tr><td name=9>09:00</td><td draggable="true"></td></tr>'
+  		+	'<tr><td name=10>10:00</td><td draggable="true"></td></tr>'
+  		+	'<tr><td name=11>11:00</td><td draggable="true"></td></tr>'
+  		+	'<tr><td name=12>12:00</td><td draggable="true"></td></tr>'
+  		+	'<tr><td name=13>13:00</td><td draggable="true"></td></tr>'
+  		+	'<tr><td name=14>14:00</td><td draggable="true"></td></tr>'
+  		+	'<tr><td name=15>15:00</td><td draggable="true"></td></tr>'
+  		+	'<tr><td name=16>16:00</td><td draggable="true"></td></tr>'
+  		+	'<tr><td name=17>17:00</td><td draggable="true"></td></tr>'
+  		+	'<tr><td name=18>18:00</td><td draggable="true"></td></tr>'
+  		+	'<tr><td name=19>19:00</td><td draggable="true"></td></tr>'
+  		+	'<tr><td name=20>20:00</td><td draggable="true"></td></tr>'
+  		+	'<tr><td name=21>21:00</td><td draggable="true"></td></tr>'
+  		+	'<tr><td name=22>22:00</td><td draggable="true"></td></tr>'
+  		+	'<tr><td name=23>23:00</td><td draggable="true"></td></tr>'
   		+  '</tbody>'
   		return html;
 }
@@ -313,7 +402,7 @@ function createTable(day) {
 function changePlan() {
   var numList = ['1️⃣', '2️⃣', '3️⃣', '4️⃣', '5️⃣', '6️⃣', '7️⃣', '8️⃣', '9️⃣', '🔟'];
   let ndx = 0;
-  $('#planTable tbody tr').each(function() {
+  $('#planTable tbody:eq('+tbodyIndex+') tr').each(function() {
     var $this = $(this).find('td:eq(1)');
     var text = $this.text().trim(); // 공백 제거
     if (text !== '') {
@@ -323,7 +412,7 @@ function changePlan() {
   });
 }
 
-function loadTravelData() {
+function loadTravelData(ta_num) {
     $.ajax({
         url: "/getPlanData",
         method: "post",
@@ -333,12 +422,13 @@ function loadTravelData() {
             // 여행지 정보를 순회하면서 마커를 생성하고 이름 설정
             data.forEach(function(travelInfo) {
                 let allPosition = new naver.maps.LatLng(travelInfo.ta_latitude, travelInfo.ta_longitude);
-                console.log(allPosition);
+                console.log(data.length);
                 let marker = new naver.maps.Marker({
                     position: allPosition,
                     map: map,
-                    title: travelInfo.ta_name
+                    title: ta_num
                 });
+                markers.push(marker);
                 
                 let infoWindow = new naver.maps.InfoWindow({
                     content: travelInfo.ta_name
@@ -359,4 +449,53 @@ function loadTravelData() {
             console.error("여행지 정보를 불러오는데 실패했습니다.");
         }
     });
+}
+
+function markerReload(){
+		var planList = [];
+		
+		for (let i = 0; i<markers.length; i++) {
+			markers[i].setMap(null);
+		}
+		
+		markers = [];
+		
+		$('#planTable tbody:eq(' +tbodyIndex+ ') tr').each(function(){
+			 let $this = $(this).find('h1').attr('name');
+			 if ( $this == undefined ) {
+				 return;
+			 }
+			 planList.push($this);
+		})
+		
+		for (let i = 0; i<planList.length; i++) {
+			loadTravelData(planList[i]);
+		}
+		
+		changePlan();
+}
+
+function likeFilter(filter) {
+	page = "";
+	
+	$.ajax({ url:'/likeFilter', data: {page : page, filter : filter }, type: 'post', dataType: 'json',
+			success: function(data) {
+				if (data.length == 5) {
+					for( let i=0; i<data.length; i++ ) {
+						ListShow(data, i);
+					}
+				} else {
+					for( let i=0; i<data.length; i++ ) {
+						ListShow(data, i);
+					}
+					for ( let i=data.length; i<=$('div[name=contentList]').length; i++){
+						let set = $('div[name=contentList]').eq(i);
+						set.prev('hr').hide();
+						set.hide();
+					}
+				}
+			}, error: function(){
+				alert("error!!!");
+			}
+	})
 }

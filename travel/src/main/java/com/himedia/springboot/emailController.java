@@ -134,26 +134,50 @@ public class emailController {
 		String id = (String) s.getAttribute("id");
 		
 		int pageNo = Integer.parseInt(req.getParameter("page"));
+		String filter = req.getParameter("filter");
 		
 		st = ( pageNo - 1 ) * ps;
 		
-		ArrayList<travel_attDTO> tList = hDao.getCartList(st, ps, id);
+		if (filter.equals("전체")) {
 		
-		JSONArray ja = new JSONArray();
-		
-		for (int i = 0; i < tList.size(); i++) {
-			JSONObject jo = new JSONObject();
-			jo.put("ta_num", tList.get(i).getTa_num());
-			jo.put("ta_name", tList.get(i).getTa_name());
-			jo.put("ta_local", tList.get(i).getTa_local());
-			jo.put("ta_img", tList.get(i).getTa_img());
-			jo.put("ta_address", tList.get(i).getTa_address());
-			jo.put("ta_category", tList.get(i).getTa_category());
-			jo.put("ta_latitude", tList.get(i).getTa_latitude());
-			jo.put("ta_longitude", tList.get(i).getTa_longitude());
-			ja.add(jo);
+			ArrayList<travel_attDTO> tList = hDao.getCartList(st, ps, id);
+			JSONArray ja = new JSONArray();
+			
+			for (int i = 0; i < tList.size(); i++) {
+				JSONObject jo = new JSONObject();
+				jo.put("ta_num", tList.get(i).getTa_num());
+				jo.put("ta_name", tList.get(i).getTa_name());
+				jo.put("ta_local", tList.get(i).getTa_local());
+				jo.put("ta_img", tList.get(i).getTa_img());
+				jo.put("ta_address", tList.get(i).getTa_address());
+				jo.put("ta_category", tList.get(i).getTa_category());
+				jo.put("ta_latitude", tList.get(i).getTa_latitude());
+				jo.put("ta_longitude", tList.get(i).getTa_longitude());
+				ja.add(jo);
+			}
+			
+			return ja.toJSONString();
+		} else {
+			
+			ArrayList<travel_attDTO> tList = hDao.getCartFilterList(st, ps, id, filter);
+			JSONArray ja = new JSONArray();
+			
+			for (int i = 0; i < tList.size(); i++) {
+				JSONObject jo = new JSONObject();
+				jo.put("ta_num", tList.get(i).getTa_num());
+				jo.put("ta_name", tList.get(i).getTa_name());
+				jo.put("ta_local", tList.get(i).getTa_local());
+				jo.put("ta_img", tList.get(i).getTa_img());
+				jo.put("ta_address", tList.get(i).getTa_address());
+				jo.put("ta_category", tList.get(i).getTa_category());
+				jo.put("ta_latitude", tList.get(i).getTa_latitude());
+				jo.put("ta_longitude", tList.get(i).getTa_longitude());
+				ja.add(jo);
+			}
+			
+			return ja.toJSONString();
 		}
-		return ja.toJSONString();
+		
 	}
 	
 	@GetMapping("/food_store")
@@ -164,10 +188,10 @@ public class emailController {
 			page="1";	
 		} 
 		int pno = Integer.parseInt(page);
-		start = (pno-1)*5;
-		psize=5;		
+		start = (pno-1)*10;
+		psize=10;		
 		int cnt=tDao.cntTravelList("음식");
-		int pagecount = (int)Math.ceil(cnt/5.0);
+		int pagecount = (int)Math.ceil(cnt/10.0);
 		String pagestr="";
 		for(int i=1; i<=pagecount; i++) {
 			if(pno==i) {
@@ -190,10 +214,10 @@ public class emailController {
 			page="1";	
 		} 
 		int pno = Integer.parseInt(page);
-		start = (pno-1)*5;
-		psize=5;		
+		start = (pno-1)*10;
+		psize=10;		
 		int cnt=tDao.cntTravelList("숙박");
-		int pagecount = (int)Math.ceil(cnt/5.0);
+		int pagecount = (int)Math.ceil(cnt/10.0);
 		String pagestr="";
 		for(int i=1; i<=pagecount; i++) {
 			if(pno==i) {
@@ -216,10 +240,10 @@ public class emailController {
 			page="1";	
 		} 
 		int pno = Integer.parseInt(page);
-		start = (pno-1)*5;
-		psize=5;		
+		start = (pno-1)*10;
+		psize=10;		
 		int cnt=tDao.cntTravelList("쇼핑");
-		int pagecount = (int)Math.ceil(cnt/5.0);
+		int pagecount = (int)Math.ceil(cnt/10.0);
 		String pagestr="";
 		for(int i=1; i<=pagecount; i++) {
 			if(pno==i) {
@@ -262,17 +286,62 @@ public class emailController {
 	public String getPlanData(HttpServletRequest req) {
 		int num = Integer.parseInt(req.getParameter("ta_num"));
 		
-		ArrayList<travel_attDTO> getMarker = hDao.getMarker(num);
+		travel_attDTO getMarker = hDao.getMarker(num);
 		
 		JSONArray ja = new JSONArray();
 		
-		for (int i = 0; i < getMarker.size(); i++) {
+		JSONObject jo = new JSONObject();
+		jo.put("ta_name", getMarker.getTa_name());
+		jo.put("ta_latitude", getMarker.getTa_latitude());
+		jo.put("ta_longitude", getMarker.getTa_longitude());
+		ja.add(jo);
+			
+		return ja.toJSONString();
+	}
+	
+	@PostMapping("/likeFilter")
+	@ResponseBody
+	public String likeFilter(HttpServletRequest req, Model model) {
+		HttpSession s = req.getSession();
+		String id = (String) s.getAttribute("id");
+		
+		String filter = req.getParameter("filter");
+		
+		String page = req.getParameter("page");
+		if(page == null || page.equals("")) {
+			page = "1";
+		}
+		int pageNo = Integer.parseInt(page);
+		st = (pageNo - 1) * ps;
+		int cnt = hDao.cntCartList(id);
+		int pageCount = (int)Math.ceil(cnt / 5.0);
+		page = "";
+		for(int i=1; i<=pageCount; i++) {
+			if(pageNo == i) {
+				page += "<a class=strong id=" + i  + ">" + i +"</a>&nbsp;";
+			} else {
+				page += "<a class=a id=" + i + ">" + i + "</a>&nbsp;";
+			}
+		}
+		
+		ArrayList<travel_attDTO> filterList = hDao.getFilterList(id, filter);
+		
+		JSONArray ja = new JSONArray();
+		
+		for(int i=0; i<filterList.size(); i++) {
 			JSONObject jo = new JSONObject();
-			jo.put("ta_name", getMarker.get(i).getTa_name());
-			jo.put("ta_latitude", getMarker.get(i).getTa_latitude());
-			jo.put("ta_longitude", getMarker.get(i).getTa_longitude());
+			jo.put("ta_num", filterList.get(i).getTa_num());
+			jo.put("ta_name", filterList.get(i).getTa_name());
+			jo.put("ta_local", filterList.get(i).getTa_local());
+			jo.put("ta_img", filterList.get(i).getTa_img());
+			jo.put("ta_address", filterList.get(i).getTa_address());
+			jo.put("ta_category", filterList.get(i).getTa_category());
+			jo.put("ta_latitude", filterList.get(i).getTa_latitude());
+			jo.put("ta_longitude", filterList.get(i).getTa_longitude());
+			jo.put("page", page);
 			ja.add(jo);
 		}
+		
 		return ja.toJSONString();
 	}
 	
