@@ -5,7 +5,7 @@
 
 <insert id="addComment" >
 
-insert into comment set commenter=#{param1}, comment_content=#{param2}, board_seqno=#{param3}, comment_created=CURDATE();
+insert into comment set commenter=#{param1}, comment_content=#{param2}, board_seqno=#{param3}, isprivate=#{param4}, isprivatecomment=#{param5}, comment_created=CURDATE();
 </insert>
 
 <select id ="showComment">
@@ -26,6 +26,13 @@ select * from comment where board_seqno=#{param1}
     <update id="answerCount">
 	update board set answer_count =#{param1} where seqno=#{param2}
 </update>
+    
+    <delete id= "deleteByboard">
+    delete from comment where board_seqno = #{param1}
+     
+    </delete>
+    
+    
     
 
 </mapper>

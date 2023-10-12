@@ -93,19 +93,15 @@ var tagListJson = ["제주투어"," 제주힐링여행"," 가을여행"," 사진
 				<a href="/q&a" class="newq2">Show All Question</a>
 			</div>
 			<br> <br>
-			<ul style="display: flex;">
-				<li><a href="#">질문1: 제주도가는방법</a>
-				<li><a href="#">질문2: 제주도맛집</a>
-				<li><a href="#">질문3: 제주도 해수욕장</a>
-				<li><a href="#">질문4: 제주도 날씨</a>
-				<li><a href="#">질문5: 제주도 핫플</a>
-			</ul>
-			<ul style="display: flex">
-				<li><a href="#">질문6:페이지 이벤트</a>
-				<li><a href="#">질문6:페이지 이벤트</a>
-				<li><a href="#">질문6:페이지 이벤트</a>
-				<li><a href="#">질문6:페이지 이벤트</a>
-			</ul>
+			
+			<!-- db에서 출력 -->
+			<ul>
+    <c:forEach items="${board}" var="question" varStatus="loop">
+        <li><a href="/view?seqno=${question.seqno}"${question.seqno}" class="break-word">질문${loop.index + 1}: ${question.title}</a></li>
+    </c:forEach>
+</ul>
+
+			
 		</div>
 	</div>
 
@@ -130,20 +126,20 @@ var tagListJson = ["제주투어"," 제주힐링여행"," 가을여행"," 사진
 				<h2 class="dth2">For Tour Contents</h2>
 				<p class="dtTitle">Recommend JeJu Island LandMark</p>
 				<p class="dtKeyword">여행지</p>
-				<a href="#" class="plus-button">+</a>
+				<a href="/travel_list" class="plus-button">+</a>
 
 
 				<!-- db에서 출력 테스트 -->
-				<div class="dtCard">
-					<a href="#"><img src="${location[0].ta_img}" class="testimg1" /></a>
-					<a style="text-decoration: none;" href="#" class="carda">
+				<div class="dtCard" data-ta-name="${location[0].ta_name}">
+					<a href="travel_Detail?ta_name=${location[0].ta_name}"><img src="${location[0].ta_img}" class="testimg1" /></a>
+					<a style="text-decoration: none;" href="travel_Detail?ta_name=${location[0].ta_name}" class="carda">
 						${location[0].ta_name} </a>
 				</div>
 
 				<!-- db에서 출력 테스트 -->
-				<div class="dttcard">
-					<a href="#"><img src="${location[1].ta_img}" class="testimg1" /></a>
-					<a style="text-decoration: none;" href="#" class="carda">
+				<div class="dttcard" data-ta-name="${location[1].ta_name}">
+					<a href="travel_Detail?ta_name=${location[1].ta_name }"><img src="${location[1].ta_img}" class="testimg1" /></a>
+					<a style="text-decoration: none;" href="travel_Detail?ta_name=${location[1].ta_name }" class="carda">
 						${location[1].ta_name} </a>
 				</div>
 
@@ -172,19 +168,19 @@ var tagListJson = ["제주투어"," 제주힐링여행"," 가을여행"," 사진
 
 
 				<!-- db에서 출력 테스트 -->
-				<div class="dtCard2">
-					<a href="#"><img src="img/${restaurant[0].fs_img}"
-						class="testimg1" /></a> <a style="text-decoration: none;" href="#"
-						class="carda"> ${restaurant[0].fs_name} </a>
+				<div class="dtCard2" data-ta-name="${food[0].ta_name}">
+					<a href="travel_Detail?ta_name=${food[0].ta_name}"><img src="img/${food[0].ta_img}"
+						class="testimg1" /></a> <a style="text-decoration: none;" href="travel_Detail?ta_name=${food[0].ta_name}"
+						class="carda"> ${food[0].ta_name} </a>
 				</div>
 
 
-				<div class="dttcard2">
-					<a href="#"><img src="img/${restaurant[1].fs_img}"
-						class="testimg1"></a> <a style="text-decoration: none;" href="#"
-						class="carda"> ${restaurant[1].fs_name} </a>
+				<div class="dttcard2" data-ta-name="${food[1].ta_name}">
+					<a href="travel_Detail?ta_name=${food[1].ta_name}"><img src="img/${food[1].ta_img}"
+						class="testimg1"></a> <a style="text-decoration: none;" href="travel_Detail?ta_name=${food[1].ta_name}"
+						class="carda"> ${food[1].ta_name} </a>
 				</div>
-
+	
 
 			</dt>
 			<dd>
@@ -198,18 +194,18 @@ var tagListJson = ["제주투어"," 제주힐링여행"," 가을여행"," 사진
 				class="firstdt second-instance">
 				<h2 class="dth2">For Tour Contents</h2>
 				<p class="dtTitle">Recommend JeJu Island beach</p>
-				<p class="dtKeyword">해수욕장</p>
+				<p class="dtKeyword">쇼핑</p>
 
-				<div class="dtCard3">
-					<a href="#"><img src="img/이미지테스트.jpg" class="testimg1" /></a> <a
-						style="text-decoration: none;" href="#" class="carda">Traditional
-						Market</a>
+				<div class="dtCard3" data-ta-name="${shopping[0].ta_name}">
+					<a href="travel_Detail?ta_name=${shopping[0].ta_name}"><img src="img/${shopping[0].ta_img}" class="testimg1" /></a> <a
+						style="text-decoration: none;" href="travel_Detail?ta_name=${shopping[0].ta_name}" class="carda">
+							${shopping[0].ta_name}
+						</a>
 				</div>
-
-				<div class="dttcard3">
-					<a href="#"><img src="img/이미지테스트.jpg" class="testimg1"></a> <a
-						style="text-decoration: none;" href="#" class="carda">Other
-						Traditional Market</a>
+				<div class="dttcard3" data-ta-name="${shopping[1].ta_name}">
+					<a href="travel_Detail?ta_name=${shopping[1].ta_name}"><img src="img/${shopping[1].ta_img}" class="testimg1"></a> <a
+						style="text-decoration: none;" href="travel_Detail?ta_name=${shopping[1].ta_name }" class="carda">
+						${shopping[1].ta_name }</a>
 				</div>
 
 			</dt>
@@ -227,17 +223,17 @@ var tagListJson = ["제주투어"," 제주힐링여행"," 가을여행"," 사진
 				class="seconddt fourth-instance">
 				<h2 class="dth2">For Tour Contents</h2>
 				<p class="dtTitle">Recommend JeJu Island Restaurant</p>
-				<p class="dtKeyword">맛집추천</p>
+				<p class="dtKeyword">숙박</p>
 
-				<div class="dtCard4">
-					<a href="#"><img src="img/이미지테스트.jpg" class="testimg1" /></a> <a
-						style="text-decoration: none;" href="#" class="carda">Special
-						Product</a>
+				<div class="dtCard4" data-ta-name="${hotel[0].ta_name}">
+					<a href="travel_Detail?ta_name=${hotel[0].ta_name}"><img src="img/${hotel[0].ta_img}" class="testimg1" /></a> <a
+						style="text-decoration: none;" href="travel_Detail?ta_name=${hotel[0].ta_name }" class="carda">
+						${hotel[0].ta_name }</a>
 				</div>
-				<div class="dttcard4">
-					<a href="#"><img src="img/이미지테스트.jpg" class="testimg1" /></a> <a
-						style="text-decoration: none;" href="#" class="carda">Other
-						Special Product</a>
+				<div class="dttcard4" data-ta-name="${hotel[1].ta_name}">
+					<a href="travel_Detail?ta_name=${hotel[1].ta_name}"><img src="img/${hotel[1].ta_img}" class="testimg1" /></a> <a
+						style="text-decoration: none;" href="travel_Detail?ta_name=${hotel[1].ta_name}" class="carda">
+						${hotel[1].ta_name}</a>
 				</div>
 			</dt>
 
@@ -246,7 +242,7 @@ var tagListJson = ["제주투어"," 제주힐링여행"," 가을여행"," 사진
 					class=dtimg2>
 			</dd>
 
-
+<br><br><br><br><br><br><br><br>
 
 
 
@@ -254,8 +250,26 @@ var tagListJson = ["제주투어"," 제주힐링여행"," 가을여행"," 사진
 			<%@include file="footer.jsp"%>
 </body>
 <script src="https://code.jquery.com/jquery-latest.js"></script>
+<script>
 
+$(document).ready(function() {
+    var classNames = ['dtCard', 'dtCard2', 'dtCard3', 'dtCard4', 'dttcard', 'dttcard2', 'dttcard3', 'dttcard4'];
+
+    classNames.forEach(function(className) {
+        $('.' + className).on('click', function() {
+            var taName = $(this).data('ta-name');
+            if (taName) {
+                window.location.href = 'travel_Detail?ta_name=' + taName;
+            }
+        });
+    });
+});
+
+
+
+</script>
 <script src="/resources/js/home.js"></script>
+
 <!-- 
 <script>
 	$(document)

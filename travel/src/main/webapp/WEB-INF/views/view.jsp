@@ -17,7 +17,16 @@
     padding: 0;
 }
 
+@font-face {
+    font-family: 'GmarketSansMedium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
 .h1title {
+	font-family: 'GmarketSansMedium';
     text-align: left;
     font-size: 30px;
     margin-top: 20px;
@@ -73,7 +82,7 @@ a {
 
 .showview a {
 font-family: 'SUITE-Regular';
-   font-size: 20px;
+   font-size: 17px;
     color: #535353;
     margin-bottom : 10px;
 }
@@ -401,7 +410,6 @@ font-family: 'SUITE-Regular';
     background-color: #007bff;
     color: white;
     border: none;
-    padding: 10px 20px;
     cursor: pointer;
     border-radius: 5px;
     font-size: 16px;
@@ -436,9 +444,19 @@ font-family: 'SUITE-Regular';
 	border-radius:5px;
 }      
 
+
+
+@font-face {
+    font-family: 'RIDIBatang';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.0/RIDIBatang.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
 .fortitleh2 {
+	font-family: 'RIDIBatang';
 	margin-left:5%;
-	font-size:35px;
+	font-size:25px;
 }      
 
 .revbtn {
@@ -456,11 +474,20 @@ font-family: 'SUITE-Regular';
     cursor:pointer;
 }
 
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+
 .writereview{
 	position:relative;
 	bottom:24px;
 	right:33px;
 	color:white;
+	font-family: 'Pretendard-Regular';
 }
 
 
@@ -478,17 +505,18 @@ font-family: 'SUITE-Regular';
  
 .b2 {
 	display: inline-block;
-    margin: 0 20px 0 0;
     font-size: 14px;
     color: #8a8b8b;
 } 
  
 .showview span {
 	display: inline-block;
-    margin: 0 20px 0 0;
-    font-size: 14px;
+ 
+    font-size: 11px;
     
+    font-weight:bold;
     margin-left: 3%;
+     font-family: 'GmarketSansMedium';
 } 
  
 .deleteComment,
@@ -557,7 +585,7 @@ font-family: 'GowunBatang-Regular';
 
 .forpos {
 	margin-top: 5%;
-	margin-left: 36%;
+	margin-left: 35%;
 }
 
 @font-face {
@@ -572,6 +600,139 @@ font-family: 'GowunBatang-Regular';
 	font-family: 'Pretendard-Regular';
 	text-align:center;
 }
+
+
+.logincomment{
+	text-align:center;
+	margin-top:5%;
+}
+
+.retxt {
+        width: 100%; /* 원하는 너비로 조절하세요 */
+        height: 80px; /* 원하는 높이로 조절하세요 */
+        padding: 5px;
+        margin-bottom: 10px;
+    }
+    
+    .subrp {
+        background-color: #007BFF !important; /* 버튼 배경색 지정 */
+        color: #fff !important; /* 버튼 텍스트 색상 지정 */
+        border: none !important;
+        cursor: pointer !important;
+        border-radius :10px !important;
+    }
+    
+    
+    .modal {
+    display: none;
+    position: fixed;
+    z-index: 999; /* 모달의 z-index 값을 높게 설정 */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    position: relative;
+}
+    
+
+.goback {
+	text-align:center;
+}
+
+.goprev {
+font-family: 'Pretendard-Regular';
+	height:40px;
+	width:50px;
+}
+
+.goprev:hover {
+	background-color: grey !important;
+}
+
+
+
+
+.editReply {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-right: 5px;
+}
+
+.editReply:hover {
+    background-color: #0056b3;
+}
+
+/* 삭제 버튼 */
+.deleteReply {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-right: 5px;
+}
+
+.deleteReply:hover {
+    background-color: #c82333;
+}
+
+/* 수정할 댓글 텍스트 영역 */
+.retxt {
+    width: 100%;
+    max-width: 300px; /* 최대 너비 설정 */
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+
+/* 확인 버튼 */
+.subrp {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-right: 5px;
+}
+
+.subrp:hover {
+    background-color: #218838;
+}
+
+@font-face {
+    font-family: 'SUITE-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+
+
+.repcommenter , .repcomment, .repday {
+	font-family: 'SUITE-Regular';
+}
+
+.onlywriter {
+	display:none;
+}
+
 
 
 
@@ -601,14 +762,20 @@ font-family: 'GowunBatang-Regular';
 
 
 <div class="showview">
-    <span>작성자: ${bpost.writer}</span> &nbsp;&nbsp;
-    <span class="b2">작성일: ${bpost.created}</span> &nbsp;&nbsp;
-    <span class="b2">조회수: ${bpost.hit}</span> &nbsp;&nbsp;
-   <br>
+    <span>작성자: 
+        <c:choose>
+            <c:when test="${bpost.isprivate == 1}">비공개</c:when>
+            <c:otherwise>${bpost.writer}</c:otherwise>
+        </c:choose>
+    </span>
+    <p class="onlywriter">${bpost.writer}</p>
+    <span class="b2">작성일: ${bpost.created}</span> 
+    <span class="b2">조회수: ${bpost.hit}</span> 
+    <br>
 </div>
 <br><br>
-  <hr class="hr2"/>
-  <br>
+<hr class="hr2"/>
+<br>
 <div class="showview">
     <a>${bpost.content}</a>
 </div>
@@ -620,6 +787,16 @@ font-family: 'GowunBatang-Regular';
 <a class="writereview" id="writereview">댓글 작성</a>
 </div>
 
+         
+<c:if test ="${empty sessionScope.id}">
+	<p class="logincomment"><strong>로그인 후 댓글을 작성할 수 있습니다.</strong>
+</c:if>         
+
+
+
+
+
+
 <br><br>
 
 
@@ -630,7 +807,9 @@ font-family: 'GowunBatang-Regular';
         <input type="text" name="board_seqno" id="board_seqno" value="${bpost.seqno}" style="display: none;">
         <input type="text" name="commenter" id="commenter" value="${sessionScope.id}" readonly>
         <textarea name="comment_content" id="comment_content" placeholder="댓글 내용"></textarea>
-        <button type="button" id="submitComment">완료</button>
+        <button type="button" id="submitComment">완료</button><br>
+        작성자 비공개<input type="checkbox" id="checkprivate"><br>
+        작성자에게만 보이기 <input type="checkbox" id="privateComment">
     </form>
     <br>
 </div>
@@ -663,12 +842,32 @@ font-family: 'GowunBatang-Regular';
         <c:otherwise>
             <c:forEach items="${comments}" var="comment">
                 <div class="comment">
-                    <p class="cmter"><strong>댓글 작성자: <c:out value="${comment.commenter}" /> &nbsp;&nbsp; 작성일: <c:out value="${comment.comment_created }" /></strong></p>
+                    <p class="cmter">
+                    <c:choose>
+            		<c:when test="${comment.isprivate == 1}">댓글 작성자: 비공개</c:when>
+            		<c:otherwise>
+            		<strong>댓글 작성자: <c:out value="${comment.commenter}" /> 
+            		</c:otherwise>
+        			</c:choose>         			 
+                    &nbsp;&nbsp; 작성일: <c:out value="${comment.comment_created }" /></strong></p>
                     <p style="display:none;"><c:out value="${comment.comment_id}" /></p>
-                    <p class="cmtnt"><c:out value="${comment.comment_content}" /></p>
+                    <p style="display:none;">작성자:<c:out value="${comment.commenter}" /></p>
+                    <p class="cmtnt">
+                    
+                    <c:choose>
+    				<c:when test="${comment.isprivatecomment == 1 && sessionScope.id != comment.commenter && sessionScope.id != bpost.writer}">
+
+       				<strong>작성자에게만 보이는 댓글입니다.</strong>
+    				</c:when>
+    				<c:otherwise>
+                    
+                    <c:out value="${comment.comment_content}" /></p>
+                    </c:otherwise>
+                    </c:choose>
+                    
                     <p class="cmtct">작성일: <c:out value="${comment.comment_created}" /></p>
                     <p style="display:none;"><c:out value="${comment.board_seqno }" /></p>
-                    
+                  
                     <c:if test="${sessionScope.id == comment.commenter}">
                         <br><br>
                         
@@ -685,7 +884,9 @@ font-family: 'GowunBatang-Regular';
                     <!-- 대댓글 폼 -->
                     <div class="reply-form" style="display:none;">
                         <textarea class="reply-content" placeholder="답글 내용" style="resize:none;"></textarea>
-                        <button class="submitReply">작성완료</button>
+                        <button class="submitReply">작성완료</button><br>
+                        작성자 비공개 <input type="checkbox" id="privatebox"><br>
+                        작성자에게ㄹㄹㄹ<input type="checkbox" id="showtowriter">
                     </div>
                     
                     <div class="forup" style="display:none;">
@@ -726,12 +927,12 @@ font-family: 'GowunBatang-Regular';
       
       
       
-         
-<c:if test ="${empty sessionScope.id}">
-	<p><strong>로그인 후 댓글을 작성할 수 있습니다.</strong>
-</c:if>         
+
 
 <br><br>
+<div class="goback">
+	<input type="button" value="목록" id="goprev" class="goprev">
+</div>
 <c:if test="${sessionScope.id == bpost.writer}">
 <div class="forpos">
    <input type="button" value="게시글 삭제" id="del" name="del" data-seqno="${bpost.seqno}" style="margin-left:15%;">
@@ -741,7 +942,8 @@ font-family: 'GowunBatang-Regular';
 
 <br><br><br><br><br><br>
 
-<div id="editForm" style="display: none;">
+<div id="editModal" class="modal">
+<div id="editForm" class="modal-content" style="display: none;">
     <form id="editPostForm" method="post" action="/editPost">
         <input type="hidden" name="seqno" id="seqno" value="${bpost.seqno}">
         <input type="text" name="title" id="title" value="${bpost.title}" placeholder="제목">
@@ -755,9 +957,10 @@ font-family: 'GowunBatang-Regular';
         </select>
         &nbsp;&nbsp;&nbsp;<button type="button" id="editcomplete">수정 완료</button>
     </form>
-    <input type="button" id="editclose" name="editclose" value="닫기">
+  </div>
 </div>
 
+<br><br><br><br>
 
 
 <div id="sessionData" style="display: none;" data-id="${sessionScope.id}">
@@ -774,6 +977,38 @@ font-family: 'GowunBatang-Regular';
 <script>
     $(document).ready(function () {
     	
+    	var isModalOpen = false; // 모달 상태를 저장하는 변수
+
+    	$('#edit').click(function () {
+    	    isModalOpen = true;
+    	    $('#editModal').css("display", "block");
+    	});
+
+    	$('#editcomplete').click(function () {
+    	    isModalOpen = false;
+    	    $('#editModal').css("display", "none");
+    	});
+
+    	$(window).click(function(event) {
+    	    if (isModalOpen && event.target == document.getElementById("editModal")) {
+    	        $('#editModal').css("display", "none");
+    	        isModalOpen = false;
+    	    }
+    	});
+
+
+
+    	
+    	
+    	
+    	
+    	
+    	
+    	$('.goprev').click(function(){
+    		window.location.href="/q&a";
+    	})
+    	
+    	
     	$('.revbtn').click(function(){
     		
 
@@ -782,13 +1017,26 @@ font-family: 'GowunBatang-Regular';
     	
     		
     	
-    	 var userId = $('#sessionData').data('id');
-    	    
-    	    if (userId) {
-    	       
+    	 var userId = $('#sessionData').data('id');   	    
+    	    if (userId) {    	   
     	        console.log('사용자 ID: ' + userId);
     	    }
     	
+    	    
+    	    
+    	    
+    	    if(!userId) {
+    	    	$('.revbtn').click(function(){
+    	    		if(confirm('로그인이 필요합니다. 로그인 페이지로 이동하시겠습니까?')){
+    	    			window.location.href="/login";
+    	    		}
+    	    		
+    	    	})
+    	    }
+    	    
+    	    
+    	    
+    	    
 
     	    $('.showreply').click(function () {
     	        var replyList = $(this).next('.reply-list');
@@ -817,28 +1065,37 @@ font-family: 'GowunBatang-Regular';
     	                        replyHtml += '<br><hr/>';
     	                        replyHtml += '<span class="reply-icon"> </span>';
     	                        replyHtml += '<li>';
-    	                        replyHtml += '<p>작성자: ' + replies[i].commenter + '</p>';
-    	                        replyHtml += '<p>내용: ' + replies[i].reply_content + '</p>';
-    	                        
+    	                        replyHtml += '<p class="repcommenter">';
+
+    	                        // 대댓글이 비공개이고 작성자와 현재 사용자가 다른 경우
+    	                        // 본인의 댓글은 비공개로 설정해도 닉네임이 보입니다.
+    	                        if (replies[i].isprivate === 1 && userId !== replies[i].commenter) {
+    	                            replyHtml += '작성자: 비공개';
+    	                        } else {
+    	                            replyHtml += '작성자: ' + replies[i].commenter;
+    	                        }
+
+    	                        replyHtml += '</p>';
+    	                        replyHtml += '<p style="font-weight:bold;" class="repcomment">내용: ' + replies[i].reply_content + '</p>';
+
     	                        // reply_created에서 월과 일만 추출
     	                        var replyDate = new Date(replies[i].reply_created);
     	                        var month = (replyDate.getMonth() + 1).toString().padStart(2, '0'); // 월
     	                        var day = replyDate.getDate().toString().padStart(2, '0'); // 일
-    	                        
-    	                        replyHtml += '<p>일자: ' + month + '/' + day + '</p>';
-    	                        
+
+    	                        replyHtml += '<p class="repday">일자: ' + month + '/' + day + '</p>';
     	                        replyHtml += '<p class="rplid" style="display:none;">번호: ' + replies[i].reply_id + '</p>';
 
     	                        if (userId == replies[i].commenter) {
     	                            replyHtml += '<button class="editReply" data-replyId="' + replies[i].reply_id + '">수정</button>';
     	                            replyHtml += '<button class="deleteReply" data-replyId="' + replies[i].reply_id + '">삭제</button>' + "<br>";
     	                            replyHtml += '<textarea class="retxt" style="display:none;" data-replyId="' + replies[i].reply_id + '"></textarea>' + "<br>";
-    	                            replyHtml += '<input type="button" class="subrp" value="확인" style="display:none;">'
+    	                            replyHtml += '<input type="button" class="subrp" value="확인" style="display:none;">';
     	                        }
     	                        replyHtml += '</li>';
     	                    }
     	                    replyHtml += '</ul>';
-    	                    replyList.html(replyHtml);
+    	                    replyList.html(replyHtml)
     	                    
     	                   
 
@@ -937,46 +1194,50 @@ font-family: 'GowunBatang-Regular';
     	  
     	    
 		// 대댓글..		
-        $('.submitReply').click(function () {
-   		
-   		 var commenter = $('#commenter').val();
-    	 var replyContent = $(this).siblings('.reply-content').val(); 
-    	 var commentId = $(this).closest('.comment').find('p:eq(1)').text(); 
-		 var boardseqno = $('#board_seqno').val();
-		 
-    	
-    	console.log('commenter:', commenter);
-    	console.log('replyContent:', replyContent);
-    	console.log(commentId);
-		console.log(boardseqno);
-    	
-		
-		if(replyContent==''){
-			alert("내용을 입력하세요..")
-			return false;
-		}
-    	
-    	
-    	$.ajax({
-        	url: '/doinreply',
-        	method: 'POST',
-        	data: {
-            	commenter: commenter,
-            	replyContent: replyContent,
-            	commentId: commentId,
-            	boardseqno : boardseqno
-        	},
-        	success: function (data) {
-        		if (data==""){
-            	alert('답글 작성 완료');
-            	window.location.reload();
-        		}
-        	},
-        	error: function (error) {
-            	alert('답글 작성에 실패했습니다.'+error);
-        	}
-    	});
-	});
+    $('.submitReply').click(function () {
+    var commenter = $('#commenter').val();
+    var replyContent = $(this).siblings('.reply-content').val();
+    var commentId = $(this).closest('.comment').find('p:eq(1)').text();
+    var boardseqno = $('#board_seqno').val();
+    var isprivate = $('#privatebox').is(':checked') ? 1 : 0; 
+    if($('#showtowriter').is(':checked')) {
+    	isprivate = 2
+    }
+    if($('#showtowriter').is(':checked')&&$('#privatebox').is(':checked')) {
+    	isprivate = 3
+    }
+
+    console.log('commenter:', commenter);
+    console.log('replyContent:', replyContent);
+    console.log('commentId:', commentId);
+    console.log('boardseqno:', boardseqno);
+
+    if (replyContent == '') {
+        alert("내용을 입력하세요..");
+        return false;
+    }
+
+    $.ajax({
+        url: '/doinreply',
+        method: 'POST',
+        data: {
+            commenter: commenter,
+            replyContent: replyContent,
+            commentId: commentId,
+            boardseqno: boardseqno,
+            isprivate: isprivate 
+        },
+        success: function (data) {
+            if (data == "") {
+                alert('답글 작성 완료');
+                window.location.reload();
+            }
+        },
+        error: function (error) {
+            alert('답글 작성에 실패했습니다.' + error);
+        }
+    });
+});
         
     	    
     	   
@@ -1015,7 +1276,10 @@ font-family: 'GowunBatang-Regular';
                var boardSeqno = $('#board_seqno').val();
                var commenter = $('#commenter').val();
                var commentContent = $('#comment_content').val();
-
+               var isPrivate = $('#checkprivate').is(':checked') ? 1 : 0;
+               var isprivatecomment = $('#privateComment').is(':checked') ? 1 : 0;
+               
+               
                if (commenter == '') {
                    alert('로그인하세요...');
                    window.location.href = "/login";
@@ -1029,6 +1293,8 @@ font-family: 'GowunBatang-Regular';
 
                
                
+               
+               
                // 댓글 데이터를 서버로 전송
                $.ajax({
             	    url: '/doincomment',
@@ -1036,7 +1302,9 @@ font-family: 'GowunBatang-Regular';
             	    data: {
             	        board_seqno: boardSeqno,
             	        commenter: commenter,
-            	        comment_content: commentContent
+            	        comment_content: commentContent,
+            	        isprivate : isPrivate,
+            	        isprivatecomment : isprivatecomment
             	    },
             	    success: function (data) {
             	        alert('작성완료');
@@ -1072,7 +1340,7 @@ font-family: 'GowunBatang-Regular';
 		
     	// 수정 폼 열림
     	$('#edit').click(function () {
-            $('#editForm').show();        
+            $('#editForm').toggle();        
         });
     	
     	$('#editclose').click(function(){
@@ -1108,22 +1376,33 @@ font-family: 'GowunBatang-Regular';
     	
     	
     $('#del').click(function () {
-        if (confirm('정말로 게시글을 삭제하시겠습니까?')) {
-            let seqno = $(this).data('seqno'); 
-            $.ajax({
-                url: '/deletePost',
-                data: { seqno: seqno },
-                type: 'post',
-                success: function (data) {
-                    alert('게시글이 삭제되었습니다.');
-                    window.location.href="/q&a";
-                },
-                error: function (error) {
-                    alert('페이지 에러');
-                }
-            });
-        }
+        Swal.fire({
+            title: '정말로 게시글을 삭제하시겠습니까?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: '삭제',
+            cancelButtonText: '취소',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                let seqno = $(this).data('seqno');
+                $.ajax({
+                    url: '/deletePost',
+                    data: { seqno: seqno },
+                    type: 'post',
+                    success: function (data) {
+                        Swal.fire('게시글이 삭제되었습니다.', '', 'success');
+                        alert('게시글이 삭제되었습니다.'); // Display an additional alert
+                        window.location.href = "/q&a";
+                    },
+                    error: function (error) {
+                        Swal.fire('페이지 에러', '', 'error');
+                    }
+                });
+            }
+        });
     });
+
+
 
     	
     	

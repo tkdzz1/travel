@@ -10,7 +10,7 @@ public interface BoardDAO {
 	ArrayList<BoardDTO> getList(int start, int psize);
 	int getTotal();
 	
-	void insert(String p1, String p2, String p3, String p4);
+	void insert(String p1, String p2, String p3, String p4, int p5);
 	
 	BoardDTO view(int seqno);
 	void hitup(int seqno);
@@ -23,5 +23,7 @@ public interface BoardDAO {
 	ArrayList<BoardDTO> popular();
 	
 	void answerCount(int seqno,int s);
+	
+	ArrayList<BoardDTO> getboardlist(); // 임시 7개만 출력
 	
 }

@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css">
 <title>게시물 작성</title>
 
 <style>
@@ -51,7 +52,6 @@
     margin-bottom: 10px !important;
   }
 
-
   a {
     text-decoration: none !important;
     color: #007bff !important;
@@ -60,8 +60,6 @@
   a:hover {
     text-decoration: underline !important;
   }
-
- 
 
   /* 추가한 부분: 버튼 스타일 */
   #btnSubmit, #btnPrev {
@@ -76,7 +74,6 @@
     background-color: #0056b3 !important;
   }
 </style>
-
 </head>
 <body>
 <%@include file="header.jsp"%>
@@ -102,8 +99,10 @@
         <td>내용</td>
         <td><textarea rows="10" cols="64" name="content" id="content"></textarea></td>
       </tr>
-      <tr><td></td>
+      <tr>
+        <td></td>
         <td style="text-align:right;">
+          닉네임 숨기기 &nbsp;<input type="checkbox" id="check" name="private">&nbsp;&nbsp;&nbsp;
           <input type="submit" id="btnSubmit" name="btnSubmit" value="작성완료">&nbsp;&nbsp;
           <input type="button" id="btnPrev" value="이전으로">
         </td>
@@ -111,39 +110,58 @@
     </table>
   </form>
   <br><br><br><br>
-	  <%@include file="footer.jsp"%>
+  <%@include file="footer.jsp"%>
 </body>
-  <script src="https://code.jquery.com/jquery-latest.js"></script>
-  <script>
-  $(document)
-  .ready(function(){
-	  $('#btnPrev').click(function(){
-		  window.location.href="/q&a";
-	  })
-  })
-  
-  
-  
-  
-  
-    $(document).on('submit', '#frmInsert', function () {
-      if ($('#title').val() === '') {
-        alert('제목을 입력하세요.');
-        return false;
-      }
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script src="https://code.jquery.com/jquery-latest.js"></script>
+<script>
+$(document).ready(function() {
+	  $('#btnPrev').click(function() {
+	    window.location.href = "/q&a";
+	  });
 
-      if ($('#category').val() === '카테고리 선택') {
-        alert('카테고리를 선택하세요.');
-        return false;
-      }
+	  $(document).on('submit', '#frmInsert', function(e) {
+	    if ($('#title').val() === '') {
+	      Swal.fire({
+	        icon: 'error',
+	        title: '제목을 입력하세요.',
+	      });
+	      return false;
+	    }
 
-      if ($('#content').val() === '') {
-        alert('게시물 내용을 입력하세요.');
-        return false;
-      }
+	    if ($('#category').val() === '카테고리 선택') {
+	      Swal.fire({
+	        icon: 'error',
+	        title: '카테고리를 선택하세요.',
+	      });
+	      return false;
+	    }
 
-      alert('작성 완료!');
-      return true;
-    });
-  </script>
+	    if ($('#content').val() === '') {
+	      Swal.fire({
+	        icon: 'error',
+	        title: '게시물 내용을 입력하세요.',
+	      });
+	      return false;
+	    }
+
+	    if ($('#check').is(':checked')) {
+	      $('<input>').attr({
+	        type: 'hidden',
+	        name: 'private',
+	        value: '1'
+	      }).appendTo('#frmInsert');
+	    } else {
+	      $('<input>').attr({
+	        type: 'hidden',
+	        name: 'private',
+	        value: '0'
+	      }).appendTo('#frmInsert');
+	    }
+
+	    alert('작성 완료');
+	    return true;
+	  });
+	});
+</script>
 </html>

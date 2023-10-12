@@ -10,5 +10,6 @@ public class ReplyDTO {
 	String commenter; // 작성자
 	String reply_content; // 답글
 	String reply_created; 
+	int isprivate;
 
 }

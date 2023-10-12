@@ -17,6 +17,9 @@ public interface travel_attDAO {
 	travel_attDTO getDetailImg(String ta_name);
 	void deleteTravel_attraction(String ta_name);
 	ArrayList<travel_attDTO> locationName();
+	ArrayList<travel_attDTO> foodStore();
+	ArrayList<travel_attDTO> shopping();
+	ArrayList<travel_attDTO> hotel();
 	void updateTravelAttraction(String name, String string, String taContent);
 	void updateList1(String name, String local, String address, String category, String savedListImageName, String ta_name);
 	void updateList2(String name, String local, String address, String category, String ta_name);

@@ -10,5 +10,6 @@ public class CommentDTO {
 	int board_seqno;
 	int comment_id;
 	String commenter;
-	
+	int isprivate;
+	int isprivatecomment;
 }

@@ -37,7 +37,16 @@
 </delete>
 <!-- 테스트 -->
 <select id="locationName" resultType="com.himedia.springboot.travel_attDTO">
-   select ta_name,ta_img from travel_attraction order by ta_num asc limit 3;
+   select ta_name,ta_img from travel_attraction order by ta_num asc
+</select>
+<select id="foodStore" resultType="com.himedia.springboot.travel_attDTO">
+	select ta_name,ta_img from travel_attraction where ta_category = "음식" order by ta_num desc;
+</select>
+<select id="shopping" resultType="com.himedia.springboot.travel_attDTO">
+	select ta_name,ta_img from travel_attraction where ta_category = "쇼핑" order by ta_num desc;
+</select>
+<select id="hotel" resultType="com.himedia.springboot.travel_attDTO">
+	select ta_name,ta_img from travel_attraction where ta_category = "숙박" order by ta_num desc;
 </select>
 <update id="updateTravelAttraction">
     update detail_imginfo set ta_name=#{param1}, ta_imginfo=#{param2}, ta_content=#{param3} where ta_name=#{param1}
