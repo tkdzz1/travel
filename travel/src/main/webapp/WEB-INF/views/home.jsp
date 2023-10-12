@@ -120,7 +120,8 @@
 							<div class="modal-background">
 								<div class="modal">
 									<h2>당장 올레로 안 올레?</h2>
-									<img class="img-modal" src="https://img.hankyung.com/photo/202307/AKR20230724060800056_04_i_P4.jpg">
+									<img class="img-modal"
+										src="https://img.hankyung.com/photo/202307/AKR20230724060800056_04_i_P4.jpg">
 								</div>
 							</div>
 						</div>
@@ -228,15 +229,17 @@
 				<a href="/q&a" class="newq2">Show All Question</a>
 			</div>
 			<br> <br>
-			
+
 			<!-- db에서 출력 -->
 			<ul>
-    <c:forEach items="${board}" var="question" varStatus="loop">
-        <li><a href="/view?seqno=${question.seqno}"${question.seqno}" class="break-word">질문${loop.index + 1}: ${question.title}</a></li>
-    </c:forEach>
-</ul>
+				<c:forEach items="${board}" var="question" varStatus="loop">
+					<li><a href="/view?seqno=${question.seqno}"
+						${question.seqno}" class="break-word">질문${loop.index + 1}:
+							${question.title}</a></li>
+				</c:forEach>
+			</ul>
 
-			
+
 		</div>
 	</div>
 
@@ -266,15 +269,19 @@
 
 				<!-- db에서 출력 테스트 -->
 				<div class="dtCard" data-ta-name="${location[0].ta_name}">
-					<a href="travel_Detail?ta_name=${location[0].ta_name}"><img src="${location[0].ta_img}" class="testimg1" /></a>
-					<a style="text-decoration: none;" href="travel_Detail?ta_name=${location[0].ta_name}" class="carda">
+					<a href="travel_Detail?ta_name=${location[0].ta_name}"><img
+						src="${location[0].ta_img}" class="testimg1" /></a> <a
+						style="text-decoration: none;"
+						href="travel_Detail?ta_name=${location[0].ta_name}" class="carda">
 						${location[0].ta_name} </a>
 				</div>
 
 				<!-- db에서 출력 테스트 -->
 				<div class="dttcard" data-ta-name="${location[1].ta_name}">
-					<a href="travel_Detail?ta_name=${location[1].ta_name }"><img src="${location[1].ta_img}" class="testimg1" /></a>
-					<a style="text-decoration: none;" href="travel_Detail?ta_name=${location[1].ta_name }" class="carda">
+					<a href="travel_Detail?ta_name=${location[1].ta_name }"><img
+						src="${location[1].ta_img}" class="testimg1" /></a> <a
+						style="text-decoration: none;"
+						href="travel_Detail?ta_name=${location[1].ta_name }" class="carda">
 						${location[1].ta_name} </a>
 				</div>
 
@@ -304,18 +311,22 @@
 
 				<!-- db에서 출력 테스트 -->
 				<div class="dtCard2" data-ta-name="${food[0].ta_name}">
-					<a href="travel_Detail?ta_name=${food[0].ta_name}"><img src="img/${food[0].ta_img}"
-						class="testimg1" /></a> <a style="text-decoration: none;" href="travel_Detail?ta_name=${food[0].ta_name}"
-						class="carda"> ${food[0].ta_name} </a>
+					<a href="travel_Detail?ta_name=${food[0].ta_name}"><img
+						src="img/${food[0].ta_img}" class="testimg1" /></a> <a
+						style="text-decoration: none;"
+						href="travel_Detail?ta_name=${food[0].ta_name}" class="carda">
+						${food[0].ta_name} </a>
 				</div>
 
 
 				<div class="dttcard2" data-ta-name="${food[1].ta_name}">
-					<a href="travel_Detail?ta_name=${food[1].ta_name}"><img src="img/${food[1].ta_img}"
-						class="testimg1"></a> <a style="text-decoration: none;" href="travel_Detail?ta_name=${food[1].ta_name}"
-						class="carda"> ${food[1].ta_name} </a>
+					<a href="travel_Detail?ta_name=${food[1].ta_name}"><img
+						src="img/${food[1].ta_img}" class="testimg1"></a> <a
+						style="text-decoration: none;"
+						href="travel_Detail?ta_name=${food[1].ta_name}" class="carda">
+						${food[1].ta_name} </a>
 				</div>
-	
+
 
 			</dt>
 			<dd>
@@ -332,14 +343,17 @@
 				<p class="dtKeyword">쇼핑</p>
 
 				<div class="dtCard3" data-ta-name="${shopping[0].ta_name}">
-					<a href="travel_Detail?ta_name=${shopping[0].ta_name}"><img src="img/${shopping[0].ta_img}" class="testimg1" /></a> <a
-						style="text-decoration: none;" href="travel_Detail?ta_name=${shopping[0].ta_name}" class="carda">
-							${shopping[0].ta_name}
-						</a>
+					<a href="travel_Detail?ta_name=${shopping[0].ta_name}"><img
+						src="img/${shopping[0].ta_img}" class="testimg1" /></a> <a
+						style="text-decoration: none;"
+						href="travel_Detail?ta_name=${shopping[0].ta_name}" class="carda">
+						${shopping[0].ta_name} </a>
 				</div>
 				<div class="dttcard3" data-ta-name="${shopping[1].ta_name}">
-					<a href="travel_Detail?ta_name=${shopping[1].ta_name}"><img src="img/${shopping[1].ta_img}" class="testimg1"></a> <a
-						style="text-decoration: none;" href="travel_Detail?ta_name=${shopping[1].ta_name }" class="carda">
+					<a href="travel_Detail?ta_name=${shopping[1].ta_name}"><img
+						src="img/${shopping[1].ta_img}" class="testimg1"></a> <a
+						style="text-decoration: none;"
+						href="travel_Detail?ta_name=${shopping[1].ta_name }" class="carda">
 						${shopping[1].ta_name }</a>
 				</div>
 
@@ -361,13 +375,17 @@
 				<p class="dtKeyword">숙박</p>
 
 				<div class="dtCard4" data-ta-name="${hotel[0].ta_name}">
-					<a href="travel_Detail?ta_name=${hotel[0].ta_name}"><img src="img/${hotel[0].ta_img}" class="testimg1" /></a> <a
-						style="text-decoration: none;" href="travel_Detail?ta_name=${hotel[0].ta_name }" class="carda">
+					<a href="travel_Detail?ta_name=${hotel[0].ta_name}"><img
+						src="img/${hotel[0].ta_img}" class="testimg1" /></a> <a
+						style="text-decoration: none;"
+						href="travel_Detail?ta_name=${hotel[0].ta_name }" class="carda">
 						${hotel[0].ta_name }</a>
 				</div>
 				<div class="dttcard4" data-ta-name="${hotel[1].ta_name}">
-					<a href="travel_Detail?ta_name=${hotel[1].ta_name}"><img src="img/${hotel[1].ta_img}" class="testimg1" /></a> <a
-						style="text-decoration: none;" href="travel_Detail?ta_name=${hotel[1].ta_name}" class="carda">
+					<a href="travel_Detail?ta_name=${hotel[1].ta_name}"><img
+						src="img/${hotel[1].ta_img}" class="testimg1" /></a> <a
+						style="text-decoration: none;"
+						href="travel_Detail?ta_name=${hotel[1].ta_name}" class="carda">
 						${hotel[1].ta_name}</a>
 				</div>
 			</dt>
@@ -382,7 +400,16 @@
 	</div>
 
 
-<br><br><br><br><br><br><br><br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+
+<div data-helper-component-key="core-system-row" __directive_pos="0.2" class="_grid-system-row_"><div data-helper-component-key="core-system-column" __directive_pos="0.2.0" class="_grid-system-column_ xs-12 sm-12 md-12 lg-12"><section __directive_pos="0.2.0.0" class="knowledge" data-v-7c539ecc=""><div class="wrapper" data-v-7c539ecc=""><div class="logotype" data-v-7c539ecc=""><img src="/image/knowledge/logotype2.png" alt="제주관광 지식iN" data-v-7c539ecc=""></div><div class="stitle1" data-v-7c539ecc="">제주 여행에 관해서라면 어떤 것이라도 물어 보세요! <br data-v-7c539ecc="">비짓제주 상주 전문가를 비롯해 제주를 잘 아는 사람이라면 누구에게라도 답변 받을 수 있습니다</div><div class="view" data-v-7c539ecc=""><a href="/kr/knowledge/list?menuId=DOM_200000000011003" data-v-7c539ecc="">제주관광 지식iN 바로가기 </a><a href="#" style="background:#e55283;margin-left:20px" data-v-7c539ecc="">질문하기</a></div><div class="new_qna" data-v-7c539ecc=""><h4 data-v-7c539ecc="">신규 질문</h4><div class="best-data" data-v-7c539ecc=""><ul class="list" data-v-7c539ecc=""><li data-v-7c539ecc=""><a data-v-7c539ecc="" href="/kr/knowledge/view?menuId=DOM_200000000011003&amp;knwld_seq=906#"><strong data-v-7c539ecc="">사라오름에 물이 있을까요?</strong><ul data-v-7c539ecc=""><li data-v-7c539ecc="">조회 : 27</li><li data-v-7c539ecc="">답변 : 1</li></ul></a></li><li data-v-7c539ecc=""><a data-v-7c539ecc="" href="/kr/knowledge/view?menuId=DOM_200000000011003&amp;knwld_seq=905#"><strong data-v-7c539ecc="">제주공항에 외국인을 위한 세금 환급 카운터가 있나요?</strong><ul data-v-7c539ecc=""><li data-v-7c539ecc="">조회 : 26</li><li data-v-7c539ecc="">답변 : 1</li></ul></a></li><li data-v-7c539ecc=""><a data-v-7c539ecc="" href="/kr/knowledge/view?menuId=DOM_200000000011003&amp;knwld_seq=904#"><strong data-v-7c539ecc="">저지마을 레스토랑 예약은 어떻게하나요?</strong><ul data-v-7c539ecc=""><li data-v-7c539ecc="">조회 : 177</li><li data-v-7c539ecc="">답변 : 1</li></ul></a></li><li data-v-7c539ecc=""><a data-v-7c539ecc="" href="/kr/knowledge/view?menuId=DOM_200000000011003&amp;knwld_seq=903#"><strong data-v-7c539ecc="">추울때 가기좋은곳 있을까요?</strong><ul data-v-7c539ecc=""><li data-v-7c539ecc="">조회 : 126</li><li data-v-7c539ecc="">답변 : 1</li></ul></a></li><li data-v-7c539ecc=""><a data-v-7c539ecc="" href="/kr/knowledge/view?menuId=DOM_200000000011003&amp;knwld_seq=901#"><strong data-v-7c539ecc="">추석연휴 식당 추천 부탁해요</strong><ul data-v-7c539ecc=""><li data-v-7c539ecc="">조회 : 142</li><li data-v-7c539ecc="">답변 : 1</li></ul></a></li><li data-v-7c539ecc=""><a data-v-7c539ecc="" href="/kr/knowledge/view?menuId=DOM_200000000011003&amp;knwld_seq=900#"><strong data-v-7c539ecc=""> 비가 오는 날에 가볼만한 관광명소를 추천해주세요</strong><ul data-v-7c539ecc=""><li data-v-7c539ecc="">조회 : 161</li><li data-v-7c539ecc="">답변 : 2</li></ul></a></li><li data-v-7c539ecc=""><a data-v-7c539ecc="" href="/kr/knowledge/view?menuId=DOM_200000000011003&amp;knwld_seq=899#"><strong data-v-7c539ecc="">박물관은 살아있다 애견동반</strong><ul data-v-7c539ecc=""><li data-v-7c539ecc="">조회 : 164</li><li data-v-7c539ecc="">답변 : 1</li></ul></a></li><li data-v-7c539ecc=""><a data-v-7c539ecc="" href="/kr/knowledge/view?menuId=DOM_200000000011003&amp;knwld_seq=888#"><strong data-v-7c539ecc="">금오름 분화구에 현재 물 고여있나요?</strong><ul data-v-7c539ecc=""><li data-v-7c539ecc="">조회 : 1581</li><li data-v-7c539ecc="">답변 : 1</li></ul></a></li></ul></div></div></div></section><!----></div><!----></div>
 
 
 	<div class="side_banner">
@@ -454,22 +481,28 @@
 <script src="https://code.jquery.com/jquery-latest.js"></script>
 
 <script>
+	$(document)
+			.ready(
+					function() {
+						var classNames = [ 'dtCard', 'dtCard2', 'dtCard3',
+								'dtCard4', 'dttcard', 'dttcard2', 'dttcard3',
+								'dttcard4' ];
 
-$(document).ready(function() {
-    var classNames = ['dtCard', 'dtCard2', 'dtCard3', 'dtCard4', 'dttcard', 'dttcard2', 'dttcard3', 'dttcard4'];
-
-    classNames.forEach(function(className) {
-        $('.' + className).on('click', function() {
-            var taName = $(this).data('ta-name');
-            if (taName) {
-                window.location.href = 'travel_Detail?ta_name=' + taName;
-            }
-        });
-    });
-});
-
-
-
+						classNames
+								.forEach(function(className) {
+									$('.' + className)
+											.on(
+													'click',
+													function() {
+														var taName = $(this)
+																.data('ta-name');
+														if (taName) {
+															window.location.href = 'travel_Detail?ta_name='
+																	+ taName;
+														}
+													});
+								});
+					});
 </script>
 
 <script src="/resources/js/home.js"></script>

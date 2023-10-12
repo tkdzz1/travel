@@ -9,5 +9,6 @@ public interface likeDAO {
 	void removeLike(String ta_name, String id);
 	int cntLike(String ta_name, String id);
 	int totalLike(String ta_name);
+	void delete(int ta_num, String id);
 
 }

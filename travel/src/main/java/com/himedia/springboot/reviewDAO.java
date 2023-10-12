@@ -12,4 +12,5 @@ public interface reviewDAO {
 	void deletelist(String ta_name);
 	int cntReviewList(String ta_name);
 	void updateContent(int reviewNum, String updateContent, int rating);
+	void delete(String ta_name);
 }

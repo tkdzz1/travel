@@ -55,21 +55,21 @@
 		            </c:otherwise>
 		        </c:choose>
 		        <div>
-		            <p><input type="text" name="content" class="content" value="${status.index < fn:length(ta_contentParts) ? ta_contentParts[status.index] : ''}"></p>
+					<p><textarea name="content" class="content" style="height:auto; width:90%;">${status.index < fn:length(ta_contentParts) ? ta_contentParts[status.index] : ''}</textarea></p>
 		            <input type="button" class="deleteContent" value="컨텐츠 삭제">
 		        </div>
 		    </div>
 		</c:forEach>
 
 		<label>새 컨텐츠 추가</label><br>
-		<input type="text" id="addcontent"><br>
+		<textarea id="addcontent" style="width:90%;"></textarea><br>
 		<input type="file" id="addimagefile"><br>
 		<input type="button" id="updatedetail" value="내용 추가"><br>
 		<table>
 			<tr>
 		        <td><input type="submit" id="update" value="저장"></td>
 		        <td></td>
-		        <td><input type="submit" id="cancle" value="취소"></td>
+		        <td><input type="button" id="cancle" value="취소"></td>
         	</tr>
         </table>
     </div>
@@ -185,7 +185,8 @@ $(document).ready(function () {
     });
 	$("#cancle").on("click",function(){
 		let taName = $('#ta_name').val();
-		document.location="/travel_detail?ta_name" + taName;
+		console.log(taName)
+		document.location="/travel_Detail?ta_name=" + taName;
 	})
 });
 

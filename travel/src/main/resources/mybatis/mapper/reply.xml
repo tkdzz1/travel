@@ -5,12 +5,12 @@
 
 <insert id="addReply" >
 
-insert into reply set commenter=#{param1}, reply_content=#{param2}, parent_comment_id=#{param3}, reply_created=now();
+insert into reply set commenter=#{param1}, reply_content=#{param2}, parent_comment_id=#{param3}, isprivate=#{param4}, reply_created=CURDATE();
 </insert>
 
 <delete id="delete" >
 
-delete from reply where parent_comment_id = #{param1}
+delete from reply where reply_id = #{param1}
 
 </delete>
 
@@ -19,6 +19,13 @@ delete from reply where parent_comment_id = #{param1}
 	select * from reply where parent_comment_id = #{param1}
 
 </select>
+
+<update id="edtreply">
+    UPDATE reply SET reply_content = #{param2} WHERE reply_id = #{param1}
+</update>
     
+<delete id = "deleteByComment">
+	delete from reply where parent_comment_id = #{param1}
+</delete>
 
 </mapper>

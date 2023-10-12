@@ -13,17 +13,34 @@
 </head>
 <%@ include file="../header.jsp" %>
 <body>
+<div style="height:100%;">
 <section>
 <div class="background-img" style="background-image: url('img/t_img/${detail.ta_img}');">
     <div class="travel-info">
-        <h1>여행지 상세 정보</h1>
-        <h2 class="ta_name">${detail.ta_name}</h2>
+        <h1>여행지 상세 정보</h1><br>
+        <h2 class="ta_name">${detail.ta_name}</h2><br>
         <input type="hidden" id="hidname" value="${detail.ta_name }">
         <input type="hidden" id="pagestr" value="${pagestr}">
         <input type="hidden" id="ta_num" value="${detail.ta_num }">
         <input type="hidden" id="ta_category" value="${detail.ta_category}">
         <p><strong>주소:</strong><span>${detail.ta_address}</span></p>
-        <p><strong>분류:</strong>${detail.ta_category}</p>
+		<span>별점:
+		    <c:choose>
+		        <c:when test="${not empty avgStar}">
+		            <c:forEach begin="1" end="${avgStar}" var="i">
+		                <c:if test="${i <= avgStar}">
+		                    <label class="avgStar">★</label>
+		                </c:if>
+		            </c:forEach>
+		        </c:when>
+		        <c:otherwise>
+		            <p>아직 받은 별점이 없습니다!</p>
+		        </c:otherwise>
+		    </c:choose>
+		</span>
+
+        
+        
     </div>
 </div>
 <div class="detail-info">
@@ -39,7 +56,7 @@
 	</table>
 	<c:set var="maxIndex" value="${fn:length(ta_imginfoParts) > fn:length(ta_contentParts) ? fn:length(ta_imginfoParts) : fn:length(ta_contentParts)}" />
 	<c:forEach begin="0" end="${maxIndex-1}" varStatus="status">
-		<div>
+		<div class="content">
 		    <!-- 이미지 출력 -->
 		    <c:choose>
 		        <c:when test="${empty ta_imginfoParts[status.index]}">
@@ -53,7 +70,7 @@
 		
 		    <!-- 텍스트 출력 -->
 		    <c:if test="${status.index < fn:length(ta_contentParts)}">
-		        <p>${ta_contentParts[status.index]}</p>
+		        <label>${ta_contentParts[status.index]}</label>
 		    </c:if>
 	    </div>
 	</c:forEach>
@@ -85,12 +102,13 @@
 	<div id="insertReview" class="insertReview">
 		<input type="hidden" id="taname" value="${detail.ta_name}">
 		<textarea class="col-auto form-control" id="reviewContents" placeholder="좋은 리뷰를 남겨주세요!"></textarea>
-	  <input type="button" id=btnreview class="btnreview" style="height:50px;" value="작성완료">
+	  <input type="button" id=btnreview class="btnreview" style="height:50px;margin-top:10px;" value="작성완료">
 	</div>
-	
+
+</div>
+</section>
 </div>
 <%@ include file="../footer.jsp" %>
-</section>
 </body>
 <script src="https://code.jquery.com/jquery-latest.js"></script>
 <script>
@@ -217,7 +235,7 @@ $(document).ready(function(){
                 reviewComment.append(starRating);
 
                 // 리뷰 내용 및 삭제 버튼 추가
-                reviewComment.append("<div class='review-content' style='height:50px;'>" + review.review_content + "</div><br>");
+				reviewComment.append("<textarea class='review-content' rows='6' style='width:800px;' readonly>" + review.review_content + "</textarea>");
                 
                 reviewComment.append("<div id='star-rating' style='display:none;direction: rtl;'>");
                 reviewComment.find("#star-rating").append("<input type='radio' name='updatedStar" + review.review_num + "' class='radio2' value='5' id='updateRate1" + review.review_num + "' data-review-num='" + review.review_num + "'><label for='updateRate1" + review.review_num + "'>★</label>");
@@ -230,12 +248,12 @@ $(document).ready(function(){
                 reviewComment.append("<input type='hidden' id='rating_num" + review.review_num + "' value='" + review.review_rating + "'>");
 
 
-                reviewComment.append("<textarea class='update-content' style='height:50px;display:none;'>" + review.review_content + "</textarea>");
+                reviewComment.append("<textarea class='update-content'  rows='6' style='width:800px;display:none; ' >" + review.review_content + "</textarea>");
 				reviewComment.append("<div class='button-container'>");
-				reviewComment.append("<input type='button' style='height:40px;' class='delete-button' data-review-num='" + review.review_num + "' value='삭제'>");
-				reviewComment.append("<input type='button' style='height:40px;' class='update-button' data-review-num='" + review.review_num + "' value='수정'>");
-				reviewComment.append("<input type='button' style='height:40px;display:none;' class='accept-button' data-review-num='" + review.review_num + "' value='확인'>");
-				reviewComment.append("<input type='button' style='height:40px;display:none;' class='cancle-button' data-review-num='" + review.review_num + "' value='취소'>");
+				reviewComment.append("<input type='button' style='height:40px;margin-top:10px;' class='delete-button' data-review-num='" + review.review_num + "' value='삭제'>");
+				reviewComment.append("<input type='button' style='height:40px;width:40px;margin-top:10px;' class='update-button' data-review-num='" + review.review_num + "' value='수정'>");
+				reviewComment.append("<input type='button' style='height:40px;display:none;margin-top:10px;' class='accept-button' data-review-num='" + review.review_num + "' value='확인'>");
+				reviewComment.append("<input type='button' style='height:40px;display:none;margin-top:10px;' class='cancle-button' data-review-num='" + review.review_num + "' value='취소'>");
 				reviewComment.append("</div><br><br>");
 
 
@@ -391,29 +409,32 @@ $(document)
 })
 .on("click", ".delete-button", function () {
     var reviewNum = $(this).data("review-num"); // 데이터 속성을 통해 리뷰 번호 가져오기
-    console.log("클릭한 삭제 버튼의 리뷰 번호: " + reviewNum);
-    
     var reviewComment = $(this).closest(".review-comment"); // 삭제할 리뷰 댓글을 찾기
-    
-    // Ajax 요청
-    $.ajax({
-        type: "POST", // 또는 다른 HTTP 메서드 (GET, DELETE 등)
-        url: "/deleteReview", // 서버에서 삭제 작업을 수행할 엔드포인트 URL
-        data: { reviewNum: reviewNum }, // 서버에 전달할 데이터 (리뷰 번호)
-        success: function (response) {
-            console.log("리뷰가 성공적으로 삭제되었습니다.");
-            
-            // 리뷰 댓글 div를 화면에서 제거
-            reviewComment.remove();
-            location.reload();
-            // 여기에서 필요한 업데이트 작업을 수행할 수 있습니다.
-        },
-        error: function (error) {
-            // 삭제 중에 오류가 발생하면 이 부분이 실행됩니다.
-            console.error("리뷰 삭제 중 오류 발생: " + error);
-            // 오류 처리를 위한 코드를 추가할 수 있습니다.
-        }
-    });
+
+    // 사용자에게 삭제 확인 대화상자 표시
+    var confirmDelete = confirm("정말로 삭제하시겠습니까?");
+
+    if (confirmDelete) {
+        // 사용자가 확인을 클릭한 경우
+        $.ajax({
+            type: "POST",
+            url: "/deleteReview",
+            data: { reviewNum: reviewNum },
+            success: function (response) {
+                console.log("리뷰가 성공적으로 삭제되었습니다.");
+                
+                // 리뷰 댓글 div를 화면에서 제거
+                reviewComment.remove();
+                location.reload();
+            },
+            error: function (error) {
+                console.error("리뷰 삭제 중 오류 발생: " + error);
+            }
+        });
+    } else {
+        // 사용자가 취소를 클릭한 경우
+        console.log("삭제가 취소되었습니다.");
+    }
 })
 .on("click", ".update-button", function () {
     var reviewComment = $(this).closest(".review-comment");
@@ -421,23 +442,15 @@ $(document)
     var deleteButton = reviewComment.find(".delete-button");
     var updateButton = reviewComment.find(".update-button");
     var acceptButton = reviewComment.find(".accept-button");
-    var cancleButton = reviewComment.find(".cancle-button");
-	let starRating = reviewComment.find("#star-rating");
-	
-    // 기존 별점 값을 가져오기
-    var existingRating = reviewComment.find("#rating_num" + reviewComment.data("review-num")).val();
-    
-    console.log(existingRating)
-    // 수정 별점 입력란 설정 및 체크
-    starRating.find("input[name^='updatedStar']").prop("checked", false); // 모든 별점 선택 해제
-    starRating.find("input[name^='updatedStar'][value='" + existingRating + "']").prop("checked", true); // 수정 별점 선택
-	
-    // 수정할 내용을 보이도록 스타일 변경
-    starRating.css("display","inline-block")
-    acceptButton.css("display", "inline-block"); // inline-block으로 변경
+    var cancelButton = reviewComment.find(".cancle-button");
+    var starRating = reviewComment.find("#star-rating");
+
+
+    starRating.css("display", "inline-block");
+    acceptButton.css("display", "inline-block");
     updateButton.css("display", "none");
-    cancleButton.css("display", "inline-block"); // inline-block으로 변경
-    updateContent.css("display", "inline-block"); // inline-block으로 변경
+    cancelButton.css("display", "inline-block");
+    updateContent.css("display", "inline-block");
     deleteButton.css("display", "none");
 })
 .on("click",".cancle-button", function(){
@@ -450,11 +463,11 @@ $(document)
     let starRating = reviewComment.find("#star-rating");
     
     acceptButton.css("display","none");
-    updateButton.css("display","inline-block");
-    cancleButton.css("display","none");
     updateContent.css("display", "none");
-    deleteButton.css("display","inline-block")
-    starRating.css("display","none")
+    cancleButton.css("display", "none");
+    updateButton.css("display", "inline-block");
+    deleteButton.css("display", "inline-block");
+    starRating.css("display", "none");
 })
 .on("click", ".accept-button", function () {
     var reviewComment = $(this).closest(".review-comment"); // 수정할 리뷰 댓글을 찾기
@@ -466,6 +479,11 @@ $(document)
     
     // 수정 대상 리뷰의 별점을 찾기
     var rating = $("input[name='updatedStar" + reviewNum + "']:checked").val();
+    
+    if(rating==undefined){
+    	alert("별점을 선택해 주십시오.")
+    	return false;
+    }
     
     // 리뷰 번호와 별점 확인
     console.log("Review Number: " + reviewNum);

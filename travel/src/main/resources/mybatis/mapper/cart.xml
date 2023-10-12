@@ -14,4 +14,7 @@
 <select id="totalCart">
 	select count(*) from cart where cart_local=#{param1}
 </select>
+<delete id="delete">
+	delete from cart where cart_num=#{param1} and cart_id=#{param2}
+</delete>
 </mapper>

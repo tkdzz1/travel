@@ -14,4 +14,7 @@
 <select id="totalLike">
 	select count(*) from likes where like_local=#{param1}
 </select>
+<delete id="delete">
+	delete from likes where like_num=#{param1} and like_id=#{param2}
+</delete>
 </mapper>

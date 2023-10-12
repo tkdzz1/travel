@@ -14,5 +14,6 @@ public class BoardDTO {
 	String updated;
 	String category;
 	int answer_count;
+	int isprivate;
 
 }

@@ -46,10 +46,10 @@ public class tController {
 			page="1";	
 		} 
 		int pno = Integer.parseInt(page);
-		start = (pno-1)*5;
-		psize=5;		
+		start = (pno-1)*10;
+		psize=10;		
 		int cnt=tdao.cntTravelList("관광지");
-		int pagecount = (int)Math.ceil(cnt/5.0);
+		int pagecount = (int)Math.ceil(cnt/10.0);
 		String pagestr="";
 		for(int i=1; i<=pagecount; i++) {
 			if(pno==i) {
@@ -128,21 +128,20 @@ public class tController {
                 }
                 StringBuilder taContentBuilder = new StringBuilder();
                 for (String detailInfo : detailInfos) {
-	                    if (detailInfo == null || detailInfo.isEmpty()) {
-	                        // 콘텐츠가 비어있는 경우 더미 데이터를 추가합니다
-	                    	
-	                        taContentBuilder.append("/");
-	                    } else {
-	                        if (taContentBuilder.length() > 0) {
-		                    	taContentBuilder.append("/");
-		                        taContentBuilder.append(detailInfo);
-	                        } else {
-	                        	taContentBuilder.append(detailInfo);
-	                        }
-	                    }
+                    if (detailInfo == null || detailInfo.isEmpty()) {
+                        // 값이 공백인 경우 /를 추가합니다
+                        taContentBuilder.append("/");
+                    } else {
+                        if (taContentBuilder.length() > 0) {
+                            taContentBuilder.append(",");
+                        }
+                        taContentBuilder.append(detailInfo);
+                    }
                 }
+
                 
                 String taContent = taContentBuilder.toString();
+                System.out.println("taContent" + taContent);
                 // 여행지 정보를 데이터베이스에 저장
                 tdao.addTravelList(name, local, savedMainName, address, category, latitude, longitude);
                 tdao.addImgInfo(name,detailImagePaths.toString(),taContent);
@@ -169,10 +168,10 @@ public class tController {
 			page="1";	
 		} 
 		int pno = Integer.parseInt(page);
-		start = (pno-1)*5;
-		psize=5;		
+		start = (pno-1)*10;
+		psize=10;		
 		int cnt=tdao.cntTravelList(category);
-		int pagecount = (int)Math.ceil(cnt/5.0);
+		int pagecount = (int)Math.ceil(cnt/10.0);
 		String pagestr="";
 		for(int i=1; i<=pagecount; i++) {
 			if(pno==i) {
@@ -189,8 +188,10 @@ public class tController {
             JSONObject jo = new JSONObject();
             jo.put("ta_num", getlist.get(i).getTa_num());
             jo.put("ta_name", getlist.get(i).getTa_name());
+            jo.put("ta_img", getlist.get(i).getTa_img());
             jo.put("ta_local", getlist.get(i).getTa_local());
             jo.put("ta_address", getlist.get(i).getTa_address());
+            jo.put("ta_category", getlist.get(i).getTa_category());
             jo.put("ta_latitude", getlist.get(i).getTa_latitude());
             jo.put("ta_longitude", getlist.get(i).getTa_longitude());
             ja.add(jo);
@@ -206,19 +207,22 @@ public class tController {
     	String ta_content = detail.getTa_content();
     	String[] ta_contentParts = ta_content.split("/");
     	String[] ta_imginfoParts = ta_imginfo.split("/");
-    	
+    	Integer avgStar = tdao.avgStar(ta_name);
+    	System.out.println(avgStar);
     	tdao.hitup(ta_name);
     	model.addAttribute("detail", detail);
         model.addAttribute("ta_imginfoParts", ta_imginfoParts);
         model.addAttribute("ta_contentParts", ta_contentParts);
-        
+        model.addAttribute("avgStar", avgStar);
     	return "/travel_attraction/travel_detail";
     }
     @PostMapping("/delete_list")
     @ResponseBody
     public String delete(HttpServletRequest req) {
+    	HttpSession session = req.getSession();
+        String id = (String) session.getAttribute("id");
         String ta_name = req.getParameter("ta_name");
-        tdao.deleteList(ta_name);
+        int ta_num = Integer.parseInt(req.getParameter("ta_num"));
         String imageDirectory = mainuploadDirectory;
         String  mainImageFileName = req.getParameter("ta_img");
         // 이미지 파일 삭제 메서드 호출
@@ -226,7 +230,13 @@ public class tController {
         if (mainImageFile.exists()) {
             mainImageFile.delete(); // 파일을 삭제합니다.
         }
+        ldao.delete(ta_num,id);
+        cdao.delete(ta_num,id);
+        
+        tdao.deleteList(ta_name);
         rdao.deletelist(ta_name);
+        tdao.deleteTravel_attraction(ta_name);
+
         return "삭제되었습니다.";
     }
 
@@ -248,9 +258,7 @@ public class tController {
             if (mainImageFile.exists()) {
                 mainImageFile.delete(); // 파일을 삭제합니다.
             }
-        }
-        tdao.deleteTravel_attraction(ta_name);
-        
+        }        
         return "삭제되었습니다.";
     }
     @GetMapping("/update")
@@ -347,7 +355,7 @@ public class tController {
                     taContentBuilder.append("/");
                 } else {
                     if (taContentBuilder.length() > 0) {
-                        taContentBuilder.append("/");
+                    	taContentBuilder.append("/");
                     }
                     taContentBuilder.append(detailInfo);
                 }
@@ -534,7 +542,7 @@ public class tController {
             if (pno == i) {
                 pagestr += i + "&nbsp;";
             } else {
-                pagestr += "<a href='/travel_Detail?ta_name=test2&pageno=" + i + "'>" + i + "</a>&nbsp;";
+                pagestr += "<a href='/travel_Detail?ta_name=" + ta_name + "&pageno=" + i + "'>" + i + "</a>&nbsp;";
             }
         }
         model.addAttribute("pagestr", pagestr);
@@ -566,7 +574,6 @@ public class tController {
     	String ta_name = req.getParameter("ta_name");
     	String ta_category=req.getParameter("ta_category");
     	int ta_num = Integer.parseInt(req.getParameter("ta_num"));
-    	System.out.println(ta_name);
     	cdao.addCart(ta_name,ta_category,ta_num,id);
     	
     	int cnt = cdao.totalCart(ta_name);
@@ -579,7 +586,6 @@ public class tController {
     	HttpSession session = req.getSession();
         String id = (String) session.getAttribute("id");
         String ta_name = req.getParameter("ta_name");
-        System.out.println(id);
         int cnt = cdao.cntCart(ta_name,id);
         return cnt+"";
     }
@@ -624,7 +630,6 @@ public class tController {
     	HttpSession session = req.getSession();
         String id = (String) session.getAttribute("id");
         String ta_name = req.getParameter("ta_name");
-        System.out.println(id);
         int cnt = ldao.cntLike(ta_name,id);
         return cnt+"";
     }
@@ -648,7 +653,6 @@ public class tController {
     	int reviewNum = Integer.parseInt(req.getParameter("reviewNum"));
     	String updatedText=req.getParameter("updatedText");
     	int rating = Integer.parseInt(req.getParameter("rating"));
-    	System.out.println(updatedText);
     	rdao.updateContent(reviewNum,updatedText,rating);
     	return "성공";
     }

@@ -3,10 +3,38 @@
 				 "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.himedia.springboot.homeDAO">
 
-<select id="getLikeList" resultType="com.himedia.springboot.travel_attDTO">
+<select id="getCartList" resultType="com.himedia.springboot.travel_attDTO">
 SELECT a.ta_num, a.ta_name, a.ta_local, a.ta_img, a.ta_address, a.ta_category, a.ta_latitude, a.ta_longitude
 FROM travel_attraction a JOIN cart b ON a.ta_num = b.cart_num
-WHERE b.cart_id = #{param1};
+WHERE b.cart_id = #{param3}
+limit #{param1}, #{param2};
+</select>
+
+<select id="getCartFilterList" resultType="com.himedia.springboot.travel_attDTO">
+SELECT a.ta_num, a.ta_name, a.ta_local, a.ta_img, a.ta_address, a.ta_category, a.ta_latitude, a.ta_longitude
+FROM travel_attraction a JOIN cart b ON a.ta_num = b.cart_num
+WHERE b.cart_id = #{param3} and b.cart_category = #{param4}
+limit #{param1}, #{param2};
+</select>
+
+<select id="cntCartList" resultType="int">
+SELECT COUNT(*)
+FROM cart
+WHERE cart_id = #{param1};
+</select>
+
+<select id="getChoice" resultType="com.himedia.springboot.travel_attDTO">
+select * from travel_attraction where ta_num = #{param1}
+</select>
+
+<select id="getMarker" resultType="com.himedia.springboot.travel_attDTO">
+select ta_name, ta_latitude, ta_longitude from travel_attraction where ta_num = #{param1}
+</select>
+
+<select id="getFilterList" resultType="com.himedia.springboot.travel_attDTO">
+SELECT *
+FROM cart a JOIN travel_attraction b ON a.cart_num = b.ta_num
+WHERE cart_id = #{param1} AND cart_category= #{param2};
 </select>
 
 </mapper>

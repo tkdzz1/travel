@@ -23,7 +23,7 @@ body {
 	color: white;
 	margin-left: 500px;
 	width: 700px;
-    background-color: rgba(0, 0, 0, 0.6); /* 배경 색상 및 투명도 설정 */
+    background-color: rgba(0, 0, 0, 0.4); /* 배경 색상 및 투명도 설정 */
     padding: 20px; /* 내용과의 여백 설정 */
     height:500px;
 }
@@ -34,16 +34,16 @@ h1, h2, p {
 }
 
 h1 {
-    font-size: 24px;
+    font-size: 20px;
 }
 
 h2 {
-    font-size: 18px;
+    font-size: 40px;
     margin-top: 10px; /* 제목과 내용 사이 여백 설정 */
 }
 
 p {
-    font-size: 16px;
+    font-size: 25px;
     margin-top: 5px; /* 내용과 내용 사이 여백 설정 */
 }
 .background-img {
@@ -54,15 +54,12 @@ p {
 .detail-info {
 	margin-left: auto;
 	margin-right: auto;
-	width: 900px;
+	width: 1200px;
 	padding: 10px;
-	white-space: pre;
 	color: black;
-	text-align: center; /* 가로 가운데 정렬 */
 	
 }
 .detail-info {
-    max-width: 800px;
     margin: 0 auto;
     background-color: #fff;
     padding: 20px;
@@ -75,6 +72,7 @@ p {
     padding: 10px;
     background-color: #fff;
     border-radius: 5px;
+
 }
 
 /* 이미지 스타일 */
@@ -96,7 +94,7 @@ input[type="text"] {
 
 /* 버튼 스타일 */
 input[type="button"] {
-    background-color: lightgreen;
+    background-color: orange;
     color: #fff;
     border: none;
     cursor: pointer;
@@ -104,7 +102,7 @@ input[type="button"] {
 }
 
 input[type="button"]:hover {
-    background-color: green;
+    background-color: darkorange;
 }
 
 /* 이미지 삭제 버튼 스타일 */
@@ -156,7 +154,7 @@ table {
 	margin-left: auto;
 	margin-right: auto;
 	width: 850px;
-	height: 1600px;
+	height: auto;
 	border: 1px solid #ddd;
 	
 	
@@ -221,6 +219,7 @@ table {
     height: 40px;
     display: inline-block; /* 인라인 블록 요소로 변경 */
     margin-right: 5px; /* 오른쪽 여백 추가 (필요한 경우 조절) */
+    
 }
 
 /* 확인 버튼 스타일 */
@@ -238,4 +237,12 @@ table {
 .accept-button, .cancel-button {
     height: 40px;
     flex-grow: 1; /* 공간을 동일하게 분할 */
+}
+
+.content {
+	white-space: pre-wrap;
+}
+.review-comment {
+    border-bottom: 1px solid black; /* 아래 선도 설정할 경우 */
+    margin-bottom: 10px; /* 댓글 간의 간격 설정 */
 }

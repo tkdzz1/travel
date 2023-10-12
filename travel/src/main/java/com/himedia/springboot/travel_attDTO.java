@@ -16,5 +16,9 @@ public class travel_attDTO {
 	private double ta_longitude;
 	private String ta_imginfo;
 	private int ta_hit;
+	private int like_count;
+	private int review_count;
+	private double avgStar;
+	private int cart_count;
 
 }

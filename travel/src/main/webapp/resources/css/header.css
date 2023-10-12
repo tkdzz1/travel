@@ -109,55 +109,6 @@ ul li {
 	list-style: none
 }
 
-table {
-	border-collapse: collapse;
-	border-spacing: 0;
-	width: 100%;
-	box-sizing: border-box
-}
-
-caption {
-	position: relative;
-	width: 1px;
-	height: 1px;
-	margin: 0;
-	padding: 0;
-	background: 0 0;
-	font-size: 0;
-	color: transparent;
-	line-height: 0;
-	text-indent: 100%
-}
-
-legend {
-	position: absolute;
-	width: 1px;
-	height: 1px;
-	margin: 0;
-	padding: 0;
-	background: 0 0;
-	font-size: 0;
-	color: transparent;
-	line-height: 0
-}
-
-fieldset {
-	border: none;
-	min-width: 0
-}
-
-hr {
-	visibility: hidden;
-	overflow: hidden;
-	position: absolute;
-	height: 0;
-	width: 0;
-	font-size: 0
-}
-
-template {
-	display: none
-}
 
 input[type]:focus {
 	outline: solid 2px #ffa458;
