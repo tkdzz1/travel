@@ -13,7 +13,6 @@ article,aside,audio,blockquote,body,button,canvas,caption,dd,details,div,dl,dt,e
     margin: 0;
     padding: 0;
     border: 0;
-    font-family: inherit; 
     vertical-align: baseline;
     box-sizing: border-box;
     word-break: break-all
@@ -1097,8 +1096,7 @@ select {
     border: solid 1px #858585;
     line-height: 24px;
     background: #fff;
-    font-size: inherit;
-    font-family: inherit;
+
     color: inherit;
     text-transform: none;
     vertical-align: middle
@@ -1108,8 +1106,6 @@ textarea {
     min-height: 80px;
     padding: 1px 6px;
     line-height: 25px;
-    font-size: inherit;
-    font-family: inherit;
     color: inherit;
     vertical-align: middle;
     resize: none
@@ -1156,7 +1152,6 @@ select.b-input {
     padding: 0 0 2px 12px;
     -webkit-padding-end: 30px;
     -moz-padding-end: 30px;
-    font-family: inherit;
     line-height: 27px;
     background: #fff url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAGCAYAAAD68A/GAAAANElEQVQYV2Ncvnz5fwYiACPRCkGGEVIcGRnJyAizFZdikCKQGrhCbCbDFGEoRFaMrAgkDgB1ORXvQyzzggAAAABJRU5ErkJggg==) no-repeat right 8px center;
     -webkit-appearance: none;

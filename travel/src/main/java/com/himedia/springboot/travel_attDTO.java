@@ -20,5 +20,8 @@ public class travel_attDTO {
 	private int review_count;
 	private double avgStar;
 	private int cart_count;
+	private int ta_nx;
+	private int ta_ny;
+	private String ta_add;
 
 }

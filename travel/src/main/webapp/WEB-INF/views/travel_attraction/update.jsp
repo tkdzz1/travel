@@ -55,14 +55,14 @@
 		            </c:otherwise>
 		        </c:choose>
 		        <div>
-					<p><textarea name="content" class="content" style="height:auto; width:90%;">${status.index < fn:length(ta_contentParts) ? ta_contentParts[status.index] : ''}</textarea></p>
+					<p><textarea name="content" class="content" style="height:400px; width:90%;">${status.index < fn:length(ta_contentParts) ? ta_contentParts[status.index] : ''}</textarea></p>
 		            <input type="button" class="deleteContent" value="컨텐츠 삭제">
 		        </div>
 		    </div>
 		</c:forEach>
 
 		<label>새 컨텐츠 추가</label><br>
-		<textarea id="addcontent" style="width:90%;"></textarea><br>
+		<textarea id="addcontent" style="width:90%;height:400px;"></textarea><br>
 		<input type="file" id="addimagefile"><br>
 		<input type="button" id="updatedetail" value="내용 추가"><br>
 		<table>
@@ -126,7 +126,6 @@ $(document).ready(function () {
                 `;
                 
                 updateinfoDiv.html(newImageInfo);
-                location.reload()
                 // 페이지 새로고침 또는 이미지 목록 업데이트 등 추가적인 동작을 수행할 수 있습니다.
             },
             error: function (jqXHR, textStatus, errorThrown) {

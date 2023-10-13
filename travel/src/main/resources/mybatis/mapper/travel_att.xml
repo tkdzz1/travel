@@ -23,7 +23,7 @@
 	select count(*) from travel_attraction where ta_category = #{param1};
 </select>
 <select id="getDetail" resultType="com.himedia.springboot.travel_attDTO">
-	select a.ta_num,a.ta_name,a.ta_local,a.ta_img,a.ta_address,a.ta_category, a.ta_latitude,a.ta_longitude,a.ta_hit,b.ta_imginfo,b.ta_content
+	select a.ta_num,a.ta_name,a.ta_local,a.ta_img,a.ta_address,a.ta_category, a.ta_latitude,a.ta_longitude,a.ta_hit,a.ta_nx,a.ta_ny,b.ta_imginfo,b.ta_content
     from travel_attraction a inner join detail_imginfo b on a.ta_name=b.ta_name where b.ta_name=#{param1}
 </select>
 <insert id="addImgInfo">
