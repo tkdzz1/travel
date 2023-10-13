@@ -14,184 +14,135 @@
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
 </head>
 <body>
-	<%@ include file="../header.jsp"%>
-	<div id=wrapper>
+<%@ include file = "../header.jsp" %>
+<div id=wrapper>
 
-		<div style="float: left; margin-left: 10%;">
-			<h1>여행 준비</h1>
-			<hr>
-			<h5>
-				작성자 : <span id=writer>${id}</span>
-			</h5>
-			<table style="width: 400px;">
-				<tr>
-					<td>제목</td>
-					<td><input type="text" id=title placeholder="예시) 나의 3박4일 제주여행"></td>
-				</tr>
-				<tr>
-					<td>기간</td>
-					<td id="days"></td>
-				</tr>
-				<tr>
-					<td><input type="date" id=start data-placeholder="시작 날짜"
-						required aria-required="true"></td>
-					<td><input type="date" id=end data-placeholder="종료 날짜"
-						required aria-required="true"></td>
-				</tr>
-				<tr>
-					<td>인원</td>
-					<td><input type=number id=people value=1 style="width: 30px;"></td>
-				</tr>
-				<tr>
-					<td>일행</td>
-					<td><select id=party>
-							<option selected>선택</option>
-							<option>혼자</option>
-							<option>부모</option>
-							<option>아이</option>
-							<option>친구</option>
-					</select>
-				</tr>
-				<tr>
-					<td colspan="2" class="btn33"><button id=plan class="w-btn w-btn-red">일정
-							만들기</button></td>
-				</tr>
-			</table>
-		</div>
+	<div style="float:left; margin-left:10%;">
+	    <h1>여행 준비</h1>
+	    <hr>
+	    <h5>작성자 : <span id=writer>${id}</span></h5>
+	    <table style="width:400px;">
+	      <tr>
+	        <td>제목</td>
+	        <td><input type="text" id=title placeholder="예시) 나의 3박4일 제주여행"></td>
+	      </tr>
+	      <tr>
+	        <td>기간</td>
+	        <td id="days"></td>
+	      </tr>
+	      <tr>
+	        <td><input type="date" id=start data-placeholder="시작 날짜" required aria-required="true"></td>
+	        <td><input type="date" id=end data-placeholder="종료 날짜" required aria-required="true"></td>
+	      </tr>
+	      <tr>
+	      	<td>인원</td><td><input type=number id=people value=1 style="width:50px;"></td>
+	      </tr>
+	      <tr>
+	      	<td>일행</td><td><select id=party>
+	      									<option selected>선택</option>
+	      									<option>혼자</option>
+	      									<option>부모</option>
+	      									<option>아이</option>
+	      									<option>친구</option>
+	      								</select>
+	   	  </tr>
+	      <tr>
+	        <td colspan="2"><button id=plan class="w-btn w-btn-red">일정 만들기</button></td>
+	      </tr>
+	    </table>
+	</div>
 
-		<div class="right-panel">
-			<div id="map-container">
-				<div id="map" style="width: 850px; height: 400px;"></div>
-			</div>
-		</div>
-
-		<div style="float: left; margin-left: 10%;" class=travel_list id=list>
+	  <div class="right-panel" style="border:1px solid white;">
+	    <div id="map-container"> 
+	      <div id="map" style="width: 850px; height: 400px;"></div> 
+	    </div>
+	  </div>
+	  
+	  <div style="float:left; margin-left:10%;" class=travel_list id=list>
 			<ul>
-				<li class=select>찜한 여행지
-					<hr>
-				</li>
-				<li>검색
-					<hr>
-				</li>
+				<li class=select>찜한 여행지<hr></li>
+				<li>검색<hr></li>
 			</ul>
 			<div class=option>
 				<ul>
-					<li class=select>전체
-						<hr>
-					</li>
-					<li>관광지
-						<hr>
-					</li>
-					<li>음식
-						<hr>
-					</li>
-					<li>쇼핑
-						<hr>
-					</li>
-					<li>숙박
-						<hr>
-					</li>
+					<li class=select>전체<hr></li>
+					<li>관광지<hr></li>
+					<li>음식<hr></li>
+					<li>쇼핑<hr></li>
+					<li>숙박<hr></li>
 				</ul>
 			</div>
-			<c:if test="${tList != 'empty' }">
-				<c:forEach items="${tList}" var="tList">
-					<hr>
-					<div name=contentList class=listContent>
-						<input type=hidden value="${tList.ta_num}" name=taNum> <img
-							src="/img/t_img/${tList.ta_img}">
-						<div class=text>
-							<h5>${tList.ta_name}</h5>
-							<p>${tList.ta_local}</p>
-							<button class="w-btn w-btn-red" name=add>일정에 추가</button>
+			<div id=searchDIV style="text-align:center; display:none;">
+				<input type=text id=search placeholder="검색어 입력">
+			</div>
+			<div id=listResult>
+				<c:if test="${tList != 'empty' }">
+					<c:forEach items="${tList}" var="tList">
+						<hr>
+						<div name=contentList class=listContent>
+							<input type=hidden value="${tList.ta_num}" name=taNum>
+							<img src="/img/t_img/${tList.ta_img}">
+							<div class=text>
+								<h5 style="font-size:20px;">${tList.ta_name}</h5>
+								<p style="font-size:20px;">${tList.ta_local}</p>
+								<button class="w-btn w-btn-red" name=add>일정에 추가</button>
+							</div>
 						</div>
+					</c:forEach>
+					<hr>
+					<div id=page>
+					 	${page}
 					</div>
-				</c:forEach>
-				<hr>
-				<div id=page>${page}</div>
-			</c:if>
+				</c:if>
+			</div>
+			
+			<div style="text-align:center; margin-top: 50%; display:none;" id="filterListEmpty">
+				<img src="img/heart.png" style="width:100px;">
+				<h3>찜한 여행지가 없습니다.</h3>
+			</div>
+			
 			<c:if test="${tList == 'empty' }">
-				<div style="text-align: center; margin-top: 50%;">
-					<img src="img/heart.png" style="width: 100px;">
-					<h3>찜한 여행지가 없습니다.</h3>
-				</div>
+			<div style="text-align:center; margin-top: 50%;">
+				<img src="img/heart.png" style="width:100px;">
+				<h3>찜한 여행지가 없습니다.</h3>
+			</div>
 			</c:if>
-		</div>
+	  </div>
 
-		<div>
-			<table id=planTable class=timeTable>
-				<thead style="background-color: black;">
-					<tr>
-						<td style="width: 60px;">시간</td>
-						<td style="width: 800px;"></td>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>06:00</td>
-						<td rowspan=18>일정을 만들어주세요.</td>
-					</tr>
-					<tr>
-						<td>07:00</td>
-					</tr>
-					<tr>
-						<td>08:00</td>
-					</tr>
-					<tr>
-						<td>09:00</td>
-					</tr>
-					<tr>
-						<td>10:00</td>
-					</tr>
-					<tr>
-						<td>11:00</td>
-					</tr>
-					<tr>
-						<td>12:00</td>
-					</tr>
-					<tr>
-						<td>13:00</td>
-					</tr>
-					<tr>
-						<td>14:00</td>
-					</tr>
-					<tr>
-						<td>15:00</td>
-					</tr>
-					<tr>
-						<td>16:00</td>
-					</tr>
-					<tr>
-						<td>17:00</td>
-					</tr>
-					<tr>
-						<td>18:00</td>
-					</tr>
-					<tr>
-						<td>19:00</td>
-					</tr>
-					<tr>
-						<td>20:00</td>
-					</tr>
-					<tr>
-						<td>21:00</td>
-					</tr>
-					<tr>
-						<td>22:00</td>
-					</tr>
-					<tr>
-						<td>23:00</td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
+  <div>
+  	<table id=planTable class=timeTable>
+  		<thead style="background-color:black;">
+  			<tr><td style="width:60px;">시간</td><td style="width:800px;"></td></tr>
+  		</thead>
+  		<tbody>
+  			<tr><td>06:00</td><td rowspan=18>일정을 만들어주세요.</td></tr>
+  			<tr><td>07:00</td></tr>
+  			<tr><td>08:00</td></tr>
+  			<tr><td>09:00</td></tr>
+  			<tr><td>10:00</td></tr>
+  			<tr><td>11:00</td></tr>
+  			<tr><td>12:00</td></tr>
+  			<tr><td>13:00</td></tr>
+  			<tr><td>14:00</td></tr>
+  			<tr><td>15:00</td></tr>
+  			<tr><td>16:00</td></tr>
+  			<tr><td>17:00</td></tr>
+  			<tr><td>18:00</td></tr>
+  			<tr><td>19:00</td></tr>
+  			<tr><td>20:00</td></tr>
+  			<tr><td>21:00</td></tr>
+  			<tr><td>22:00</td></tr>
+  			<tr><td>23:00</td></tr>
+  		</tbody>
+  	</table>
+  </div>
 
-		<div style="text-align: center;">
-			<button class="w-btn w-btn-red" id=save>저장</button>
-			<button class="w-btn w-btn-black" id=cancel>취소</button>
-		</div>
-
-	</div>
-	<%@ include file="../footer.jsp"%>
+  <div style="text-align:center;">
+  		<button class="w-btn w-btn-red" id=save>저장</button> <button class="w-btn w-btn-black" id=cancel>취소</button>
+  </div>
+  
+</div>
+<%@ include file = "../footer.jsp" %>
 </body>
 <script src="https://code.jquery.com/jquery-latest.js"></script>
 <script src="js/my_jeju_travel.js"></script>

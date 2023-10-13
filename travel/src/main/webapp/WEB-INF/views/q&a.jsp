@@ -371,7 +371,7 @@ button:hover {
 .allbtn {
     background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30.018' viewBox='0 0 30 30.018'%3E%3Cdefs%3E%3CclipPath id='a'%3E%3Cpath data-name='사각형 322' fill='none' d='M0 0h30v30.018H0z'/%3E%3C/clipPath%3E%3C/defs%3E%3Cg data-name='그룹 3347'%3E%3Cg data-name='그룹 3346' clip-path='url(%23a)' fill='none' stroke='%23fff' stroke-width='2'%3E%3Cpath data-name='사각형 318' d='M1.145 1.145h11.227v11.227H1.145z'/%3E%3Cpath data-name='사각형 319' d='M17.628 1.145h11.227v11.227H17.628z'/%3E%3Cpath data-name='사각형 320' d='M1.145 17.646h11.227v11.227H1.145z'/%3E%3Cpath data-name='사각형 321' d='M17.628 17.646h11.227v11.227H17.628z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
     background: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30.018' viewBox='0 0 30 30.018'%3E%3Cdefs%3E%3CclipPath id='a'%3E%3Cpath data-name='사각형 322' fill='none' d='M0 0h30v30.018H0z'/%3E%3C/clipPath%3E%3C/defs%3E%3Cg data-name='그룹 3347'%3E%3Cg data-name='그룹 3346' clip-path='url(%23a)' fill='none' stroke='%23a1a1a1' stroke-width='2'%3E%3Cpath data-name='사각형 318' d='M1.145 1.145h11.227v11.227H1.145z'/%3E%3Cpath data-name='사각형 319' d='M17.628 1.145h11.227v11.227H17.628z'/%3E%3Cpath data-name='사각형 320' d='M1.145 17.646h11.227v11.227H1.145z'/%3E%3Cpath data-name='사각형 321' d='M17.628 17.646h11.227v11.227H17.628z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") no-repeat center top 20px/30px auto;
-    
+    height: 100%; transition: transform .2s ease, padding .2s ease;display:inline-block
 }
 
 
@@ -470,17 +470,23 @@ font-weight:bold;
 
 <div class="catea">
     <input type="button" value="전체보기" class="allbtn" style="width:150px;
-        height:150px; border-radius:10px; background-color:#ef6d00; margin-right: 0;">
+        height:150px; border-radius:10px; background-color:#ef6d00; margin-right: 0; cursor:pointer;">
     <input type="button" value="관광지" class="landmark" style="width:150px;
-        height:150px; border-radius:10px; background-color:#ef6d00; margin-right: 0;">
+        height:150px; border-radius:10px; background-color:#ef6d00; margin-right: 0; cursor:pointer;">
     <input type="button" value="음식점" class="food" style="width:150px;
-        height:150px; border-radius:10px; background-color:#ef6d00; margin-right: 0;">
+        height:150px; border-radius:10px; background-color:#ef6d00; margin-right: 0; cursor:pointer;">
     <input type="button" value="기타" class="etc" style="width:150px;
-        height:150px; border-radius:10px; background-color:#ef6d00; margin-right: 0;">
+        height:150px; border-radius:10px; background-color:#ef6d00; margin-right: 0; cursor:pointer;">
 </div>
 
 
-
+   <c:if test="${empty sessionScope.id}">
+        <div class="logplease">
+        <button id="btnlogin" class="btnlogin">글쓰기</button> 
+          
+            </div>
+        </c:if>
+        
 
 
 <table id="tblBoard">
@@ -541,13 +547,7 @@ font-weight:bold;
         
         
       
-        <c:if test="${empty sessionScope.id}">
-        <div class="logplease">
-        <button id="btnlogin" class="btnlogin">글쓰기</button> 
-          
-            </div>
-        </c:if>
-        
+     
 
 <br><br><br>
 <%@include file="footer.jsp"%>

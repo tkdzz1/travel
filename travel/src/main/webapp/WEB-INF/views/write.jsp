@@ -52,10 +52,7 @@
     margin-bottom: 10px !important;
   }
 
-  a {
-    text-decoration: none !important;
-    color: #007bff !important;
-  }
+
 
   a:hover {
     text-decoration: underline !important;
@@ -72,6 +69,18 @@
 
   #btnSubmit:hover, #btnPrev:hover {
     background-color: #0056b3 !important;
+  }
+  
+  
+  @font-face {
+    font-family: 'SUIT-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+  
+  .hidename {
+  font-family: 'SUIT-Regular';
   }
 </style>
 </head>
@@ -102,7 +111,7 @@
       <tr>
         <td></td>
         <td style="text-align:right;">
-          닉네임 숨기기 &nbsp;<input type="checkbox" id="check" name="private">&nbsp;&nbsp;&nbsp;
+         <a class="hidename"> 닉네임 숨기기</a> &nbsp;<input type="checkbox" id="check" name="private">&nbsp;&nbsp;&nbsp;
           <input type="submit" id="btnSubmit" name="btnSubmit" value="작성완료">&nbsp;&nbsp;
           <input type="button" id="btnPrev" value="이전으로">
         </td>
@@ -116,9 +125,10 @@
 <script src="https://code.jquery.com/jquery-latest.js"></script>
 <script>
 $(document).ready(function() {
-	  $('#btnPrev').click(function() {
-	    window.location.href = "/q&a";
-	  });
+	$('#btnPrev').click(function() {
+	    history.back();  // q&a로 x 이전페이지로
+	});
+
 
 	  $(document).on('submit', '#frmInsert', function(e) {
 	    if ($('#title').val() === '') {

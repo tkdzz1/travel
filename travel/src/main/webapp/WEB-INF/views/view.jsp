@@ -7,6 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/3.0.1/js.cookie.min.js"></script>
     <title>게시물 보기</title>
     
     <style>
@@ -116,7 +117,7 @@ font-family: 'SUITE-Regular';
     border:1px solid #d8d8d8;;
     
      padding-left: 20px;
-     padding: 60px;
+     padding: 85px;
 }
 
 
@@ -620,6 +621,7 @@ font-family: 'GowunBatang-Regular';
         border: none !important;
         cursor: pointer !important;
         border-radius :10px !important;
+        
     }
     
     
@@ -704,13 +706,12 @@ font-family: 'Pretendard-Regular';
 
 /* 확인 버튼 */
 .subrp {
-    background-color: #28a745;
+    background-color: #007bff;
     color: white;
     border: none;
-    padding: 5px 10px;
     cursor: pointer;
     border-radius: 5px;
-    margin-right: 5px;
+    font-family: 'SUITE-Regular';
 }
 
 .subrp:hover {
@@ -733,7 +734,57 @@ font-family: 'Pretendard-Regular';
 	display:none;
 }
 
+.noshowwriter, .onlyshowtowriter {
+	font-family: 'GmarketSansMedium';
+	color: #848484;
+}
 
+.hidecommenter, .showtoowner {
+	font-family: 'GmarketSansMedium';
+}
+
+.emotional {
+	float:right;
+	display:flex;
+	
+}
+
+
+@font-face {
+    font-family: 'BMJUA';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMJUA.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+.emotional li {
+	    display: inline-block;
+    text-align: center;
+    width: 80px;
+    font-size: 14px;
+    color: #535353;
+    padding: 50px 0 0;
+   font-family: 'BMJUA';
+}
+
+.fli {
+	background: url(https://www.visitjeju.net/image/knowledge/icon-evaluation1.svg) no-repeat top/36px auto;
+}
+
+.sli {
+	background: url(https://www.visitjeju.net/image/knowledge/icon-evaluation2.svg) no-repeat top/36px auto;
+}  
+
+.tli {
+	background: url(https://www.visitjeju.net/image/knowledge/icon-evaluation3.svg) no-repeat top/36px auto;
+}
+
+.fifli {
+	background:url(https://www.visitjeju.net/image/knowledge/icon-evaluation4.svg) no-repeat top/36px auto;
+}
+
+.sili {
+	background:url(https://www.visitjeju.net/image/knowledge/icon-evaluation5.svg) no-repeat top/36px auto;
+}
 
 
 
@@ -808,8 +859,8 @@ font-family: 'Pretendard-Regular';
         <input type="text" name="commenter" id="commenter" value="${sessionScope.id}" readonly>
         <textarea name="comment_content" id="comment_content" placeholder="댓글 내용"></textarea>
         <button type="button" id="submitComment">완료</button><br>
-        작성자 비공개<input type="checkbox" id="checkprivate"><br>
-        작성자에게만 보이기 <input type="checkbox" id="privateComment">
+        <a class="noshowwriter">작성자 비공개</a><input type="checkbox" id="checkprivate"><br>
+        <a class="onlyshowtowriter">작성자에게만 보이기</a> <input type="checkbox" id="privateComment">
     </form>
     <br>
 </div>
@@ -843,56 +894,75 @@ font-family: 'Pretendard-Regular';
             <c:forEach items="${comments}" var="comment">
                 <div class="comment">
                     <p class="cmter">
-                    <c:choose>
-            		<c:when test="${comment.isprivate == 1}">댓글 작성자: 비공개</c:when>
-            		<c:otherwise>
-            		<strong>댓글 작성자: <c:out value="${comment.commenter}" /> 
-            		</c:otherwise>
-        			</c:choose>         			 
-                    &nbsp;&nbsp; 작성일: <c:out value="${comment.comment_created }" /></strong></p>
-                    <p style="display:none;"><c:out value="${comment.comment_id}" /></p>
-                    <p style="display:none;">작성자:<c:out value="${comment.commenter}" /></p>
+                        <c:choose>
+                            <c:when test="${comment.isprivate == 1 && sessionScope.id != comment.commenter}">
+                                댓글 작성자: 비공개
+                            </c:when>
+                            <c:otherwise>
+                                <strong>댓글 작성자: <c:out value="${comment.commenter}" /></strong>
+                            </c:otherwise>
+                        </c:choose>
+                        &nbsp;&nbsp; 작성일: <c:out value="${comment.comment_created}" />
+                    </p>
+                    <p style="display:none;" id="ckcmtid"><c:out value="${comment.comment_id}" /></p>
+                    <p style="display:none;"><c:out value="${comment.commenter}" /></p>
                     <p class="cmtnt">
-                    
-                    <c:choose>
-    				<c:when test="${comment.isprivatecomment == 1 && sessionScope.id != comment.commenter && sessionScope.id != bpost.writer}">
-
-       				<strong>작성자에게만 보이는 댓글입니다.</strong>
-    				</c:when>
-    				<c:otherwise>
-                    
-                    <c:out value="${comment.comment_content}" /></p>
-                    </c:otherwise>
-                    </c:choose>
-                    
+                        <c:choose>
+                            <c:when test="${comment.isprivatecomment == 1 && sessionScope.id != comment.commenter && sessionScope.id != bpost.writer}">
+                                <strong>작성자에게만 보이는 댓글입니다.</strong>
+                            </c:when>
+                            <c:otherwise>
+                                <c:out value="${comment.comment_content}" />
+                            </c:otherwise>
+                        </c:choose>
+                    </p>
                     <p class="cmtct">작성일: <c:out value="${comment.comment_created}" /></p>
-                    <p style="display:none;"><c:out value="${comment.board_seqno }" /></p>
-                  
+                    <p style="display:none;"><c:out value="${comment.board_seqno}" /></p>
+                    
                     <c:if test="${sessionScope.id == comment.commenter}">
                         <br><br>
-                        
                         <div class="buttons">
                             <button class="deleteComment" data-seqno="${comment.board_seqno}">삭제</button>
                             <button class="edtcmt">수정</button>
+
                         </div>
-                        
-                        <button class="showreply">답글 보기</button>
-                        <div class="reply-list" style="display: none;"> </div>
-                        <button class="replyComment">답글 작성</button> <!-- 대댓글 작성 버튼 추가 -->
                     </c:if>
                     
+                    
+                    <c:choose>
+                    <c:when test="${!empty sessionScope.id }" >
+                     <button class="showreply">답글 보기</button>
+                        <div class="reply-list" style="display: none;"> </div>
+                        <button class="replyComment">답글 작성</button>
+                        
+                            <ul class="emotional">
+                            <li class="fli"><strong>좋아요</strong><p>0</p></li>
+                            <li class="sli">유익해요<p>0</p></li>
+                            <li class="tli">재밌어요<p>0</p></li>
+                            <li class="fifli">동의못해요<p>0</p></li>
+                            <li class="sili">광고같아요<p>0</p></li>
+                            
+                            </ul>
+                        
+                   </c:when>
+                   <c:otherwise>
+                    <p style="font-size:13px;">로그인 후 답글 작성 가능합니다.</p>
+             		</c:otherwise>
+             		</c:choose>
+             
+             
+             
                     <!-- 대댓글 폼 -->
                     <div class="reply-form" style="display:none;">
                         <textarea class="reply-content" placeholder="답글 내용" style="resize:none;"></textarea>
                         <button class="submitReply">작성완료</button><br>
-                        작성자 비공개 <input type="checkbox" id="privatebox"><br>
-                        작성자에게ㄹㄹㄹ<input type="checkbox" id="showtowriter">
+                        <a class="hidecommenter">작성자 비공개</a> <input type="checkbox" id="privatebox"><br>
+                        <a class="showtoowner">작성자에게만 보이기</a><input type="checkbox" id="showtowriter">
                     </div>
-                    
                     <div class="forup" style="display:none;">
                         <h3>댓글 수정</h3>
                         <form id="editCommentForm" method="post" action="/editComment">
-                            <input type="text" id="commentId" name="commentId" style="display:none;"> 
+                            <input type="text" id="commentId" name="commentId" style="display:none;">
                             <p style="display:none;" id="bsq"><c:out value="${comment.board_seqno}" /></p>
                             <p style="display:none;" id="cmtid"><c:out value="${comment.comment_id}" /></p>
                             <textarea style="resize:none;" id="txt" name="content"></textarea>
@@ -904,6 +974,7 @@ font-family: 'Pretendard-Regular';
         </c:otherwise>
     </c:choose>
 </div>
+
 
 
 
@@ -977,6 +1048,72 @@ font-family: 'Pretendard-Regular';
 <script>
     $(document).ready(function () {
     	
+    	
+    	var board_seqno = $('#board_seqno').val();
+    	var userId = $('#user_id').val(); 
+    	console.log("seqno: " + board_seqno);
+
+    	if (board_seqno !== null) {
+    	    document.querySelectorAll('.emotional li').forEach(function(li, index) {
+    	        li.addEventListener('click', function() {
+    	            var commentId = $(this).closest('.comment').find('p:eq(1)').text().trim();
+    	            console.log("cmtid: " + commentId); // 각 댓글 고유 번호
+    	            
+    	            // 쿠키를 통해 이미 표현한 감정인지 확인
+    	            var expressed = Cookies.get('expressed_emotion_' + board_seqno + '_' + commentId + '_' + userId);
+    	            if (expressed) {
+    	                alert('이미 감정을 표현하셨습니다.');
+    	            } else {
+    	                if (confirm('감정 표현 하시겠습니까?')) {
+    	                    var p = li.querySelector('p');
+    	                    var currentCount = parseInt(p.textContent);
+    	                    p.textContent = currentCount + 1;
+
+    	                  	// 10년간 저장
+    	                    Cookies.set('expressed_emotion_' + board_seqno + '_' + commentId + '_' + userId, true, { 
+    	                        expires: 3650, // 10년 (365일 * 10)
+    	                        path: ''
+    	                    });
+
+    	                    // 각 페이지별로 다른 쿠키 이름을 생성
+    	                    Cookies.set('count_' + board_seqno + '_' + index, currentCount + 1, { path: '' });
+    	                    alert('Success');
+    	                }
+    	            }
+    	        });
+    	    });
+
+    	    // 페이지가 로드될 때 쿠키에서 숫자를 가져와 각 li에 설정
+    	    document.querySelectorAll('.emotional li').forEach(function(li, index) {
+    	        var count = Cookies.get('count_' + board_seqno + '_' + index);
+    	        if (count !== undefined) {
+    	            li.querySelector('p').textContent = count;
+    	        }
+    	    });
+    	}
+
+    	
+    	
+        
+        
+        
+        
+        
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
     	var isModalOpen = false; // 모달 상태를 저장하는 변수
 
     	$('#edit').click(function () {
@@ -998,7 +1135,9 @@ font-family: 'Pretendard-Regular';
 
 
 
-    	
+    	 
+    	        
+    	  
     	
     	
     	
@@ -1042,6 +1181,11 @@ font-family: 'Pretendard-Regular';
     	        var replyList = $(this).next('.reply-list');
     	        var commentId = $(this).closest('.comment').find('p:eq(1)').text().trim(); // 댓글 ID
 
+    	        
+    	        var commenter123 = $(this).closest('.comment').find('p:eq(2)').text().trim();
+    	        
+    	        console.log('댓글 작성자:' + commenter123);
+    	        console.log('현재 아이디:'+userId);
     	        // 대댓글 목록을 토글(보이기/숨기기)합니다.
     	        replyList.toggle();
 
@@ -1068,16 +1212,26 @@ font-family: 'Pretendard-Regular';
     	                        replyHtml += '<p class="repcommenter">';
 
     	                        // 대댓글이 비공개이고 작성자와 현재 사용자가 다른 경우
-    	                        // 본인의 댓글은 비공개로 설정해도 닉네임이 보입니다.
-    	                        if (replies[i].isprivate === 1 && userId !== replies[i].commenter) {
+    	                        // 본인의 댓글은 비공개로 설정해도 본인에게는 닉네임이 보입니다.
+    	                        if (replies[i].isprivate === 1 || (replies[i].isprivate === 3 && userId !== replies[i].commenter)) {
     	                            replyHtml += '작성자: 비공개';
     	                        } else {
     	                            replyHtml += '작성자: ' + replies[i].commenter;
     	                        }
 
     	                        replyHtml += '</p>';
-    	                        replyHtml += '<p style="font-weight:bold;" class="repcomment">내용: ' + replies[i].reply_content + '</p>';
+    	                        replyHtml += '<p class="repcommenter" style="font-weight:bold;">';
 
+    	                        if (replies[i].isprivate === 3) {
+    	                            if (userId !== replies[i].commenter && userId !== commenter123) {
+    	                                replyHtml += '비밀글';
+    	                            } else {
+    	                                replyHtml += '내용: ' + replies[i].reply_content;
+    	                            }
+    	                        } else {
+    	                            replyHtml += '내용: ' + replies[i].reply_content;
+    	                        }
+    	                        replyHtml += '</p>';
     	                        // reply_created에서 월과 일만 추출
     	                        var replyDate = new Date(replies[i].reply_created);
     	                        var month = (replyDate.getMonth() + 1).toString().padStart(2, '0'); // 월
@@ -1086,16 +1240,16 @@ font-family: 'Pretendard-Regular';
     	                        replyHtml += '<p class="repday">일자: ' + month + '/' + day + '</p>';
     	                        replyHtml += '<p class="rplid" style="display:none;">번호: ' + replies[i].reply_id + '</p>';
 
-    	                        if (userId == replies[i].commenter) {
+    	                        if (userId === replies[i].commenter) {
     	                            replyHtml += '<button class="editReply" data-replyId="' + replies[i].reply_id + '">수정</button>';
     	                            replyHtml += '<button class="deleteReply" data-replyId="' + replies[i].reply_id + '">삭제</button>' + "<br>";
-    	                            replyHtml += '<textarea class="retxt" style="display:none;" data-replyId="' + replies[i].reply_id + '"></textarea>' + "<br>";
+    	                            replyHtml += '<textarea class="retxt" placeholder="수정 내용" style="display:none;" data-replyId="' + replies[i].reply_id + '"></textarea>' + "<br>";
     	                            replyHtml += '<input type="button" class="subrp" value="확인" style="display:none;">';
     	                        }
     	                        replyHtml += '</li>';
     	                    }
     	                    replyHtml += '</ul>';
-    	                    replyList.html(replyHtml)
+    	                    replyList.html(replyHtml);
     	                    
     	                   
 
@@ -1323,8 +1477,8 @@ font-family: 'Pretendard-Regular';
     	    var commentForm = commentDiv.find('.forup');
     	    commentForm.toggle();
     	    
-    	    var commentContent = commentDiv.find('p:eq(2)').text(); // 댓글 내용 가져오기
-    	    commentForm.find('#txt').val(commentContent); // 댓글 내용을 입력란에 채우기
+    	    var commentContent = ""; // 빈 값으로 대체
+    	    commentForm.find('#txt').val(commentContent);
     	});
     	
     	
@@ -1443,6 +1597,7 @@ font-family: 'Pretendard-Regular';
     	 
     	 $('.forup form').submit(function (event) {
     		    event.preventDefault();
+    		    
 
     		    // 폼에서 필요한 데이터 가져오기
     		    var content = $(this).find('#txt').val(); // 수정된 댓글 내용

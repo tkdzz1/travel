@@ -64,7 +64,7 @@ $(document)
 			
 			$('#planTable tbody').each(function(){
 				
-				let planNum = 0;
+				let planNum = 0;	
 				
 				$(this).find('tr').each(function(){
 					
