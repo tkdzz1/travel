@@ -1,4 +1,5 @@
 @charset "UTF-8";
+
 /* 슬라이드 관련 스타일 유지 */
 .slide-container {
 	position: relative;
@@ -19,21 +20,28 @@
 
 .slide-button {
 	position: absolute;
-/*	top: 30%;*/
+	/*	top: 30%;*/
 	transform: translateY(-20%);
-	background: rgba(0, 0, 0, 0.5); /* 배경색 추가 */
-	border: 1px solid #fff; /* 테두리 스타일 및 색상 설정 */
+	background: rgba(0, 0, 0, 0.5);
+	/* 배경색 추가 */
+	border: 1px solid #fff;
+	/* 테두리 스타일 및 색상 설정 */
 	font-size: 40px;
 	cursor: pointer;
 	color: black;
 	height: 30px;
 	cursor: pointer;
 	color: white;
-	height: 40px; /* 높이 조정 */
-	width: 40px; /* 너비 조정 */
-	text-align: center; /* 텍스트 가운데 정렬 */
-	line-height: 40px; /* 텍스트 수직 가운데 정렬 */
-	border-radius: 10%; /* 원 모양의 모서리로 변경 */
+	height: 40px;
+	/* 높이 조정 */
+	width: 40px;
+	/* 너비 조정 */
+	text-align: center;
+	/* 텍스트 가운데 정렬 */
+	line-height: 40px;
+	/* 텍스트 수직 가운데 정렬 */
+	border-radius: 10%;
+	/* 원 모양의 모서리로 변경 */
 }
 
 .slide2-button {
@@ -140,8 +148,7 @@
 @font-face {
 	font-family: 'GongGothicMedium';
 	src:
-		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicMedium.woff')
-		format('woff');
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicMedium.woff') format('woff');
 	font-weight: normal;
 	font-style: normal;
 }
@@ -152,7 +159,8 @@
 	*/
 	font-family: 'GongGothicMedium';
 	text-align: center;
-	flex-grow: 1; /* 내용에 따라 높이가 자동으로 조절 */
+	flex-grow: 1;
+	/* 내용에 따라 높이가 자동으로 조절 */
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -167,8 +175,7 @@
 @font-face {
 	font-family: 'HakgyoansimWoojuR';
 	src:
-		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-2@1.0/HakgyoansimWoojuR.woff2')
-		format('woff2');
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-2@1.0/HakgyoansimWoojuR.woff2') format('woff2');
 	font-weight: normal;
 	font-style: normal;
 }
@@ -256,7 +263,8 @@
 	width: 300px;
 	height: 300px;
 	border-radius: 30px;
-	margin-left: auto; /* 화면 오른쪽에 배치 */
+	margin-left: auto;
+	/* 화면 오른쪽에 배치 */
 	margin-right: 380px;
 }
 
@@ -284,8 +292,7 @@
 @font-face {
 	font-family: 'S-CoreDream-3Light';
 	src:
-		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff')
-		format('woff');
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff');
 	font-weight: normal;
 	font-style: normal;
 }
@@ -304,8 +311,7 @@
 @font-face {
 	font-family: 'GmarketSansMedium';
 	src:
-		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff')
-		format('woff');
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
 	font-weight: normal;
 	font-style: normal;
 }
@@ -382,8 +388,7 @@
 	left: 50%;
 	width: 25px;
 	height: 25px;
-	background: url(https://www.visitjeju.net/image/main/btn_plus.png)
-		no-repeat;
+	background: url(https://www.visitjeju.net/image/main/btn_plus.png) no-repeat;
 	margin-left: -12px;
 	text-indent: -9999px;
 }
@@ -394,24 +399,34 @@
 	height: 40px;
 	text-align: center;
 	line-height: 35px;
-	border: 2px solid grey; /* 테두리 스타일 및 색상 설정 */
-	text-decoration: none; /* 밑줄 제거 */
-	color: #000; /* 플러스 모양 색상 설정 */
-	font-size: 50px; /* 플러스 모양의 글꼴 크기 설정 */
+	border: 2px solid grey;
+	/* 테두리 스타일 및 색상 설정 */
+	text-decoration: none;
+	/* 밑줄 제거 */
+	color: #000;
+	/* 플러스 모양 색상 설정 */
+	font-size: 50px;
+	/* 플러스 모양의 글꼴 크기 설정 */
 	margin-top: 50px;
 }
 
 .plus-button:hover {
+
+	background-color: #000;
+	/* 마우스 호버 시 배경색 변경 */
+	color: #fff;
+	/* 플러스 모양 색상 변경 */
+
 	background-color: #000; /* 마우스 호버 시 배경색 변경 */
 	color: #fff; /* 플러스 모양 색상 변경 */
 	text-decoration:none;
+
 }
 
 @font-face {
 	font-family: 'SUITE-Regular';
 	src:
-		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Regular.woff2')
-		format('woff2');
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Regular.woff2') format('woff2');
 	font-weight: 400;
 	font-style: normal;
 }
@@ -540,8 +555,7 @@
 @font-face {
 	font-family: 'LINESeedKR-Bd';
 	src:
-		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Bd.woff2')
-		format('woff2');
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Bd.woff2') format('woff2');
 	font-weight: 700;
 	font-style: normal;
 }
@@ -584,42 +598,58 @@
 
 #showprev {
 	position: absolute;
-	right: 35%; /* 조절 가능한 왼쪽 위치 조정 */
+	right: 35%;
+	/* 조절 가능한 왼쪽 위치 조정 */
 	transform: translateY(-600%);
-	background: rgba(0, 0, 0, 0.5); /* 배경색 추가 */
-	border: 2px solid #fff; /* 테두리 스타일 및 색상 설정 */
+	background: rgba(0, 0, 0, 0.5);
+	/* 배경색 추가 */
+	border: 2px solid #fff;
+	/* 테두리 스타일 및 색상 설정 */
 	font-size: 40px;
 	cursor: pointer;
 	color: white;
-	height: 40px; /* 높이 조정 */
-	width: 40px; /* 너비 조정 */
-	text-align: center; /* 텍스트 가운데 정렬 */
-	line-height: 40px; /* 텍스트 수직 가운데 정렬 */
-	border-radius: 50%; /* 원 모양의 모서리로 변경 */
+	height: 40px;
+	/* 높이 조정 */
+	width: 40px;
+	/* 너비 조정 */
+	text-align: center;
+	/* 텍스트 가운데 정렬 */
+	line-height: 40px;
+	/* 텍스트 수직 가운데 정렬 */
+	border-radius: 50%;
+	/* 원 모양의 모서리로 변경 */
 	z-index: 2;
 }
 
 #shownext {
 	position: absolute;
-	right: 16.7%; /* 조절 가능한 왼쪽 위치 조정 */
+	right: 16.7%;
+	/* 조절 가능한 왼쪽 위치 조정 */
 	transform: translateY(-600%);
-	background: rgba(0, 0, 0, 0.5); /* 배경색 추가 */
-	border: 2px solid #fff; /* 테두리 스타일 및 색상 설정 */
+	background: rgba(0, 0, 0, 0.5);
+	/* 배경색 추가 */
+	border: 2px solid #fff;
+	/* 테두리 스타일 및 색상 설정 */
 	font-size: 44px;
 	cursor: pointer;
 	color: white;
-	height: 40px; /* 높이 조정 */
-	width: 40px; /* 너비 조정 */
-	text-align: center; /* 텍스트 가운데 정렬 */
-	line-height: 40px; /* 텍스트 수직 가운데 정렬 */
-	border-radius: 50%; /* 원 모양의 모서리로 변경 */
+	height: 40px;
+	/* 높이 조정 */
+	width: 40px;
+	/* 너비 조정 */
+	text-align: center;
+	/* 텍스트 가운데 정렬 */
+	line-height: 40px;
+	/* 텍스트 수직 가운데 정렬 */
+	border-radius: 50%;
+	/* 원 모양의 모서리로 변경 */
 	z-index: 2;
 }
 
 .carda {
 	font-size: 20px;
-	position:relative;
-	top:10%;
+	position: relative;
+	top: 10%;
 }
 
 .carda:hover {
@@ -659,11 +689,13 @@
 .reviewimg {
 	height: 161px;
 	width: 161px;
-	border: 2px solid transparent; /* 기본적으로 투명 테두리 설정 */
+	border: 2px solid transparent;
+	/* 기본적으로 투명 테두리 설정 */
 }
 
 .reviewimg:hover {
-	border: 2px solid #5858FA; /* 원하는 테두리 스타일 및 두께 설정 */
+	border: 2px solid #5858FA;
+	/* 원하는 테두리 스타일 및 두께 설정 */
 }
 
 .imgsdiv {
@@ -694,8 +726,7 @@
 @font-face {
 	font-family: 'S-CoreDream-3Light';
 	src:
-		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff')
-		format('woff');
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff');
 	font-weight: normal;
 	font-style: normal;
 }
@@ -725,18 +756,215 @@
 .lastcomment {
 	display: inline-block;
 	border: 1px solid grey;
-	margin-top:5%;
+	margin-top: 5%;
 }
 
 .lastcomment:hover {
 	background-color: #A4A4A4;
-	cursor:pointer;
+	cursor: pointer;
 }
 
 .card:hover {
-	border:1px solid green;
+	border: 1px solid green;
 }
 
 
 
 /* header.jsp */
+
+/* modal */
+
+/* modal style */
+html.modal-active,
+body.modal-active {
+	overflow: hidden;
+}
+
+#modal-container {
+	position: fixed;
+	left: 0;
+	top: 0;
+	display: table;
+	height: 100%;
+	width: 100%;
+	z-index: 1050;
+	/* hidden 처리 */
+	transform: scale(0);
+}
+
+#modal-container .modal-background {
+	display: table-cell;
+	background: rgba(0, 0, 0, .8);
+	text-align: center;
+	vertical-align: middle;
+}
+
+#modal-container .modal-background .modal {
+	background: #fff;
+	padding: 50px;
+	display: inline-block;
+	border-radius: 3px;
+	position: relative;
+}
+
+#modal-container .modal-background .modal h2 {
+	font-size: 25px;
+	line-height: 25px;
+	margin-bottom: 15px;
+
+}
+
+#modal-container .modal-background .modal img {
+	width: 1100px;
+	height: 700px;
+}
+
+
+/*
+ * ------------------------------
+ * Unfolding Animation
+ * ------------------------------
+ */
+#modal-container.one {
+	/*transform: scaleX(0) scaleY(1);*/
+	animation: unfoldIn 1s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+
+#modal-container.one .modal-background .modal {
+	/* 초기 display: none 처럼 크기를 0 으로 하여 보여주지 않음*/
+	transform: scale(0);
+	/* 0.5 초 동안 애니메이션을 실행, 단 0.8초 지연시켜 0.8초 후에 애니메이션을 실행 */
+	animation: zoomIn .5s .8s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+
+#modal-container.one.out {
+	transform: scale(1);
+	animation: unfoldOut 1s .3s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+
+#modal-container.one.out .modal-background .modal {
+	animation: zoomOut 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+
+#modal-container.two {
+	/*transform: scaleX(0) scaleY(1);*/
+	animation: unfoldIn 1s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+
+#modal-container.two .modal-background .modal {
+	/* 초기 display: none 처럼 크기를 0 으로 하여 보여주지 않음*/
+	transform: scale(0);
+	/* 0.5 초 동안 애니메이션을 실행, 단 0.8초 지연시켜 0.8초 후에 애니메이션을 실행 */
+	animation: zoomIn .5s .8s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+
+#modal-container.two.out {
+	transform: scale(1);
+	animation: unfoldOut 1s .3s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+
+#modal-container.two.out .modal-background .modal {
+	animation: zoomOut 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+
+#modal-container.three {
+	/*transform: scaleX(0) scaleY(1);*/
+	animation: unfoldIn 1s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+
+#modal-container.three .modal-background .modal {
+	/* 초기 display: none 처럼 크기를 0 으로 하여 보여주지 않음*/
+	transform: scale(0);
+	/* 0.5 초 동안 애니메이션을 실행, 단 0.8초 지연시켜 0.8초 후에 애니메이션을 실행 */
+	animation: zoomIn .5s .8s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+
+#modal-container.three.out {
+	transform: scale(1);
+	animation: unfoldOut 1s .3s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+
+#modal-container.three.out .modal-background .modal {
+	animation: zoomOut 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+
+#modal-container.four {
+	/*transform: scaleX(0) scaleY(1);*/
+	animation: unfoldIn 1s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+
+#modal-container.four .modal-background .modal {
+	/* 초기 display: none 처럼 크기를 0 으로 하여 보여주지 않음*/
+	transform: scale(0);
+	/* 0.5 초 동안 애니메이션을 실행, 단 0.8초 지연시켜 0.8초 후에 애니메이션을 실행 */
+	animation: zoomIn .5s .8s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+
+#modal-container.four.out {
+	transform: scale(1);
+	animation: unfoldOut 1s .3s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+
+#modal-container.four.out .modal-background .modal {
+	animation: zoomOut 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+
+/* Dimmed showing */
+@keyframes unfoldIn {
+	0% {
+		transform: scaleX(0) scaleY(0.005);
+	}
+
+	50% {
+		/* 0.5 초간 세로 크기는 작은상태로 가로 너비만 확대  */
+		transform: scaleX(1) scaleY(0.005);
+	}
+
+	100% {
+		/* 0.5 초간 세로 크기를 확대 */
+		transform: scaleY(1) scaleX(1);
+	}
+}
+
+/* Show modal content  */
+@keyframes zoomIn {
+	from {
+		transform: scale(0);
+	}
+
+	to {
+		transform: scale(1);
+	}
+}
+
+/* Hide modal content */
+@keyframes zoomOut {
+	from {
+		transform: scale(1);
+	}
+
+	to {
+		transform: scale(0);
+	}
+}
+
+/* Dimmed hiding */
+@keyframes unfoldOut {
+	0% {
+		transform: scale(1)
+	}
+
+	50% {
+		transform: scaleX(1) scaleY(0.005);
+	}
+
+	100% {
+		transform: scaleX(0) scaleY(0.005);
+	}
+}
+
+/* modal end */
+
+
+/* modal 2 */
+

@@ -48,9 +48,14 @@
 	update board set answer_count =#{param2} where seqno =#{param1}
 </update>
 
+<select id="getprof" resultType="com.himedia.springboot.BoardDTO">
+SELECT a.seqno, a.title, a.category, a.answer_count, a.created FROM board a
+LEFT OUTER JOIN MEMBER b ON a.writer=b.member_id
+where b.member_id=#{param1}
+</select>
+
 <select id = "getboardlist">
 	select * from board order by seqno desc limit 7
 </select>
-
 
 </mapper>

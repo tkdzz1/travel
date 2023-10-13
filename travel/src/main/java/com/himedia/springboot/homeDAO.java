@@ -10,8 +10,13 @@ public interface homeDAO {
 	ArrayList<travel_attDTO> getCartList(int st, int ps, String id);
 	ArrayList<travel_attDTO> getCartFilterList(int st, int ps, String id, String filter);
 	int cntCartList(String id);
+	int cntCartFilterList(String id, String filter);
 	travel_attDTO getChoice(int ta_num);
 	travel_attDTO getMarker(int num);
-	ArrayList<travel_attDTO> getFilterList(String id, String filter);
-	
+	int savePlan(String writer, String title, String days, String start, String end, String people, String party, String allDay);
+	ArrayList<travel_attDTO> showALL(int st, int ps);
+	int cntShowALL();
+	ArrayList<homeDTO> getPlanList(String id);
+	int cntPlanList(String id);
+	homeDTO getPlanner(String id, int num);
 }

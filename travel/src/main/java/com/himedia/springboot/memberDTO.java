@@ -8,4 +8,5 @@ public class memberDTO {
 	int admin;
 	String created;
 	
+	
 }
