@@ -55,7 +55,7 @@ where b.member_id=#{param1}
 </select>
 
 <select id = "getboardlist">
-	select * from board order by seqno desc limit 7
+	select * from board order by seqno desc limit 8
 </select>
 
 </mapper>

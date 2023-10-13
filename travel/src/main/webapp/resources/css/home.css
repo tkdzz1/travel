@@ -431,15 +431,165 @@
 	font-style: normal;
 }
 
-.beforedt {
-	font-family: 'SUITE-Regular';
-	font-size: 20px;
-}
 
+/* 맞춤 여행 */
+ 
 .mainh2 {
 	font-family: 'SUITE-Regular';
-	font-size: 40px;
+	font-size: 35px;
+    font-weight: 800;
+    line-height: 1;
+    margin-top: 100px;
 }
+
+.beforedt {
+	font-family: 'SUITE-Regular';
+	margin-top: 17px;
+    font-size: 20px;
+    color: #787878;
+    line-height: 1;
+}
+.bwrap{
+	width: 1290px;
+    margin: 60px auto 0;
+}
+.swrap{
+display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    margin: 0 -15px 40px;
+    min-height: 100px;
+    overflow: hidden;
+}
+
+.swrap dd, .swrap dt{
+	width: 300px;
+    margin: 15px 15px 0;
+}
+.swrap dt{
+	color: #fff;
+    text-align: center;
+    border-radius: 15px;
+    position: relative;
+}
+.swrap dt .stitle{
+	font-family: 'SUITE-Regular';
+	font-size: 14px;
+    line-height: 40px;
+    margin: 40px 0 5px;
+}
+.swrap dt .title{
+	font-family: 'SUITE-Regular';
+	font-size: 26px;
+    line-height: 28px;
+    margin: 5px 0 10px;
+}
+.swrap dt .keyword{
+	font-family: 'SUITE-Regular';
+	font-weight: 600;
+    font-size: 42px;
+    line-height: 46px;
+    margin: 10px 0 0;
+}
+.firstwrap dt{
+	background: #385693;
+}
+.firstwrap dt p.more{
+	position: relative;
+    margin: 20px 0 0;
+}
+.firstwrap dt p.more a{
+	display: block;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 25px;
+    height: 25px;
+    background: url(https://www.visitjeju.net/image/main/btn_plus.png) no-repeat;
+    margin-left: -12px;
+    text-indent: -9999px;
+}
+.swrap dt:after{
+	content: "";
+    position: absolute;
+    width: 10px;
+    height: 17px;
+    background-repeat: no-repeat;
+    background-size: 10px 17px;
+    margin-top: -9px;
+}
+.firstwrap dt:after{
+	top: 50%;
+    right: -10px;
+    background-image: url(https://www.visitjeju.net/image/main/icon_blue.png);
+}
+.swrap .pic{
+	border-radius: 15px 15px 0 0;
+	background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.swrap dd img{
+	width: 100%;
+}
+.swrap img{
+	vertical-align: top;
+}
+.swrap dd .bottomwrap{
+	border-left: 1px solid #d9d8d8;
+    border-right: 1px solid #efefef;
+    border-bottom: 1px solid #efefef;
+    border-radius: 0 0 15px 15px;
+}
+.swrap dd p.bottomtitle{
+	display: table;
+    table-layout: fixed;
+}
+.swrap dd p.bottomtitle span{
+	display: table-cell;
+    height: 90px;
+    vertical-align: middle;
+    text-align: center;
+    width: 270px;
+    padding: 0 10px;
+    font-size: 18px;
+    line-height: 20px;
+    font-family: NanumSquare;
+}
+.swrap dd a:hover p.bottomtitle span {
+	color: #ef6d00;
+}
+.swrap dd a{
+		text-decoration: none;
+}
+
+.secondwrap dt{
+	background: #7AB6A9;
+}
+.secondwrap dt:after{
+	top: 50%;
+    left: -10px;
+    background-image: url(https://www.visitjeju.net/image/main/icon_emer.png);
+}
+
+.thirdwrap dt{
+	background: #9EB21F;
+}
+.thirdwrap dt:after{
+	top: 50%;
+    right: -10px;
+    background-image: url(https://www.visitjeju.net/image/main/icon_green.png);
+}
+
+.fourthwrap dt{
+	background: #ef6d00;
+}
+.fourthwrap dt:after{
+	top: 50%;
+    left: -10px;
+    background-image: url(https://www.visitjeju.net/image/main/icon_coral.png);
+}
+
 
 .dtCard {
 	position: relative;
@@ -968,3 +1118,9 @@ body.modal-active {
 
 /* modal 2 */
 
+
+/* update */
+
+section.travelp{
+	padding-bottom: 60px;
+}

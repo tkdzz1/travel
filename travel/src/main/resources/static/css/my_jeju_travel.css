@@ -1,9 +1,11 @@
 @charset "UTF-8";
 #wrapper {
 	height: 100%;
-	margin-top: 3%;
+	/*margin-top: 3%;
 	margin-left: auto;
-	margin-right: auto;
+	margin-right: auto;*/
+	margin : 0 auto;
+	padding: 0 80px;
 }
 
 #wrapper > h1 {
@@ -76,6 +78,7 @@ div {
 	width:400px;
 	height: 1000px;
 	border: 3px solid #ffa458;
+	margin:auto;
 }
 
 .timeTable tr {
@@ -108,6 +111,8 @@ div {
 .listContent{
 	display:flex;
 	align-items: center;
+	padding-top: 20px;
+	padding-bottom: 20px;
 }
 
 .listContent img {
@@ -127,4 +132,17 @@ div {
 }
 .listContent button {
 	height: 50px;
+}
+.text h5{
+	font-size: 23px;
+	padding-top: 18px;
+}
+.text p{
+	font-size: 18px;
+	padding-top: 5px;
+	padding-bottom: 8px;
+	color: rgb(128, 128, 128);
+}
+.btn33{
+	padding-top: 8px;
 }

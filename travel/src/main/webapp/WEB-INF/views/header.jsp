@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" href="/resources/css/member.css" />
+
 <link rel="stylesheet" href="/resources/css/header.css" />
 <meta charset="UTF-8">
 <title>test</title>
