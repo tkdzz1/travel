@@ -78,6 +78,10 @@ div {
 	border: 3px solid #ffa458;
 }
 
+.timeTable table {
+	border: 3px solid #ffa458;
+}
+
 .timeTable tr {
 	height: 60px;
 	border-bottom: 1px solid black;
@@ -93,7 +97,7 @@ div {
 	color:white;
 }
 
-.timeTable thead span {
+.timeTable thead span:nth-child(odd) {
 	cursor: pointer;
 }
 

@@ -14,7 +14,7 @@
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
 </head>
 <body>
-<%@ include file = "../header.jsp" %>
+<%-- <%@ include file = "../header.jsp" %> --%>
 <div id=wrapper>
 
 	<div style="float:left; margin-left:10%;">
@@ -52,7 +52,7 @@
 	    </table>
 	</div>
 
-	  <div class="right-panel">
+	  <div class="right-panel" style="border:1px solid white;">
 	    <div id="map-container"> 
 	      <div id="map" style="width: 850px; height: 400px;"></div> 
 	    </div>
@@ -72,24 +72,35 @@
 					<li>숙박<hr></li>
 				</ul>
 			</div>
-			<c:if test="${tList != 'empty' }">
-				<c:forEach items="${tList}" var="tList">
-					<hr>
-					<div name=contentList class=listContent>
-						<input type=hidden value="${tList.ta_num}" name=taNum>
-						<img src="/img/t_img/${tList.ta_img}">
-						<div class=text>
-							<h5 style="font-size:20px;">${tList.ta_name}</h5>
-							<p style="font-size:20px;">${tList.ta_local}</p>
-							<button class="w-btn w-btn-red" name=add>일정에 추가</button>
+			<div id=searchDIV style="text-align:center; display:none;">
+				<input type=text id=search placeholder="검색어 입력">
+			</div>
+			<div id=listResult>
+				<c:if test="${tList != 'empty' }">
+					<c:forEach items="${tList}" var="tList">
+						<hr>
+						<div name=contentList class=listContent>
+							<input type=hidden value="${tList.ta_num}" name=taNum>
+							<img src="/img/t_img/${tList.ta_img}">
+							<div class=text>
+								<h5 style="font-size:20px;">${tList.ta_name}</h5>
+								<p style="font-size:20px;">${tList.ta_local}</p>
+								<button class="w-btn w-btn-red" name=add>일정에 추가</button>
+							</div>
 						</div>
+					</c:forEach>
+					<hr>
+					<div id=page>
+					 	${page}
 					</div>
-				</c:forEach>
-				<hr>
-				<div id=page>
-				 	${page}
-				</div>
-			</c:if>
+				</c:if>
+			</div>
+			
+			<div style="text-align:center; margin-top: 50%; display:none;" id="filterListEmpty">
+				<img src="img/heart.png" style="width:100px;">
+				<h3>찜한 여행지가 없습니다.</h3>
+			</div>
+			
 			<c:if test="${tList == 'empty' }">
 			<div style="text-align:center; margin-top: 50%;">
 				<img src="img/heart.png" style="width:100px;">

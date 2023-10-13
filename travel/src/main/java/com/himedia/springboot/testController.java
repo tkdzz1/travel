@@ -31,10 +31,10 @@ public class testController {
 	public String test3() {
 		return "weather/weather3";
 	}
-	@GetMapping("/mypage")
-	public String myPage() {
-		return "member/mypage";
-	}
+//	@GetMapping("/mypage")
+//	public String myPage() {
+//		return "member/mypage";
+//	}
 	@GetMapping("/myreview")
 	public String myReview() {
 		return "member/my_review";

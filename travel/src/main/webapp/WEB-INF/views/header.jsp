@@ -92,6 +92,5 @@
 
 </body>
 <script src="https://code.jquery.com/jquery-latest.js"></script>
-<script src="/resources/js/member.js"></script>
 <script src="/resources/js/header.js"></script>
 </html>

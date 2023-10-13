@@ -54,11 +54,11 @@ $(document)
 .on('click','#login',function(){
 	$.ajax({url:'/login', data:{email : $('input[name=email]').val(), pw : $('input[name=loginPassword]').val()}, type:'post', dataType:'text',
 		success:function(data){
-			if (data == "1") {
-				document.location = "/";
+			if (data == "0") {
+				alert("입력하신 회원정보와 일치하는 데이터가 없습니다.");
 				return false;
 			}else {
-				alert("입력하신 회원정보와 일치하는 데이터가 없습니다.");
+				document.location = data;
 				return false;
 			}
 		}, error:function(){

@@ -6,6 +6,8 @@
 <link rel="stylesheet" href="/resources/css/home.css" />
 <link rel="stylesheet" href="/resources/css/member.css" />
 <link rel="stylesheet" href="/resources/css/mypage.css" />
+    <link rel="stylesheet" type="text/css" href="css/map.css">
+    <script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=81hlrkxaq1"></script>
 <head>
 <meta charset="UTF-8">
 <title>마이페이지</title>
@@ -68,18 +70,73 @@
 
 								<div class="my_tour_wrap">
 									<div class="wrap_tit_zone">
-										<p class="wrap_tit">나의 여행일정 (0)</p>
+										<p class="wrap_tit">나의 여행일정 (${cnt})</p>
 									</div>
 
 									<div class="tour_list clear">
 										<dl class="item_section add">
 											<dt>나의 여행 일정 만들기</dt>
 											<dd>
-												<a href="javascript:void(0)" id="btn_add_schedule1"
+												<a href="/my_jeju_travel" id="btn_add_schedule1"
 													class="btn_add_schedule">만들기</a>
 											</dd>
 										</dl>
+										<c:forEach items="${pList}" var="pList">
+											<dl class="item_section add" style="cursor:pointer;" id="${pList.planner_num}" name=planner>
+												<dt>${pList.title}</dt>
+												<dd>
+												 <span>${pList.days}</span> <br>
+												 <span>${pList.startDay} ~ ${pList.endDay}</span> <br>
+												 <span>${pList.people} 명</span> <br>
+												 <span>${pList.party}</span>
+												</dd>
+											</dl>
+										</c:forEach>
 									</div>
+									
+									<div id="myModal" class="modal">
+									  <div class="modal-content">
+									    <span class="close" id="closeModalBtn">&times;</span>
+									    <h2 id=modalTitle style="color:#ffa458;">모달 제목</h2>
+									    <hr>
+									    <div style="float:left;">
+											<table>
+												<tr>
+													<td style="color:#ffa458; font-weight:bold;"><span id=id></span> 의 제주 여행</td>
+												</tr>
+												<tr>
+													<td><span style="color:gray">제목</span><span id=title style="margin-left:10px;">제목</span></td>
+												</tr>
+												<tr>
+													<td><span style="color:gray">기간</span><span id=days style="margin-left:10px;"></span></td>
+												</tr>
+												<tr>
+													<td><span id=startDay></span> ~ <span id=endDay></span></td>
+												</tr>
+												<tr>
+													<td><span style="color:gray">인원</span><span id=people style="margin-left:10px;"></span> 명</td>
+												</tr>
+												<tr>
+													<td><span style="color:gray">일행</span><span id=party style="margin-left:10px;"></span></td>
+												</tr>
+											</table>
+									    </div>
+									    
+										  <div class="right-panel" style="border:1px solid white;">
+										    <div id="map-container"> 
+										      <div id="map" style="width: 850px; height: 400px;"></div> 
+										    </div>
+										 </div>
+										 
+									    <div style="margin-left:5%;">
+									    	<table id=planTable class=timeTable>
+									    	
+									    	</table>
+									    </div>
+									    
+									  </div>
+									</div>
+									
 									<div class="paging">
 										<div id="paging" class="page-wrap">
 											<a href="javascript:void(0)" class="spr_com page-first">처음</a><a
@@ -100,5 +157,6 @@
 	</div>
 	<%@ include file="../footer.jsp"%>
 	<script src="https://code.jquery.com/jquery-latest.js"></script>
+	<script src="js/mypage.js"></script>
 </body>
 </html>
