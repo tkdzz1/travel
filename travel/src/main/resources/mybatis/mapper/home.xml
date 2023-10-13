@@ -3,6 +3,14 @@
 				 "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.himedia.springboot.homeDAO">
 
+<select id="showALL" resultType="com.himedia.springboot.travel_attDTO">
+select * from travel_attraction limit #{param1}, #{param2}
+</select>
+
+<select id="cntShowALL" resultType="int">
+select count(*) from travel_attraction
+</select>
+
 <select id="getCartList" resultType="com.himedia.springboot.travel_attDTO">
 SELECT a.ta_num, a.ta_name, a.ta_local, a.ta_img, a.ta_address, a.ta_category, a.ta_latitude, a.ta_longitude
 FROM travel_attraction a JOIN cart b ON a.ta_num = b.cart_num
@@ -23,6 +31,12 @@ FROM cart
 WHERE cart_id = #{param1};
 </select>
 
+<select id="cntCartFilterList" resultType="int">
+SELECT COUNT(*)
+FROM cart
+where cart_id = #{param1} and cart_category = #{param2};
+</select>
+
 <select id="getChoice" resultType="com.himedia.springboot.travel_attDTO">
 select * from travel_attraction where ta_num = #{param1}
 </select>
@@ -31,10 +45,21 @@ select * from travel_attraction where ta_num = #{param1}
 select ta_name, ta_latitude, ta_longitude from travel_attraction where ta_num = #{param1}
 </select>
 
-<select id="getFilterList" resultType="com.himedia.springboot.travel_attDTO">
-SELECT *
-FROM cart a JOIN travel_attraction b ON a.cart_num = b.ta_num
-WHERE cart_id = #{param1} AND cart_category= #{param2};
+<insert id="savePlan" parameterType="String">
+insert into travel_planner
+set writer=#{param1}, title=#{param2}, days=#{param3}, startDay=#{param4}, endDay=#{param5}, people=#{param6}, party=#{param7}, plan=#{param8}
+</insert>
+
+<select id="getPlanList" resultType="com.himedia.springboot.homeDTO">
+select * from travel_planner where writer = #{param1}
+</select>
+
+<select id="cntPlanList" resultType="int">
+select count(*) from travel_planner where writer = #{param1}
+</select>
+
+<select id="getPlanner" resultType="com.himedia.springboot.homeDTO">
+select * from travel_planner where writer = #{param1} and planner_num = #{param2}
 </select>
 
 </mapper>

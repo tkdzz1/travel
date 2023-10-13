@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
@@ -32,6 +35,8 @@ public class emailController {
 	
 	@Value("${cos.key}")
 	private String cosKey;
+	
+	String redirect = "/";
 	
 	@GetMapping("/login")
 	public String login() {
@@ -84,9 +89,11 @@ public class emailController {
 		if ( check == 1 ) {
 			HttpSession s = req.getSession();
 			s.setAttribute("id", email);
+		} else {
+			return String.valueOf(check);
 		}
 		
-		return String.valueOf(check);
+		return redirect;
 	}
 	
 	int st;
@@ -96,6 +103,11 @@ public class emailController {
 	public String myJejuTravel(HttpServletRequest req, Model model) {
 		HttpSession s = req.getSession();
 		String id = (String) s.getAttribute("id");
+		
+		if ( id == null || id.equals("") ) {
+			redirect =  req.getRequestURL().toString();
+			return "redirect:/login";
+		}
 		
 		String page = req.getParameter("pageno");
 		if(page == null || page.equals("")) {
@@ -308,23 +320,29 @@ public class emailController {
 		String filter = req.getParameter("filter");
 		
 		String page = req.getParameter("page");
+		
 		if(page == null || page.equals("")) {
 			page = "1";
 		}
+		
 		int pageNo = Integer.parseInt(page);
 		st = (pageNo - 1) * ps;
-		int cnt = hDao.cntCartList(id);
+		
+		int cnt;
+		ArrayList<travel_attDTO> filterList;
+		
+		if ( filter.equals("전체") ) {
+			cnt = hDao.cntCartList(id);
+			filterList = hDao.getCartList(st, ps, id);
+		} else {
+			cnt = hDao.cntCartFilterList(id, filter);
+			filterList = hDao.getCartFilterList(st, ps, id, filter);
+		}
+
 		int pageCount = (int)Math.ceil(cnt / 5.0);
 		page = "";
-		for(int i=1; i<=pageCount; i++) {
-			if(pageNo == i) {
-				page += "<a class=strong id=" + i  + ">" + i +"</a>&nbsp;";
-			} else {
-				page += "<a class=a id=" + i + ">" + i + "</a>&nbsp;";
-			}
-		}
 		
-		ArrayList<travel_attDTO> filterList = hDao.getFilterList(id, filter);
+		page = pagenation(page, pageCount, pageNo);
 		
 		JSONArray ja = new JSONArray();
 		
@@ -343,6 +361,122 @@ public class emailController {
 		}
 		
 		return ja.toJSONString();
+	}
+	
+	@PostMapping("/savePlan")
+	@ResponseBody
+	public String savePlan(HttpServletRequest req) {
+		String writer = req.getParameter("writer");
+		String title = req.getParameter("title");
+		String days = req.getParameter("days");
+		String start = req.getParameter("start");
+		String end = req.getParameter("end");
+		String people = req.getParameter("people");
+		String party = req.getParameter("party");
+		String allDay = req.getParameter("allDay");
+		
+		int check = hDao.savePlan(writer, title, days, start, end, people, party, allDay);
+		
+		return String.valueOf(check);
+	}
+	
+	@PostMapping("/searchList")
+	@ResponseBody
+	public String searchList(HttpServletRequest req) {
+		String page = req.getParameter("page");
+		
+		if(page == null || page.equals("")) {
+			page = "1";
+		}
+		
+		int pageNo = Integer.parseInt(page);
+		st = (pageNo - 1) * ps;
+		
+		int cnt = hDao.cntShowALL();
+		
+		int pageCount = (int)Math.ceil(cnt / 5.0);
+		page = "";
+		
+		page = pagenation(page, pageCount, pageNo);
+		
+		ArrayList<travel_attDTO> searchList = hDao.showALL(st, ps);
+		
+		JSONArray ja = new JSONArray();
+		
+		for(int i=0; i<searchList.size(); i++) {
+			JSONObject jo = new JSONObject();
+			jo.put("ta_num", searchList.get(i).getTa_num());
+			jo.put("ta_name", searchList.get(i).getTa_name());
+			jo.put("ta_local", searchList.get(i).getTa_local());
+			jo.put("ta_img", searchList.get(i).getTa_img());
+			jo.put("ta_address", searchList.get(i).getTa_address());
+			jo.put("ta_category", searchList.get(i).getTa_category());
+			jo.put("ta_latitude", searchList.get(i).getTa_latitude());
+			jo.put("ta_longitude", searchList.get(i).getTa_longitude());
+			jo.put("page", page);
+			ja.add(jo);
+		}
+		
+		return ja.toJSONString();
+		
+		
+	}
+	
+	@GetMapping("/mypage")
+	public String myPage(HttpServletRequest req, Model model) {
+		HttpSession s = req.getSession();
+		
+		String id = (String)s.getAttribute("id");
+		
+		ArrayList<homeDTO> pList = hDao.getPlanList(id);
+		
+		int countPlan = hDao.cntPlanList(id);
+		
+		model.addAttribute("pList", pList);
+		model.addAttribute("cnt", countPlan);
+		
+		return "member/mypage";
+	}
+	
+	@PostMapping("/getPlanner")
+	@ResponseBody
+	public String getPlanner(HttpServletRequest req) {
+		HttpSession s = req.getSession();
+		
+		String id = (String)s.getAttribute("id");
+		
+		int planNum = Integer.parseInt(req.getParameter("planNum"));
+		
+		homeDTO getPlanner = hDao.getPlanner(id, planNum);
+		
+		JSONArray ja = new JSONArray();
+		
+		JSONObject jo = new JSONObject();
+		
+		jo.put("planner_num", getPlanner.getPlanner_num());
+		jo.put("writer", getPlanner.getWriter());
+		jo.put("title", getPlanner.getTitle());
+		jo.put("days", getPlanner.getDays());
+		jo.put("startDay", getPlanner.getStartDay());
+		jo.put("endDay", getPlanner.getEndDay());
+		jo.put("people", getPlanner.getPeople());
+		jo.put("party", getPlanner.getParty());
+		jo.put("plan", getPlanner.getPlan());
+		ja.add(jo);
+		
+		return ja.toJSONString();
+	}
+	
+	public static String pagenation(String page, int pageCount, int pageNo) {
+		for(int i=1; i<=pageCount; i++) {
+			if(pageNo == i) {
+				page += "<a class=strong id=" + i  + ">" + i +"</a>&nbsp;";
+			} else {
+				page += "<a class=a id=" + i + ">" + i + "</a>&nbsp;";
+			}
+		}
+		
+		return page;
 	}
 	
 }

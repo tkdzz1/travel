@@ -57,6 +57,7 @@
 <script src="https://code.jquery.com/jquery-latest.js"></script>.
 <script>
 $(document).ready(function() {
+	
     // 디테일 필드 추가 버튼 클릭 시 동작
     $("#addDetailField").click(function() {
         const newDetailField = `

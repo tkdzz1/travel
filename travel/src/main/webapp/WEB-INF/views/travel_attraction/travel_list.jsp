@@ -23,21 +23,21 @@
 			        <br>
 			        <span class="tooltip" data-tooltip="조회수">
 		       		<strong><img src="../img/조회수.png" style="width:25px;height:25px;" title="조회수"></strong>${alist.ta_hit}
-			        </span><br>
+			        </span>
 			        <span class="tooltip" data-tooltip="좋아요">
 			        <strong><img src="../img/color_like.png" style="width:25px;height:25px;" title="좋아요"></strong>${alist.like_count} 
-					</span>	<br>
+					</span>	
 			        <span class="tooltip" data-tooltip="리뷰">
 			        <strong><img src="../img/리뷰.png" style="width:25px;height:25px;" title="리뷰"></strong>${alist.review_count} 
-					</span><br>
+					</span>
 			        <span class="tooltip" data-tooltip="찜"  >
 			        <strong><img src="../img/찜.png" style="width:25px;height:25px;" title="찜"></strong>${alist.cart_count} 
-					</span><br>						
+					</span>						
 			        <span class="tooltip" data-tooltip="별점"  >
 			        <strong><img src="../img/별.png" style="width:25px;height:25px;" title="별점"></strong>${alist.avgStar} 
 					</span>	
 												
-						<p><strong></strong>
+						<strong></strong>
 						  <c:choose>
 						    <c:when test="${alist.ta_category eq '관광지'}">
 						      <span class="tooltip" data-tooltip="관광지">
@@ -60,7 +60,7 @@
 						      </span>
 						    </c:when>
 						  </c:choose>
-						</p>
+						
 			        <input type=hidden id=category value="${alist.ta_category}">
 			        <button class="btndelete" data-name="${alist.ta_name}">삭제</button> <!-- 수정된 버튼 -->
    			        <input type="hidden" id="h_num" name="h_num" value="${alist.ta_num}" class="h_num">

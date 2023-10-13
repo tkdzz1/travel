@@ -14,7 +14,7 @@
 	    <a href="#main_visual">본문 바로가기</a>
 	    <a href="#lnbNav">주메뉴 바로가기</a>
 	</div>
-	<header class="header">
+	<header class="header" style="border-bottom: 1px solid #f0f0f0;">
     <div class="lnb">
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-93774907-1"></script>
 <script>
@@ -92,6 +92,5 @@
 
 </body>
 <script src="https://code.jquery.com/jquery-latest.js"></script>
-<script src="/resources/js/member.js"></script>
 <script src="/resources/js/header.js"></script>
 </html>

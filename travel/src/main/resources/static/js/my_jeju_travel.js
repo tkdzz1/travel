@@ -2,11 +2,13 @@ let choicePlan;
 let ta_num;
 let beforeValue;
 let filter;
+let nowStatus;
 let markers = [];
-let infoWindow = new naver.maps.InfoWindow();
-let isInfoWindowOpen = false;
 let dragIndex;
 let tbodyIndex;
+
+let infoWindow = new naver.maps.InfoWindow();
+let isInfoWindowOpen = false;
 let mapOptions = { 
     center: new naver.maps.LatLng(33.3595704, 126.600000),
     zoom: 10
@@ -67,12 +69,14 @@ $(document)
 			table += createTable(i);
 		}
 		$('#planTable').html(table);
+		
 		$('#planTable thead').each(function() {
 		    $(this).hide();
 		});
 		$('#planTable tbody').each(function() {
 		    $(this).hide();
 		});
+		
 		$('#planTable thead:eq(0)').show();
 		$('#planTable tbody:eq(0)').show();
 	}
@@ -82,6 +86,27 @@ $(document)
 	if ( $(this).hasClass('select') ) {
 		return false;
 	} else {
+		nowStatus = $(this).text();
+		let keyword = $('#search').val();
+		
+		if ( nowStatus == "검색" ) {
+			$('.option').hide();
+			$('#searchDIV').show();
+			$.ajax({url:'/searchList', data:{}, type: 'post', dataType: 'json',
+				success: function(data){
+					for(let i = 0; i<data.length; i++){
+						ListShow(data, i);
+					}
+				}, error: function(){
+					alert("ERROR");
+				}
+				
+			})
+		} else {
+			$('.option').show();
+			$('#searchDIV').hide();
+		}
+		
 		$('#list ul:eq(0) li').removeClass('select');
 		$('#list ul:eq(1) li').removeClass('select');
 		$(this).addClass('select');
@@ -95,7 +120,6 @@ $(document)
 		return false;
 	} else {
 		filter = $(this).text();
-		console.log(filter);
 		likeFilter(filter);
 		
 		$('#list ul:eq(1) li').removeClass('select');
@@ -118,6 +142,7 @@ $(document)
 	
 	$.ajax({ url:'/pageMove', type:'post', data: {page : page, filter : filter}, dataType: 'json',
 		success: function(data) {
+			
 			if (data.length == 5) {
 				for( let i=0; i<data.length; i++ ) {
 					ListShow(data, i);
@@ -193,7 +218,7 @@ $(document)
 	return false;
 })
 
-.on('click','#planTable thead td span',function(){
+.on('click','#planTable thead td span:even',function(){
 	var thead = $(this).closest('thead').attr("name");
 	var tbody = $(this).closest('thead').next().attr("name");
 	var dayCheck =  $(this).parent().text().split(" ")[2] + $(this).parent().text().split(" ")[3];
@@ -333,19 +358,65 @@ $(document)
 })
 
 .on('click','#save',function(){
-	console.log("작성자 : " + $('#writer').text());
-	console.log("제목 : " + $("#title").val());
-	console.log("기간 : " + $('#days').text())
-	console.log("시작 날짜 : " + $('#start').val());
-	console.log("종료 날짜 : " + $('#end').val());
-	console.log("인원 : " + $('#people').val());
-	console.log("일행 : " + $('#party').val());
 	
-	var plan = [];
+	var writer = $('#writer').text();
+	var title = $("#title").val();
+	var days = $('#days').text();
+	var start = $('#start').val();
+	var end = $('#end').val();
+	var people = parseInt($('#people').val());
+	var party = $('#party').val();
+	
+	var planner = [];
+	
+	//DAY1?6:53*8:43=>DAY2 의 형식으로 계획 저장
 	
 	$('#planTable thead').each(function(){
-
+		let dayPlan = [];
+		let plan = $(this).find('span[name=day]').text() + "?";
+		
+		$(this).next().find('tr').each(function(){
+			
+			let plan_att = $(this).find('td:eq(1)').find('span:eq(1)').attr('name');
+			
+			if ( plan_att == undefined ) {
+				return;
+			} else {
+				let time = $(this).find('td:eq(0)').attr('name') + ":";
+				time += plan_att;
+				dayPlan.push(time);
+			}
+			
+		})
+		
+		let dayN = dayPlan.join("*");
+		plan += dayN;
+		planner.push(plan); 
+		
 	})
+	
+	var allDay = planner.join("=>");
+	
+	$.ajax({url : '/savePlan', data : { writer : writer, title : title, days : days, start : start, end : end, people : people, party : party, allDay : allDay }, type: 'post', dataType: 'text',
+			success: function(data){
+				if (data == "1") {
+				    Swal.fire({
+				      icon: 'success',
+				      title: '일정이 성공적으로 저장되었습니다.',
+				      text: '확인을 누르면 일정 리스트로 이동합니다.',
+				    }).then(result => {
+						document.location = "/mypage"
+					})
+				} else {
+					alert("다시 시도해 주세요.");
+					return false;
+				}
+			}, error: function(){
+				alert("저장 중 오류 발생 !");
+				return false;
+			}
+	})
+	
 })
 ;
 
@@ -368,13 +439,13 @@ function ListShow(data, i){
 	set.find('img').attr("src", "/img/t_img/" + obj['ta_img']);
 	set.find('h5').text(obj['ta_name']);
 	set.find('p').text(obj['ta_local']);
-	console.log(set.parent().find('#page').html());
+	set.parent().find('#page').html(obj['page']);
 }
 
 function createTable(day) {
 	 let html ='<thead style="background-color:black;" name=day' + day +'>'
   		+	'<tr><td style="color:white; width:60px;">시간</td>'
-  		+ '<td style="width:800px;"><span name=before>◀ </span> DAY ' + day + ' <span name=after> ▶</span></td></tr>'
+  		+ '<td style="width:800px;"><span name=before>◀ </span> <span name=day>DAY ' + day + '</span><span name=after> ▶</span></td></tr>'
   		+ '</thead>'
   		+ '<tbody name=day' + day + '>' 
   		+	'<tr><td name=6>06:00</td><td draggable="true"></td></tr>'
@@ -480,6 +551,15 @@ function likeFilter(filter) {
 	
 	$.ajax({ url:'/likeFilter', data: {page : page, filter : filter }, type: 'post', dataType: 'json',
 			success: function(data) {
+				if (data.length == 0) {
+					$('#filterListEmpty').show();
+					$('#listResult').hide();
+					return false;
+				}
+				
+				$('#filterListEmpty').hide();
+				$('#listResult').show();
+				
 				if (data.length == 5) {
 					for( let i=0; i<data.length; i++ ) {
 						ListShow(data, i);

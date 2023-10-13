@@ -1,6 +1,7 @@
 package com.himedia.springboot;
 import java.io.File;
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -122,8 +123,8 @@ public class tController {
                             detailImagePaths.append("/");
                         }
                         detailImagePaths.append(savedDetailImageName);
-                    } else {	
-                    	detailImagePaths.append("/");
+                    } else {
+                        detailImagePaths.append("/"); // 디테일 이미지가 없을 경우 "//"를 추가하여 공백 처리
                     }
                 }
                 StringBuilder taContentBuilder = new StringBuilder();
@@ -133,7 +134,7 @@ public class tController {
                         taContentBuilder.append("/");
                     } else {
                         if (taContentBuilder.length() > 0) {
-                            taContentBuilder.append(",");
+                            taContentBuilder.append("/");
                         }
                         taContentBuilder.append(detailInfo);
                     }
@@ -157,6 +158,7 @@ public class tController {
 
         return "redirect:/travel_list";
     }
+
 
     @PostMapping("/getTravelData")
     @ResponseBody
@@ -283,23 +285,24 @@ public class tController {
                                          @RequestParam("name") String name,
                                          HttpServletRequest req,
                                          Model model) {
-        try { 	
-        	
-            if (newdetailImages == null && contents ==null) {
-            	String newdetailImage="";
-            	String contetn="";
-            	tdao.updateTravelAttraction(name, newdetailImage, contetn);
-            	return "redirect:/travel_Detail?ta_name=" + name;
+        try {
+            if (newdetailImages == null && contents == null) {
+                String newdetailImage = "";
+                String content = "";
+                tdao.updateTravelAttraction(name, newdetailImage, content);
+                return "redirect:/travel_Detail?ta_name=" + name;
             }
 
-        	String ta_name = req.getParameter("ta_name");
+            String ta_name = req.getParameter("ta_name");
+            System.out.println("ta_name:" + ta_name);
             String local = req.getParameter("local");
             String address = req.getParameter("address");
             String category = req.getParameter("category");
-            
-        	travel_attDTO detail = tdao.getDetail(ta_name);
-        	String ta_imginfo = detail.getTa_imginfo();
-        	String[] ta_imginfoParts = ta_imginfo.split("/");
+
+            travel_attDTO detail = tdao.getDetail(ta_name);
+            String ta_imginfo = detail.getTa_imginfo();
+            String[] ta_imginfoParts = ta_imginfo.split("/");
+
             if (!newListImage.isEmpty()) {
                 String listImageName = newListImage.getOriginalFilename();
                 UUID listImageId = UUID.randomUUID();
@@ -309,11 +312,12 @@ public class tController {
                 String savedListImageName = listImageId.toString() + formattedListDate + "." + StringUtils.getFilenameExtension(listImageName);
                 File listImageFile = new File(mainuploadDirectory + File.separator + savedListImageName);
                 newListImage.transferTo(listImageFile);
-                tdao.updateList1(name,local,savedListImageName,address,category,ta_name);
+                tdao.updateList1(name, local, savedListImageName, address, category, ta_name);
             } else {
-            	tdao.updateList2(name,local,address,category,ta_name);
+                tdao.updateList2(name, local, address, category, ta_name);
             }
-            tdao.updateDetailInfo(name,ta_name);
+            tdao.updateDetailInfo(name, ta_name);
+
             // 이미지 수정을 위한 인덱스
             int imageIndex = 0;
             StringBuilder detailImagePaths = new StringBuilder();
@@ -355,18 +359,17 @@ public class tController {
                     taContentBuilder.append("/");
                 } else {
                     if (taContentBuilder.length() > 0) {
-                    	taContentBuilder.append("/");
+                        taContentBuilder.append("/");
                     }
                     taContentBuilder.append(detailInfo);
                 }
             }
 
             String taContent = taContentBuilder.toString();
-
-            // 여행지 정보 및 이미지 업데이트
+            String encoded_ta_name = URLEncoder.encode(ta_name, "UTF-8");
+            System.out.println("in");
             tdao.updateTravelAttraction(name, detailImagePaths.toString(), taContent);
-
-            return "redirect:/travel_Detail?ta_name=" + name;
+            return "redirect:/travel_Detail?ta_name=" + encoded_ta_name;
         } catch (IOException e) {
             e.printStackTrace();
             model.addAttribute("errorMessage", "파일 업로드 실패");
@@ -374,6 +377,7 @@ public class tController {
 
         return "redirect:/travel_Detail?ta_name=" + name;
     }
+
     @PostMapping("/deleteImage")
     @ResponseBody
     public String deleteImage(@RequestParam("ta_name") String taName,
@@ -390,7 +394,8 @@ public class tController {
             // 3. 삭제하려는 이미지를 배열에서 제거하고 빈 문자열을 추가합니다.
             List<String> updatedImageList = new ArrayList<>(Arrays.asList(ta_imginfoParts));
             updatedImageList.remove(imageToDelete);
-            updatedImageList.add("");
+            updatedImageList.add(updatedImageList.indexOf(imageToDelete), "//");
+
 
             // 4. 업데이트된 문자열을 '/'로 합쳐서 문자열로 변환합니다.
             String updatedTaImgInfo = String.join("/", updatedImageList);
@@ -404,6 +409,7 @@ public class tController {
             return "error"; // 이미지 삭제 실패 메시지를 리턴
         }
     }
+
 
     @PostMapping("/updatedetail")
     @ResponseBody

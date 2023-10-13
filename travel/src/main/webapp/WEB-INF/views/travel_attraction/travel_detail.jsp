@@ -37,10 +37,8 @@
 		            <p>아직 받은 별점이 없습니다!</p>
 		        </c:otherwise>
 		    </c:choose>
-		</span>
-
-        
-        
+		</span><br>
+        <ul class="list-group list-group-flush weather" style="font-weight: 600;"></ul>
     </div>
 </div>
 <div class="detail-info">
@@ -113,7 +111,132 @@
 <script src="https://code.jquery.com/jquery-latest.js"></script>
 <script>
 $(document).ready(function(){
-
+	var arr =[];
+	var today = new Date();
+	var week = new Array('일', '월', '화', '수', '목', '금', '토');
+	var year = today.getFullYear();
+	var month = today.getMonth() +1;
+	var day = today.getDate();
+	var hours = today.getHours();
+	var minutes = today.getMinutes();
+	var hours_al = new Array('02', '05', '08', '11', '14', '17', '20', '23');
+	var jeju = [ 
+		{'region' : '${detail.ta_add}','nx' : ${detail.ta_nx},'ny' : ${detail.ta_ny}}
+		];
+	
+	/* $('.weather-date').html(month + "월" + day + "일" + week[today.getDay()]+ "요일"); */
+	/*  동네예보 시간이 0200, 0500, ... 3시간 단위로 23시 까지 */
+	for(var i=0; i<hours_al.length; i++){
+		var h = hours_al[i] - hours;
+		if(h == -1 || h==0 || h == -2){
+			var now = hours_al[i];
+		}
+		if(hours == 00){
+			var now = hours_al[7]
+		}
+	}
+	/* example
+	   9시 -> 09시 변경 필요
+	*/
+	if(hours<10){
+		hours='0' + hours
+	}
+	if(month<10){
+		month='0' + month;
+	}
+	if(day<10){
+		day='0'+ day;
+	}
+	
+	today=year+ "" +month+ "" +day;
+	/* 좌표 */
+	$.each(jeju,function(j, k) {
+		var _nx = jeju[j].nx, _ny = jeju[j].ny, region = jeju[j].region;
+		
+		ForecastGribURL = "http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst?";
+		ForecastGribURL += "serviceKey=YimpteXz0DkV4RJNO2oLeZVHyf45P11WDD989d78AbKbCYII11otV0umLTyiTAhgoOLnRa2SDzNNSRxzb2sBDQ%3D%3D";
+		ForecastGribURL += "&type=XML";
+		ForecastGribURL += "&numOfRows=10";
+		ForecastGribURL += "&base_date=" + today;
+		ForecastGribURL += "&base_time=" + now + "00";
+		ForecastGribURL += "&nx=" + _nx + "&ny=" + _ny;
+		arr.push({'url': ForecastGribURL, 'region' : region});
+		
+		$.ajax({
+			url : arr[j].url,
+			type : 'GET',
+			dataType: 'xml',
+			success : function(data){
+				var $data = $(data).find("response>body>items>item");
+				var cate = "";
+				var temp = "";
+				var sky = "";
+				var pty = "";
+				var pop = "";
+				
+				$.each($data,function(i,o){
+					cate = $(o).find("category").text();		//카테고리 목록
+					if(cate == 'TMP'){
+						temp = $(this).find("fcstValue").text();	// 온도
+					}
+					if(cate == 'SKY'){
+						sky = $(this).find("fcstValue").text();		// 하늘상태
+					}
+					if(cate == 'PTY'){
+						pty = $(this).find("fcstValue").text();	// 강수형태
+					}
+					if(cate == "POP"){
+						pop = $(this).find("fcstValue").text();	// 강수 확률
+					}
+					
+				})
+				
+				$('.weather').append('<li class="list-group-item weather_li'+j+'"></li>');
+				$('.weather_li'+j).addClass('in'+j);
+				$('.in'+j).html("<br>"+"현재온도:"+temp+"°C"+"<br>");	//온도
+			 	$('.in'+j).append("강수확률"+pop+"%");	// 강수 확률
+				$('.in'+j).prepend(arr[j].region+'&emsp;');	//지역이름
+				
+				if(pty !=0){
+					switch(pty){
+					case '1':
+						$('.in'+j).append(" / 비");
+						$('.in'+j).prepend('<img src="img/logo/free-icon-rainy.png" style="width: 50px; height: 50px;">&emsp;');
+						break;
+					case '2':
+						$('.in'+j).append(" / 비/눈");
+						$('.in'+j).prepend('<img src="img/logo/free-icon-snowrain.png" style="width: 50px; height: 50px;">&emsp;');
+						break;
+					case '3':
+						$('.in'+j).append(" / 눈");
+						$('.in'+j).prepend('<img src="img/logo/free-icon-snow.png" style="width: 50px; height: 50px;">&emsp;');
+						break;
+					}
+				} else {
+					switch(sky){
+					case '1':
+						$('.in'+j).append(" / 맑음");
+						$('.in'+j).prepend('<img src="img/logo/free-icon-sunny.png" style="width: 50px; height: 50px;">&emsp;');
+						break;
+					case '2':
+						$('.in'+j).append(" / 구름조금");
+						$('.in'+j).prepend('<img src="img/logo/free-icon-cloudy.png" style="width: 50px; height: 50px;">&emsp;');
+						break;
+					case '3':
+						$('.in'+j).append(" / 구름많음");
+						$('.in'+j).prepend('<img src="img/logo/free-icon-cloudy3.png" style="width: 50px; height: 50px;">&emsp;');
+						break;
+					case '4':
+						$('.in'+j).append(" / 흐림");
+						$('.in'+j).prepend('<img src="img/logo/free-icon-cloudy2.png" style="width: 50px; height: 50px;">&emsp;');
+						break;
+						
+					}
+					
+				}	//if 종료
+			}	//success func 종료
+		})
+	})
 	let ta_name = $("#hidname").val();
     $.ajax({
         url:"/totalCart",
