@@ -18,7 +18,7 @@
 <div id=wrapper>
 
 	<div style="float:left; margin-left:10%;">
-	    <h1>여행 준비</h1>
+	    <h1 style="color:#ffa458;">나만의 제주 여행</h1>
 	    <hr>
 	    <h5>작성자 : <span id=writer>${id}</span></h5>
 	    <table style="width:400px;">
@@ -112,10 +112,10 @@
   <div>
   	<table id=planTable class=timeTable>
   		<thead style="background-color:black;">
-  			<tr><td style="width:60px;">시간</td><td style="width:800px;"></td></tr>
+  			<tr><td style="width:60px;">시간</td><td style="width:800px;">스케줄</td></tr>
   		</thead>
   		<tbody>
-  			<tr><td>06:00</td><td rowspan=18>일정을 만들어주세요.</td></tr>
+  			<tr><td>06:00</td><td rowspan=18 style="vertical-align:middle;color:#ff5f2e;"><h2>여행 정보 입력 후 일정 만들기를 클릭해 주세요.</h2></td></tr>
   			<tr><td>07:00</td></tr>
   			<tr><td>08:00</td></tr>
   			<tr><td>09:00</td></tr>

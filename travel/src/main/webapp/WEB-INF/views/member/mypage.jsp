@@ -6,6 +6,7 @@
 <link rel="stylesheet" href="/resources/css/home.css" />
 <link rel="stylesheet" href="/resources/css/member.css" />
 <link rel="stylesheet" href="/resources/css/mypage.css" />
+<link rel="stylesheet" href="css/my_jeju_travel.css" />
     <link rel="stylesheet" type="text/css" href="css/map.css">
     <script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=81hlrkxaq1"></script>
 <head>

@@ -41,7 +41,7 @@
 												<div class="infoLV">
 													<span class="myN"><c:if test="${empty nickname}">${id}</c:if>
 														<c:if test="${!empty nickname}">${nickname}</c:if> </span>&nbsp;님의
-													제주여행 <input type="text" value="${id }" id=userid readonly class="mybut">
+													제주여행
 												</div>
 												
 											</div>

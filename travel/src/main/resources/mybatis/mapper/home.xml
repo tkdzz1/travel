@@ -62,4 +62,8 @@ select count(*) from travel_planner where writer = #{param1}
 select * from travel_planner where writer = #{param1} and planner_num = #{param2}
 </select>
 
+<delete id="secession">
+delete from member where member_id=#{param1};
+</delete>
+
 </mapper>

@@ -4,6 +4,7 @@ let beforeValue;
 let filter;
 let nowStatus;
 let markers = [];
+let addPlaning = 0;
 let dragIndex;
 let tbodyIndex;
 
@@ -177,6 +178,10 @@ $(document)
 		return false;
 	}
 	
+	if ( addPlaning == 1 ) {
+		return false;
+	}
+	
 	choicePlan = $(this).closest('.listContent').find('input[name=taNum]').val();
 	
 	$('#planTable tbody td:first-child').each(function() {
@@ -188,6 +193,7 @@ $(document)
 	    });
 	
 	    td.wrap(button);
+	    addPlaning = 1;
 	});
 	return false;
 })
@@ -204,6 +210,7 @@ $(document)
 				addPlan.html('<h1 name='+ta_num+'><span name=num></span>' + '<span name='+ta_num+'>' + obj['ta_name'] + '</span>' + '<span name=empty> ❌ </span></h1>');	
 				changePlan();
 				loadTravelData(ta_num);
+				addPlaning = 0;
 			}, error:function(){
 				console.log('error!');
 			}
@@ -218,7 +225,7 @@ $(document)
 	return false;
 })
 
-.on('click','#planTable thead td span:even',function(){
+.on('click','#planTable thead tr td span',function(){
 	var thead = $(this).closest('thead').attr("name");
 	var tbody = $(this).closest('thead').next().attr("name");
 	var dayCheck =  $(this).parent().text().split(" ")[2] + $(this).parent().text().split(" ")[3];
@@ -275,8 +282,8 @@ $(document)
 		
 		for (let i = 0; i<markers.length; i++) {
 			if ( markers[i]['title'] == ta_num ) {
-				markers.splice(i, 1);
 				markers[i].setMap(null);
+				markers.splice(i, 1);
 				break;
 			}
 		}
@@ -445,7 +452,7 @@ function ListShow(data, i){
 function createTable(day) {
 	 let html ='<thead style="background-color:black;" name=day' + day +'>'
   		+	'<tr><td style="color:white; width:60px;">시간</td>'
-  		+ '<td style="width:800px;"><span name=before>◀ </span> <span name=day>DAY ' + day + '</span><span name=after> ▶</span></td></tr>'
+  		+ '<td style="width:800px;"><span name=before>◀ </span> <span name=day>DAY ' + day + '</span> <span name=after> ▶</span></td></tr>'
   		+ '</thead>'
   		+ '<tbody name=day' + day + '>' 
   		+	'<tr><td name=6>06:00</td><td draggable="true"></td></tr>'
@@ -471,15 +478,18 @@ function createTable(day) {
 }
 
 function changePlan() {
-  var numList = ['1️⃣', '2️⃣', '3️⃣', '4️⃣', '5️⃣', '6️⃣', '7️⃣', '8️⃣', '9️⃣', '🔟'];
+  var numList = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten'];
   let ndx = 0;
+  
   $('#planTable tbody:eq('+tbodyIndex+') tr').each(function() {
     var $this = $(this).find('td:eq(1)');
     var text = $this.text().trim(); // 공백 제거
+    
     if (text !== '') {
-      $this.find('span[name=num]').text(numList[ndx]);
+      $this.find('span[name=num]').html('<img src="img/logo/' + numList[ndx] + '.png" style="width:30px;"></img>');
       ndx++;
     }
+    
   });
 }
 
@@ -493,7 +503,7 @@ function loadTravelData(ta_num) {
             // 여행지 정보를 순회하면서 마커를 생성하고 이름 설정
             data.forEach(function(travelInfo) {
                 let allPosition = new naver.maps.LatLng(travelInfo.ta_latitude, travelInfo.ta_longitude);
-                console.log(data.length);
+                
                 let marker = new naver.maps.Marker({
                     position: allPosition,
                     map: map,

@@ -16,7 +16,10 @@ import jakarta.servlet.http.HttpSession;
 public class testController {
 	@Autowired
 	private BoardDAO bdao;
-
+	
+	@Autowired
+	private homeDAO hDao;
+	
 	@GetMapping("/weather")
 	public String test() {
 		return "weather/weather";
@@ -31,10 +34,7 @@ public class testController {
 	public String test3() {
 		return "weather/weather3";
 	}
-//	@GetMapping("/mypage")
-//	public String myPage() {
-//		return "member/mypage";
-//	}
+
 	@GetMapping("/myreview")
 	public String myReview() {
 		return "member/my_review";
@@ -52,13 +52,26 @@ public class testController {
 		model.addAttribute("blist",alBoard);
 		model.addAttribute("imp",id);
 
-		
-		
 		return "member/my_bbs";
 	}
 	@GetMapping("/header2")
 	public String header2() {
 		return "member/header2";
+	}
+	@GetMapping("/edit")
+	public String edit() {
+		return "edit";
+	}
 	
+	@GetMapping("/secession")
+	public String secession(HttpServletRequest req) {
+		HttpSession s = req.getSession();
+		String id = (String) s.getAttribute("id");
+		
+		hDao.secession(id);
+		s.invalidate();
+		
+		return "redirect:/";
+		
 	}
 }	

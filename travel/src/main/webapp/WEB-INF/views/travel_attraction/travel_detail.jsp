@@ -9,7 +9,7 @@
 <link rel="stylesheet" type="text/css" href="/css/detail.css"> <!-- CSS 파일 연결 -->
 <link rel="stylesheet" type="text/css" href="/css/star.css">
 
-<title>Insert title here</title>
+<title>Travel JEJU - 여행지 상세 정보</title>
 </head>
 <%@ include file="../header.jsp" %>
 <body>

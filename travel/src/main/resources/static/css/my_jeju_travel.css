@@ -97,9 +97,16 @@ div {
 }
 
 .timeTable thead td {
+	vertical-align: middle;
 	color:white;
 }
 
+.timeTable tbody td:nth-child(odd) {
+	vertical-align: middle;
+	text-align:center;
+	color:white;
+	background-color: black;
+}
 .timeTable thead span:nth-child(odd) {
 	cursor: pointer;
 }

@@ -39,8 +39,8 @@ h1 {
 }
 
 .w-btn-red {
-    background-color: #ff5f2e;
-    color: #e1eef6;
+    background-color: #ff5f2e !important;
+    color: #e1eef6 !important; 
 }
 
 .w-btn-black {

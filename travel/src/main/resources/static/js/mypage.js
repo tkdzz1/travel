@@ -1,10 +1,15 @@
+let tbodyIndex;
+let markers = [];
+var numList = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten'];
+let ta_name;
+//let count = 0;
+
 let infoWindow = new naver.maps.InfoWindow();
 let isInfoWindowOpen = false;
 let mapOptions = { 
     center: new naver.maps.LatLng(33.3612909, 126.6954437),
     zoom: 10
 };	
-
 let map = new naver.maps.Map('map', mapOptions);
 
 $(document)
@@ -12,6 +17,8 @@ $(document)
 	
 })
 .on('click','dl[name=planner]',function(){
+	markerReload();
+	
 	let planNum = $(this).attr("id");
 	$.ajax({ url:"/getPlanner", data: { planNum : planNum }, type: 'post', dataType: 'json',
 		success: function(response){
@@ -61,6 +68,7 @@ $(document)
 			console.log(plan);
 			
 			day = 1;
+			tbodyIndex = 0;
 			
 			$('#planTable tbody').each(function(){
 				
@@ -75,26 +83,86 @@ $(document)
 					planTime = plan[day-1].split("*");
 					
 					if ( planTime[planNum].split(":")[0] == time ) {
-						att.html( planTime[planNum].split(":")[1] );
+						let travel_att = planTime[planNum].split(":")[1];
+						
+					    loadTravelData(travel_att, function(ta_name) {
+					        att.html('<h1 name=' + travel_att + '><span name=num></span> ' + ta_name + '</h1>');
+					        changePlan();
+					    });
+
 						planNum++;
 					}
 					
 					if ( planNum == planTime.length ) {
-						return true;
+						day++;
+						return false;
 					}
 					
 				})
 				
-				day++;
-				
 			})
+			
+			$("#myModal").show();
 			
 		}, error: function(){
 			
 		}
 		
 	})
-	$("#myModal").show();
+})
+
+.on('click','#planTable thead tr td span',function(){
+	var thead = $(this).closest('thead').attr("name");
+	var tbody = $(this).closest('thead').next().attr("name");
+	var dayCheck =  $(this).parent().text().split(" ")[2] + $(this).parent().text().split(" ")[3];
+	
+	if ( $(this).attr("name") == "before" ) {
+		if ( dayCheck == "DAY1" ) {
+			return false;
+		}
+		
+		count = 0;
+		
+		$('thead[name=' + thead + ']').hide();
+		$('tbody[name=' + tbody + ']').hide();
+		
+		var numberZone = thead.match(/\d+/);
+		
+		if ( numberZone ) {
+			tbodyIndex = parseInt(numberZone[0], 10) - 2;
+			var decrement = ( parseInt(numberZone[0], 10) - 1 ).toString();
+			var updateDay = thead.replace(/\d+/, decrement);
+		}
+		
+		$('thead[name=' + updateDay + ']').show();
+		$('tbody[name=' + updateDay + ']').show();
+		
+		markerReload();
+		
+	} else {
+		if ( dayCheck == "DAY" + $('#planTable tbody').length ) {
+			return false;
+		}
+		
+		count = 0;
+		
+		$('thead[name=' + thead + ']').hide();
+		$('tbody[name=' + tbody + ']').hide();
+		
+		var numberZone = thead.match(/\d+/);
+		
+		if ( numberZone ) {
+			tbodyIndex = parseInt(numberZone[0], 10);
+			var increment = ( parseInt(numberZone[0], 10) + 1 ).toString();
+			var updateDay = thead.replace(/\d+/, increment);
+		}
+		
+		$('thead[name=' + updateDay + ']').show();
+		$('tbody[name=' + updateDay + ']').show();
+		
+		markerReload();
+		
+	}
 })
 
 $("#closeModalBtn").click(function() {
@@ -111,7 +179,7 @@ $(window).click(function(event) {
 function createTable(day) {
 	 let html ='<thead style="background-color:black;" name=day' + day +'>'
   		+	'<tr><td style="color:white; width:60px;">시간</td>'
-  		+ '<td style="width:800px;"><span name=before>◀ </span> <span name=day>DAY ' + day + '</span><span name=after> ▶</span></td></tr>'
+  		+ '<td style="width:800px;"><span name=before>◀ </span> <span name=day>DAY ' + day + '</span> <span name=after> ▶</span></td></tr>'
   		+ '</thead>'
   		+ '<tbody name=day' + day + '>' 
   		+	'<tr><td name=6>06:00</td><td draggable="true"></td></tr>'
@@ -134,4 +202,94 @@ function createTable(day) {
   		+	'<tr><td name=23>23:00</td><td draggable="true"></td></tr>'
   		+  '</tbody>'
   		return html;
+}
+
+function changePlan() {
+  var numList = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten'];
+  let ndx = 0;
+  
+  $('#planTable tbody:eq('+tbodyIndex+') tr').each(function() {
+    var $this = $(this).find('td:eq(1)');
+    var text = $this.text().trim(); // 공백 제거
+    
+    if (text !== '') {
+      $this.find('span[name=num]').html('<img src="img/logo/' + numList[ndx] + '.png" style="width:30px;"></img>');
+      ndx++;
+    }
+    
+  });
+}
+
+function loadTravelData(ta_num, callback) {
+    $.ajax({
+        url: "/getPlanData",
+        method: "post",
+        data: { ta_num : ta_num },
+        dataType: "json",
+        success: function(data) {
+            // 여행지 정보를 순회하면서 마커를 생성하고 이름 설정
+            data.forEach(function(travelInfo) {
+                let allPosition = new naver.maps.LatLng(travelInfo.ta_latitude, travelInfo.ta_longitude);
+                
+                ta_name = travelInfo.ta_name;
+                
+                callback(ta_name);
+				
+                let marker = new naver.maps.Marker({
+                    position: allPosition,
+                    map: map,
+                    title: ta_num,
+//                        icon: {
+//					        content: '<img src="img/logo/' + numList[count] + '.png"' + 'width="30" height="30" />', // 이미지 URL 및 크기를 지정
+//					        size: new naver.maps.Size(30, 30), // 마커 이미지의 크기
+//					        anchor: new naver.maps.Point(15, 15) // 마커 이미지의 중심 위치
+//					    }
+                });
+                markers.push(marker);
+//                count++;
+                
+                let infoWindow = new naver.maps.InfoWindow({
+                    content: travelInfo.ta_name
+                });
+
+               naver.maps.Event.addListener(marker, 'click', function() {
+                    if (isInfoWindowOpen) {
+                        infoWindow.close();
+                        isInfoWindowOpen = false;
+                    } else {
+                        infoWindow.open(map, marker);
+                        isInfoWindowOpen = true;
+                    }
+                });
+
+            });
+        },
+        error: function(xhr, status, error) {
+            console.error("여행지 정보를 불러오는데 실패했습니다.");
+        }
+    });
+}
+
+function markerReload(){
+		var planList = [];
+		
+		for (let i = 0; i<markers.length; i++) {
+			markers[i].setMap(null);
+		}
+		
+		markers = [];
+		
+		$('#planTable tbody:eq(' +tbodyIndex+ ') tr').each(function(){
+			 let $this = $(this).find('h1').attr('name');
+			 if ( $this == undefined ) {
+				 return;
+			 }
+			 planList.push($this);
+		})
+		
+		for (let i = 0; i<planList.length; i++) {
+			loadTravelData(planList[i], function(){
+				changePlan();
+			});
+		}
 }

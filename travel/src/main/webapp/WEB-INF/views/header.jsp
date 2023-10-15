@@ -41,17 +41,6 @@
                         <li><a href="/shopping"><span>쇼핑</span></a></li>
                     </ul>
                 </li>
-                <li class="lnb_nav_item n2">
-                    <a href="#" class="lnb_nav_link"><span>지역별여행</span></a>
-                    <ul class="depth2">
-                        <li><a href="#"><span>곶자왈</span></a></li>
-                        <li><a href="#"><span>오름</span></a></li>
-                        <li><a href="#"><span>올레길</span></a></li>
-                        <li><a href="#"><span>한라산</span></a></li>
-                        <li><a href="#"><span>유네스코</span></a></li>
-                        <li><a href="#"><span>우도</span></a></li>
-                    </ul>
-                </li>
                 <li class="lnb_nav_item n3">
                     <a href="#" class="lnb_nav_link"><span>여행준비</span></a>
                     <ul class="depth2">
@@ -67,7 +56,7 @@
                         <li><a href="/myreview"><span>나의 리뷰</span></a></li>
                         <li><a href="/mylike"><span>찜한 여행지</span></a></li>
                         <li><a href="#"><span>제주 방문지</span></a></li>
-                        <li><a href="#"><span>정보 수정</span></a></li>
+                        <li><a href="/edit"><span>정보 수정</span></a></li>
                     </ul>
                 </li>
             </ul>

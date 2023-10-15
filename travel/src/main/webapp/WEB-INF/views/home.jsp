@@ -74,24 +74,24 @@
 			</div>
 		</section>
 
-		<form id="frmSearch" name="frmSearch" method="post" action="">
-			<div style="display: none;">
-				<input type="text" class="text">
-			</div>
-			<section class="search_form wrap" id="searchContent">
-				<h2 class="blind">통합검색</h2>
-				<fieldset>
-					<legend>통합검색</legend>
-					<div class="search_wrap">
-						<label for="total_search" class="blind">검색어 입력</label> <input
-							type="search" name="ipt_intgrfind_kword" id="total_search"
-							class="text" placeholder="검색어를 입력해 주세요."> <input
-							type="button" id="btn_total_search" name="ipt_intgrfind_kword"
-							value="검색" class="search_submit">
-					</div>
-				</fieldset>
-			</section>
-		</form>
+<!-- 		<form id="frmSearch" name="frmSearch" method="post" action=""> -->
+<!-- 			<div style="display: none;"> -->
+<!-- 				<input type="text" class="text"> -->
+<!-- 			</div> -->
+<!-- 			<section class="search_form wrap" id="searchContent"> -->
+<!-- 				<h2 class="blind">통합검색</h2> -->
+<!-- 				<fieldset> -->
+<!-- 					<legend>통합검색</legend> -->
+<!-- 					<div class="search_wrap"> -->
+<!-- 						<label for="total_search" class="blind">검색어 입력</label> <input -->
+<!-- 							type="search" name="ipt_intgrfind_kword" id="total_search" -->
+<!-- 							class="text" placeholder="검색어를 입력해 주세요."> <input -->
+<!-- 							type="button" id="btn_total_search" name="ipt_intgrfind_kword" -->
+<!-- 							value="검색" class="search_submit"> -->
+<!-- 					</div> -->
+<!-- 				</fieldset> -->
+<!-- 			</section> -->
+<!-- 		</form> -->
 		<!-- 날씨 -->
 	</main>
 	<div class="wrap">
@@ -110,7 +110,7 @@
 					<div class="content">
 						<div class="subject">
 							<div class="buttons">
-								<a href="javascript:void(0);" id="one" class="button">낭만가득 제주도 여행</a>
+								<a href="javascript:void(0);" id="one" class="button" style="color:white;">낭만가득 제주도 여행</a>
 							</div>
 						</div>
 					</div>
@@ -138,7 +138,7 @@
 					<div class="content">
 						<div class="subject">
 							<div class="buttons">
-								<a href="javascript:void(0);" id="two" class="button">제주동문시장
+								<a href="javascript:void(0);" id="two" class="button" style="color:white;">제주동문시장
 									먹거리 탐방</a>
 							</div>
 						</div>
@@ -166,7 +166,7 @@
 					<div class="content">
 						<div class="subject">
 							<div class="buttons">
-								<a href="javascript:void(0);" id="three" class="button">제주의
+								<a href="javascript:void(0);" id="three" class="button" style="color:white;">제주의
 									캠핑 핫플</a>
 							</div>
 						</div>
@@ -195,7 +195,7 @@
 					<div class="content">
 						<div class="subject">
 							<div class="buttons">
-								<a href="javascript:void(0);" id="four" class="button">백제사 템플스테이</a>
+								<a href="javascript:void(0);" id="four" class="button" style="color:white;">백제사 템플스테이</a>
 							</div>
 						</div>
 					</div>

@@ -153,11 +153,6 @@ footer .logo {
   <div class="inner">
   
   <!-- menu1 이라는 class name을 menu로 변경 -->
-  
-    <ul class="menu">
-      <li><a href="/personal">개인정보처리방침</a></li>
-      <li><a href="/service">이용약관</a></li>
-    </ul>
    
    
     <div class="info">
