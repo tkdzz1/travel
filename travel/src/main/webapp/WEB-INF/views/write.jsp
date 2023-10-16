@@ -100,6 +100,7 @@
           <select name="category" id="category">
             <option value="음식점">음식점</option>
             <option value="관광지">관광지</option>
+            <option value="숙박">숙박</option>
             <option value="기타">기타</option>
           </select>
         </td>

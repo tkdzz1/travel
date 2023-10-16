@@ -1024,6 +1024,7 @@ font-family: 'Pretendard-Regular';
         <select name="category" id="category" style="width:15%;"> 
             <option value="음식점" ${bpost.category == '음식점' ? 'selected' : ''}>음식점</option>
             <option value="관광" ${bpost.category == '관광' ? 'selected' : ''}>관광</option>
+            <option value="숙박" ${bpost.category == '숙박' ? 'selected' : ''}>숙박</option>
             <option value="기타" ${bpost.category == '기타' ? 'selected' : ''}>기타</option>
         </select>
         &nbsp;&nbsp;&nbsp;<button type="button" id="editcomplete">수정 완료</button>

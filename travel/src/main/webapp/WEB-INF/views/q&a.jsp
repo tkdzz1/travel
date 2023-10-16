@@ -370,22 +370,26 @@ button:hover {
 
 .allbtn {
     background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30.018' viewBox='0 0 30 30.018'%3E%3Cdefs%3E%3CclipPath id='a'%3E%3Cpath data-name='사각형 322' fill='none' d='M0 0h30v30.018H0z'/%3E%3C/clipPath%3E%3C/defs%3E%3Cg data-name='그룹 3347'%3E%3Cg data-name='그룹 3346' clip-path='url(%23a)' fill='none' stroke='%23fff' stroke-width='2'%3E%3Cpath data-name='사각형 318' d='M1.145 1.145h11.227v11.227H1.145z'/%3E%3Cpath data-name='사각형 319' d='M17.628 1.145h11.227v11.227H17.628z'/%3E%3Cpath data-name='사각형 320' d='M1.145 17.646h11.227v11.227H1.145z'/%3E%3Cpath data-name='사각형 321' d='M17.628 17.646h11.227v11.227H17.628z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-    background: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30.018' viewBox='0 0 30 30.018'%3E%3Cdefs%3E%3CclipPath id='a'%3E%3Cpath data-name='사각형 322' fill='none' d='M0 0h30v30.018H0z'/%3E%3C/clipPath%3E%3C/defs%3E%3Cg data-name='그룹 3347'%3E%3Cg data-name='그룹 3346' clip-path='url(%23a)' fill='none' stroke='%23a1a1a1' stroke-width='2'%3E%3Cpath data-name='사각형 318' d='M1.145 1.145h11.227v11.227H1.145z'/%3E%3Cpath data-name='사각형 319' d='M17.628 1.145h11.227v11.227H17.628z'/%3E%3Cpath data-name='사각형 320' d='M1.145 17.646h11.227v11.227H1.145z'/%3E%3Cpath data-name='사각형 321' d='M17.628 17.646h11.227v11.227H17.628z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") no-repeat center top 20px/30px auto;
+    background: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30.018' viewBox='0 0 30 30.018'%3E%3Cdefs%3E%3CclipPath id='a'%3E%3Cpath data-name='사각형 322' fill='none' d='M0 0h30v30.018H0z'/%3E%3C/clipPath%3E%3C/defs%3E%3Cg data-name='그룹 3347'%3E%3Cg data-name='그룹 3346' clip-path='url(%23a)' fill='none' stroke='%23fff' stroke-width='2'%3E%3Cpath data-name='사각형 318' d='M1.145 1.145h11.227v11.227H1.145z'/%3E%3Cpath data-name='사각형 319' d='M17.628 1.145h11.227v11.227H17.628z'/%3E%3Cpath data-name='사각형 320' d='M1.145 17.646h11.227v11.227H1.145z'/%3E%3Cpath data-name='사각형 321' d='M17.628 17.646h11.227v11.227H17.628z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") no-repeat center top 20px/30px auto;
     height: 100%; transition: transform .2s ease, padding .2s ease;display:inline-block
 }
 
 
 .landmark{
-background: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36.983' height='27.597' viewBox='0 0 36.983 27.597'%3E%3Cg data-name='그룹 64' transform='translate(-453.953 -441.175)' fill='none' stroke='%23a1a1a1' stroke-width='2'%3E%3Cpath data-name='패스 18463' d='M456.047 467.123l11.214-10.431 11.316 10.666' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath data-name='패스 18464' d='M471.213 460.368l3.951-3.677 10.4 9.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath data-name='패스 18465' d='M463.746 452.537a2.657 2.657 0 1 1-2.657-2.657 2.657 2.657 0 0 1 2.657 2.657z' stroke-miterlimit='10'/%3E%3Crect data-name='사각형 32' width='31.485' height='22.389' rx='4' transform='translate(454.953 445.206)' stroke-miterlimit='10'/%3E%3Cpath data-name='패스 18466' d='M458.451 444.974a2.8 2.8 0 0 1 2.8-2.8h25.887a2.8 2.8 0 0 1 2.8 2.8v16.792a2.8 2.8 0 0 1-2.8 2.8h-1.9' stroke-miterlimit='10'/%3E%3C/g%3E%3C/svg%3E") no-repeat center top 22px/35px auto;
+background: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36.983' height='27.597' viewBox='0 0 36.983 27.597'%3E%3Cg data-name='그룹 64' transform='translate(-453.953 -441.175)' fill='none' stroke='%23fff' stroke-width='2'%3E%3Cpath data-name='패스 18463' d='M456.047 467.123l11.214-10.431 11.316 10.666' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath data-name='패스 18464' d='M471.213 460.368l3.951-3.677 10.4 9.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath data-name='패스 18465' d='M463.746 452.537a2.657 2.657 0 1 1-2.657-2.657 2.657 2.657 0 0 1 2.657 2.657z' stroke-miterlimit='10'/%3E%3Crect data-name='사각형 32' width='31.485' height='22.389' rx='4' transform='translate(454.953 445.206)' stroke-miterlimit='10'/%3E%3Cpath data-name='패스 18466' d='M458.451 444.974a2.8 2.8 0 0 1 2.8-2.8h25.887a2.8 2.8 0 0 1 2.8 2.8v16.792a2.8 2.8 0 0 1-2.8 2.8h-1.9' stroke-miterlimit='10'/%3E%3C/g%3E%3C/svg%3E") no-repeat center top 22px/35px auto;
 }
 
 
 .food {
-background: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='38.811' height='20.865' viewBox='0 0 38.811 20.865'%3E%3Cg data-name='그룹 62' fill='grey' stroke='%23a1a1a1' stroke-linejoin='round' stroke-width='2'%3E%3Cpath data-name='패스 18462' d='M19.406 4.079A15.786 15.786 0 0 0 3.62 19.865h31.572A15.786 15.786 0 0 0 19.406 4.079z'/%3E%3Cpath data-name='선 2' d='M0 19.865h38.811'/%3E%3Cpath data-name='선 3' d='M19.406 4.079V0'/%3E%3C/g%3E%3C/svg%3E") no-repeat center top 26px/39px auto;
+background: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='38.811' height='20.865' viewBox='0 0 38.811 20.865'%3E%3Cg data-name='그룹 62' fill='grey' stroke='%23fff' stroke-linejoin='round' stroke-width='2'%3E%3Cpath data-name='패스 18462' d='M19.406 4.079A15.786 15.786 0 0 0 3.62 19.865h31.572A15.786 15.786 0 0 0 19.406 4.079z'/%3E%3Cpath data-name='선 2' d='M0 19.865h38.811'/%3E%3Cpath data-name='선 3' d='M19.406 4.079V0'/%3E%3C/g%3E%3C/svg%3E") no-repeat center top 26px/39px auto;
+}
+
+.hotel {
+background: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='34.013' height='28.844' viewBox='0 0 34.013 28.844'%3E%3Cg data-name='그룹 61' fill='grey' stroke='%23fff' stroke-linejoin='round' stroke-width='2'%3E%3Cpath data-name='패스 18461' d='M33.017 19.231H1l4.192-7.366h23.625z'/%3E%3Cpath data-name='사각형 26' d='M5.191 1H28.82v10.865H5.191z'/%3E%3Cpath data-name='사각형 27' d='M8.989 7.93h8.017v3.49H8.989z'/%3E%3Cpath data-name='사각형 28' d='M17.006 7.93h8.017v3.49h-8.017z'/%3E%3Cpath data-name='사각형 29' d='M1 19.231h32.013v8.613H1z'/%3E%3C/g%3E%3C/svg%3E") no-repeat center top 26px/39px auto;
 }
 
 .etc {
-background: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36.16' height='27.025' viewBox='0 0 36.16 27.025'%3E%3Cg data-name='그룹 68' fill='grey' stroke='%23a1a1a1' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'%3E%3Cpath data-name='패스 18473' d='M20.907 11.855c0-4.251-4.456-7.7-9.953-7.7s-9.953 3.446-9.953 7.7c0 3.569 3.147 6.562 7.41 7.432l3.515 6.738-.617-6.488c5.33-.146 9.598-3.524 9.598-7.682z'/%3E%3Cpath data-name='패스 18474' d='M31.568 1h-14.79a3.593 3.593 0 0 0-3.592 3.592v6.8a3.593 3.593 0 0 0 3.592 3.592h8.56l-.757 7.966 4.155-7.966h2.831a3.592 3.592 0 0 0 3.592-3.592v-6.8A3.592 3.592 0 0 0 31.568 1z'/%3E%3C/g%3E%3C/svg%3E") no-repeat center top 27px/34px auto;
+background: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36.16' height='27.025' viewBox='0 0 36.16 27.025'%3E%3Cg data-name='그룹 68' fill='grey' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'%3E%3Cpath data-name='패스 18473' d='M20.907 11.855c0-4.251-4.456-7.7-9.953-7.7s-9.953 3.446-9.953 7.7c0 3.569 3.147 6.562 7.41 7.432l3.515 6.738-.617-6.488c5.33-.146 9.598-3.524 9.598-7.682z'/%3E%3Cpath data-name='패스 18474' d='M31.568 1h-14.79a3.593 3.593 0 0 0-3.592 3.592v6.8a3.593 3.593 0 0 0 3.592 3.592h8.56l-.757 7.966 4.155-7.966h2.831a3.592 3.592 0 0 0 3.592-3.592v-6.8A3.592 3.592 0 0 0 31.568 1z'/%3E%3C/g%3E%3C/svg%3E") no-repeat center top 27px/34px auto;
 }
 
 .popimg {
@@ -476,6 +480,8 @@ font-weight:bold;
         height:150px; border-radius:10px; background-color:#ef6d00; margin-right: 0; cursor:pointer;">
     <input type="button" value="음식점" class="food" style="width:150px;
         height:150px; border-radius:10px; background-color:#ef6d00; margin-right: 0; cursor:pointer;">
+    <input type="button" value="숙박" class="hotel" style="width:150px;
+        height:150px; border-radius:10px; background-color:#ef6d00; margin-right: 0; cursor:pointer;">
     <input type="button" value="기타" class="etc" style="width:150px;
         height:150px; border-radius:10px; background-color:#ef6d00; margin-right: 0; cursor:pointer;">
 </div>
@@ -547,6 +553,10 @@ font-weight:bold;
           
             </div>
         </c:if>
+        
+        
+       
+        
       
      
 
@@ -555,6 +565,7 @@ font-weight:bold;
 </body>
 <script src="https://code.jquery.com/jquery-latest.js"></script>
 <script>
+
   
     function filter(category) {
        
@@ -572,11 +583,7 @@ font-weight:bold;
     }
     
     
-    $('.popitem').click(function () {
-        const seqno = $(this).find('.pseq').text();
-        window.location.href = '/view?seqno=' + seqno;
-    });
-
+    
  
     $('.allbtn').click(function () {
         filter('all');
@@ -590,10 +597,27 @@ font-weight:bold;
         filter('기타');
     });
     
+    $('.hotel').click(function(){
+    	filter('숙박');
+    })
+    
     $('.food').click(function(){
     	filter('음식점');
     })
 
+    
+    
+    
+    $('.popitem').click(function () {
+        const seqno = $(this).find('.pseq').text();
+        window.location.href = '/view?seqno=' + seqno;
+    });
+
+    
+    
+    
+    
+    
     $(document)
         .on('click', '#tblBoard tbody tr', function () {
             document.location = '/view?seqno=' + $(this).find('td:eq(0)').text();
