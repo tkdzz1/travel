@@ -17,14 +17,16 @@
 <%@ include file = "../header.jsp" %>
 <div id=wrapper>
 
-	<div style="float:left; margin-left:10%;">
+	<div id=main>
 	    <h1 style="color:#ffa458;">나만의 제주 여행</h1>
+	    <br>
 	    <hr>
 	    <h5>작성자 : <span id=writer>${id}</span></h5>
+	    <br>
 	    <table style="width:400px;">
 	      <tr>
 	        <td>제목</td>
-	        <td><input type="text" id=title placeholder="예시) 나의 3박4일 제주여행"></td>
+	        <td><input type="text" id=title placeholder="예) 나의 3박4일 제주여행"></td>
 	      </tr>
 	      <tr>
 	        <td>기간</td>
@@ -46,10 +48,13 @@
 	      									<option>친구</option>
 	      								</select>
 	   	  </tr>
-	      <tr>
+	    </table>
+	    <br>
+	    <table>
+	       <tr>
 	        <td colspan="2"><button id=plan class="w-btn w-btn-red">일정 만들기</button></td>
 	      </tr>
-	    </table>
+		</table>	      
 	</div>
 
 	  <div class="right-panel" style="border:1px solid white;">
@@ -58,11 +63,13 @@
 	    </div>
 	  </div>
 	  
-	  <div style="float:left; margin-left:10%;" class=travel_list id=list>
+	  <div style="	float:left; margin-left:10%;" class=travel_list id=list>
+	  		<br>
 			<ul>
 				<li class=select>찜한 여행지<hr></li>
 				<li>검색<hr></li>
 			</ul>
+			<br>
 			<div class=option>
 				<ul>
 					<li class=select>전체<hr></li>
@@ -102,7 +109,7 @@
 			</div>
 			
 			<c:if test="${tList == 'empty' }">
-			<div style="text-align:center; margin-top: 50%;">
+			<div style="text-align:center; margin-top: 50%; display:block;">
 				<img src="img/heart.png" style="width:100px;">
 				<h3>찜한 여행지가 없습니다.</h3>
 			</div>
@@ -136,12 +143,15 @@
   		</tbody>
   	</table>
   </div>
-
+	
+	<br>
+	
   <div style="text-align:center;">
   		<button class="w-btn w-btn-red" id=save>저장</button> <button class="w-btn w-btn-black" id=cancel>취소</button>
   </div>
   
 </div>
+<br>
 <%@ include file = "../footer.jsp" %>
 </body>
 <script src="https://code.jquery.com/jquery-latest.js"></script>
