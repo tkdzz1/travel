@@ -16,6 +16,21 @@ table {
 	border: 3px solid #ffa458;
 }
 
+#planTable {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: auto;
+    box-sizing: border-box;
+}
+
+#main {
+	float:left;
+	margin-left: 9.7%;
+	height:402px;
+    box-sizing: border-box;
+	border: 3px solid #ffa458;
+}
+
 input[type='date']::before {
   content: attr(data-placeholder);
   width: 100%;

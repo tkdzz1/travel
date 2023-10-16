@@ -45,6 +45,7 @@
                     <a href="#" class="lnb_nav_link"><span>여행준비</span></a>
                     <ul class="depth2">
                         <li><a href="/my_jeju_travel"><span>나만의 제주 여행</span></a></li>
+                        <li><a href="/q&a"><span>제주여행 Q&A</span></a></li>
                         <li><a href="https://www.kctg.or.kr/tour/touristSiteList.do" target="_blank"><span>문화관광해설사</span></a></li>
                         <li><a href="https://jejutour.or.kr/"  target="_blank"><span>제주투어</span></a></li>
                     </ul>
