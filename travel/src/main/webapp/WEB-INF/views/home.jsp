@@ -110,7 +110,7 @@
 					<div class="content">
 						<div class="subject">
 							<div class="buttons">
-								<a href="javascript:void(0);" id="one" class="button" style="color:white;">낭만가득 제주도 여행</a>
+								<a href="javascript:void(0);" id="one" class="button" >낭만가득 제주도 여행</a>
 							</div>
 						</div>
 					</div>
@@ -138,7 +138,7 @@
 					<div class="content">
 						<div class="subject">
 							<div class="buttons">
-								<a href="javascript:void(0);" id="two" class="button" style="color:white;">제주동문시장
+								<a href="javascript:void(0);" id="two" class="button" >제주동문시장
 									먹거리 탐방</a>
 							</div>
 						</div>
@@ -166,7 +166,7 @@
 					<div class="content">
 						<div class="subject">
 							<div class="buttons">
-								<a href="javascript:void(0);" id="three" class="button" style="color:white;">제주의
+								<a href="javascript:void(0);" id="three" class="button">제주의
 									캠핑 핫플</a>
 							</div>
 						</div>
@@ -195,7 +195,7 @@
 					<div class="content">
 						<div class="subject">
 							<div class="buttons">
-								<a href="javascript:void(0);" id="four" class="button" style="color:white;">백제사 템플스테이</a>
+								<a href="javascript:void(0);" id="four" class="button" >백제사 템플스테이</a>
 							</div>
 						</div>
 					</div>
