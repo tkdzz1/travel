@@ -17,7 +17,8 @@
 	select ta_num,ta_name,ta_local,ta_img,ta_address,ta_category, ta_latitude, ta_longitude, ta_hit from travel_attraction
 </select>
 <insert id="addTravelList">
-	INSERT INTO travel_attraction SET ta_name = #{param1}, ta_local = #{param2}, ta_img = #{param3}, ta_address = #{param4}, ta_category = #{param5}, ta_latitude=#{param6}, ta_longitude=#{param7} 
+	INSERT INTO travel_attraction SET ta_name = #{param1}, ta_local = #{param2}, ta_img = #{param3}, ta_address = #{param4}, ta_category = #{param5}, ta_latitude=#{param6}, ta_longitude=#{param7}
+	, ta_add=#{param8}, ta_nx=#{param9}, ta_ny=#{param10} 
 </insert>
 <select id="cntTravelList" resultType="int">
 	select count(*) from travel_attraction where ta_category = #{param1};

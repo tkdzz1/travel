@@ -9,7 +9,7 @@ public interface travel_attDAO {
 
 	ArrayList<travel_attDTO> getList(int start, int psize, String string);
 	ArrayList<travel_attDTO> getmaker();
-	void addTravelList(String name, String local, String savedMainName, String address, String category, double latitude, double longitude);
+	void addTravelList(String name, String local, String savedMainName, String address, String category, double latitude, double longitude, String ta_add, int ta_nx, int ta_ny);
 	int cntTravelList(String string);
 	travel_attDTO getDetail(String ta_name);
 	void addImgInfo(String name, String savedImageName, String taContent);

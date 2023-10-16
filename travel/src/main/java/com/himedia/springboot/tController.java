@@ -88,6 +88,16 @@ public class tController {
                 String image = main.getOriginalFilename();
                 String address = req.getParameter("address");
                 String category = req.getParameter("category");
+                String ta_add = address.split(" ")[1];
+                int ta_nx, ta_ny;
+                
+                if ( ta_add.equals("제주시") ) {
+                	ta_nx = 53;
+                	ta_ny = 38;
+                } else {
+                	ta_nx = 52;
+                	ta_ny = 33;
+                }
                 
                 String[] cList = {"관광지", "travel_list", "음식", "food_store", "숙박", "stay", "쇼핑", "shopping"};
                 String redirect = "";
@@ -144,7 +154,7 @@ public class tController {
                 String taContent = taContentBuilder.toString();
                 System.out.println("taContent" + taContent);
                 // 여행지 정보를 데이터베이스에 저장
-                tdao.addTravelList(name, local, savedMainName, address, category, latitude, longitude);
+                tdao.addTravelList(name, local, savedMainName, address, category, latitude, longitude, ta_add, ta_nx, ta_ny);
                 tdao.addImgInfo(name,detailImagePaths.toString(),taContent);
                 model.addAttribute("fileName", mainFile);
                 return "redirect:/" + redirect;
