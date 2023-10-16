@@ -13,7 +13,10 @@
 <%@ include file="../header.jsp" %>
 <div class="container">
     <div class="left-panel">
-        <h1>여행지 정보</h1> <button id="addtravellist">관광지 추가</button>
+        <h1>여행지 정보</h1>
+        <c:if test="${admin !=0}">
+        <button class="w-btn w-btn-red" id="addtravellist">관광지 추가</button>
+        </c:if>
         <c:forEach items="${list}" var="alist">
         <div class="travel-card">
             <div class="image-and-text">
@@ -62,7 +65,9 @@
 						  </c:choose>
 						
 			        <input type=hidden id=category value="${alist.ta_category}">
+			        <c:if test="${admin !=0}">
 			        <button class="btndelete" data-name="${alist.ta_name}">삭제</button> <!-- 수정된 버튼 -->
+			        </c:if>
    			        <input type="hidden" id="h_num" name="h_num" value="${alist.ta_num}" class="h_num">
 			        <input type="hidden" id="h_name" name="h_name" value="${alist.ta_name}" class="h_name">
 			        <input type="hidden" id="h_name" name="h_latitude" value="${alist.ta_latitude}" class="h_latitude">

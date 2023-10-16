@@ -29,4 +29,5 @@ public interface travel_attDAO {
 	void insertReview(String ta_name, String id, int rating, String reviewContents);
 	void delete(String ta_name);
 	Integer avgStar(String ta_name);
+	memberDTO getAdmin(String id);
 }

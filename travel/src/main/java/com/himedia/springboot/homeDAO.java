@@ -20,5 +20,6 @@ public interface homeDAO {
 	int cntPlanList(String id);
 	homeDTO getPlanner(String id, int num);
 	int secession(String id);
+	ArrayList<reviewDTO> getReviewListToMyPage(String id);
 	
 }

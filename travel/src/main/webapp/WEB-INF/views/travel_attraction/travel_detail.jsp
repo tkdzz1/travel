@@ -74,7 +74,9 @@
 	</c:forEach>
 	<table>
 		<tr>
+			<c:if test="${admin !=0}">
 	        <td><button id="update">수정</button></td>
+	        </c:if>
 	        <td></td>
 	        <td><button id="cancle">이전</button></td>
        	</tr>
@@ -84,6 +86,7 @@
 <section>
 <div class="review">
 	<h1 class="reviewh1">리뷰 작성</h1>
+	<input type=hidden id=id value="${id}">
 	<fieldset id="field">
 		<span class="text-bold">별점을 선택해주세요</span>
 		<input type="radio" name="reviewStar" class="radio" value="5" id="rate1"><label
@@ -111,6 +114,7 @@
 <script src="https://code.jquery.com/jquery-latest.js"></script>
 <script>
 $(document).ready(function(){
+	var id = $('#id').val();
 	var arr =[];
 	var today = new Date();
 	var week = new Array('일', '월', '화', '수', '목', '금', '토');
@@ -372,13 +376,17 @@ $(document).ready(function(){
 
 
                 reviewComment.append("<textarea class='update-content'  rows='6' style='width:800px;display:none; ' >" + review.review_content + "</textarea>");
+                
+                if ( review.review_id == id ) {
+                
 				reviewComment.append("<div class='button-container'>");
 				reviewComment.append("<input type='button' style='height:40px;margin-top:10px;' class='delete-button' data-review-num='" + review.review_num + "' value='삭제'>");
 				reviewComment.append("<input type='button' style='height:40px;width:40px;margin-top:10px;' class='update-button' data-review-num='" + review.review_num + "' value='수정'>");
 				reviewComment.append("<input type='button' style='height:40px;display:none;margin-top:10px;' class='accept-button' data-review-num='" + review.review_num + "' value='확인'>");
 				reviewComment.append("<input type='button' style='height:40px;display:none;margin-top:10px;' class='cancle-button' data-review-num='" + review.review_num + "' value='취소'>");
 				reviewComment.append("</div><br><br>");
-
+				
+				}
 
                 // 리뷰 댓글 창을 리뷰 목록 컨테이너에 추가
                 reviewListContainer.append(reviewComment);

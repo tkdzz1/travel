@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="/resources/css/home.css" />
 <link rel="stylesheet" href="/resources/css/member.css" />
 <link rel="stylesheet" href="/resources/css/mypage.css" />
+<link rel="stylesheet" href="/resources/css/bbs.css" />
 <meta charset="UTF-8">
 <title>나의리뷰</title>
 </head>
@@ -49,7 +50,6 @@
 													<li><p>나의질문</p> <em>0</em></li>
 													<li><p>나의리뷰</p> <em>0</em></li>
 													<li><p>찜한여행지</p> <em>0</em></li>
-													<li><p>제주방문지</p> <em>0</em></li>
 												</ul>
 											</div>
 										</div>
@@ -62,7 +62,6 @@
 										<li><a href="/mybbs">나의질문</a></li>
 										<li class="on"><a href="/myreview">나의리뷰</a></li>
 										<li><a href="/mylike">찜한여행지</a></li>
-										<li><a href="#">제주방문지</a></li>
 									</ul>
 								</div>
 
@@ -71,6 +70,37 @@
 										<p class="wrap_tit">나의 리뷰</p>
 										<p class="wrap_sub_tit">내가 남긴 리뷰를 확인할 수 있습니다.</p>
 									</div>
+									
+									<table class="bbs" id="tblBoard">
+										<colgroup>
+											<col style="width: 100px;">
+											<col>
+											<col style="width: 130px;">
+											<col style="width: 140px;">
+											<col style="width: 140px;">
+										</colgroup>
+										<thead>
+											<tr>
+												<th scope="col">번호</th>
+												<th scope="col">내용</th>
+												<th scope="col">방문지</th>
+												<th scope="col">별점</th>
+												<th scope="col">작성일</th>
+											</tr>
+										</thead>
+										<tbody>
+										    <c:forEach items="${review}" var="review">
+											<tr>
+												<td>${review.review_num}</td>
+												<td>${review.review_content}</td>
+												<td>${review.review_location}</td>
+												<td> ★ ${review.review_rating}</td>
+												<td>${review.review_created}</td>
+											</tr>
+										</tbody>
+										    </c:forEach>
+									</table>
+									
 									<div class="paging">
 										<div id="paging" class="page-wrap">
 											<a href="javascript:void(0)" class="spr_com page-first">처음</a><a

@@ -19,24 +19,16 @@ public class testController {
 	
 	@Autowired
 	private homeDAO hDao;
-	
-	@GetMapping("/weather")
-	public String test() {
-		return "weather/weather";
-	}
-	
-	@GetMapping("/weather2")
-	public String test2() {
-		return "weather/weather2";
-	}
-	
-	@GetMapping("/weather3")
-	public String test3() {
-		return "weather/weather3";
-	}
 
 	@GetMapping("/myreview")
-	public String myReview() {
+	public String myReview(HttpServletRequest req, Model model) {
+		HttpSession s = req.getSession();
+		String id = (String) s.getAttribute("id");
+		
+		ArrayList<reviewDTO> getReview = hDao.getReviewListToMyPage(id);
+		
+		model.addAttribute("review", getReview);
+		
 		return "member/my_review";
 	}
 	@GetMapping("/mylike")
@@ -54,10 +46,7 @@ public class testController {
 
 		return "member/my_bbs";
 	}
-	@GetMapping("/header2")
-	public String header2() {
-		return "member/header2";
-	}
+
 	@GetMapping("/edit")
 	public String edit() {
 		return "edit";

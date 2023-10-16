@@ -76,4 +76,7 @@
 <select id="avgStar" resultType="Integer">
 	    SELECT ROUND(AVG(review_rating)) AS avgStar FROM review where review_location=#{param1}
 </select>
+<select id="getAdmin" resultType="com.himedia.springboot.memberDTO">
+select * from member where member_id = #{param1}
+</select>
 </mapper>

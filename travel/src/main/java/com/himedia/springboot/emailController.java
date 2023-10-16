@@ -93,7 +93,7 @@ public class emailController {
 			return String.valueOf(check);
 		}
 		
-		return redirect;
+		return "redirect/";
 	}
 	
 	int st;
@@ -105,7 +105,7 @@ public class emailController {
 		String id = (String) s.getAttribute("id");
 		
 		if ( id == null || id.equals("") ) {
-			redirect =  req.getRequestURL().toString();
+//			redirect =  req.getRequestURL().toString();
 			return "redirect:/login";
 		}
 		

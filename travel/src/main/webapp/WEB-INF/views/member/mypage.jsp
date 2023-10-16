@@ -52,7 +52,6 @@
 													<li><p>나의질문</p> <em>0</em></li>
 													<li><p>나의리뷰</p> <em>0</em></li>
 													<li><p>찜한여행지</p> <em>0</em></li>
-													<li><p>제주방문지</p> <em>0</em></li>
 												</ul>
 											</div>
 										</div>
@@ -65,7 +64,6 @@
 										<li><a href="/mybbs">나의질문</a></li>
 										<li><a href="/myreview">나의리뷰</a></li>
 										<li><a href="/mylike">찜한여행지</a></li>
-										<li><a href="#">제주방문지</a></li>
 									</ul>
 								</div>
 

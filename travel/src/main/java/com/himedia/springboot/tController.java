@@ -41,6 +41,18 @@ public class tController {
 	
 	@GetMapping("/travel_list")
 	public String tlist(HttpServletRequest req,Model model) {
+		
+		HttpSession s = req.getSession();
+		
+		String id = (String) s.getAttribute("id");
+		
+		if ( id == null ) {
+			model.addAttribute("admin", 0);
+		} else {
+			memberDTO adminCheck = tdao.getAdmin(id);
+			model.addAttribute("admin", adminCheck.getAdmin());
+		}
+		
 		int start, psize;
 		String page = req.getParameter("pageno");
 		if(page==null || page.equals("")) {
@@ -212,6 +224,18 @@ public class tController {
     }
     @GetMapping("/travel_Detail")
     public String detail(HttpServletRequest req,Model model) {
+    	
+		HttpSession s = req.getSession();
+		
+		String id = (String) s.getAttribute("id");
+		
+		if ( id == null ) {
+			model.addAttribute("admin", 0);
+		} else {
+			memberDTO adminCheck = tdao.getAdmin(id);
+			model.addAttribute("admin", adminCheck.getAdmin());
+		}
+    	
     	String ta_name=req.getParameter("ta_name");
     	travel_attDTO detail = tdao.getDetail(ta_name);
     	 

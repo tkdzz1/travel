@@ -66,4 +66,8 @@ select * from travel_planner where writer = #{param1} and planner_num = #{param2
 delete from member where member_id=#{param1};
 </delete>
 
+<select id="getReviewListToMyPage" resultType="com.himedia.springboot.reviewDTO">
+select * from review where review_id = #{param1};
+</select>
+
 </mapper>
