@@ -860,7 +860,7 @@ font-family: 'Pretendard-Regular';
         <textarea name="comment_content" id="comment_content" placeholder="댓글 내용"></textarea>
         <button type="button" id="submitComment">완료</button><br>
         <a class="noshowwriter">작성자 비공개</a><input type="checkbox" id="checkprivate"><br>
-        <a class="onlyshowtowriter">작성자에게만 보이기</a> <input type="checkbox" id="privateComment">
+        <a class="onlyshowtowriter">질문 작성자에게만 공개</a> <input type="checkbox" id="privateComment">
     </form>
     <br>
 </div>

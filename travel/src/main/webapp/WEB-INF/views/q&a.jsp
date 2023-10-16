@@ -407,8 +407,9 @@ font-weight:bold;
 }
 
 .logplease{
-	text-align:center;
+	text-align:center !important;
 }
+
 
         
 </style>
@@ -480,12 +481,7 @@ font-weight:bold;
 </div>
 
 
-   <c:if test="${empty sessionScope.id}">
-        <div class="logplease">
-        <button id="btnlogin" class="btnlogin">글쓰기</button> 
-          
-            </div>
-        </c:if>
+  
         
 
 
@@ -545,7 +541,12 @@ font-weight:bold;
             </div>    
         </c:if>
         
-        
+         <c:if test="${empty sessionScope.id}">
+        <div class="logplease">
+        <button id="btnlogin" class="btnlogin">글쓰기</button> 
+          
+            </div>
+        </c:if>
       
      
 

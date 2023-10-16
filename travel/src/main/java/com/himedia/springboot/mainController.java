@@ -403,18 +403,4 @@ public class mainController {
 	}
 
 	
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }
