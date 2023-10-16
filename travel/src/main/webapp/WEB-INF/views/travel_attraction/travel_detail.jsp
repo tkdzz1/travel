@@ -62,7 +62,7 @@
 		        </c:when>
 		        <c:otherwise>
 		            <!-- 이미지 정보가 비어 있지 않을 때, 이미지 출력 -->
-		            <img src="img/t_sub_img/${ta_imginfoParts[status.index]}" alt="이미지 ${status.index + 1}" style="width: 600px; height: 400px;">
+		            <img src="img/t_sub_img/${ta_imginfoParts[status.index]}" alt="이미지 ${status.index + 1}" style="width: 900px; height: 400px;">
 		        </c:otherwise>
 		    </c:choose>
 		
