@@ -563,6 +563,9 @@ function likeFilter(filter) {
 			success: function(data) {
 				if (data.length == 0) {
 					$('#filterListEmpty').show();
+					if ( $('#filterListEmpty').next().attr('display','block') ) {
+						$('#filterListEmpty').next().hide();
+					}
 					$('#listResult').hide();
 					return false;
 				}
