@@ -524,6 +524,8 @@ function loadTravelData(ta_num) {
                         isInfoWindowOpen = true;
                     }
                 });
+                
+                marker.infoWindow = infoWindow;
             });
         },
         error: function(xhr, status, error) {
@@ -537,6 +539,10 @@ function markerReload(){
 		
 		for (let i = 0; i<markers.length; i++) {
 			markers[i].setMap(null);
+			
+			if (markers[i].infoWindow) {
+            	markers[i].infoWindow.close();
+        	}
 		}
 		
 		markers = [];

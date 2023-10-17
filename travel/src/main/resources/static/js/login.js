@@ -58,7 +58,7 @@ $(document)
 				alert("입력하신 회원정보와 일치하는 데이터가 없습니다.");
 				return false;
 			}else {
-				document.location = data;
+				document.location = "/";
 				return false;
 			}
 		}, error:function(){

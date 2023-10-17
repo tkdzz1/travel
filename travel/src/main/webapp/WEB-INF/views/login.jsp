@@ -10,6 +10,8 @@
 <body>
 <%@ include file="header.jsp" %>
 <div class="container">
+	<img src="img/logo/TravelJEJU.png" style="width:350px;">
+	<br>
 	<div id=loginDIV>
 		<h1>이메일 로그인</h1>
 		<input type=text name=email placeholder="이메일 주소" style="height:50px;width:250px;"> <button class="w-btn w-btn-red" id=emailCheck>다음</button>
@@ -32,7 +34,7 @@
 		<input type=password name=loginPassword><button id=login class="w-btn w-btn-red">로그인</button>
 	</div>
 	<div class="social-login">
-		<br><br><hr><br><br>
+		<br><br>
 		<h1>SNS 로그인</h1>
 		<img src="img/kakaologin.png" id="kakaoLogin">
 	</div>

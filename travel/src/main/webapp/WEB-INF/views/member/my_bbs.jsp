@@ -47,10 +47,10 @@
 											</div>
 											<div class="myBtm">
 												<ul>
-													<li><p>나의여행일정</p> <em>0</em></li>
-													<li><p>나의질문</p> <em>0</em></li>
-													<li><p>나의리뷰</p> <em>0</em></li>
-													<li><p>찜한여행지</p> <em>0</em></li>
+													<li><p>나의여행일정</p> <em>${cnt1}</em></li>
+													<li><p>나의질문</p> <em>${cnt2}</em></li>
+													<li><p>나의리뷰</p> <em>${cnt3}</em></li>
+													<li><p>찜한여행지</p> <em>${cnt4}</em></li>
 												</ul>
 											</div>
 										</div>
@@ -68,7 +68,7 @@
 
 								<div class="my_tour_wrap">
 									<div class="wrap_tit_zone">
-										<p class="wrap_tit">나의 질문</p>
+										<p class="wrap_tit">나의 질문 (${cnt2})</p>
 										<p class="wrap_sub_tit">내가 작성한 질문을 확인할 수 있습니다.</p>
 
 									</div>
@@ -99,8 +99,8 @@
 												<td>${bpost.answer_count}</td>
 												<td>${bpost.created}</td>
 											</tr>
-										</tbody>
-										    </c:forEach>
+											</c:forEach>
+										</tbody> 
 									</table>
 
 

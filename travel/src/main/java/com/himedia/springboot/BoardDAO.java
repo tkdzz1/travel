@@ -24,7 +24,7 @@ public interface BoardDAO {
 	
 	void answerCount(int seqno,int s);
 
-	ArrayList<BoardDTO> getprof();
+	ArrayList<BoardDTO> getprof(String id);
 
 	ArrayList<BoardDTO> getboardlist(); // 임시 7개만 출력
 }

@@ -93,7 +93,7 @@ public class emailController {
 			return String.valueOf(check);
 		}
 		
-		return "redirect/";
+		return "redirect:/";
 	}
 	
 	int st;
@@ -420,22 +420,6 @@ public class emailController {
 		return ja.toJSONString();
 		
 		
-	}
-	
-	@GetMapping("/mypage")
-	public String myPage(HttpServletRequest req, Model model) {
-		HttpSession s = req.getSession();
-		
-		String id = (String)s.getAttribute("id");
-		
-		ArrayList<homeDTO> pList = hDao.getPlanList(id);
-		
-		int countPlan = hDao.cntPlanList(id);
-		
-		model.addAttribute("pList", pList);
-		model.addAttribute("cnt", countPlan);
-		
-		return "member/mypage";
 	}
 	
 	@PostMapping("/getPlanner")

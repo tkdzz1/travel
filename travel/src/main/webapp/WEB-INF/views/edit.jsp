@@ -21,7 +21,7 @@
 </style>
 <%@ include file="/WEB-INF/views/header.jsp"%>
 <body>
-<div class=maindiv>
+<div class=maindiv style="height:800px;">
 <div>
 <h3>회원탈퇴</h3>
 <br>
@@ -55,8 +55,8 @@ $(document)
 		   showCancelButton: true, // cancel버튼 보이기. 기본은 원래 없음
 		   confirmButtonColor: '#3085d6', // confrim 버튼 색깔 지정
 		   cancelButtonColor: '#d33', // cancel 버튼 색깔 지정
-		   confirmButtonText: '예', // confirm 버튼 텍스트 지정
-		   cancelButtonText: '아니오', // cancel 버튼 텍스트 지정
+		   confirmButtonText: '확인', // confirm 버튼 텍스트 지정
+		   cancelButtonText: '취소', // cancel 버튼 텍스트 지정
 		   
 		   reverseButtons: false, // 버튼 순서 거꾸로
 	   
@@ -64,7 +64,13 @@ $(document)
 		   // 만약 Promise리턴을 받으면,
 		   if (result.isConfirmed) { // 만약 모달창에서 confirm 버튼을 눌렀다면
 		   
-		      document.location = "/secession";
+			    Swal.fire({
+				      icon: 'success',
+				      title: '탈퇴가 정상적으로 처리되었습니다.',
+				      text: '확인을 누르면 홈으로 이동합니다.',
+				    }).then(result => {
+						document.location = "/secession"
+					})
 		      
 		   }
 		});

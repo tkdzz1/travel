@@ -70,4 +70,22 @@ delete from member where member_id=#{param1};
 select * from review where review_id = #{param1};
 </select>
 
+<select id="cntBbs" resultType="int">
+select count(*) from board where writer = #{param1}
+</select>
+
+<select id="cntReview" resultType="int">
+select count(*) from review where review_id = #{param1}
+</select>
+
+<select id="cntCart" resultType="int">
+select count(*) from Cart where cart_id = #{param1}
+</select>
+
+<select id="getCList" resultType="com.himedia.springboot.travel_attDTO">
+SELECT b.ta_img, b.ta_name, b.ta_local, b.ta_category
+FROM cart a JOIN travel_attraction b ON cart_num = ta_num
+WHERE a.cart_id = #{param1};
+</select>
+
 </mapper>

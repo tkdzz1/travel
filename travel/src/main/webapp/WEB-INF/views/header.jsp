@@ -63,7 +63,12 @@
         </nav>
         <div class="signup">
 	        <div class="gnb_site">
-	            <button type="button" class="btn">여행자</button>
+	        	<c:if test="${empty id}">
+	            <button type="button" class="btn">로그인</button>
+	            </c:if>
+	            <c:if test="${!empty id}">
+	            <button type="button" class="btn" style="width:200px;">${id}</button>
+	            </c:if>
 	            <ul class="list">
 	            	<c:if test="${empty id}">
 	            		<li><a href="/login"><span>로그인</span></a></li>

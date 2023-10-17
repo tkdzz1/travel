@@ -46,10 +46,10 @@
 											</div>
 											<div class="myBtm">
 												<ul>
-													<li><p>나의여행일정</p> <em>0</em></li>
-													<li><p>나의질문</p> <em>0</em></li>
-													<li><p>나의리뷰</p> <em>0</em></li>
-													<li><p>찜한여행지</p> <em>0</em></li>
+													<li><p>나의여행일정</p> <em>${cnt1}</em></li>
+													<li><p>나의질문</p> <em>${cnt2}</em></li>
+													<li><p>나의리뷰</p> <em>${cnt3}</em></li>
+													<li><p>찜한여행지</p> <em>${cnt4}</em></li>
 												</ul>
 											</div>
 										</div>
@@ -67,7 +67,7 @@
 
 								<div class="my_tour_wrap">
 									<div class="wrap_tit_zone">
-										<p class="wrap_tit">나의 리뷰</p>
+										<p class="wrap_tit">나의 리뷰 (${cnt3})</p>
 										<p class="wrap_sub_tit">내가 남긴 리뷰를 확인할 수 있습니다.</p>
 									</div>
 									

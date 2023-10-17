@@ -2,7 +2,8 @@ let tbodyIndex;
 let markers = [];
 var numList = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten'];
 let ta_name;
-//let count = 0;
+var count = 0;
+var day1;
 
 let infoWindow = new naver.maps.InfoWindow();
 let isInfoWindowOpen = false;
@@ -14,12 +15,13 @@ let map = new naver.maps.Map('map', mapOptions);
 
 $(document)
 .ready(function(){
-	
+
 })
 .on('click','dl[name=planner]',function(){
 	markerReload();
 	
 	let planNum = $(this).attr("id");
+	console.log(planNum);
 	$.ajax({ url:"/getPlanner", data: { planNum : planNum }, type: 'post', dataType: 'json',
 		success: function(response){
 			let obj = response[0];
@@ -69,6 +71,7 @@ $(document)
 			
 			day = 1;
 			tbodyIndex = 0;
+			day1 = true;
 			
 			$('#planTable tbody').each(function(){
 				
@@ -81,23 +84,28 @@ $(document)
 					let time = $(this).find('td:eq(0)').attr("name");
 					
 					planTime = plan[day-1].split("*");
-					
+
 					if ( planTime[planNum].split(":")[0] == time ) {
 						let travel_att = planTime[planNum].split(":")[1];
+						if ( day1 ) {
+						    loadTravelData(travel_att, function(ta_name) {
+						        att.html('<h1 name=' + travel_att + '><span name=num></span> ' + ta_name + '</h1>');
+						        changePlan();
+						    });
+						} else {
+							// 여기어캄 ???????????????????????????????????????????????
+						}
 						
-					    loadTravelData(travel_att, function(ta_name) {
-					        att.html('<h1 name=' + travel_att + '><span name=num></span> ' + ta_name + '</h1>');
-					        changePlan();
-					    });
-
 						planNum++;
+						
 					}
-					
+
 					if ( planNum == planTime.length ) {
 						day++;
+						day1 = false;
 						return false;
 					}
-					
+				
 				})
 				
 			})
@@ -115,13 +123,11 @@ $(document)
 	var thead = $(this).closest('thead').attr("name");
 	var tbody = $(this).closest('thead').next().attr("name");
 	var dayCheck =  $(this).parent().text().split(" ")[2] + $(this).parent().text().split(" ")[3];
-	
+
 	if ( $(this).attr("name") == "before" ) {
 		if ( dayCheck == "DAY1" ) {
 			return false;
 		}
-		
-		count = 0;
 		
 		$('thead[name=' + thead + ']').hide();
 		$('tbody[name=' + tbody + ']').hide();
@@ -136,15 +142,13 @@ $(document)
 		
 		$('thead[name=' + updateDay + ']').show();
 		$('tbody[name=' + updateDay + ']').show();
-		
+		count = 0;
 		markerReload();
 		
 	} else {
 		if ( dayCheck == "DAY" + $('#planTable tbody').length ) {
 			return false;
 		}
-		
-		count = 0;
 		
 		$('thead[name=' + thead + ']').hide();
 		$('tbody[name=' + tbody + ']').hide();
@@ -159,13 +163,15 @@ $(document)
 		
 		$('thead[name=' + updateDay + ']').show();
 		$('tbody[name=' + updateDay + ']').show();
-		
+		count = 0;
 		markerReload();
 		
 	}
 })
 
 $("#closeModalBtn").click(function() {
+	count = 0;
+	
   $("#myModal").hide();
 });
 
@@ -239,14 +245,14 @@ function loadTravelData(ta_num, callback) {
                     position: allPosition,
                     map: map,
                     title: ta_num,
-//                        icon: {
-//					        content: '<img src="img/logo/' + numList[count] + '.png"' + 'width="30" height="30" />', // 이미지 URL 및 크기를 지정
-//					        size: new naver.maps.Size(30, 30), // 마커 이미지의 크기
-//					        anchor: new naver.maps.Point(15, 15) // 마커 이미지의 중심 위치
-//					    }
+                        icon: {
+					        content: '<img src="img/logo/' + numList[count] + '.png"' + 'width="30" height="30" />', // 이미지 URL 및 크기를 지정
+					        size: new naver.maps.Size(30, 30), // 마커 이미지의 크기
+					        anchor: new naver.maps.Point(15, 15) // 마커 이미지의 중심 위치
+					    }
                 });
                 markers.push(marker);
-//                count++;
+                count++;
                 
                 let infoWindow = new naver.maps.InfoWindow({
                     content: travelInfo.ta_name
@@ -261,6 +267,8 @@ function loadTravelData(ta_num, callback) {
                         isInfoWindowOpen = true;
                     }
                 });
+                
+                marker.infoWindow = infoWindow;
 
             });
         },
@@ -275,6 +283,9 @@ function markerReload(){
 		
 		for (let i = 0; i<markers.length; i++) {
 			markers[i].setMap(null);
+			if (markers[i].infoWindow) {
+            	markers[i].infoWindow.close();
+        	}
 		}
 		
 		markers = [];

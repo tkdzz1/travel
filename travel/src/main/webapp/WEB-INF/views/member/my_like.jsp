@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="/resources/css/home.css" />
 <link rel="stylesheet" href="/resources/css/member.css" />
 <link rel="stylesheet" href="/resources/css/mypage.css" />
+<link rel="stylesheet" href="/resources/css/bbs.css" />
 <meta charset="UTF-8">
 <title>나의여행일정</title>
 </head>
@@ -45,10 +46,10 @@
 											</div>
 											<div class="myBtm">
 												<ul>
-													<li><p>나의여행일정</p> <em>0</em></li>
-													<li><p>나의질문</p> <em>0</em></li>
-													<li><p>나의리뷰</p> <em>0</em></li>
-													<li><p>찜한여행지</p> <em>0</em></li>
+													<li><p>나의여행일정</p> <em>${cnt1}</em></li>
+													<li><p>나의질문</p> <em>${cnt2}</em></li>
+													<li><p>나의리뷰</p> <em>${cnt3}</em></li>
+													<li><p>찜한여행지</p> <em>${cnt4}</em></li>
 												</ul>
 											</div>
 										</div>
@@ -66,8 +67,36 @@
 
 								<div class="my_tour_wrap">
 									<div class="wrap_tit_zone">
-										<p class="wrap_tit">찜한 여행지</p>
+										<p class="wrap_tit">찜한 여행지 (${cnt4})</p>
 									</div>
+									
+									<table class="bbs" id="tblBoard">
+										<colgroup>
+											<col style="width: 100px;">
+											<col>
+											<col style="width: 130px;">
+											<col style="width: 140px;">
+										</colgroup>
+										<thead>
+											<tr>
+												<th scope="col">사진</th>
+												<th scope="col">여행지</th>
+												<th scope="col">지역</th>
+												<th scope="col">카테고리</th>
+											</tr>
+										</thead>
+										<tbody>
+										    <c:forEach items="${cart}" var="cart">
+											<tr>
+												<td><a href="/travel_Detail?ta_name=${cart.ta_name}"><img src="/img/t_img/${cart.ta_img}" style="width:100px; height:100px;"></a></td>
+												<td><a href="/travel_Detail?ta_name=${cart.ta_name}">${cart.ta_name}</a></td>
+												<td>${cart.ta_local}</td>
+												<td>${cart.ta_category}</td>
+											</tr>
+											</c:forEach>
+										</tbody>
+									</table>
+									
 									<div class="paging">
 										<div id="paging" class="page-wrap">
 											<a href="javascript:void(0)" class="spr_com page-first">처음</a><a
