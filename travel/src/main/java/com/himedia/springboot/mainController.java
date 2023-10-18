@@ -231,6 +231,8 @@ public class mainController {
 	    
 	    int seqno = Integer.parseInt(req.getParameter("seqno"));
 	    
+	    // 대댓글 먼저 삭제 => 댓글 먼저 삭제시 대댓글 삭제X
+	    rdao.deleteByPost(seqno);
 	    // 게시글 삭제시, 댓글도 삭제
 	    cdao.deleteByboard(seqno);
 	    

@@ -815,7 +815,7 @@ font-family: 'Pretendard-Regular';
 <div class="showview">
     <span>작성자: 
         <c:choose>
-            <c:when test="${bpost.isprivate == 1}">비공개</c:when>
+            <c:when test="${bpost.isprivate == 1 && sessionScope.id != bpost.writer}">비공개</c:when>
             <c:otherwise>${bpost.writer}</c:otherwise>
         </c:choose>
     </span>
@@ -1338,7 +1338,7 @@ font-family: 'Pretendard-Regular';
 
     	
     	$('.replyComment').click(function () {
-            $(this).next('.reply-form').toggle();
+            $(this).siblings('.reply-form').toggle();
         });
 
         // 닫기 버튼 클릭 시 대댓글 폼 닫기

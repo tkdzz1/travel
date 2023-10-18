@@ -17,4 +17,6 @@ public interface ReplyDAO {
 	int edtreply(int reply_id, String reply_content);
 	
 	void deleteByComment(int comment_parent_id);
+	
+	void deleteByPost(int s);
 }

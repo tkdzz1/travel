@@ -28,4 +28,14 @@ delete from reply where reply_id = #{param1}
 	delete from reply where parent_comment_id = #{param1}
 </delete>
 
+<delete id = "deleteByPost">
+	
+    DELETE reply
+FROM reply
+JOIN COMMENT ON reply.parent_comment_id = comment.comment_id
+WHERE comment.board_seqno = #{param1}
+</delete>
+
+
+
 </mapper>

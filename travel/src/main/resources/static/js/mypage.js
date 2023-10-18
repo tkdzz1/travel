@@ -87,14 +87,10 @@ $(document)
 
 					if ( planTime[planNum].split(":")[0] == time ) {
 						let travel_att = planTime[planNum].split(":")[1];
-						if ( day1 ) {
-						    loadTravelData(travel_att, function(ta_name) {
-						        att.html('<h1 name=' + travel_att + '><span name=num></span> ' + ta_name + '</h1>');
-						        changePlan();
-						    });
-						} else {
-							// 여기어캄 ???????????????????????????????????????????????
-						}
+					    loadTravelData(travel_att, function(ta_name) {
+					        att.html('<h1 name=' + travel_att + '><span name=num></span> ' + ta_name + '</h1>');
+					        changePlan();
+					    });
 						
 						planNum++;
 						
@@ -251,6 +247,7 @@ function loadTravelData(ta_num, callback) {
 					        anchor: new naver.maps.Point(15, 15) // 마커 이미지의 중심 위치
 					    }
                 });
+
                 markers.push(marker);
                 count++;
                 
@@ -271,6 +268,7 @@ function loadTravelData(ta_num, callback) {
                 marker.infoWindow = infoWindow;
 
             });
+            
         },
         error: function(xhr, status, error) {
             console.error("여행지 정보를 불러오는데 실패했습니다.");
