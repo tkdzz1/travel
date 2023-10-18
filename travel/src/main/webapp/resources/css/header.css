@@ -16,7 +16,7 @@ article,aside,audio,blockquote,body,button,canvas,caption,dd,details,div,dl,dt,e
     font-size: inherit;
     vertical-align: baseline;
     box-sizing: border-box;
-    word-break: break-all
+/*    word-break: break-all*/
 }
 
 body,html {

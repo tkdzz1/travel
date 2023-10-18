@@ -7,6 +7,8 @@ let markers = [];
 let addPlaning = 0;
 let dragIndex;
 let tbodyIndex;
+let count = 0;
+var numList = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten'];
 
 let infoWindow = new naver.maps.InfoWindow();
 let isInfoWindowOpen = false;
@@ -83,20 +85,68 @@ $(document)
 	}
 })
 
+.on('input', '#search', function(){
+	let keyword = $(this).val();
+	
+	if ( keyword == '' ) {
+		$('#list ul:eq(0) li:eq(1)').trigger('click');
+		$('#listResult').show();
+		$('#searchListEmpty').hide();
+	}
+	
+	$.ajax({ url:'/searchResult', data: {keyword : keyword}, type:'post', dataType:'json',
+		success: function(data) {
+			if ( data == "0" ) {
+				$('#listResult').hide();
+				$('#searchListEmpty').show();
+			} else {
+				$('#listResult').show();
+				$('#searchListEmpty').hide();
+				
+				for(let i=0; i<data.length; i++){
+					ListShow(data, i);
+				}
+				
+				for(let i=data.length; i<$('div[name=contentList]').length; i++){
+					$('div[name=contentList]').eq(i).hide();
+				}
+			}
+		}, error: function(){
+			alert('error!!');
+		}
+		
+	})
+})
+
 .on('click','#list ul:eq(0) li', function(){
 	if ( $(this).hasClass('select') ) {
 		return false;
 	} else {
 		nowStatus = $(this).text();
-		let keyword = $('#search').val();
 		
 		if ( nowStatus == "검색" ) {
+			$('#filterListEmpty').hide();
+			$('#listResult').show();
+			$('#search').val('');
+			filter = "검색";
 			$('.option').hide();
 			$('#searchDIV').show();
 			$.ajax({url:'/searchList', data:{}, type: 'post', dataType: 'json',
 				success: function(data){
+					var cLen = $('div[name=contentList]').length;
 					for(let i = 0; i<data.length; i++){
-						ListShow(data, i);
+						if ( i < cLen ) {
+							ListShow(data, i);
+						} else {
+								let obj = data[i];
+								let html = '<hr>' + '<div name=contentList class=listContent>'
+											   + '<input type=hidden value="' + obj['ta_num'] + '" name=taNum>'
+											   + '<img src="/img/t_img/' + obj['ta_img'] + '">' + '<div class=text>'
+											   + '<h5 style="font-size:20px;">'+obj['ta_name']+'</h5>'
+											   + '<p style="font-size:20px;">'+obj['ta_local']+'</p>'
+											   + '<button class="w-btn w-btn-red" name=add>일정에 추가</button></div></div>'
+							 $('#addList').append(html);
+						}
 					}
 				}, error: function(){
 					alert("ERROR");
@@ -104,6 +154,8 @@ $(document)
 				
 			})
 		} else {
+			$('#list ul:eq(1) li:eq(0)').trigger('click');
+			likeFilter("전체");
 			$('.option').show();
 			$('#searchDIV').hide();
 		}
@@ -191,7 +243,7 @@ $(document)
 	        class: 'w-btn w-btn-red',
 	        name: 'selectTime'
 	    });
-	
+		td.prop('background-color', '#ff5f2e')
 	    td.wrap(button);
 	    addPlaning = 1;
 	});
@@ -289,7 +341,7 @@ $(document)
 		}
 		
 		$(this).closest('td').html('');
-		changePlan();
+		markerReload();
 		return false;
 	}
 })
@@ -335,7 +387,7 @@ $(document)
         var dragData = $(this).html();
         $(this).html(data);
         $('#planTable tbody:eq('+tbodyIndex+') tr:eq(' + dragIndex + ') td:odd').html(dragData);
-        changePlan();
+        markerReload();
     }
     
 })
@@ -507,9 +559,15 @@ function loadTravelData(ta_num) {
                 let marker = new naver.maps.Marker({
                     position: allPosition,
                     map: map,
-                    title: ta_num
+                    title: ta_num,
+                         icon: {
+					        content: '<img src="img/logo/' + numList[count] + '.png"' + 'width="30" height="30" />', // 이미지 URL 및 크기를 지정
+					        size: new naver.maps.Size(30, 30), // 마커 이미지의 크기
+					        anchor: new naver.maps.Point(15, 15) // 마커 이미지의 중심 위치
+					    }
                 });
                 markers.push(marker);
+                count++;
                 
                 let infoWindow = new naver.maps.InfoWindow({
                     content: travelInfo.ta_name
@@ -535,6 +593,8 @@ function loadTravelData(ta_num) {
 }
 
 function markerReload(){
+		count = 0;
+		
 		var planList = [];
 		
 		for (let i = 0; i<markers.length; i++) {

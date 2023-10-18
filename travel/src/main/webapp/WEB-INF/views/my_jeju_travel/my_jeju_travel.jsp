@@ -59,7 +59,7 @@
 
 	  <div class="right-panel" style="border:1px solid white;">
 	    <div id="map-container"> 
-	      <div id="map" style="width: 850px; height: 400px;"></div> 
+	      <div id="map" style="width: 75%; height: 400px;"></div> 
 	    </div>
 	  </div>
 	  
@@ -96,6 +96,9 @@
 							</div>
 						</div>
 					</c:forEach>
+					<div id=addList>
+					
+					</div>
 					<hr>
 					<div id=page>
 					 	${page}
@@ -106,6 +109,11 @@
 			<div style="text-align:center; margin-top: 50%; display:none;" id="filterListEmpty">
 				<img src="img/heart.png" style="width:100px;">
 				<h3>찜한 여행지가 없습니다.</h3>
+			</div>
+			
+			<div style="text-align:center; margin-top: 50%; display:none;" id="searchListEmpty">
+				<img src="img/heart.png" style="width:100px;">
+				<h3>검색 결과가 없습니다.</h3>
 			</div>
 			
 			<c:if test="${tList == 'empty' }">

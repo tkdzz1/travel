@@ -169,7 +169,27 @@ public class emailController {
 			}
 			
 			return ja.toJSONString();
-		} else {
+		} else if ( filter.equals("검색") ) {
+			
+			ArrayList<travel_attDTO> tList = hDao.showALL(st, ps);
+			JSONArray ja = new JSONArray();
+			
+			for (int i = 0; i < tList.size(); i++) {
+				JSONObject jo = new JSONObject();
+				jo.put("ta_num", tList.get(i).getTa_num());
+				jo.put("ta_name", tList.get(i).getTa_name());
+				jo.put("ta_local", tList.get(i).getTa_local());
+				jo.put("ta_img", tList.get(i).getTa_img());
+				jo.put("ta_address", tList.get(i).getTa_address());
+				jo.put("ta_category", tList.get(i).getTa_category());
+				jo.put("ta_latitude", tList.get(i).getTa_latitude());
+				jo.put("ta_longitude", tList.get(i).getTa_longitude());
+				ja.add(jo);
+			}
+			
+			return ja.toJSONString();
+			
+		}	else {
 			
 			ArrayList<travel_attDTO> tList = hDao.getCartFilterList(st, ps, id, filter);
 			JSONArray ja = new JSONArray();
@@ -418,7 +438,53 @@ public class emailController {
 		}
 		
 		return ja.toJSONString();
+
+	}
+	
+	@PostMapping("/searchResult")
+	@ResponseBody
+	public String searchResult(HttpServletRequest req) {
+		String page = req.getParameter("page");
+		String keyword = req.getParameter("keyword");
+		keyword = "%" + keyword + "%";
 		
+		if(page == null || page.equals("")) {
+			page = "1";
+		}
+		
+		int pageNo = Integer.parseInt(page);
+		st = (pageNo - 1) * ps;
+		
+		int cnt = hDao.cntKeyword(keyword);
+		
+		if ( cnt == 0 ) {
+			return String.valueOf(cnt);
+		}
+		
+		int pageCount = (int)Math.ceil(cnt / 5.0);
+		page = "";
+		
+		page = pagenation(page, pageCount, pageNo);
+		
+		ArrayList<travel_attDTO> searchList = hDao.getSearchList(st, ps, keyword);
+		
+		JSONArray ja = new JSONArray();
+		
+		for(int i=0; i<searchList.size(); i++) {
+			JSONObject jo = new JSONObject();
+			jo.put("ta_num", searchList.get(i).getTa_num());
+			jo.put("ta_name", searchList.get(i).getTa_name());
+			jo.put("ta_local", searchList.get(i).getTa_local());
+			jo.put("ta_img", searchList.get(i).getTa_img());
+			jo.put("ta_address", searchList.get(i).getTa_address());
+			jo.put("ta_category", searchList.get(i).getTa_category());
+			jo.put("ta_latitude", searchList.get(i).getTa_latitude());
+			jo.put("ta_longitude", searchList.get(i).getTa_longitude());
+			jo.put("page", page);
+			ja.add(jo);
+		}
+		
+		return ja.toJSONString();
 		
 	}
 	

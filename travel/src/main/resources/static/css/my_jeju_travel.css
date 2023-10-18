@@ -111,6 +111,10 @@ div {
 	border: 1px solid gray;
 }
 
+.timeTable td:first-child {
+	width: 10%;
+}
+
 .timeTable thead td {
 	vertical-align: middle;
 	color:white;

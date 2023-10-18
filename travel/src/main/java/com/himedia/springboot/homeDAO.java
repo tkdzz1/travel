@@ -25,5 +25,7 @@ public interface homeDAO {
 	int cntReview(String id);
 	int cntCart(String id);
 	ArrayList<travel_attDTO> getCList(String id);
+	int cntKeyword(String keyword);
+	ArrayList<travel_attDTO> getSearchList(int st, int ps, String keyword);
 	
 }

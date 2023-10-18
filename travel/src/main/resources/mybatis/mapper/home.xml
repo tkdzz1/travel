@@ -11,6 +11,14 @@ select * from travel_attraction limit #{param1}, #{param2}
 select count(*) from travel_attraction
 </select>
 
+<select id="cntKeyword" resultType="int">
+select count(*) from travel_attraction where ta_name like #{param1}
+</select>
+
+<select id="getSearchList" resultType="com.himedia.springboot.travel_attDTO">
+select * from travel_attraction where ta_name like #{param3} limit #{param1}, #{param2}
+</select>
+
 <select id="getCartList" resultType="com.himedia.springboot.travel_attDTO">
 SELECT a.ta_num, a.ta_name, a.ta_local, a.ta_img, a.ta_address, a.ta_category, a.ta_latitude, a.ta_longitude
 FROM travel_attraction a JOIN cart b ON a.ta_num = b.cart_num
